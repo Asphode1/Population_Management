@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+  minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="root"
+  stylesheets="@../css/Main.css" xmlns="http://javafx.com/javafx/8"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.HomeController">
+  <children>
+    <VBox fx:id="main" layoutX="88.0" prefHeight="720.0" prefWidth="1202.0" styleClass="mainBlock"
+      AnchorPane.leftAnchor="78.0">
+      <children>
+        <AnchorPane prefHeight="85.0" prefWidth="1192.0">
+          <children>
+            <ImageView fitHeight="65.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="10.0">
+              <image>
+                <Image url="@../img/logo2.png" />
+              </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="258.0" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="15.0">
+              <image>
+                <Image url="@../img/lelepopmanagement.png" />
+              </image>
+            </ImageView>
+            <ImageView fitHeight="42.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.leftAnchor="327.0" AnchorPane.topAnchor="13.0">
+              <image>
+                <Image url="@../img/Picture1.png" />
+              </image>
+            </ImageView>
+            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" styleClass="exitBtn"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <graphic>
+                <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true"
+                  preserveRatio="true">
+                  <image>
+                    <Image url="@../img/exit2.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <padding>
+                <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+              </padding>
+            </Button>
+          </children>
+        </AnchorPane>
+        <Pane prefHeight="630.0" prefWidth="1192.0">
+          <children>
+            <fx:include fx:id="dashboard" managed="true" source="Dashboard.fxml" visible="true" />
+            <fx:include fx:id="people" managed="false" source="People.fxml" visible="false" />
+            <fx:include fx:id="household" managed="false" source="Household.fxml" visible="false" />
+            <fx:include fx:id="reward" managed="false" source="Reward.fxml" visible="false" />
+          </children>
+          <VBox.margin>
+            <Insets left="10.0" top="5.0" />
+          </VBox.margin>
+        </Pane>
+      </children>
+    </VBox>
+    <Pane fx:id="grayBar" mouseTransparent="true" prefHeight="720.0" prefWidth="1192.0"
+      styleClass="grayBar" visible="false" AnchorPane.leftAnchor="88.0" />
+    <VBox id="NavBar" fx:id="navBar" alignment="TOP_CENTER" maxHeight="-Infinity"
+      maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+      prefWidth="88.0" style="-fx-background-color: #569698;" styleClass="navBar">
+      <children>
+        <HBox fx:id="navHBtn" alignment="CENTER_RIGHT" prefHeight="76.0" prefWidth="76.0">
+          <children>
+            <Button fx:id="navBtn" mnemonicParsing="false" onAction="#navOpen" prefHeight="76.0"
+              prefWidth="76.0" styleClass="navBtn">
+              <graphic>
+                <ImageView fitHeight="20.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../img/navBtn.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </Button>
+          </children>
+          <VBox.margin>
+            <Insets left="6.0" right="6.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox fx:id="dshHBtn" alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="76.0"
+          styleClass="onFocus">
+          <children>
+            <Button fx:id="dshBtn" mnemonicParsing="false" prefHeight="76.0" prefWidth="76.0">
+              <graphic>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../img/dashboard.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Label ellipsisString="" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="0.0"
+              text="Trang chủ" />
+          </children>
+          <VBox.margin>
+            <Insets left="6.0" right="6.0" top="5.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox fx:id="ppHBtn" alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="76.0">
+          <children>
+            <Button fx:id="ppBtn" mnemonicParsing="false" prefHeight="76.0" prefWidth="76.0">
+              <graphic>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../img/people.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Label ellipsisString="" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="0.0"
+              text="Nhân khẩu" />
+          </children>
+          <VBox.margin>
+            <Insets left="6.0" right="6.0" top="5.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox fx:id="hhHBtn" alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="76.0">
+          <children>
+            <Button fx:id="hhBtn" mnemonicParsing="false" prefHeight="76.0" prefWidth="76.0">
+              <graphic>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../img/household.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Label ellipsisString="" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="0.0"
+              text="Hộ khẩu" />
+          </children>
+          <VBox.margin>
+            <Insets left="6.0" right="6.0" top="5.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox fx:id="rwHBtn" alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="76.0">
+          <children>
+            <Button fx:id="rwBtn" mnemonicParsing="false" prefHeight="76.0" prefWidth="76.0">
+              <graphic>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../img/reward.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Label ellipsisString="" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="0.0"
+              text="Phần thưởng" />
+          </children>
+          <VBox.margin>
+            <Insets left="6.0" right="6.0" top="5.0" />
+          </VBox.margin>
+        </HBox>
+        <Pane VBox.vgrow="ALWAYS" />
+        <HBox fx:id="lgoHBtn" alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="76.0">
+          <children>
+            <Button fx:id="lgoBtn" mnemonicParsing="false" prefHeight="76.0" prefWidth="76.0">
+              <graphic>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../img/logout.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </Button>
+            <Label ellipsisString="" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="0.0"
+              text="Log out" />
+          </children>
+          <VBox.margin>
+            <Insets left="6.0" right="6.0" top="5.0" />
+          </VBox.margin>
+        </HBox>
+      </children>
+      <padding>
+        <Insets bottom="6.0" top="6.0" />
+      </padding>
+    </VBox>
+    <AnchorPane fx:id="startup" layoutX="399.0" layoutY="310.0" mouseTransparent="true"
+      prefHeight="720.0" prefWidth="1280.0" styleClass="startup" AnchorPane.leftAnchor="0.0"
+      AnchorPane.topAnchor="0.0">
+      <children>
+        <Label fx:id="helloText" layoutX="606.0" layoutY="208.0" text="Hello, ABC"
+          textFill="#fefefe" AnchorPane.rightAnchor="590.0" AnchorPane.topAnchor="310.0">
+          <font>
+            <Font name="Montserrat Regular" size="80.0" />
+          </font>
+        </Label>
+        <Pane fx:id="movePane" layoutX="35.0" layoutY="260.0" prefHeight="200.0" prefWidth="628.0"
+          style="-fx-background-color: #569698;" AnchorPane.rightAnchor="590.0" />
+        <ImageView fx:id="logo" fitHeight="100.0" fitWidth="200.0" layoutX="333.0" layoutY="154.0"
+          opacity="0.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="590.0"
+          AnchorPane.topAnchor="310.0">
+          <image>
+            <Image url="@../img/logo.png" />
+          </image>
+        </ImageView>
+      </children>
+    </AnchorPane>
+  </children>
+</AnchorPane>

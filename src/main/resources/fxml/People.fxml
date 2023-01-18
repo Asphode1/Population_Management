@@ -1,0 +1,1831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="people" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+  minWidth="-Infinity" prefHeight="630.0" prefWidth="1192.0" styleClass="household"
+  stylesheets="@../css/household.css" xmlns="http://javafx.com/javafx/8"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.PeopleController">
+  <children>
+    <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="1180.0">
+      <children>
+        <Label text="Quản lý thông tin nhân khẩu" textFill="#3e6d6e">
+          <font>
+            <Font name="Montserrat SemiBold" size="24.0" />
+          </font>
+          <HBox.margin>
+            <Insets left="20.0" />
+          </HBox.margin>
+        </Label>
+        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" mnemonicParsing="false" onAction="#excel" prefHeight="40.0"
+          prefWidth="40.0" styleClass="addBtn">
+          <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true"
+              preserveRatio="true">
+              <image>
+                <Image url="@../img/excel.png" />
+              </image>
+            </ImageView>
+          </graphic>
+          <HBox.margin>
+            <Insets left="100.0" right="20.0" />
+          </HBox.margin>
+        </Button>
+        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" mnemonicParsing="false" onAction="#addNew" prefHeight="40.0"
+          prefWidth="40.0" styleClass="addBtn">
+          <HBox.margin>
+            <Insets />
+          </HBox.margin>
+          <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" mouseTransparent="true" pickOnBounds="true"
+              preserveRatio="true">
+              <image>
+                <Image url="@../img/plus.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <TextField fx:id="searchBar" alignment="CENTER" prefHeight="40.0" promptText="Tìm kiếm..."
+          styleClass="manageSearchBar" HBox.hgrow="ALWAYS">
+          <font>
+            <Font name="Montserrat Medium" size="20.0" />
+          </font>
+          <HBox.margin>
+            <Insets left="20.0" right="5.0" />
+          </HBox.margin>
+        </TextField>
+      </children>
+    </HBox>
+    <Pane prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: #111;" />
+    <AnchorPane fx:id="tableNkPane" prefHeight="432.0" prefWidth="1098.0" VBox.vgrow="ALWAYS">
+      <children>
+        <AnchorPane fx:id="addPane" prefHeight="200.0" prefWidth="200.0"
+          style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <VBox alignment="TOP_CENTER" layoutX="55.0" prefHeight="473.0" prefWidth="1000.0"
+              style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+              styleClass="rightProfile" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="42.0">
+              <children>
+                <Label text="Thêm nhân khẩu mới" textFill="#569698">
+                  <font>
+                    <Font name="Montserrat SemiBold" size="26.0" />
+                  </font>
+                  <VBox.margin>
+                    <Insets top="10.0" />
+                  </VBox.margin>
+                </Label>
+                <VBox prefHeight="391.0" prefWidth="1008.0" styleClass="portfolioVBox">
+                  <children>
+                    <HBox fx:id="roleHBox" alignment="CENTER_LEFT" layoutY="39.0">
+                      <children>
+                        <Label prefWidth="140.0" styleClass="addLabel" text="Họ Tên" />
+                        <TextField fx:id="addNameField" prefWidth="280.0" styleClass="addLabel">
+                          <HBox.margin>
+                            <Insets right="30.0" />
+                          </HBox.margin>
+                        </TextField>
+                        <Label prefWidth="180.0" styleClass="addLabel" text="Bí danh">
+                          <HBox.margin>
+                            <Insets left="20.0" />
+                          </HBox.margin>
+                        </Label>
+                        <TextField fx:id="addAliField" prefWidth="280.0" styleClass="addLabel" />
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="100.0">
+                      <children>
+                        <Label prefWidth="140.0" styleClass="addLabel" text="Quốc tịch" />
+                        <TextField fx:id="addNationField" prefWidth="280.0" styleClass="addLabel">
+                          <HBox.margin>
+                            <Insets right="30.0" />
+                          </HBox.margin>
+                        </TextField>
+                        <Label prefWidth="180.0" styleClass="addLabel" text="Nghề nghiệp">
+                          <HBox.margin>
+                            <Insets left="20.0" />
+                          </HBox.margin>
+                        </Label>
+                        <TextField fx:id="addJobField" prefWidth="280.0" styleClass="addLabel" />
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                      <children>
+                        <Label prefWidth="140.0" styleClass="addLabel" text="Ngày sinh" />
+                        <DatePicker fx:id="addDOBPicker" prefWidth="280.0" styleClass="addLabel" />
+                        <Label prefWidth="180.0" styleClass="addLabel" text="Nơi làm việc">
+                          <HBox.margin>
+                            <Insets left="50.0" />
+                          </HBox.margin>
+                        </Label>
+                        <TextField fx:id="addWorkField" prefWidth="280.0" styleClass="addLabel" />
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                      <children>
+                        <Label prefWidth="140.0" styleClass="addLabel" text="Nơi sinh" />
+                        <TextField fx:id="addBPlaceField" prefWidth="280.0" styleClass="addLabel">
+                          <HBox.margin>
+                            <Insets right="30.0" />
+                          </HBox.margin>
+                        </TextField>
+                        <Label prefWidth="180.0" styleClass="addLabel" text="CCCD">
+                          <HBox.margin>
+                            <Insets left="20.0" />
+                          </HBox.margin>
+                        </Label>
+                        <TextField fx:id="addCCCDField" prefWidth="280.0" styleClass="addLabel" />
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                      <children>
+                        <Label prefWidth="140.0" styleClass="addLabel" text="Giới tính" />
+                        <CheckBox fx:id="addMCheckBox" contentDisplay="CENTER"
+                          mnemonicParsing="false" prefWidth="100.0" selected="true"
+                          styleClass="addLabel" text="Nam">
+                          <HBox.margin>
+                            <Insets left="40.0" />
+                          </HBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="addFCheckBox" contentDisplay="CENTER"
+                          mnemonicParsing="false" prefWidth="100.0" styleClass="addLabel" text="Nữ">
+                          <HBox.margin>
+                            <Insets left="40.0" />
+                          </HBox.margin>
+                        </CheckBox>
+                        <Label prefWidth="180.0" styleClass="addLabel" text="Ngày cấp">
+                          <HBox.margin>
+                            <Insets left="50.0" />
+                          </HBox.margin>
+                        </Label>
+                        <DatePicker fx:id="addCCCDDatePicker" prefWidth="280.0"
+                          styleClass="addLabel" />
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                      <children>
+                        <Label prefWidth="140.0" styleClass="addLabel" text="Nguyên quán" />
+                        <TextField fx:id="addDomicileField" prefWidth="280.0" styleClass="addLabel">
+                          <HBox.margin>
+                            <Insets right="30.0" />
+                          </HBox.margin>
+                        </TextField>
+                        <Label prefWidth="180.0" styleClass="addLabel" text="Chuyển đến ngày">
+                          <HBox.margin>
+                            <Insets left="20.0" />
+                          </HBox.margin>
+                        </Label>
+                        <DatePicker fx:id="addToDatePicker" prefWidth="280.0" styleClass="addLabel" />
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                      <children>
+                        <Label prefWidth="140.0" styleClass="addLabel" text="Dân tộc" />
+                        <TextField fx:id="addEthField" prefWidth="280.0" styleClass="addLabel">
+                          <HBox.margin>
+                            <Insets right="30.0" />
+                          </HBox.margin>
+                        </TextField>
+                        <Label prefWidth="180.0" styleClass="addLabel" text="Tôn giáo">
+                          <HBox.margin>
+                            <Insets left="20.0" />
+                          </HBox.margin>
+                        </Label>
+                        <TextField fx:id="addRelField" prefWidth="280.0" styleClass="addLabel">
+                          <HBox.margin>
+                            <Insets />
+                          </HBox.margin>
+                        </TextField>
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                      <children>
+                        <Label prefHeight="23.0" prefWidth="355.0" styleClass="addLabel"
+                          text="Nơi thường trú trước khi chuyển đến">
+                          <HBox.margin>
+                            <Insets />
+                          </HBox.margin>
+                        </Label>
+                        <TextField fx:id="addBeforeField" prefHeight="35.0" prefWidth="575.0"
+                          styleClass="addLabel">
+                          <HBox.margin>
+                            <Insets right="30.0" />
+                          </HBox.margin>
+                        </TextField>
+                      </children>
+                      <VBox.margin>
+                        <Insets top="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                  </children>
+                  <VBox.margin>
+                    <Insets top="5.0" />
+                  </VBox.margin>
+                </VBox>
+                <Label fx:id="addErrText" alignment="CENTER" ellipsisString="" prefHeight="27.0"
+                  prefWidth="465.0" textFill="#ee213c">
+                  <font>
+                    <Font name="Montserrat Medium" size="15.0" />
+                  </font>
+                </Label>
+                <HBox alignment="CENTER" prefHeight="61.0" prefWidth="671.0" styleClass="btnZone"
+                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <Button fx:id="saveAddBtn" mnemonicParsing="false" onAction="#saveAdd"
+                      text="Lưu">
+                      <font>
+                        <Font name="Montserrat Medium" size="20.0" />
+                      </font>
+                      <padding>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                      </padding>
+                      <HBox.margin>
+                        <Insets right="100.0" />
+                      </HBox.margin>
+                      <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="saveBtn" />
+                      </styleClass>
+                    </Button>
+                    <Button fx:id="cancelAddBtn" mnemonicParsing="false" onAction="#cancelAdd"
+                      styleClass="btn" text="Huỷ">
+                      <font>
+                        <Font name="Montserrat Medium" size="20.0" />
+                      </font>
+                      <padding>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                      </padding>
+                    </Button>
+                  </children>
+                  <VBox.margin>
+                    <Insets bottom="10.0" left="20.0" right="20.0" />
+                  </VBox.margin>
+                </HBox>
+              </children>
+              <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" />
+              </padding>
+            </VBox>
+            <AnchorPane fx:id="addSaveConfirmPane" style="-fx-background-color: #5555;"
+              visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <VBox alignment="CENTER" prefHeight="150.0" prefWidth="400.0"
+                  style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                  AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                  <children>
+                    <Label text="Lưu nhân khẩu mới ?" textFill="#569698">
+                      <font>
+                        <Font name="Montserrat SemiBold" size="22.0" />
+                      </font>
+                    </Label>
+                    <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
+                      <children>
+                        <Button fx:id="saveConfirmAddBtn" mnemonicParsing="false" text="Lưu">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                          <styleClass>
+                            <String fx:value="btn" />
+                            <String fx:value="saveBtn" />
+                          </styleClass>
+                          <HBox.margin>
+                            <Insets right="80.0" />
+                          </HBox.margin>
+                        </Button>
+                        <Button fx:id="cancelConfirmAddBtn" mnemonicParsing="false"
+                          onAction="#cancelConfirmAdd" styleClass="btn" text="Huỷ">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                        </Button>
+                      </children>
+                      <VBox.margin>
+                        <Insets top="20.0" />
+                      </VBox.margin>
+                    </HBox>
+                  </children>
+                  <padding>
+                    <Insets top="20.0" />
+                  </padding>
+                </VBox>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="editPane" prefHeight="200.0" prefWidth="200.0"
+          style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="1000.0"
+                  style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                  styleClass="rightProfile" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="33.0">
+                  <children>
+                    <Label text="Chỉnh sửa" textFill="#569698">
+                      <font>
+                        <Font name="Montserrat SemiBold" size="26.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <VBox prefHeight="438.0" prefWidth="960.0" styleClass="portfolioVBox">
+                      <children>
+                        <HBox fx:id="roleHBoxEdit" alignment="CENTER_LEFT" layoutY="39.0">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Họ tên" />
+                            <TextField fx:id="editNameField" prefWidth="280.0" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Bí danh">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="editAliField" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="100.0">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Quốc tịch" />
+                            <TextField fx:id="editNationField" prefWidth="280.0"
+                              styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Nghề nghiệp">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="editJobField" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Ngày sinh" />
+                            <DatePicker fx:id="editDOBPicker" prefWidth="280.0"
+                              styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Nơi làm việc">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="editWorkField" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Nơi sinh" />
+                            <TextField fx:id="editBPlaceField" prefWidth="280.0"
+                              styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="CCCD">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="editCCCDField" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Giới tính" />
+                            <CheckBox fx:id="editMCheckBox" mnemonicParsing="false"
+                              prefWidth="100.0" styleClass="addLabel" text="Nam">
+                              <HBox.margin>
+                                <Insets left="40.0" />
+                              </HBox.margin>
+                            </CheckBox>
+                            <CheckBox fx:id="editFCheckBox" mnemonicParsing="false"
+                              prefWidth="100.0" styleClass="addLabel" text="Nữ">
+                              <HBox.margin>
+                                <Insets left="40.0" />
+                              </HBox.margin>
+                            </CheckBox>
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Ngày cấp">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <DatePicker fx:id="editCCCDDatePicker" prefWidth="280.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Nguyên quán" />
+                            <TextField fx:id="editDomicileField" prefWidth="280.0"
+                              styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Chuyển đến ngày">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <DatePicker fx:id="editToDatePicker" prefWidth="280.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Dân tộc" />
+                            <TextField fx:id="editEthField" prefWidth="280.0" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Tôn giáo">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="editRelField" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefHeight="27.0" prefWidth="372.0" styleClass="addLabel"
+                              text="Nơi thường trú trước khi chuyển đến" />
+                            <TextField fx:id="editBeforeField" prefHeight="39.0" prefWidth="528.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                      <VBox.margin>
+                        <Insets top="5.0" />
+                      </VBox.margin>
+                    </VBox>
+                    <Label fx:id="editErrText" alignment="CENTER" contentDisplay="CENTER"
+                      ellipsisString="" prefHeight="27.0" prefWidth="465.0" textFill="#eb2222">
+                      <font>
+                        <Font name="Montserrat Medium" size="15.0" />
+                      </font>
+                    </Label>
+                    <HBox fx:id="btnZone11" alignment="CENTER" prefHeight="61.0" prefWidth="671.0"
+                      styleClass="btnZone" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <Button fx:id="saveEditBtn" mnemonicParsing="false" onAction="#saveEdit"
+                          text="Lưu">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                          <HBox.margin>
+                            <Insets right="100.0" />
+                          </HBox.margin>
+                          <styleClass>
+                            <String fx:value="btn" />
+                            <String fx:value="saveBtn" />
+                          </styleClass>
+                        </Button>
+                        <Button fx:id="deleteEditBtn" mnemonicParsing="false" onAction="#deleteEdit"
+                          text="Xoá">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                          <HBox.margin>
+                            <Insets right="100.0" />
+                          </HBox.margin>
+                          <styleClass>
+                            <String fx:value="btn" />
+                            <String fx:value="delBtn" />
+                          </styleClass>
+                        </Button>
+                        <Button fx:id="cancelEditBtn" mnemonicParsing="false" onAction="#cancelEdit"
+                          styleClass="btn" text="Huỷ">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                        </Button>
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" />
+                      </VBox.margin>
+                    </HBox>
+                  </children>
+                  <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" />
+                  </padding>
+                </VBox>
+                <AnchorPane fx:id="editSaveConfirmPane" style="-fx-background-color: #5555;"
+                  visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <VBox alignment="CENTER" prefHeight="150.0" prefWidth="400.0"
+                      style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                      AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                      <children>
+                        <Label text="Lưu thay đổi ?" textFill="#569698">
+                          <font>
+                            <Font name="Montserrat SemiBold" size="22.0" />
+                          </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
+                          <children>
+                            <Button fx:id="saveConfirmEditBtn" mnemonicParsing="false" text="Lưu">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                              <padding>
+                                <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                              </padding>
+                              <styleClass>
+                                <String fx:value="btn" />
+                                <String fx:value="saveBtn" />
+                              </styleClass>
+                              <HBox.margin>
+                                <Insets right="80.0" />
+                              </HBox.margin>
+                            </Button>
+                            <Button fx:id="cancelConfirmEditBtn" mnemonicParsing="false"
+                              onAction="#cancelConfirmEdit" styleClass="btn" text="Huỷ">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                              <padding>
+                                <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                              </padding>
+                            </Button>
+                          </children>
+                          <VBox.margin>
+                            <Insets top="20.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                      <padding>
+                        <Insets top="20.0" />
+                      </padding>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+                <AnchorPane fx:id="editDeleteConfirmPane" prefHeight="200.0" prefWidth="200.0"
+                  style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
+                  <children>
+                    <VBox alignment="CENTER" layoutX="191.0" prefHeight="150.0" prefWidth="400.0"
+                      style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                      AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                      <children>
+                        <Label text="Xác nhận xoá nhân khẩu" textFill="#569698">
+                          <font>
+                            <Font name="Montserrat SemiBold" size="22.0" />
+                          </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                          <children>
+                            <Button fx:id="editDeleteConfirmBtn" mnemonicParsing="false"
+                              text="Xác nhận">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                              <HBox.margin>
+                                <Insets right="80.0" />
+                              </HBox.margin>
+                              <styleClass>
+                                <String fx:value="delBtn" />
+                                <String fx:value="btn" />
+                              </styleClass>
+                            </Button>
+                            <Button fx:id="editCancelDeleteBtn" mnemonicParsing="false"
+                              styleClass="btn" text="Huỷ">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                            </Button>
+                          </children>
+                          <VBox.margin>
+                            <Insets top="20.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                      <padding>
+                        <Insets top="20.0" />
+                      </padding>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="infoPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0"
+          prefWidth="200.0" style="-fx-background-color: #5555;" visible="false"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="1000.0"
+                  style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                  styleClass="rightProfile" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="33.0">
+                  <children>
+                    <Label text="Thông tin nhân khẩu" textFill="#569698">
+                      <font>
+                        <Font name="Montserrat SemiBold" size="26.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <VBox prefHeight="438.0" prefWidth="960.0" styleClass="portfolioVBox">
+                      <children>
+                        <HBox fx:id="roleHBoxEdit1" alignment="CENTER_LEFT" layoutY="39.0">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Họ tên" />
+                            <TextField fx:id="infoNameField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Bí danh">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="infoAliField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="100.0">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Quốc tịch" />
+                            <TextField fx:id="infoNationField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Nghề nghiệp">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="infoJobField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Ngày sinh" />
+                            <TextField fx:id="infoDOBField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Nơi làm việc">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="infoWorkField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Nơi sinh" />
+                            <TextField fx:id="infoBPlaceField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="CCCD">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="infoCCCDField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Giới tính" />
+                            <TextField fx:id="infoGenField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Ngày cấp">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="infoCCCDDateField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Nguyên quán" />
+                            <TextField fx:id="infoDomicileField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Chuyển đến ngày">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="infoToDateField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="140.0" styleClass="addLabel" text="Dân tộc" />
+                            <TextField fx:id="infoEthField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Tôn giáo">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="infoRelField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefHeight="27.0" prefWidth="372.0" styleClass="addLabel"
+                              text="Nơi thường trú trước khi chuyển đến" />
+                            <TextField fx:id="infoBeforeField" editable="false" prefHeight="39.0"
+                              prefWidth="528.0" style="-fx-background-color: inherit;"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                      <VBox.margin>
+                        <Insets top="5.0" />
+                      </VBox.margin>
+                    </VBox>
+                    <HBox fx:id="btnZone111" alignment="CENTER" prefHeight="61.0" prefWidth="671.0"
+                      styleClass="btnZone" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <Button fx:id="editInfoBtn" mnemonicParsing="false" onAction="#editInfo"
+                          text="Chỉnh sửa">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                          <styleClass>
+                            <String fx:value="btn" />
+                            <String fx:value="saveBtn" />
+                          </styleClass>
+                          <HBox.margin>
+                            <Insets right="100.0" />
+                          </HBox.margin>
+                        </Button>
+                        <Button fx:id="deleteInfoBtn" mnemonicParsing="false" onAction="#deleteInfo"
+                          text="Xoá">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                          <styleClass>
+                            <String fx:value="btn" />
+                            <String fx:value="delBtn" />
+                          </styleClass>
+                          <HBox.margin>
+                            <Insets right="100.0" />
+                          </HBox.margin>
+                        </Button>
+                        <Button fx:id="cancelInfoBtn" mnemonicParsing="false" onAction="#cancelInfo"
+                          styleClass="btn" text="Đóng">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                        </Button>
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" />
+                      </VBox.margin>
+                    </HBox>
+                  </children>
+                  <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" />
+                  </padding>
+                </VBox>
+                <AnchorPane fx:id="infoDeleteConfirmPane" prefHeight="200.0" prefWidth="200.0"
+                  style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
+                  <children>
+                    <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0"
+                      prefWidth="400.0"
+                      style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                      AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                      <children>
+                        <Label text="Xác nhận xoá nhân khẩu" textFill="#569698">
+                          <font>
+                            <Font name="Montserrat SemiBold" size="22.0" />
+                          </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                          <children>
+                            <Button mnemonicParsing="false" onAction="#deleteEdit" text="Xoá">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                              <styleClass>
+                                <String fx:value="delBtn" />
+                                <String fx:value="btn" />
+                              </styleClass>
+                              <HBox.margin>
+                                <Insets right="80.0" />
+                              </HBox.margin>
+                            </Button>
+                            <Button mnemonicParsing="false" onAction="#cancelDeleteInfo"
+                              styleClass="btn" text="Huỷ">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                            </Button>
+                          </children>
+                          <VBox.margin>
+                            <Insets top="20.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                      <padding>
+                        <Insets top="20.0" />
+                      </padding>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="stayPane" layoutX="20.0" layoutY="20.0" prefHeight="200.0"
+          prefWidth="200.0" style="-fx-background-color: #5555;" visible="false"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.leftAnchor="299.0"
+              AnchorPane.topAnchor="33.0">
+              <children>
+                <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0"
+                  style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                  styleClass="rightProfile" AnchorPane.leftAnchor="0.0">
+                  <children>
+                    <Label text="Khai báo tạm trú" textFill="#569698">
+                      <font>
+                        <Font name="Montserrat SemiBold" size="26.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <VBox prefHeight="438.0" prefWidth="960.0" styleClass="portfolioVBox">
+                      <children>
+                        <HBox fx:id="roleHBoxEdit11" alignment="CENTER_LEFT" layoutY="39.0">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Họ tên">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="stayNameField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Ngày sinh">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="stayDOBField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Nơi ở trước kia">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="stayBeforeField" prefWidth="280.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Nơi tạm trú">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="stayStayField" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Từ ngày">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <DatePicker fx:id="stayFromPicker" prefWidth="280.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Đến ngày">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <DatePicker fx:id="stayToPicker" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox>
+                          <children>
+                            <Label prefHeight="27.0" prefWidth="160.0" styleClass="addLabel"
+                              text="Lý do:">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextArea fx:id="stayReasonField" prefHeight="84.0" prefWidth="280.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                      <VBox.margin>
+                        <Insets top="5.0" />
+                      </VBox.margin>
+                    </VBox>
+                    <Label fx:id="stayErrText" alignment="CENTER_RIGHT" ellipsisString=""
+                      prefHeight="27.0" prefWidth="465.0">
+                      <font>
+                        <Font name="Montserrat Medium" size="15.0" />
+                      </font>
+                    </Label>
+                    <HBox alignment="CENTER" prefHeight="61.0" prefWidth="671.0"
+                      styleClass="btnZone" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <Button mnemonicParsing="false" onAction="#stayConfirm" text="Xác nhận">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                          <styleClass>
+                            <String fx:value="btn" />
+                            <String fx:value="saveBtn" />
+                          </styleClass>
+                          <HBox.margin>
+                            <Insets right="80.0" />
+                          </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#stayCancel" styleClass="btn"
+                          text="Huỷ">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                        </Button>
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" />
+                      </VBox.margin>
+                    </HBox>
+                  </children>
+                  <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" />
+                  </padding>
+                </VBox>
+                <AnchorPane fx:id="stayConfirmPane" prefHeight="200.0" prefWidth="200.0"
+                  style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
+                  <children>
+                    <VBox alignment="TOP_CENTER" layoutX="191.0" layoutY="186.0" prefHeight="150.0"
+                      prefWidth="300.0"
+                      style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                      AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="175.0">
+                      <children>
+                        <Label text="Xác nhận khai báo">
+                          <font>
+                            <Font name="Montserrat Medium" size="25.0" />
+                          </font>
+                          <VBox.margin>
+                            <Insets bottom="20.0" top="20.0" />
+                          </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="400.0"
+                          VBox.vgrow="ALWAYS">
+                          <children>
+                            <Button fx:id="stayConfirmBtn" mnemonicParsing="false" text="Lưu">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                              <styleClass>
+                                <String fx:value="saveBtn" />
+                                <String fx:value="btn" />
+                              </styleClass>
+                              <HBox.margin>
+                                <Insets right="80.0" />
+                              </HBox.margin>
+                            </Button>
+                            <Button fx:id="stayCancelBtn" mnemonicParsing="false" styleClass="btn"
+                              text="Huỷ">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                            </Button>
+                          </children>
+                          <VBox.margin>
+                            <Insets />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="awayPane" layoutX="30.0" layoutY="30.0" prefHeight="200.0"
+          prefWidth="200.0" style="-fx-background-color: #5555;" visible="false"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.leftAnchor="299.0"
+              AnchorPane.topAnchor="33.0">
+              <children>
+                <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0"
+                  style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                  styleClass="rightProfile" AnchorPane.leftAnchor="0.0">
+                  <children>
+                    <Label text="Khai báo tạm vắng" textFill="#569698">
+                      <font>
+                        <Font name="Montserrat SemiBold" size="26.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <VBox prefHeight="438.0" prefWidth="960.0" styleClass="portfolioVBox">
+                      <children>
+                        <HBox fx:id="roleHBoxEdit111" alignment="CENTER_LEFT" layoutY="39.0">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Họ tên">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="awayNameField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Ngày sinh">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="awayDOBField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Nơi tạm trú">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="awayNowField" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Từ ngày">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <DatePicker fx:id="awayFromPicker" prefWidth="280.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Đến ngày">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <DatePicker fx:id="awayToPicker" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox>
+                          <children>
+                            <Label prefHeight="27.0" prefWidth="160.0" styleClass="addLabel"
+                              text="Lý do:">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextArea fx:id="awayReasonField" prefHeight="84.0" prefWidth="280.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                      <VBox.margin>
+                        <Insets top="5.0" />
+                      </VBox.margin>
+                    </VBox>
+                    <Label fx:id="awayErrText" alignment="CENTER_RIGHT" ellipsisString=""
+                      prefHeight="27.0" prefWidth="465.0">
+                      <font>
+                        <Font name="Montserrat Medium" size="15.0" />
+                      </font>
+                    </Label>
+                    <HBox alignment="CENTER" prefHeight="61.0" prefWidth="671.0"
+                      styleClass="btnZone" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <Button fx:id="awayConfirmBtn" mnemonicParsing="false"
+                          onAction="#awayConfirm" text="Xác nhận">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                          <styleClass>
+                            <String fx:value="btn" />
+                            <String fx:value="saveBtn" />
+                          </styleClass>
+                          <HBox.margin>
+                            <Insets right="80.0" />
+                          </HBox.margin>
+                        </Button>
+                        <Button fx:id="awayCancelBtn" mnemonicParsing="false" onAction="#awayCancel"
+                          styleClass="btn" text="Huỷ">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                        </Button>
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" />
+                      </VBox.margin>
+                    </HBox>
+                  </children>
+                  <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" />
+                  </padding>
+                </VBox>
+                <AnchorPane fx:id="awayConfirmPane" prefHeight="200.0" prefWidth="200.0"
+                  style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
+                  <children>
+                    <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0"
+                      prefWidth="300.0"
+                      style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                      AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="175.0">
+                      <children>
+                        <Label text="Xác nhận tạm vắng">
+                          <font>
+                            <Font name="Montserrat Medium" size="25.0" />
+                          </font>
+                          <VBox.margin>
+                            <Insets top="20.0" />
+                          </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                          <children>
+                            <Button fx:id="awayConfirmBtn" mnemonicParsing="false" text="Lưu">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                              <styleClass>
+                                <String fx:value="saveBtn" />
+                                <String fx:value="btn" />
+                              </styleClass>
+                              <HBox.margin>
+                                <Insets right="40.0" />
+                              </HBox.margin>
+                            </Button>
+                            <Button fx:id="awayCancelBtn" mnemonicParsing="false" styleClass="btn"
+                              text="Huỷ">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                            </Button>
+                          </children>
+                          <VBox.margin>
+                            <Insets />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="movePane" layoutX="40.0" layoutY="40.0" prefHeight="200.0"
+          prefWidth="200.0" style="-fx-background-color: #5555;" visible="false"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.leftAnchor="299.0"
+              AnchorPane.topAnchor="73.0">
+              <children>
+                <VBox alignment="TOP_CENTER" prefHeight="420.0" prefWidth="500.0"
+                  style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                  styleClass="rightProfile" AnchorPane.leftAnchor="0.0">
+                  <children>
+                    <Label text="Khai báo chuyển nhân khẩu" textFill="#569698">
+                      <font>
+                        <Font name="Montserrat SemiBold" size="26.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <VBox prefHeight="438.0" prefWidth="960.0" styleClass="portfolioVBox">
+                      <children>
+                        <HBox alignment="CENTER_LEFT" layoutY="39.0">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Họ tên">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="moveNameField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Ngày sinh">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="moveDOBField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Ngày chuyển đi">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <DatePicker fx:id="moveAtPicker" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Nơi chuyển đến">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="moveToField" prefWidth="280.0" styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox>
+                          <children>
+                            <Label prefHeight="27.0" prefWidth="160.0" styleClass="addLabel"
+                              text="Ghi chú">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextArea fx:id="moveNoteField" prefHeight="84.0" prefWidth="280.0"
+                              styleClass="addLabel" />
+                          </children>
+                          <VBox.margin>
+                            <Insets top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                      <VBox.margin>
+                        <Insets top="5.0" />
+                      </VBox.margin>
+                    </VBox>
+                    <Label fx:id="moveErrText" alignment="CENTER_RIGHT" ellipsisString=""
+                      prefHeight="27.0" prefWidth="465.0">
+                      <font>
+                        <Font name="Montserrat Medium" size="15.0" />
+                      </font>
+                    </Label>
+                    <HBox alignment="CENTER" prefHeight="61.0" prefWidth="671.0"
+                      styleClass="btnZone" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <Button mnemonicParsing="false" onAction="#moveConfirm" text="Xác nhận">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                          <styleClass>
+                            <String fx:value="btn" />
+                            <String fx:value="saveBtn" />
+                          </styleClass>
+                          <HBox.margin>
+                            <Insets right="80.0" />
+                          </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#moveCancel" styleClass="btn"
+                          text="Huỷ">
+                          <font>
+                            <Font name="Montserrat Medium" size="20.0" />
+                          </font>
+                          <padding>
+                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                          </padding>
+                        </Button>
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" />
+                      </VBox.margin>
+                    </HBox>
+                  </children>
+                  <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" />
+                  </padding>
+                </VBox>
+                <AnchorPane fx:id="moveConfirmPane" prefHeight="200.0" prefWidth="200.0"
+                  style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
+                  <children>
+                    <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0"
+                      prefWidth="400.0"
+                      style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                      AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="135.0">
+                      <children>
+                        <Label text="Xác nhận chuyển nhân khẩu">
+                          <font>
+                            <Font name="Montserrat Medium" size="24.0" />
+                          </font>
+                          <VBox.margin>
+                            <Insets top="20.0" />
+                          </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                          <children>
+                            <Button fx:id="moveConfirmBtn" mnemonicParsing="false" text="Xác nhận">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                              <styleClass>
+                                <String fx:value="saveBtn" />
+                                <String fx:value="btn" />
+                              </styleClass>
+                              <HBox.margin>
+                                <Insets right="80.0" />
+                              </HBox.margin>
+                            </Button>
+                            <Button fx:id="moveCancelBtn" mnemonicParsing="false" styleClass="btn"
+                              text="Cancel">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                            </Button>
+                          </children>
+                          <VBox.margin>
+                            <Insets top="20.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="lostPane" layoutX="50.0" layoutY="50.0" prefHeight="200.0"
+          prefWidth="200.0" style="-fx-background-color: #5555;" visible="false"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.leftAnchor="99.0"
+              AnchorPane.topAnchor="73.0">
+              <children>
+                <VBox alignment="TOP_CENTER" prefHeight="420.0" prefWidth="900.0"
+                  style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                  styleClass="rightProfile" AnchorPane.leftAnchor="0.0">
+                  <children>
+                    <Label text="Khai báo thông tin người mất" textFill="#569698">
+                      <font>
+                        <Font name="Montserrat SemiBold" size="26.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <VBox prefHeight="134.0" prefWidth="710.0" styleClass="portfolioVBox">
+                      <children>
+                        <HBox alignment="CENTER_LEFT" layoutY="39.0">
+                          <children>
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Họ tên người mất">
+                              <HBox.margin>
+                                <Insets left="5.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField fx:id="deadNameField" editable="false" prefWidth="280.0"
+                              style="-fx-background-color: inherit;" styleClass="addLabel"
+                              HBox.hgrow="ALWAYS" />
+                          </children>
+                          <VBox.margin>
+                            <Insets top="5.0" />
+                          </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <VBox prefHeight="78.0" prefWidth="455.0">
+                              <children>
+                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                  <children>
+                                    <Label prefWidth="175.0" styleClass="addLabel" text="Ngày sinh" />
+                                    <TextField fx:id="deadDOBField" editable="false"
+                                      prefWidth="280.0" style="-fx-background-color: inherit;"
+                                      styleClass="addLabel" />
+                                  </children>
+                                  <VBox.margin>
+                                    <Insets left="5.0" />
+                                  </VBox.margin>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="43.0">
+                                  <children>
+                                    <Label prefWidth="180.0" styleClass="addLabel" text="Ngày mất">
+                                      <HBox.margin>
+                                        <Insets left="5.0" />
+                                      </HBox.margin>
+                                    </Label>
+                                    <DatePicker fx:id="deadDatePicker" prefWidth="280.0"
+                                      styleClass="addLabel" />
+                                  </children>
+                                </HBox>
+                              </children>
+                            </VBox>
+                            <HBox prefHeight="78.0" prefWidth="372.0" HBox.hgrow="NEVER">
+                              <children>
+                                <Label prefWidth="100.0" styleClass="addLabel" text="Lí do mất">
+                                  <HBox.margin>
+                                    <Insets left="20.0" top="5.0" />
+                                  </HBox.margin>
+                                </Label>
+                                <TextArea fx:id="deadReasonField" prefHeight="78.0"
+                                  prefWidth="220.0" HBox.hgrow="ALWAYS" />
+                              </children>
+                            </HBox>
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" />
+                          </VBox.margin>
+                          <padding>
+                            <Insets right="5.0" />
+                          </padding>
+                        </HBox>
+                      </children>
+                      <VBox.margin>
+                        <Insets top="5.0" />
+                      </VBox.margin>
+                    </VBox>
+                    <HBox prefHeight="61.0" styleClass="btnZone" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+                      <children>
+                        <VBox fx:id="deadTable" HBox.hgrow="ALWAYS">
+                          <children>
+                            <TextField fx:id="deadSearchField" promptText="Tìm kiếm..."
+                              styleClass="addLabel">
+                              <VBox.margin>
+                                <Insets bottom="10.0" />
+                              </VBox.margin>
+                            </TextField>
+                          </children>
+                          <padding>
+                            <Insets left="5.0" right="5.0" top="5.0" />
+                          </padding>
+                        </VBox>
+                        <VBox prefHeight="224.0" prefWidth="397.0" HBox.hgrow="NEVER">
+                          <children>
+                            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                              <children>
+                                <Label prefWidth="160.0" styleClass="addLabel" text="Người khai báo">
+                                  <HBox.margin>
+                                    <Insets left="10.0" />
+                                  </HBox.margin>
+                                </Label>
+                                <TextField fx:id="deadPField" editable="false" prefWidth="250.0"
+                                  style="-fx-background-color: inherit;" styleClass="addLabel">
+                                  <HBox.margin>
+                                    <Insets />
+                                  </HBox.margin>
+                                </TextField>
+                              </children>
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT">
+                              <children>
+                                <Label prefWidth="160.0" styleClass="addLabel" text="Ngày khai báo">
+                                  <HBox.margin>
+                                    <Insets left="10.0" />
+                                  </HBox.margin>
+                                </Label>
+                                <DatePicker fx:id="deadNKBPicker" prefWidth="250.0"
+                                  styleClass="addLabel" />
+                              </children>
+                            </HBox>
+                            <HBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                              <children>
+                                <Button fx:id="deadAddBtn" mnemonicParsing="false" text="Xác nhận">
+                                  <font>
+                                    <Font name="Montserrat Medium" size="20.0" />
+                                  </font>
+                                  <padding>
+                                    <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                  </padding>
+                                  <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="saveBtn" />
+                                  </styleClass>
+                                  <HBox.margin>
+                                    <Insets right="20.0" />
+                                  </HBox.margin>
+                                </Button>
+                                <Button fx:id="deadCloseBtn" mnemonicParsing="false"
+                                  onAction="#cancelEdit" styleClass="btn" text="Huỷ">
+                                  <font>
+                                    <Font name="Montserrat Medium" size="20.0" />
+                                  </font>
+                                  <padding>
+                                    <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                  </padding>
+                                </Button>
+                              </children>
+                            </HBox>
+                          </children>
+                        </VBox>
+                      </children>
+                      <VBox.margin>
+                        <Insets bottom="5.0" />
+                      </VBox.margin>
+                    </HBox>
+                  </children>
+                  <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" />
+                  </padding>
+                </VBox>
+                <AnchorPane fx:id="deadConfirmPane" prefHeight="200.0" prefWidth="200.0"
+                  style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
+                  <children>
+                    <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0"
+                      prefWidth="400.0"
+                      style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;"
+                      AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="135.0">
+                      <children>
+                        <Label text="Xác nhận khai tử">
+                          <font>
+                            <Font name="Montserrat Medium" size="25.0" />
+                          </font>
+                          <VBox.margin>
+                            <Insets top="20.0" />
+                          </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                          <children>
+                            <Button fx:id="deadConfirmBtn" mnemonicParsing="false" text="Xác nhận">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                              <styleClass>
+                                <String fx:value="delBtn" />
+                                <String fx:value="btn" />
+                              </styleClass>
+                              <HBox.margin>
+                                <Insets right="80.0" />
+                              </HBox.margin>
+                            </Button>
+                            <Button fx:id="deadCancelBtn" mnemonicParsing="false" styleClass="btn"
+                              text="Huỷ">
+                              <font>
+                                <Font name="Montserrat Medium" size="20.0" />
+                              </font>
+                            </Button>
+                          </children>
+                          <VBox.margin>
+                            <Insets top="10.0" />
+                          </VBox.margin>
+                        </HBox>
+                      </children>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="excelPane" layoutX="382.0" layoutY="140.0" prefHeight="200.0"
+          prefWidth="200.0" style="-fx-background-color: #5555;" visible="false"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane layoutX="463.0" layoutY="162.0" prefHeight="200.0" prefWidth="400.0"
+              AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="162.0">
+              <children>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0"
+                  style="-fx-background-color: #f9f9f9; -fx-border-radius: 10; -fx-background-radius: 10;"
+                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <Button fx:id="importBtn" mnemonicParsing="false" prefWidth="200.0"
+                      text="Nhập dữ liệu">
+                      <styleClass>
+                        <String fx:value="saveBtn" />
+                        <String fx:value="addLabel" />
+                        <String fx:value="addLabelBig" />
+                      </styleClass>
+                    </Button>
+                    <Button fx:id="exportBtn" mnemonicParsing="false" prefWidth="200.0"
+                      text="Xuất dữ liệu">
+                      <styleClass>
+                        <String fx:value="saveBtn" />
+                        <String fx:value="addLabel" />
+                        <String fx:value="addLabelBig" />
+                      </styleClass>
+                    </Button>
+                    <Button fx:id="cancelExcelBtn" mnemonicParsing="false" prefWidth="200.0"
+                      text="Huỷ">
+                      <styleClass>
+                        <String fx:value="addLabel" />
+                        <String fx:value="addLabelBig" />
+                        <String fx:value="btn" />
+                      </styleClass>
+                    </Button>
+                  </children>
+                </VBox>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+      </children>
+      <VBox.margin>
+        <Insets top="10.0" />
+      </VBox.margin>
+    </AnchorPane>
+  </children>
+  <padding>
+    <Insets left="47.0" right="47.0" />
+  </padding>
+</VBox>

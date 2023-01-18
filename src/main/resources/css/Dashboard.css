@@ -1,0 +1,32 @@
+@import url("Root.css");
+
+.dashboardRoot{
+  -fx-background-color: transparent;
+}
+
+.dashboardRoot > VBox {
+  -fx-background-radius: 10 10 0 0;
+  -fx-border-radius: 10 10 0 0;
+  -fx-background-color: #f1f1f1;
+}
+
+.dashboardRoot > VBox > HBox > .dashboard-text{
+  -fx-font-family: "Montserrat SemiBold";
+  -fx-font-size: 24px;
+  -fx-text-fill: #569698;
+}
+
+.label{
+  -fx-font-family: "Montserrat Medium";
+  -fx-font-size: 24px;
+}
+
+.labelBig{
+  -fx-font-family: "Montserrat Bold";
+  -fx-font-size: 40px !important;
+  -fx-font-weight: 700;
+}
+
+.labelItalic{
+  -fx-font-style: italic;
+}

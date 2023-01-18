@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Montserrat Medium";
+  src: url(../fonts/Montserrat-Medium.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat Medium Italic";
+  src: url(../fonts/Montserrat-MediumItalic.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat SemiBold";
+  src: url(../fonts/Montserrat-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat Bold";
+  src: url(../fonts/Montserrat-Bold.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat SemiBold Italic";
+  src: url(../fonts/Montserrat-SemiBoldItalic.ttf);
+}
+
+@font-face {
+  font-family: "Ink Free";
+  src: url(../fonts/Inkfree.ttf);
+}
