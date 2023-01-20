@@ -223,6 +223,12 @@ public class PeopleController {
   private AnchorPane deadConfirmPane;
   @FXML
   private AnchorPane excelPane;
+  @FXML
+  private AnchorPane historyPane;
+  @FXML
+  private AnchorPane historyDetailPane;
+  @FXML
+  private AnchorPane historyListPane;
 
   @FXML
   private Button saveAddBtn;
@@ -251,6 +257,10 @@ public class PeopleController {
   @FXML
   private Button cancelInfoBtn;
   @FXML
+  private Button infoDeleteConfirmBtn;
+  @FXML
+  private Button infoDeleteCancelBtn;
+  @FXML
   private Button stayConfirmBtn;
   @FXML
   private Button stayCancelBtn;
@@ -276,6 +286,10 @@ public class PeopleController {
   private Button exportBtn;
   @FXML
   private Button cancelExcelBtn;
+  @FXML
+  private Button closeHistoryBtn;
+  @FXML
+  private Button closeHistoryListBtn;
 
   @FXML
   private Label addErrText;
@@ -303,6 +317,7 @@ public class PeopleController {
   private Button addDeadBtn = new Button("Khai báo tử");
   private ArrayList<Button> optBtnList = new ArrayList<>();
   private NhanKhau selectedNKB = null;
+  private ChuyenNhanKhau selectedCNK = null;
 
   private NguoiDung user;
 
@@ -311,6 +326,14 @@ public class PeopleController {
   }
 
   public void initialize() {
+    final ArrayList<AnchorPane> panes = new ArrayList<>(
+        Arrays.asList(infoPane, addPane, editPane, awayPane, movePane, lostPane));
+    panes.forEach(e -> {
+      e.visibleProperty().addListener((ObservableValue<? extends Boolean> ob, Boolean oldVal, Boolean newVal) -> {
+        if (newVal == false)
+          getNKList();
+      });
+    });
     optBtnList.add(addStayBtn);
     optBtnList.add(addAwayBtn);
     optBtnList.add(addMoveBtn);
@@ -593,12 +616,9 @@ public class PeopleController {
   public void deleteEdit(ActionEvent e) {
     editDeleteConfirmPane.setVisible(true);
     editDeleteConfirmBtn.setOnAction(ae -> {
-      try {
-        NhanKhauManage.xoaNhanKhau(selectedNK.getID());
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
+      NhanKhauManage.xoaNhanKhau(selectedNK.getID());
       editDeleteConfirmPane.setVisible(false);
+      editPane.setVisible(false);
     });
     editCancelDeleteBtn.setOnAction(ae -> {
       editDeleteConfirmPane.setVisible(false);
@@ -655,11 +675,15 @@ public class PeopleController {
 
   public void deleteInfo(ActionEvent e) {
     infoDeleteConfirmPane.setVisible(true);
+    infoDeleteConfirmBtn.setOnAction(ae -> {
+      NhanKhauManage.xoaNhanKhau(selectedNK.getID());
+      infoDeleteConfirmPane.setVisible(false);
+      infoPane.setVisible(false);
+    });
+    infoDeleteCancelBtn.setOnAction(ae -> {
+      infoDeleteConfirmPane.setVisible(false);
+    });
   };
-
-  public void cancelDeleteInfo(ActionEvent e) {
-    infoDeleteConfirmPane.setVisible(false);
-  }
 
   public void cancelInfo(ActionEvent e) {
     selectedNK = null;
@@ -859,6 +883,38 @@ public class PeopleController {
     });
     cancelExcelBtn.setOnAction(ae -> {
       excelPane.setVisible(false);
+    });
+  }
+
+  public void openHistory(ActionEvent e) {
+    final TableView<ChuyenNhanKhau> table = new TableView<>();
+    Callback<TableView<ChuyenNhanKhau>, TableRow<ChuyenNhanKhau>> rowFactory = new Callback<TableView<ChuyenNhanKhau>, TableRow<ChuyenNhanKhau>>() {
+      @Override
+      public TableRow<ChuyenNhanKhau> call(final TableView<ChuyenNhanKhau> param) {
+        final TableRow<ChuyenNhanKhau> row = new TableRow<>();
+        row.setOnMouseClicked(e -> {
+          if (e.getClickCount() >= 2) {
+            selectedCNK = row.getItem();
+            if (selectedCNK != null)
+              historyDetailPane.setVisible(true);
+          }
+        });
+        return row;
+      }
+    };
+    table.setRowFactory(rowFactory);
+    final ArrayList<ChuyenNhanKhau> list = null; // get list cnk
+    final ObservableList<ChuyenNhanKhau> olist = FXCollections.observableArrayList(list);
+    table.setItems(olist);
+    table.setPrefHeight(399);
+    table.setPrefWidth(704);
+    historyListPane.getChildren().clear();
+    historyListPane.getChildren().add(table);
+    closeHistoryBtn.setOnAction(ae -> {
+      historyPane.setVisible(false);
+    });
+    closeHistoryListBtn.setOnAction(ae -> {
+      historyDetailPane.setVisible(false);
     });
   }
 }
