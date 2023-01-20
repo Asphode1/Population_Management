@@ -230,6 +230,13 @@ public class HouseholdController {
   private ArrayList<ChuyenHoKhau> chkList = new ArrayList<>();
 
   public void initialize() {
+    final ArrayList<AnchorPane> panes = new ArrayList<>(
+        Arrays.asList(infoPane, editPane, addPane, movePane, splitPane, historyPane));
+    panes.forEach(e -> e.visibleProperty()
+        .addListener((ObservableValue<? extends Boolean> ob, Boolean oldVal, Boolean newVal) -> {
+          if (newVal == false)
+            getHKList();
+        }));
     optBtnList.add(addSplitBtn);
     optBtnList.add(addMoveBtn);
     optBtnList.forEach((Button e) -> {
@@ -402,8 +409,8 @@ public class HouseholdController {
     infoNKTable.setRowFactory(rowFactory);
     TableColumn<NhanKhau, String> idCol = new TableColumn<>("Id");
     idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-    idCol.setMaxWidth(50);
-    idCol.setMinWidth(50);
+    idCol.setMaxWidth(55);
+    idCol.setMinWidth(55);
     TableColumn<NhanKhau, String> nameCol = new TableColumn<>("Họ tên");
     nameCol.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
     infoNKTable.getColumns().addAll(Arrays.asList(idCol, nameCol));
@@ -572,15 +579,36 @@ public class HouseholdController {
           selectedAddNK = row.getItem();
           if (selectedAddNK != null) {
             addHKNameField.setText(selectedAddNK.getHoTen());
-            if (selectedAddChuHo != null && selectedAddNK.getID() == selectedAddChuHo.getID())
-              addCHCheckBox.setSelected(true);
+            if (selectedAddChuHo != null)
+              if (selectedAddNK.getID() == selectedAddChuHo.getID()) {
+                addCHCheckBox.setSelected(true);
+              } else
+                addCHCheckBox.setSelected(false);
+          }
+        });
+        return row;
+      }
+    };
+    Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowedFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
+      @Override
+      public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
+        final TableRow<NhanKhau> row = new TableRow<>();
+        row.setOnMouseClicked((e) -> {
+          selectedAddNK = row.getItem();
+          if (selectedAddNK != null) {
+            addHKNameField.setText(selectedAddNK.getHoTen());
+            if (selectedAddChuHo != null)
+              if (selectedAddNK.getID() == selectedAddChuHo.getID()) {
+                addCHCheckBox.setSelected(true);
+              } else
+                addCHCheckBox.setSelected(false);
           }
         });
         return row;
       }
     };
     addNKTable.setRowFactory(rowFactory);
-    addedNKTable.setRowFactory(rowFactory);
+    addedNKTable.setRowFactory(rowedFactory);
     TableColumn<NhanKhau, String> addNKIdCol = new TableColumn<>("Id");
     addNKIdCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
     addNKIdCol.setMinWidth(40);
@@ -605,8 +633,11 @@ public class HouseholdController {
     addCHCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
       @Override
       public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-        if (newValue && selectedAddChuHo != null && selectedAddChuHo.getID() != selectedAddNK.getID()) {
-          selectedAddChuHo = selectedAddNK;
+        if (newValue) {
+          if (selectedAddChuHo == null
+              || selectedAddChuHo != null && selectedAddChuHo.getID() != selectedAddNK.getID()) {
+            selectedAddChuHo = selectedAddNK;
+          }
         } else if (!newValue && selectedAddChuHo.getID() == selectedAddNK.getID()) {
           selectedAddChuHo = null;
         }
@@ -645,29 +676,31 @@ public class HouseholdController {
       searchAddedNk.addAll(addednk.stream().filter((n) -> n.getHoTen().contains(s)).toList());
     };
 
-    addHKSearchField.textProperty()
-        .addListener((ObservableValue<? extends String> observable, String oldVal, String newVal) -> {
-          if (newVal == null || newVal.isEmpty()) {
-            getNKList.run();
-            updateAddNKTable.run();
-          } else {
-            searchNKList.accept(newVal);
-            updateAddNKTable.run();
-          }
-        });
-    addedHKSearchField.textProperty()
-        .addListener((ObservableValue<? extends String> observable, String oldVal, String newVal) -> {
-          if (newVal == null || newVal.isEmpty()) {
-            ObservableList<NhanKhau> list = FXCollections.observableArrayList(addednk);
-            addedNKTable.getItems().clear();
-            addedNKTable.getItems().addAll(list);
-          } else {
-            findAddedNKList.accept(newVal);
-            ObservableList<NhanKhau> addedList = FXCollections.observableArrayList(searchAddedNk);
-            addedNKTable.getItems().clear();
-            addedNKTable.getItems().addAll(addedList);
-          }
-        });
+    addHKSearchField.textProperty().addListener((
+        ObservableValue<? extends String> observable, String oldVal,
+        String newVal) -> {
+      if (newVal == null || newVal.isEmpty()) {
+        getNKList.run();
+        updateAddNKTable.run();
+      } else {
+        searchNKList.accept(newVal);
+        updateAddNKTable.run();
+      }
+    });
+    addedHKSearchField.textProperty().addListener((
+        ObservableValue<? extends String> observable, String oldVal,
+        String newVal) -> {
+      if (newVal == null || newVal.isEmpty()) {
+        ObservableList<NhanKhau> list = FXCollections.observableArrayList(addednk);
+        addedNKTable.getItems().clear();
+        addedNKTable.getItems().addAll(list);
+      } else {
+        findAddedNKList.accept(newVal);
+        ObservableList<NhanKhau> addedList = FXCollections.observableArrayList(searchAddedNk);
+        addedNKTable.getItems().clear();
+        addedNKTable.getItems().addAll(addedList);
+      }
+    });
     addBtn.setOnAction((ae) -> {
       if (nk.contains(selectedAddNK)) {
         nk.remove(selectedAddNK);
@@ -675,7 +708,6 @@ public class HouseholdController {
         String s = addHKRelField.getText();
         addedNKRel.add(s == null || s.isEmpty() ? "" : s);
         updateAddNKTable.run();
-        addCHCheckBox.setSelected(false);
         addHKNameField.setText(null);
         addHKRelField.setText(null);
         selectedAddNK = null;
@@ -690,6 +722,8 @@ public class HouseholdController {
         updateAddNKTable.run();
         addHKNameField.setText(null);
         addHKRelField.setText(null);
+        if (selectedAddNK.getID() == selectedAddChuHo.getID())
+          selectedAddChuHo = null;
         selectedAddNK = null;
       }
     });
@@ -706,11 +740,9 @@ public class HouseholdController {
       saveConfirmAddBtn.setOnAction(ev -> {
         HoKhau hk = new HoKhau(0, selectedAddChuHo.getID(), a3, a4, a5, a6, Date.valueOf(a7), a8);
         HoKhauBean hkb = new HoKhauBean(hk, selectedAddChuHo, addednk, addedNKRel);
-        try {
-          HoKhauManage.themHoKhauBean(hkb);
-        } catch (Exception ex) {
-          ex.printStackTrace();
-        }
+        HoKhauManage.themHoKhauBean(hkb);
+        addSaveConfirmPane.setVisible(false);
+        addPane.setVisible(false);
       });
       cancelConfirmAddBtn.setOnAction(ev -> {
         addSaveConfirmPane.setVisible(false);
@@ -782,8 +814,8 @@ public class HouseholdController {
     chkTable.setRowFactory(rowFactory);
     chkTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     TableColumn<ChuyenHoKhau, String> idCol = new TableColumn<>("ID");
-    idCol.setMinWidth(50);
-    idCol.setMaxWidth(50);
+    idCol.setMinWidth(55);
+    idCol.setMaxWidth(55);
     idCol.setCellValueFactory(new PropertyValueFactory<>("idHoKhau"));
     TableColumn<ChuyenHoKhau, String> dateCol = new TableColumn<>("Ngày chuyển đi");
     dateCol.setCellValueFactory(new PropertyValueFactory<>("ngayChuyenDiString"));

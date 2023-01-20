@@ -110,6 +110,14 @@ public class RewardController {
   ArrayList<NhanKhau> totalNK = new ArrayList<>();
 
   public void initialize() {
+    detailPane.visibleProperty().addListener((ob, oldVal, newVal) -> {
+      if (newVal == false) {
+        if (selectHSGBtn.getStyleClass().contains("btnOnFocus"))
+          getGList();
+        else
+          getSList();
+      }
+    });
     Callback<TableView<DipHSG>, TableRow<DipHSG>> rowGFactory = new Callback<TableView<DipHSG>, TableRow<DipHSG>>() {
       @Override
       public TableRow<DipHSG> call(final TableView<DipHSG> param) {
