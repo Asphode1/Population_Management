@@ -6,3 +6,4 @@ target/
 src/main/java/com/lele/cnpm/database/connect/DBConnection.java
 pom.xml
 run.bat
+src/main/java/com/lele/cnpm/database/connect/DBConnection.java
