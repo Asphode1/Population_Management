@@ -223,4 +223,8 @@ public class NhanKhauManage extends NhanKhauModify {
     }
     return res;
   }
+
+  public static ArrayList<ChuyenNhanKhau> xemLichSuChuyenNhanKhaus() {
+    return ChuyenNhanKhauModify.layListChuyenNhanKhau();
+  }
 }

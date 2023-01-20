@@ -3,6 +3,9 @@ package com.lele.cnpm.src.models;
 import java.sql.Date;
 import java.util.Objects;
 
+import com.lele.cnpm.src.services.HoKhauManage;
+import com.lele.cnpm.src.services.NhanKhauManage;
+
 public class ChuyenHoKhau {
     private int id;
     private int idHoKhau;
@@ -123,4 +126,17 @@ public class ChuyenHoKhau {
     public void setNgayChuyenDiString() {
         this.ngayChuyenDiString = NhanKhau.SQLDateToString(this.ngayChuyenDi);
     }
+
+    private String tenChuHo;
+
+    public String getTenChuHo() {
+        setTenChuHo();
+        return tenChuHo;
+    }
+
+    public void setTenChuHo() {
+        this.tenChuHo = NhanKhauManage.layNhanKhau(HoKhauManage.layHoKhauTheoIdHoKhau(idHoKhau).getIdChuHo()).getHoTen();
+    }
+
+
 }

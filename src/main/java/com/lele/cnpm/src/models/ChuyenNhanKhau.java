@@ -3,6 +3,8 @@ package com.lele.cnpm.src.models;
 import java.sql.Date;
 import java.util.Objects;
 
+import com.lele.cnpm.src.services.NhanKhauManage;
+
 public class ChuyenNhanKhau {
     private int id;
     private int idNhanKhau;
@@ -112,4 +114,27 @@ public class ChuyenNhanKhau {
             ", ghiChu='" + getGhiChu() + "'" +
             "}";
     }
+
+    private NhanKhau nhanKhau;
+
+    public NhanKhau getNhanKhau() {
+        setNhanKhau();
+        return nhanKhau;
+    }
+
+    public void setNhanKhau() {
+        this.nhanKhau = NhanKhauManage.layNhanKhau(idNhanKhau);
+    }
+
+    private String tenNhanKhau;
+
+    public String getTenNhanKhau() {
+        setNhanKhau();
+        return tenNhanKhau;
+    }
+
+    public void setTenNhanKhau() {
+        this.tenNhanKhau = NhanKhauManage.layNhanKhau(idNhanKhau).getHoTen();
+    }
+
 }

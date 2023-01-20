@@ -15,7 +15,7 @@ public class HoKhauModify {
 
     public static boolean insert(int idChuHo, String tinhThanhPho, String quanHuyen, String phuongXa, String diaChi,
         Date ngayTao, String trangThai) {
-        String sql = "INSERT INTO Ho_khau(ID, idChuHo, tinhThanhPho, quanHuyen, phuongXa, diaChi, ngayTao, trangThai)"
+        String sql = "INSERT INTO Ho_khau(idChuHo, tinhThanhPho, quanHuyen, phuongXa, diaChi, ngayTao, trangThai)"
                 + " VALUES(?,?,?,?,?,?,?)";
 
         try {
