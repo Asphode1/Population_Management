@@ -25,6 +25,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseButton;
@@ -887,6 +888,7 @@ public class PeopleController {
   }
 
   public void openHistory(ActionEvent e) {
+    historyPane.setVisible(true);
     final TableView<ChuyenNhanKhau> table = new TableView<>();
     Callback<TableView<ChuyenNhanKhau>, TableRow<ChuyenNhanKhau>> rowFactory = new Callback<TableView<ChuyenNhanKhau>, TableRow<ChuyenNhanKhau>>() {
       @Override
@@ -902,9 +904,26 @@ public class PeopleController {
         return row;
       }
     };
+    TableColumn<ChuyenNhanKhau, String> idCol = new TableColumn<>("Nhân khẩu");
+    idCol.setCellValueFactory(new Callback<CellDataFeatures<ChuyenNhanKhau, String>, ObservableValue<String>>() {
+      public ObservableValue<String> call(CellDataFeatures<ChuyenNhanKhau, String> p) {
+        ChuyenNhanKhau cnk = p.getValue();
+        NhanKhau nk = NhanKhauManage.layNhanKhau(cnk.getIdNhanKhau());
+        return nk.hoTenProperty();
+      }
+    });
+    TableColumn<ChuyenNhanKhau, String> diCol = new TableColumn<>("Ngày Chuyển đi");
+    diCol.setCellValueFactory(new PropertyValueFactory<>("ngayChuyenDi"));
+    TableColumn<ChuyenNhanKhau, String> denCol = new TableColumn<>("Nơi chuyển đến");
+    denCol.setCellValueFactory(new PropertyValueFactory<>("noiChuyenDen"));
+    TableColumn<ChuyenNhanKhau, String> noteCol = new TableColumn<>("Ghi chú");
+    noteCol.setCellValueFactory(new PropertyValueFactory<>("ghiChu"));
+    table.getColumns().addAll(Arrays.asList(idCol, diCol, denCol, noteCol));
+    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     table.setRowFactory(rowFactory);
-    final ArrayList<ChuyenNhanKhau> list = null; // get list cnk
-    final ObservableList<ChuyenNhanKhau> olist = FXCollections.observableArrayList(list);
+    final ArrayList<ChuyenNhanKhau> list = NhanKhauManage.xemLichSuChuyenNhanKhaus();
+    final ObservableList<ChuyenNhanKhau> olist = FXCollections.observableArrayList(
+        list);
     table.setItems(olist);
     table.setPrefHeight(399);
     table.setPrefWidth(704);

@@ -1633,7 +1633,7 @@
             </AnchorPane>
           </children>
         </AnchorPane>
-            <AnchorPane fx:id="historyPane" layoutX="392.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="historyPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="203.0" layoutY="23.0" prefHeight="516.0" prefWidth="704.0" AnchorPane.leftAnchor="203.0" AnchorPane.topAnchor="25.0">
                      <children>
@@ -1652,7 +1652,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </AnchorPane>
-                              <Button fx:id="closeHistory" mnemonicParsing="false" prefWidth="200.0" text="Huỷ">
+                              <Button fx:id="closeHistoryBtn" mnemonicParsing="false" prefWidth="200.0" text="Huỷ">
                                  <styleClass>
                                     <String fx:value="addLabel" />
                                     <String fx:value="addLabelBig" />
@@ -1666,9 +1666,18 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="historyDetailPane" layoutX="38.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="historyDetailPane" layoutX="38.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Button fx:id="closeHistoryListBtn" mnemonicParsing="false" prefWidth="200.0" text="Huỷ">
+                                 <styleClass>
+                                    <String fx:value="addLabel" />
+                                    <String fx:value="addLabelBig" />
+                                    <String fx:value="btn" />
+                                 </styleClass>
+                              </Button>
+                           </children></VBox>
                      </children>
                   </AnchorPane>
                </children>

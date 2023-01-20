@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 // class mot nguoi can quan ly
 public class NhanKhau {
     private int ID;
@@ -23,6 +26,8 @@ public class NhanKhau {
     private Date chuyenDenNgay; 
     private String noiThuongTruTruoc;
     private String trangThai;
+
+    private ObjectProperty<String> name = new SimpleObjectProperty<>();
 
     public NhanKhau() {
     }
@@ -46,6 +51,15 @@ public class NhanKhau {
         this.noiThuongTruTruoc = noiThuongTruTruoc;
         if (trangThai.equals("") || trangThai == null) this.trangThai = "Thường trú";
         else this.trangThai = trangThai;
+        setName(hoTen);
+    }
+
+    public String getName() {
+      return name.get();
+    }
+
+    public void setName(String name){
+      this.name.set(name);
     }
 
     public int getID() {
@@ -363,5 +377,9 @@ public class NhanKhau {
 
     public void setNgaySinhString() {
         this.ngaySinhString = SQLDateToString(this.ngaySinh);
+    }
+
+    public final ObjectProperty<String> hoTenProperty() {
+      return name;
     }
 }

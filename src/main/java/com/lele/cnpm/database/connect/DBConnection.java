@@ -17,6 +17,7 @@ public class DBConnection {
     ds.setUser("sa");
     ds.setPassword("luongluong");
     ds.setServerName("DESKTOP-9J07U8P\\SQLEXPRESS");
+    ds.setServerName("ASPHODEL\\MSSQLSERVER01");
     ds.setPortNumber(1433);
     ds.setDatabaseName("QuanLyNhanKhau");
     ds.setEncrypt("true");
