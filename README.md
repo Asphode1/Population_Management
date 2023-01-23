@@ -7,7 +7,7 @@ Population_Management
 
 Check the current jdk and maven version of your pc by this command:
 ```ps1
-javac --version
+javac -version
 mvn -v
 ```
 
