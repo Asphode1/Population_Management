@@ -48,6 +48,18 @@ public class HoKhauNhanKhauModify {
   }
 
   /**
+   * Thêm một quan hệ Hộ khẩu - nhân khẩu
+   * @param idHoKhau
+   * @param idNhanKhau
+   * @param quanHeChuHo
+   * @return true/fasle
+   */
+  public static boolean themHoKhau_NhanKhau(int idHoKhau, int idNhanKhau, String quanHeChuHo) {
+    insert(idHoKhau, idNhanKhau, quanHeChuHo);
+    return true;
+  }
+
+  /**
    * Xóa một nhân khẩu khỏi quan hệ hộ khẩu-nhân khẩu
    * @param nk
    * @return true/false

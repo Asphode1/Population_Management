@@ -126,4 +126,12 @@ public class HoKhauManage extends HoKhauModify {
     public static ArrayList<NhanKhau> layListNhanKhau(int idHoKhau){
         return HoKhauNhanKhauModify.layListNhanKhau(idHoKhau);
     }
+
+    public static boolean themNhanKhauVaoHoKhau(int idHoKhau, int idNhanKhau, String quanHeChuHo) {
+        return HoKhauNhanKhauModify.themHoKhau_NhanKhau(idHoKhau, idNhanKhau, quanHeChuHo);
+    }
+
+    public static boolean xoaNhanKhauKhoiHoKhau(int idNhanKhau) {
+        return HoKhauNhanKhauModify.xoaNhanKhau(idNhanKhau);
+    }
 }

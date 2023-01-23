@@ -1,4 +1,4 @@
-# Lele's Population Management
+# Lele's Population Management (Phần mềm Quản lý nhân khẩu Lệ Lệ)
 
 # Requirements
 [Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/#jdk19-windows), version 19.0.1 or later.
