@@ -403,7 +403,7 @@ public class HomeController implements Initializable {
       Stage stage = (Stage) root.getScene().getWindow();
       try {
         Parent root = FXMLLoader
-            .load(Objects.requireNonNull(getClass().getClassLoader().getResource("ui/view/Login.fxml")));
+            .load(Objects.requireNonNull(getClass().getClassLoader().getResource("/fxml/Login.fxml")));
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
@@ -421,7 +421,7 @@ public class HomeController implements Initializable {
     Stage stage = (Stage) root.getScene().getWindow();
     try {
       Parent root = FXMLLoader
-          .load(Objects.requireNonNull(getClass().getClassLoader().getResource("ui/view/Login.fxml")));
+          .load(Objects.requireNonNull(getClass().getClassLoader().getResource("/fxml/Login.fxml")));
       Scene scene = new Scene(root);
       scene.setFill(Color.TRANSPARENT);
       stage.setScene(scene);

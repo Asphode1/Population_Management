@@ -333,19 +333,21 @@ public class HouseholdController {
       }
     };
     table.setRowFactory(rowFactory);
-    TableColumn<HoKhau, String> idCol = new TableColumn<>("ID");
-    idCol.setMaxWidth(90);
-    idCol.setMinWidth(90);
-    idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
     TableColumn<HoKhau, String> chuCol = new TableColumn<>("Chủ Hộ");
+    chuCol.setMaxWidth(250);
+    chuCol.setMinWidth(250);
     chuCol.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
     TableColumn<HoKhau, String> addrCol = new TableColumn<>("Địa chỉ");
     addrCol.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
     TableColumn<HoKhau, String> dateCol = new TableColumn<>("Ngày tạo");
-    dateCol.setCellValueFactory(new PropertyValueFactory<>("ngayTaoString"));
+    dateCol.setMaxWidth(120);
+    dateCol.setMinWidth(120);
+    dateCol.setCellValueFactory(new PropertyValueFactory<>("ngayTao"));
     TableColumn<HoKhau, String> stateCol = new TableColumn<>("Trạng thái");
+    stateCol.setMaxWidth(200);
+    stateCol.setMinWidth(200);
     stateCol.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
-    table.getColumns().addAll(Arrays.asList(idCol, chuCol, addrCol, dateCol, stateCol));
+    table.getColumns().addAll(Arrays.asList(chuCol, addrCol, dateCol, stateCol));
     getHKList();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     ArrayList<Node> al = new ArrayList<>();
