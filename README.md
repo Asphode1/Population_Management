@@ -45,10 +45,12 @@ mvn clean javafx:run
 			"presentation": {
 				"reveal": "always",
 				"group": "build"
-			}
+			},
+			"problemMatcher": []
 		}
 	]
 }
+
 
 ```
 
