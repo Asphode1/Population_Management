@@ -603,6 +603,7 @@ public class PeopleController {
           ex.printStackTrace();
         }
         editSaveConfirmPane.setVisible(false);
+        editPane.setVisible(false);
       });
       cancelConfirmEditBtn.setOnAction(ae -> {
         editSaveConfirmPane.setVisible(false);
@@ -755,6 +756,8 @@ public class PeopleController {
         } catch (Exception ex) {
           ex.printStackTrace();
         }
+        awayConfirmPane.setVisible(false);
+        awayPane.setVisible(false);
       }
     });
     awayCancelBtn.setOnAction(ae -> {
@@ -791,6 +794,8 @@ public class PeopleController {
         } catch (Exception ex) {
           ex.printStackTrace();
         }
+        moveConfirmPane.setVisible(false);
+        movePane.setVisible(false);
       }
     });
     moveCancelBtn.setOnAction(ae -> {

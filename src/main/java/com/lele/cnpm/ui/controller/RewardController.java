@@ -156,7 +156,7 @@ public class RewardController {
     namGCol.setMaxWidth(70);
     namGCol.setMinWidth(70);
     namGCol.setCellValueFactory(new PropertyValueFactory<>("nam"));
-    TableColumn<DipHSG, String> numGCol = new TableColumn<>("Số người chưa trao thưởng");
+    TableColumn<DipHSG, String> numGCol = new TableColumn<>("Chưa trao thưởng");
     numGCol.setMaxWidth(240);
     numGCol.setMinWidth(240);
     numGCol.setCellValueFactory(new PropertyValueFactory<>("soNguoiChuaTraoThuong"));
@@ -176,7 +176,7 @@ public class RewardController {
     namSCol.setMaxWidth(70);
     namSCol.setMinWidth(70);
     namSCol.setCellValueFactory(new PropertyValueFactory<>("nam"));
-    TableColumn<DipDacBiet, String> numSCol = new TableColumn<>("Số người chưa trao thưởng");
+    TableColumn<DipDacBiet, String> numSCol = new TableColumn<>("Chưa trao thưởng");
     numSCol.setMaxWidth(240);
     numSCol.setMinWidth(240);
     numSCol.setCellValueFactory(new PropertyValueFactory<>("soNguoiChuaTraoThuong"));

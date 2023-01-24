@@ -403,13 +403,12 @@ public class HomeController implements Initializable {
       Stage stage = (Stage) root.getScene().getWindow();
       try {
         Parent root = FXMLLoader
-            .load(Objects.requireNonNull(getClass().getClassLoader().getResource("/fxml/Login.fxml")));
+            .load(getClass().getResource("/fxml/Login.fxml"));
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setResizable(false);
         stage.centerOnScreen();
+        stage.setScene(scene);
         stage.show();
       } catch (Exception e) {
         e.printStackTrace();

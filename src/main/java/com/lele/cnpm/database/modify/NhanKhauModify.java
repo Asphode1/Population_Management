@@ -74,18 +74,18 @@ public class NhanKhauModify {
 
   /**
    * Xóa một nhân khẩu
-   * @param IdNhanKhau
+   * @param idNhanKhau
    * @return true/false
    */
-  public static boolean xoaNhanKhau(int IdNhanKhau) {
-    String sql = "DELETE FROM ho_khau_nhan_khau WHERE IdNhanKhau = " + IdNhanKhau
-    + "; DELETE FROM tam_tru WHERE IdNhanKhau = " + IdNhanKhau
-    + "; DELETE FROM tam_vang WHERE IdNhanKhau = " + IdNhanKhau
-    + "; DELETE FROM khai_tu WHERE IdNhanKhau = " + IdNhanKhau
-    + "; DELETE FROM chuyen_nhan_khau WHERE IdNhanKhau = " + IdNhanKhau
-    + "; DELETE FROM chi_tiet_dip_dac_biet WHERE IdNhanKhau = " + IdNhanKhau
-    + "; DELETE FROM chi_tiep_dip_hoc_sinh_gioi WHERE IdNhanKhau = " + IdNhanKhau
-    + "; DELETE FROM nhan_khau WHERE IdNhanKhau = " + IdNhanKhau;
+  public static boolean xoaNhanKhau(int idNhanKhau) {
+    String sql = "DELETE FROM ho_khau_nhan_khau WHERE idNhanKhau = " + idNhanKhau
+        + "; DELETE FROM tam_tru WHERE idNhanKhau = " + idNhanKhau
+        + "; DELETE FROM tam_vang WHERE idNhanKhau = " + idNhanKhau
+        + "; DELETE FROM khai_tu WHERE idNguoiMat = " + idNhanKhau
+        + "; DELETE FROM chuyen_nhan_khau WHERE idNhanKhau = " + idNhanKhau
+        + "; DELETE FROM chi_tiet_dip_dac_biet WHERE idNhanKhau = " + idNhanKhau
+        + "; DELETE FROM chi_tiet_dip_hoc_sinh_gioi WHERE idNhanKhau = " + idNhanKhau
+        + "; DELETE FROM nhan_khau WHERE idNhanKhau = " + idNhanKhau;
 
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
@@ -108,7 +108,7 @@ public class NhanKhauModify {
   public static boolean capNhatNhanKhau(NhanKhau nk) {
     String sql = "UPDATE nhan_khau SET hoTen = ?, biDanh = ?, ngaySinh = ?, noiSinh = ?, gioiTinh =?,"
         + " nguyenQuan = ?, danToc = ?, tonGiao = ?, quocTich = ?, ngheNghiep = ?, noiLamViec = ?, soCCCD = ?,"
-        + " ngayCap = ?, chuyenDenNgay = ?, noiThuongTruTruoc = ?, trangThai =? WHERE IdNhanKhau = "
+        + " ngayCap = ?, chuyenDenNgay = ?, noiThuongTruTruoc = ?, trangThai =? WHERE idNhanKhau = "
         + nk.getID();
 
     try {
@@ -144,14 +144,14 @@ public class NhanKhauModify {
    * @return Toàn bộ nhân khẩu đang có
    */
   public static ArrayList<NhanKhau> layListNhanKhau() {
-    String sql = "SELECT * FROM nhan_khau ORDER BY IdNhanKhau";
+    String sql = "SELECT * FROM nhan_khau ORDER BY idNhanKhau";
     ArrayList<NhanKhau> NhanKhaus = new ArrayList<NhanKhau>();
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
       while (rs.next()) {
-        int id = rs.getInt("IdNhanKhau");
+        int id = rs.getInt("idNhanKhau");
         String hoTen = rs.getString("hoTen");
         String biDanh = rs.getString("biDanh");
         Date ngaySinh = rs.getDate("ngaySinh");
@@ -187,8 +187,8 @@ public class NhanKhauModify {
    */
   public static ArrayList<NhanKhau> layListNhanKhau(String search) {
     String sql = "SELECT * FROM nhan_khau " +
-        "WHERE hoTen LIKE N'%" + search + "%'  OR soCCCD LIKE '%" + search + "%' OR IdNhanKhau LIKE '%" + search
-        + "%'" + "ORDER BY IdNhanKhau";
+        "WHERE hoTen LIKE N'%" + search + "%'  OR soCCCD LIKE '%" + search + "%' OR idNhanKhau LIKE '%" + search
+        + "%'" + "ORDER BY idNhanKhau";
     ArrayList<NhanKhau> NhanKhaus = new ArrayList<NhanKhau>();
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
@@ -196,7 +196,7 @@ public class NhanKhauModify {
       ResultSet rs = stmt.executeQuery(sql);
       // chen vao nhan khau
       while (rs.next()) {
-        int id = rs.getInt("IdNhanKhau");
+        int id = rs.getInt("idNhanKhau");
         String hoTen = rs.getString("hoTen");
         String biDanh = rs.getString("biDanh");
         Date ngaySinh = rs.getDate("ngaySinh");
@@ -231,7 +231,7 @@ public class NhanKhauModify {
    * @return Nhân khẩu có Id tương ứng
    */
   public static NhanKhau layNhanKhau(int idNhanKhau) {
-    String sql = "SELECT * FROM nhan_khau WHERE IdNhanKhau =" + idNhanKhau;
+    String sql = "SELECT * FROM nhan_khau WHERE idNhanKhau =" + idNhanKhau;
     NhanKhau nk = new NhanKhau();
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
@@ -310,7 +310,7 @@ public class NhanKhauModify {
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
       while (rs.next()) {
-        int id = rs.getInt("IdNhanKhau");
+        int id = rs.getInt("idNhanKhau");
         String hoTen = rs.getString("hoTen");
         String biDanh = rs.getString("biDanh");
         Date ngaySinh = rs.getDate("ngaySinh");
@@ -356,7 +356,7 @@ public class NhanKhauModify {
       ResultSet rs = stmt.executeQuery(sql);
       // chen vao nhan khau
       while (rs.next()) {
-        int id = rs.getInt("IdNhanKhau");
+        int id = rs.getInt("idNhanKhau");
         String hoTen = rs.getString("hoTen");
         String biDanh = rs.getString("biDanh");
         Date ngaySinh = rs.getDate("ngaySinh");
@@ -427,7 +427,7 @@ public class NhanKhauModify {
   public static ArrayList<NhanKhau> layListNhanKhauTrongDiaBan() {
     String sql = "SELECT * FROM nhan_khau "
         + " WHERE trangThai not in (N'Đã chuyển đi', N'Đã mất', N'Chuyển đi')"
-        + " ORDER BY IdNhanKhau";
+        + " ORDER BY idNhanKhau";
     ArrayList<NhanKhau> NhanKhaus = new ArrayList<NhanKhau>();
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
@@ -435,7 +435,7 @@ public class NhanKhauModify {
       ResultSet rs = stmt.executeQuery(sql);
       // chen vao nhan khau
       while (rs.next()) {
-        int id = rs.getInt("IdNhanKhau");
+        int id = rs.getInt("idNhanKhau");
         String hoTen = rs.getString("hoTen");
         String biDanh = rs.getString("biDanh");
         Date ngaySinh = rs.getDate("ngaySinh");
@@ -474,12 +474,12 @@ public class NhanKhauModify {
       sql = "SELECT * FROM nhan_khau "
           + " WHERE trangThai not in (N'Đã chuyển đi', N'Đã mất', N'Chuyển đi')"
           + " AND YEAR(GETDATE()) - YEAR(ngaySinh) between 7 and 18"
-          + " ORDER BY IdNhanKhau";
-    else 
+          + " ORDER BY idNhanKhau";
+    else
       sql = "SELECT * FROM nhan_khau "
           + " WHERE trangThai not in (N'Đã chuyển đi', N'Đã mất', N'Chuyển đi')"
           + " AND YEAR(GETDATE()) - YEAR(ngaySinh) between 6 and 17"
-          + " ORDER BY IdNhanKhau";
+          + " ORDER BY idNhanKhau";
     ArrayList<NhanKhau> NhanKhaus = new ArrayList<NhanKhau>();
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
@@ -487,7 +487,7 @@ public class NhanKhauModify {
       ResultSet rs = stmt.executeQuery(sql);
       // chen vao nhan khau
       while (rs.next()) {
-        int id = rs.getInt("IdNhanKhau");
+        int id = rs.getInt("idNhanKhau");
         String hoTen = rs.getString("hoTen");
         String biDanh = rs.getString("biDanh");
         Date ngaySinh = rs.getDate("ngaySinh");

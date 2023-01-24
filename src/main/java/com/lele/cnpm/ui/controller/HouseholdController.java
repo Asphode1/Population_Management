@@ -497,6 +497,8 @@ public class HouseholdController {
       ex.printStackTrace();
     }
     cancelDeleteInfo(e);
+    infoPane.setVisible(false);
+    editPane.setVisible(false);
   }
 
   public void cancelDeleteInfo(ActionEvent e) {

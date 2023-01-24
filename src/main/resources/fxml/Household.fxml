@@ -421,7 +421,7 @@
                 </VBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="671.0" styleClass="btnZone" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
                   <children>
-                              <VBox fx:id="editNKList" HBox.hgrow="ALWAYS">
+                              <VBox fx:id="editHKTableBox" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextField fx:id="editHKSearchField" promptText="Tìm kiếm...">
                                        <styleClass>
@@ -495,7 +495,7 @@
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </VBox>
-                              <VBox fx:id="editedNKList" HBox.hgrow="ALWAYS">
+                              <VBox fx:id="editedHKTableBox" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextField fx:id="editedHKSearchField" promptText="Tìm kiếm...">
                                        <styleClass>

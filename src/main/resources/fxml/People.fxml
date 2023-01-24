@@ -818,7 +818,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                           <children>
-                            <Button fx:id="infoDeleteConfirmbtn" mnemonicParsing="false" text="Xoá">
+                            <Button fx:id="infoDeleteConfirmBtn" mnemonicParsing="false" text="Xoá">
                               <font>
                                 <Font name="Montserrat Medium" size="20.0" />
                               </font>
@@ -830,7 +830,7 @@
                                 <Insets right="80.0" />
                               </HBox.margin>
                             </Button>
-                            <Button fx:id="infoDeleteCancelbtn" mnemonicParsing="false" styleClass="btn" text="Huỷ">
+                            <Button fx:id="infoDeleteCancelBtn" mnemonicParsing="false" styleClass="btn" text="Huỷ">
                               <font>
                                 <Font name="Montserrat Medium" size="20.0" />
                               </font>
