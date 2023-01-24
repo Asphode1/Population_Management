@@ -342,7 +342,7 @@ public class HouseholdController {
     TableColumn<HoKhau, String> dateCol = new TableColumn<>("Ngày tạo");
     dateCol.setMaxWidth(120);
     dateCol.setMinWidth(120);
-    dateCol.setCellValueFactory(new PropertyValueFactory<>("ngayTao"));
+    dateCol.setCellValueFactory(new PropertyValueFactory<>("ngayTaoString"));
     TableColumn<HoKhau, String> stateCol = new TableColumn<>("Trạng thái");
     stateCol.setMaxWidth(200);
     stateCol.setMinWidth(200);

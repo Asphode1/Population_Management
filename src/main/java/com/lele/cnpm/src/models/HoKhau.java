@@ -33,7 +33,8 @@ public class HoKhau {
         this.phuongXa = phuongXa;
         this.diaChi = diaChi;
         this.ngayTao = ngayTao;
-        this.trangThai = trangThai;
+        if (trangThai.equals("") || trangThai == null) this.trangThai = "Thường trú";
+        else this.trangThai = trangThai;
     }
 
     public int getID() {

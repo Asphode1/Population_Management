@@ -14,8 +14,8 @@ import com.lele.cnpm.src.models.KhaiTu;
 
 public class KhaiTuModify {
 
-    public static boolean insert(int idNguoiMat, int idNguoiKhai, Date ngayKhai, Date ngayMat, String liDoMatMat) {
-        String sql = "INSERT INTO khai_tu(idNguoiMat, idNguoiKhai, ngayKhai, ngayMat, liDoMatMat)"
+    public static boolean insert(int idNguoiMat, int idNguoiKhai, Date ngayKhai, Date ngayMat, String liDoMat) {
+        String sql = "INSERT INTO khai_tu(idNguoiMat, idNguoiKhai, ngayKhai, ngayMat, liDoMat)"
         + " VALUES(?,?,?,?,?)";
 
         try {
@@ -26,7 +26,7 @@ public class KhaiTuModify {
             pstmt.setInt(2, idNguoiKhai);
             pstmt.setDate(3, ngayKhai);
             pstmt.setDate(4, ngayMat); 
-            pstmt.setString(5, liDoMatMat);
+            pstmt.setString(5, liDoMat);
             int affected = pstmt.executeUpdate();
             if (affected == 0) return false;
         } catch (SQLException e) {
@@ -81,7 +81,7 @@ public class KhaiTuModify {
      * @return true/false
      */
     public static boolean capNhatKhaiTu(KhaiTu kt) {
-        String sql = "UPDATE khai_tu SET idNguoiKhai = ?, ngayKhai = ?, ngayMat = ?, liDoMatMat = ?"
+        String sql = "UPDATE khai_tu SET idNguoiKhai = ?, ngayKhai = ?, ngayMat = ?, liDoMat = ?"
         + " WHERE IdNguoiMat = " + kt.getIdNguoiMat();
 
         try {

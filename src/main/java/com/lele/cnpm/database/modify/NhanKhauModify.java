@@ -81,7 +81,7 @@ public class NhanKhauModify {
     String sql = "DELETE FROM ho_khau_nhan_khau WHERE idNhanKhau = " + idNhanKhau
         + "; DELETE FROM tam_tru WHERE idNhanKhau = " + idNhanKhau
         + "; DELETE FROM tam_vang WHERE idNhanKhau = " + idNhanKhau
-        + "; DELETE FROM khai_tu WHERE idNguoiMat = " + idNhanKhau
+        + "; DELETE FROM khai_tu WHERE idNguoiMat = " + idNhanKhau + " OR idNguoiKhai = " + idNhanKhau
         + "; DELETE FROM chuyen_nhan_khau WHERE idNhanKhau = " + idNhanKhau
         + "; DELETE FROM chi_tiet_dip_dac_biet WHERE idNhanKhau = " + idNhanKhau
         + "; DELETE FROM chi_tiet_dip_hoc_sinh_gioi WHERE idNhanKhau = " + idNhanKhau
