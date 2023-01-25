@@ -24,6 +24,7 @@ public class HoKhauManage extends HoKhauModify {
             HoKhau hk = hkb.getHoKhau();
             hk.setIdChuHo(hkb.getChuHo().getID());
             themHoKhau(hk);
+            hk.setID(HoKhauModify.layHoKhau(hk.getIdChuHo()).getID());
             ArrayList<NhanKhau> nhanKhaus = hkb.getListNhanKhaus();
             ArrayList<String> quanHes = hkb.getListQuanHeChuHos();
             int sizeList = nhanKhaus.size();
@@ -76,7 +77,7 @@ public class HoKhauManage extends HoKhauModify {
     public static boolean chuyenHoKhau(ChuyenHoKhau chk) {
         ChuyenHoKhauModify.themChuyenHoKhau(chk);
         HoKhau hk = layHoKhauTheoIdHoKhau(chk.getIdHoKhau());
-        hk.setTrangThai("N'Đã chuyển đi'");
+        hk.setTrangThai("Đã chuyển đi");
         capNhatHoKhau(hk);
         ArrayList<NhanKhau> nhanKhaus = HoKhauNhanKhauModify.layListNhanKhau(chk.getIdHoKhau());
         for (NhanKhau nk : nhanKhaus) {
@@ -133,5 +134,9 @@ public class HoKhauManage extends HoKhauModify {
 
     public static boolean xoaNhanKhauKhoiHoKhau(int idNhanKhau) {
         return HoKhauNhanKhauModify.xoaNhanKhau(idNhanKhau);
+    }
+
+    public static String layQuanHeChuHo(int idHoKhau, int idNhanKhau) {
+        return HoKhauNhanKhauModify.layQuanHeChuHo(idHoKhau, idNhanKhau);
     }
 }

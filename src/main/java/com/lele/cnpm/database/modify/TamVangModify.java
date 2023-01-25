@@ -13,8 +13,8 @@ import com.lele.cnpm.src.models.TamVang;
 
 public class TamVangModify {
     
-    public static boolean insert(int idNhanKhau, String noiTamTru, Date tuNgay, Date denNgay, String lyDo) {
-        String sql = "INSERT INTO tam_vang(idNhanKhau, noiTamTru, tuNgay, denNgay, lyDo)"
+    public static boolean insert(int idNhanKhau, String noiTamVang, Date tuNgay, Date denNgay, String lyDo) {
+        String sql = "INSERT INTO tam_vang(idNhanKhau, noiTamVang, tuNgay, denNgay, lyDo)"
         + " VALUES(?,?,?,?,?)";
 
         try {
@@ -22,7 +22,7 @@ public class TamVangModify {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, idNhanKhau);
-            pstmt.setString(2, noiTamTru);
+            pstmt.setString(2, noiTamVang);
             pstmt.setDate(3, tuNgay); 
             pstmt.setDate(4, denNgay);
             pstmt.setString(5, lyDo);
@@ -42,7 +42,7 @@ public class TamVangModify {
      * @return true/false
      */
     public static boolean themTamVang(TamVang tv) {
-        insert(tv.getIdNhanKhau(), tv.getNoiTamTru(), tv.getTuNgay(), tv.getDenNgay(), tv.getLyDo());
+        insert(tv.getIdNhanKhau(), tv.getNoiTamVang(), tv.getTuNgay(), tv.getDenNgay(), tv.getLyDo());
         return true;
     }
 
@@ -82,7 +82,7 @@ public class TamVangModify {
      * @return true/false
      */
     public static boolean capNhatTamVang(TamVang tv) {
-        String sql = "UPDATE tam_vang SET idNhanKhau = ?, noiTamTru = ?, tuNgay = ?, denNgay = ?, lyDo = ?"
+        String sql = "UPDATE tam_vang SET idNhanKhau = ?, noiTamVang = ?, tuNgay = ?, denNgay = ?, lyDo = ?"
         + " WHERE Id = " + tv.getID();
 
         try {
@@ -90,7 +90,7 @@ public class TamVangModify {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, tv.getIdNhanKhau());
-            pstmt.setString(2, tv.getNoiTamTru());
+            pstmt.setString(2, tv.getNoiTamVang());
             pstmt.setDate(3, tv.getTuNgay());
             pstmt.setDate(4, tv.getDenNgay());
             pstmt.setString(5, tv.getLyDo()); 
@@ -117,12 +117,12 @@ public class TamVangModify {
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 int idNhanKhau = rs.getInt("idNhanKhau");
-                String noiTamTru = rs.getString("noiTamTru");
+                String noiTamVang = rs.getString("noiTamVang");
                 Date tuNgay = rs.getDate("tuNgay");
                 Date denNgay = rs.getDate("denNgay");
                 String lyDo = rs.getString("lyDo");
 
-                TamVangs.add(new TamVang(id, idNhanKhau, noiTamTru, tuNgay, denNgay, lyDo));
+                TamVangs.add(new TamVang(id, idNhanKhau, noiTamVang, tuNgay, denNgay, lyDo));
             }
         } catch (SQLException e) {
             e.printStackTrace();

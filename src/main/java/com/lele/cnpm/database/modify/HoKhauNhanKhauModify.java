@@ -237,4 +237,21 @@ public class HoKhauNhanKhauModify {
     }
     return hk;
   }
+
+  public static String layQuanHeChuHo(int idHoKhau, int idNhanKhau) {
+    String sql = "SELECT * FROM ho_khau_nhan_khau "
+        + " WHERE idHoKhau = " + idHoKhau
+        + " AND idNhanKhau = " + idNhanKhau;
+    String quanHe = "";
+    try {
+      Connection conn = DBConnection.getDBConnection().getConnection();
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(sql);
+      rs.next();
+      quanHe = rs.getString("quanHeChuHo");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return quanHe;
+  }
 }

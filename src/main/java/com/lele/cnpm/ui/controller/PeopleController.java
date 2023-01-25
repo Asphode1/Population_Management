@@ -34,12 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import com.lele.cnpm.src.models.ChuyenNhanKhau;
-import com.lele.cnpm.src.models.KhaiTu;
-import com.lele.cnpm.src.models.NguoiDung;
-import com.lele.cnpm.src.models.NhanKhau;
-import com.lele.cnpm.src.models.TamTru;
-import com.lele.cnpm.src.models.TamVang;
+import com.lele.cnpm.src.models.*;
 import com.lele.cnpm.src.services.NhanKhauManage;
 
 public class PeopleController {

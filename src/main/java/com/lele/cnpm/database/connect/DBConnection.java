@@ -14,13 +14,12 @@ public class DBConnection {
    */
   public DBConnection() throws Exception {
     SQLServerDataSource ds = new SQLServerDataSource();
-    ds.setUser("sa");
-    ds.setPassword("luongluong");
-    ds.setServerName("DESKTOP-9J07U8P\\SQLEXPRESS");
-    ds.setServerName("ASPHODEL\\MSSQLSERVER01");
-    ds.setPortNumber(1433);
-    ds.setDatabaseName("QuanLyNhanKhau");
-    ds.setEncrypt("true");
+    ds.setUser(DatabaseConfig.user);
+    ds.setPassword(DatabaseConfig.password);
+    ds.setServerName(DatabaseConfig.serverName);
+    ds.setPortNumber(DatabaseConfig.portNumber);
+    ds.setDatabaseName(DatabaseConfig.databaseName);
+    ds.setEncrypt(DatabaseConfig.encrypt);
     ds.setTrustServerCertificate(true);
 
     conn = ds.getConnection();
@@ -43,5 +42,4 @@ public class DBConnection {
   public Connection getConnection() {
     return this.conn;
   }
-
 }

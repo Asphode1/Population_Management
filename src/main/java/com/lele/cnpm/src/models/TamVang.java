@@ -6,7 +6,7 @@ import java.util.Objects;
 public class TamVang {
     private int ID;
     private int idNhanKhau;
-    private String noiTamTru;
+    private String noiTamVang;
     private Date tuNgay;
     private Date denNgay;
     private String lyDo;
@@ -14,10 +14,10 @@ public class TamVang {
     public TamVang() {
     }
 
-    public TamVang(int ID, int idNhanKhau, String noiTamTru, Date tuNgay, Date denNgay, String lyDo) {
+    public TamVang(int ID, int idNhanKhau, String noiTamVang, Date tuNgay, Date denNgay, String lyDo) {
         this.ID = ID;
         this.idNhanKhau = idNhanKhau;
-        this.noiTamTru = noiTamTru;
+        this.noiTamVang = noiTamVang;
         this.tuNgay = tuNgay;
         this.denNgay = denNgay;
         this.lyDo = lyDo;
@@ -39,12 +39,12 @@ public class TamVang {
         this.idNhanKhau = idNhanKhau;
     }
 
-    public String getNoiTamTru() {
-        return this.noiTamTru;
+    public String getNoiTamVang() {
+        return this.noiTamVang;
     }
 
-    public void setNoiTamTru(String noiTamTru) {
-        this.noiTamTru = noiTamTru;
+    public void setNoiTamVang(String noiTamVang) {
+        this.noiTamVang = noiTamVang;
     }
 
     public Date getTuNgay() {
@@ -81,8 +81,8 @@ public class TamVang {
         return this;
     }
 
-    public TamVang noiTamTru(String noiTamTru) {
-        setNoiTamTru(noiTamTru);
+    public TamVang noiTamVang(String noiTamVang) {
+        setNoiTamVang(noiTamVang);
         return this;
     }
 
@@ -109,12 +109,12 @@ public class TamVang {
             return false;
         }
         TamVang tamVang = (TamVang) o;
-        return ID == tamVang.ID && idNhanKhau == tamVang.idNhanKhau && Objects.equals(noiTamTru, tamVang.noiTamTru) && Objects.equals(tuNgay, tamVang.tuNgay) && Objects.equals(denNgay, tamVang.denNgay) && Objects.equals(lyDo, tamVang.lyDo);
+        return ID == tamVang.ID && idNhanKhau == tamVang.idNhanKhau && Objects.equals(noiTamVang, tamVang.noiTamVang) && Objects.equals(tuNgay, tamVang.tuNgay) && Objects.equals(denNgay, tamVang.denNgay) && Objects.equals(lyDo, tamVang.lyDo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, idNhanKhau, noiTamTru, tuNgay, denNgay, lyDo);
+        return Objects.hash(ID, idNhanKhau, noiTamVang, tuNgay, denNgay, lyDo);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class TamVang {
         return "{" +
             " ID='" + getID() + "'" +
             ", idNhanKhau='" + getIdNhanKhau() + "'" +
-            ", noiTamTru='" + getNoiTamTru() + "'" +
+            ", noiTamVang='" + getNoiTamVang() + "'" +
             ", tuNgay='" + getTuNgay() + "'" +
             ", denNgay='" + getDenNgay() + "'" +
             ", lyDo='" + getLyDo() + "'" +

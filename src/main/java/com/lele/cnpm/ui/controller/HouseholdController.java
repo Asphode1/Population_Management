@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-import com.lele.cnpm.database.modify.HoKhauModify;
-import com.lele.cnpm.database.modify.NhanKhauModify;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -289,7 +287,7 @@ public class HouseholdController {
           } else {
             try {
               hkList.clear();
-              hkList.addAll(HoKhauModify.layListHoKhau(newVal));
+              hkList.addAll(HoKhauManage.layListHoKhau(newVal));
               setTableData();
             } catch (Exception ex) {
               ex.printStackTrace();
@@ -363,7 +361,7 @@ public class HouseholdController {
 
   private void getHKList() {
     try {
-      ArrayList<HoKhau> tmp = HoKhauModify.layListHoKhau();
+      ArrayList<HoKhau> tmp = HoKhauManage.layListHoKhau();
       hkList.clear();
       hkList.addAll(tmp);
     } catch (Exception e) {
@@ -403,6 +401,7 @@ public class HouseholdController {
             infoNKCCLabel.setText("" + selectedInfoNK.getSoCCCD());
             infoNKTDLabel.setText("" + selectedInfoNK.getNgayCap());
             infoNKTTLabel.setText("" + selectedInfoNK.getTrangThai());
+            infoNKRelLabel.setText(HoKhauManage.layQuanHeChuHo(selectedHK.getID(), selectedInfoNK.getID()));
           }
         });
         return row;
@@ -491,7 +490,7 @@ public class HouseholdController {
 
   public void confirmDeleteInfo(ActionEvent e) {
     try {
-      HoKhauModify.xoaHoKhau(selectedHK);
+      HoKhauManage.xoaHoKhau(selectedHK);
       selectedHK = null;
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -523,7 +522,7 @@ public class HouseholdController {
     editConfirmSavePane.setVisible(true);
     confirmSaveEditBtn.setOnAction(ae -> {
       try {
-        HoKhauModify.capNhatHoKhau(tmp);
+        HoKhauManage.capNhatHoKhau(tmp);
         editConfirmSavePane.setVisible(false);
       } catch (Exception ex) {
         ex.printStackTrace();
@@ -538,7 +537,7 @@ public class HouseholdController {
     editConfirmDeletePane.setVisible(true);
     confirmDelEditBtn.setOnAction(ae -> {
       try {
-        HoKhauModify.xoaHoKhau(selectedHK);
+        HoKhauManage.xoaHoKhau(selectedHK);
         selectedHK = null;
         editConfirmDeletePane.setVisible(false);
       } catch (Exception ex) {
@@ -659,7 +658,7 @@ public class HouseholdController {
     };
     Consumer<String> searchNKList = (String t) -> {
       try {
-        ArrayList<NhanKhau> temp = NhanKhauModify.layListNhanKhauChuaCoHoKhau(t);
+        ArrayList<NhanKhau> temp = NhanKhauManage.layListNhanKhauChuaCoHoKhau(t);
         nk.clear();
         nk.addAll(temp);
       } catch (Exception ex) {
@@ -668,7 +667,7 @@ public class HouseholdController {
     };
     Runnable getNKList = () -> {
       try {
-        ArrayList<NhanKhau> temp = NhanKhauModify.layListNhanKhauChuaCoHoKhau();
+        ArrayList<NhanKhau> temp = NhanKhauManage.layListNhanKhauChuaCoHoKhau();
         nk.clear();
         nk.addAll(temp);
       } catch (Exception ex) {
