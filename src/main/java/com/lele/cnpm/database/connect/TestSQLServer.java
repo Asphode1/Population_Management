@@ -1,26 +1,29 @@
 package com.lele.cnpm.database.connect;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import com.microsoft.sqlserver.jdbc.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class TestSQLServer {
-  public static void main(String[] args) {
-    SQLServerDataSource ds = new SQLServerDataSource();
-    ds.setUser("sa");
-    ds.setPassword("luongluong");
-    ds.setServerName("ASPHODEL\\MSSQLSERVER01");
-    ds.setPortNumber(1433);
-    ds.setDatabaseName("QuanLyNhanKhau");
-    ds.setEncrypt("true");
-    ds.setTrustServerCertificate(true);
 
+
+  public static void main(String[] args) throws FileNotFoundException {
+    
+    FileInputStream DatabaseConfig = new FileInputStream("./DatabaseConfig.txt");
+    Scanner scanner = new Scanner(DatabaseConfig);
     try {
-      Connection conn = ds.getConnection();
-      System.out.println(conn);
-
-    } catch (SQLException e) {
-      System.out.println(e);
-    }
+      String serverName = DBConnection.readConfiguration(scanner.nextLine()).replace("\\", "\\\\");
+      String password = DBConnection.readConfiguration(scanner.nextLine());
+      System.out.println(serverName.toString());
+      System.out.println(password);
+  } finally {
+      try {
+          scanner.close();
+          DatabaseConfig.close();
+      } catch (IOException ex) {
+          ex.printStackTrace();
+      }
+  }
   }
 }
