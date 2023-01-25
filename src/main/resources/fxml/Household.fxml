@@ -784,8 +784,8 @@
                                                             </HBox>
                                                             <HBox prefHeight="24.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Ngày chuyển đến" />
-                                                                  <Label fx:id="infoNKTDLabel" prefHeight="24.0" styleClass="addLabel" />
+                                                                  <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Ngày sinh" />
+                                                                  <Label fx:id="infoNKDOBLabel" prefHeight="24.0" styleClass="addLabel" />
                                                                </children>
                                                                <VBox.margin>
                                                                   <Insets bottom="6.0" />

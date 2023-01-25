@@ -74,7 +74,7 @@
             </AnchorPane>
             <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../img/lelepopmanagement.png" />
+                <Image url="@../img/lelepopmanagement2.png" />
               </image>
             </ImageView>
             <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="320.0"

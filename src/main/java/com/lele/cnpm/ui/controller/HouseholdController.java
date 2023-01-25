@@ -148,7 +148,7 @@ public class HouseholdController {
   @FXML
   private Label infoNKCCLabel;
   @FXML
-  private Label infoNKTDLabel;
+  private Label infoNKDOBLabel;
   @FXML
   private Label infoNKTTLabel;
   @FXML
@@ -399,7 +399,7 @@ public class HouseholdController {
             infoNKPane.setVisible(true);
             infoNKNameLabel.setText("" + selectedInfoNK.getHoTen());
             infoNKCCLabel.setText("" + selectedInfoNK.getSoCCCD());
-            infoNKTDLabel.setText("" + selectedInfoNK.getNgayCap());
+            infoNKDOBLabel.setText("" + selectedInfoNK.getNgaySinhString());
             infoNKTTLabel.setText("" + selectedInfoNK.getTrangThai());
             infoNKRelLabel.setText(HoKhauManage.layQuanHeChuHo(selectedHK.getID(), selectedInfoNK.getID()));
           }
@@ -816,10 +816,10 @@ public class HouseholdController {
     };
     chkTable.setRowFactory(rowFactory);
     chkTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    TableColumn<ChuyenHoKhau, String> idCol = new TableColumn<>("ID");
+    TableColumn<ChuyenHoKhau, String> idCol = new TableColumn<>("Chủ hộ");
     idCol.setMinWidth(55);
     idCol.setMaxWidth(55);
-    idCol.setCellValueFactory(new PropertyValueFactory<>("idHoKhau"));
+    idCol.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
     TableColumn<ChuyenHoKhau, String> dateCol = new TableColumn<>("Ngày chuyển đi");
     dateCol.setCellValueFactory(new PropertyValueFactory<>("ngayChuyenDiString"));
     TableColumn<ChuyenHoKhau, String> toCol = new TableColumn<>("Nơi chuyển đến");
