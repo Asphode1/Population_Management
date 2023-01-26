@@ -65,7 +65,8 @@ Thus, sa account is enabled and you will be able to login to the SQL instance us
 
 # Import Database
 Execute QuanLyNhanKhauCreateTables.sql using SQL Server Management Studio.
-Open file DatabaseConfig.txt to change the link to your database.
+
+Open file DatabaseConfig.txt and change the configuration of your database (server name and password).
 
 # Run the program
 
