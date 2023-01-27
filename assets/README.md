@@ -1,5 +1,15 @@
 # Phần mềm Quản lý nhân khẩu Lệ Lệ
 
+## Mục lục
+
+1. [Yêu cầu](#yêu-cầu)
+2. [Cấu Hình SQL Server](#cấu-hình-sql-server)
+3. [Nhập cơ sở dữ liệu](#nhập-cơ-sở-dữ-liệu)
+4. [Chạy chương trình](#chạy-chương-trình)
+5. [Những người đóng góp](#những-người-đóng-góp)
+
+6. [Giấy phép](#giấy-phép)
+
 # Yêu cầu
 
 [Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/#jdk19-windows), phiên bản 19.0.1 trở lên.
@@ -108,3 +118,15 @@ mvn clean javafx:run
 4. Chọn `Run javafx`.
 
 Lưu ý rằng có thể mất tới vài phút trong lần chạy đầu tiên.
+
+# Những người đóng góp
+
+1. [Mai Trung Kiên](@Asphode1)
+2. [Hồ Viết Đức Lương](@LuongHvd)
+3. [Lê Nam Khánh](@khanhkhanhlele)
+4. [Ngô Trần Anh Thư](@Chercher16)
+5. [Lê Vũ Minh Tâm](@levuminhtam2002)
+
+# Giấy phép
+
+Được cấp phép theo giấy phép [MIT](../LICENSE.md)

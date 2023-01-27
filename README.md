@@ -2,6 +2,15 @@
 
 [README Tiếng Việt](assets/README.md)
 
+## Table of Contents
+
+1. [Requirements](#requirements)
+2. [SQL Server Configuration](#sql-server-configuration)
+3. [Import Database](#import-database)
+4. [Run the program](#run-the-program)
+5. [Contributors](#contributors)
+6. [License](#license)
+
 # Requirements
 
 [Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/#jdk19-windows), version 19.0.1 or later.
@@ -112,3 +121,15 @@ mvn clean javafx:run
 4. Select `Run javafx`.
 
 Note that it may take several minutes on the first run.
+
+# Contributors
+
+1. [Mai Trung Kiên](@Asphode1)
+2. [Hồ Viết Đức Lương](@LuongHvd)
+3. [Lê Nam Khánh](@khanhkhanhlele)
+4. [Ngô Trần Anh Thư](@Chercher16)
+5. [Lê Vũ Minh Tâm](@levuminhtam2002)
+
+# License
+
+Licensed under the [MIT](LICENSE.md) license.
