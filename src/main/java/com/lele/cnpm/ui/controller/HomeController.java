@@ -57,11 +57,11 @@ public class HomeController implements Initializable {
   @FXML
   private VBox dashboard;
   @FXML
-  private VBox household;
+  private AnchorPane household;
   @FXML
-  private VBox people;
+  private AnchorPane people;
   @FXML
-  private VBox reward;
+  private AnchorPane reward;
   @FXML
   private DashboardController dashboardController;
   @FXML

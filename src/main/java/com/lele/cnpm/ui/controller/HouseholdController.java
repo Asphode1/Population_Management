@@ -61,7 +61,7 @@ public class HouseholdController {
   @FXML
   private TextField editAddrField;
   @FXML
-  private TextField editDateField;
+  private DatePicker editDatePicker;
   @FXML
   private TextField editStateField;
   @FXML
@@ -436,7 +436,7 @@ public class HouseholdController {
     editQHField.setText("" + selectedHK.getQuanHuyen());
     editPXField.setText("" + selectedHK.getPhuongXa());
     editAddrField.setText("" + selectedHK.getDiaChi());
-    editDateField.setText("" + selectedHK.getNgayTao());
+    editDatePicker.setValue(selectedHK.getNgayTao().toLocalDate());
     editStateField.setText("" + selectedHK.getTrangThai());
     TableView<NhanKhau> editNKTable = new TableView<>();
     TableView<NhanKhau> editedNKTable = new TableView<>();
@@ -516,9 +516,9 @@ public class HouseholdController {
     String a4 = editQHField.getText();
     String a5 = editPXField.getText();
     String a6 = editAddrField.getText();
-    String a7 = editDateField.getText();
+    Date a7 = Date.valueOf(editDatePicker.getValue());
     String a8 = editStateField.getText();
-    HoKhau tmp = new HoKhau(Integer.parseInt(a1), Integer.parseInt(a2), a3, a4, a5, a6, Date.valueOf(a7), a8);
+    HoKhau tmp = new HoKhau(Integer.parseInt(a1), Integer.parseInt(a2), a3, a4, a5, a6, a7, a8);
     editConfirmSavePane.setVisible(true);
     confirmSaveEditBtn.setOnAction(ae -> {
       try {
@@ -766,9 +766,6 @@ public class HouseholdController {
   public void stayCancel(ActionEvent e) {
   }
 
-  public void moveConfirm(ActionEvent e) {
-  }
-
   public void cancelConfirm(ActionEvent e) {
   }
 
@@ -790,6 +787,8 @@ public class HouseholdController {
       String s2 = moveNoteField.getText().replaceAll("\n", System.getProperty("line.separator"));
       ChuyenHoKhau chk = new ChuyenHoKhau(0, selectedHK.getID(), d1, s1, s2);
       HoKhauManage.chuyenHoKhau(chk);
+      moveConfirmPane.setVisible(false);
+      movePane.setVisible(false);
     });
     moveCancelBtn.setOnAction(ae -> {
       moveConfirmPane.setVisible(false);
@@ -817,8 +816,6 @@ public class HouseholdController {
     chkTable.setRowFactory(rowFactory);
     chkTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     TableColumn<ChuyenHoKhau, String> idCol = new TableColumn<>("Chủ hộ");
-    idCol.setMinWidth(55);
-    idCol.setMaxWidth(55);
     idCol.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
     TableColumn<ChuyenHoKhau, String> dateCol = new TableColumn<>("Ngày chuyển đi");
     dateCol.setCellValueFactory(new PropertyValueFactory<>("ngayChuyenDiString"));

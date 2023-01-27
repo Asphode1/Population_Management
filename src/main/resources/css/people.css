@@ -1,10 +1,10 @@
 @import url(Root.css);
 
-.household{
+.people{
   -fx-background-color: transparent;
 }
 
-.household > VBox {
+.people > VBox {
   -fx-background-radius: 10 10 0 0;
   -fx-border-radius: 10 10 0 0;
   -fx-background-color: #f1f1f1;
