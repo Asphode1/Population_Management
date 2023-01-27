@@ -13,9 +13,9 @@
 
 # Requirements
 
-[Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/#jdk19-windows), version 19.0.1 or later.
+[Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/#jdk19-windows) version 19.0.1 or later.
 
-[Apache Maven](https://maven.apache.org/download.cgi), version 3.8.7.
+[Apache Maven](https://maven.apache.org/download.cgi) version 3.8.7.
 
 Check this [tutorial page](https://www.tutorialspoint.com/maven/maven_environment_setup.htm) to install Maven correctly.
 
@@ -28,7 +28,7 @@ mvn -v
 
 if the current version is lower than required version, please update/reinstall.
 
-[SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads), version 2019 or later, MSSQL Server or SQL Server Express.
+[SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) version 2019 or later, MSSQL Server or SQL Server Express.
 
 [SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16) version 19.
 

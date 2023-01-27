@@ -7,14 +7,13 @@
 3. [Nhập cơ sở dữ liệu](#nhập-cơ-sở-dữ-liệu)
 4. [Chạy chương trình](#chạy-chương-trình)
 5. [Những người đóng góp](#những-người-đóng-góp)
-
 6. [Giấy phép](#giấy-phép)
 
 # Yêu cầu
 
-[Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/#jdk19-windows), phiên bản 19.0.1 trở lên.
+[Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/#jdk19-windows) phiên bản 19.0.1 trở lên.
 
-[Apache Maven](https://maven.apache.org/download.cgi), phiên bản 3.8.7.
+[Apache Maven](https://maven.apache.org/download.cgi) phiên bản 3.8.7.
 
 Kiểm tra [trang hướng dẫn](https://www.tutorialspoint.com/maven/maven_environment_setup.htm) này để cài đặt Maven đúng cách.
 
@@ -27,11 +26,11 @@ mvn -v
 
 Nếu phiên bản hiện tại thấp hơn phiên bản yêu cầu, vui lòng cập nhật/cài đặt lại.
 
-[SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads), phiên bản 2019 trở lên, MSSQL Server hoặc SQL Server Express.
+[SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) phiên bản 2019 trở lên, MSSQL Server hoặc SQL Server Express.
 
 [SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16) phiên bản 19.
 
-#### IDE ưu tiên để chạy/thử nghiệm: [Visual Studio Code](https://code.visualstudio.com/).
+#### IDE được khuyến nghị để chạy/thử nghiệm: [Visual Studio Code](https://code.visualstudio.com/).
 
 #### Extension được đề xuất để có hiệu suất tốt hơn:
 
@@ -51,7 +50,7 @@ Khởi động lại dịch vụ SQL Server sau mỗi bước để những thay
 
 2. Trên trang Server Properties, Nhấp vào Security. Bật chế độ SQL Server and Windows Authentication.
 
-3. Tại mục "Server proxy account", chọn "Enable server proxy account", nhập "Proxy Accout" là `sa` và tạo một mật khẩu, sau đó nhấn OK.
+3. Tại mục "Server proxy account", chọn "Enable server proxy account", nhập "Proxy Account" là `sa` và tạo một mật khẩu, sau đó nhấn OK.
 
 ### Kích hoạt đăng nhập Tài khoản SQL Server Auth:
 
@@ -93,7 +92,7 @@ mvn clean javafx:run
 
 1. Tạo thư mục <code>.vscode</code> bên trong thư mục làm việc và tạo một tệp có tên <code>tasks.json</code> bên trong.
 
-2. sao chép các dòng sau vào <code>tasks.json</code>:
+2. Sao chép các dòng sau vào <code>tasks.json</code>:
 
 ```json
 {
