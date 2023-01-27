@@ -1,4 +1,4 @@
-serverName = "ASPHODEL\MSSQLSERVER01"
+serverName = "DESKTOP-9J07U8P\SQLEXPRESS"
 password = "luongluong"
 
 (Hướng dẫn thay đổi:
