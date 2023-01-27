@@ -78,6 +78,7 @@ public class HoKhauManage extends HoKhauModify {
         ChuyenHoKhauModify.themChuyenHoKhau(chk);
         HoKhau hk = layHoKhauTheoIdHoKhau(chk.getIdHoKhau());
         hk.setTrangThai("Đã chuyển đi");
+        hk.setDiaChi(chk.getNoiChuyenDen());
         capNhatHoKhau(hk);
         ArrayList<NhanKhau> nhanKhaus = HoKhauNhanKhauModify.layListNhanKhau(chk.getIdHoKhau());
         for (NhanKhau nk : nhanKhaus) {
