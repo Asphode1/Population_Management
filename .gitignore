@@ -5,3 +5,5 @@ test/
 target/
 pom.xml
 run.bat
+
+DatabaseConfig.txt
