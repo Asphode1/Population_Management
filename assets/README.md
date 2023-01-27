@@ -121,11 +121,11 @@ Lưu ý rằng có thể mất tới vài phút trong lần chạy đầu tiên.
 
 # Những người đóng góp
 
-1. [Mai Trung Kiên](@Asphode1)
-2. [Hồ Viết Đức Lương](@LuongHvd)
-3. [Lê Nam Khánh](@khanhkhanhlele)
-4. [Ngô Trần Anh Thư](@Chercher16)
-5. [Lê Vũ Minh Tâm](@levuminhtam2002)
+1. [Mai Trung Kiên](https://github.com/Asphode1)
+2. [Hồ Viết Đức Lương](https://github.com/LuongHvd)
+3. [Lê Nam Khánh](https://github.com/khanhkhanhlele)
+4. [Ngô Trần Anh Thư](https://github.com/Chercher16)
+5. [Lê Vũ Minh Tâm](https://github.com/levuminhtam2002)
 
 # Giấy phép
 
