@@ -51,7 +51,7 @@ public class HoKhauManage extends HoKhauModify {
         try {
             HoKhau hkMoi = new HoKhau(0, idChuHoMoi, hkCu.getTinhThanhPho(),
                     hkCu.getQuanHuyen(), hkCu.getPhuongXa(), hkCu.getDiaChi(), Date.valueOf(LocalDate.now()),
-                    "N'Thường trú'");
+                    "Thường trú");
             //them ho khau moi vao db
             themHoKhau(hkMoi);
             hkMoi = layHoKhau(idChuHoMoi); //cap nhat id Ho Khau tang tu dong trong db
