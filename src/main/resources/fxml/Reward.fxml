@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane fx:id="reward" prefWidth="1192.0" styleClass="reward" stylesheets="@../css/reward.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.RewardController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="1162.0" styleClass="household" stylesheets="@../css/household.css" AnchorPane.leftAnchor="15.0">
@@ -108,23 +107,13 @@
                           <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
                             <children>
                               <Label prefWidth="200.0" styleClass="addLabel" text="Năm" />
-                              <TextField fx:id="yearField" editable="false" prefHeight="35.0" prefWidth="100.0">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
-                              </TextField>
+                              <TextField fx:id="yearField" editable="false" prefHeight="35.0" prefWidth="100.0" styleClass="addLabel" />
                               <Label fx:id="nameLabel" prefWidth="200.0" styleClass="addLabel" text="Tên dịp">
                                 <HBox.margin>
                                   <Insets left="20.0" />
                                 </HBox.margin>
                               </Label>
-                              <TextField fx:id="nameField" editable="false" prefHeight="35.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
-                              </TextField>
+                              <TextField fx:id="nameField" editable="false" prefHeight="35.0" prefWidth="100.0" styleClass="addLabel" HBox.hgrow="ALWAYS" />
                             </children>
                             <VBox.margin>
                               <Insets bottom="10.0" />
@@ -133,21 +122,13 @@
                           <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
                             <children>
                               <Label fx:id="present1Label" prefWidth="200.0" styleClass="addLabel" text="Phần quà đặc biệt: " />
-                              <TextField fx:id="present1Field" editable="false" prefWidth="400.0" HBox.hgrow="ALWAYS">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
+                              <TextField fx:id="present1Field" editable="false" prefWidth="400.0" styleClass="addLabel" HBox.hgrow="ALWAYS">
                                 <HBox.margin>
                                   <Insets right="20.0" />
                                 </HBox.margin>
                               </TextField>
                               <Label styleClass="addLabel" text=" ~ " />
-                              <TextField fx:id="money1Field" editable="false" prefWidth="150.0">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
+                              <TextField fx:id="money1Field" editable="false" prefWidth="150.0" styleClass="addLabel">
                                 <HBox.margin>
                                   <Insets left="20.0" />
                                 </HBox.margin>
@@ -160,21 +141,13 @@
                           <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
                             <children>
                               <Label fx:id="present2Label" prefWidth="200.0" styleClass="addLabel" text="Phần quà HSG: " />
-                              <TextField fx:id="present2Field" editable="false" prefWidth="400.0" HBox.hgrow="ALWAYS">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
+                              <TextField fx:id="present2Field" editable="false" prefWidth="400.0" styleClass="addLabel" HBox.hgrow="ALWAYS">
                                 <HBox.margin>
                                   <Insets right="20.0" />
                                 </HBox.margin>
                               </TextField>
                               <Label styleClass="addLabel" text=" ~ " />
-                              <TextField fx:id="money2Field" editable="false" prefWidth="150.0">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
+                              <TextField fx:id="money2Field" editable="false" prefWidth="150.0" styleClass="addLabel">
                                 <HBox.margin>
                                   <Insets left="20.0" />
                                 </HBox.margin>
@@ -187,21 +160,13 @@
                           <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
                             <children>
                               <Label fx:id="present3Label" prefWidth="200.0" styleClass="addLabel" text="Phần quà HS Khá: " />
-                              <TextField fx:id="present3Field" editable="false" prefWidth="400.0" HBox.hgrow="ALWAYS">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
+                              <TextField fx:id="present3Field" editable="false" prefWidth="400.0" styleClass="addLabel" HBox.hgrow="ALWAYS">
                                 <HBox.margin>
                                   <Insets right="20.0" />
                                 </HBox.margin>
                               </TextField>
                               <Label styleClass="addLabel" text=" ~ " />
-                              <TextField fx:id="money3Field" editable="false" prefWidth="150.0">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
+                              <TextField fx:id="money3Field" editable="false" prefWidth="150.0" styleClass="addLabel">
                                 <HBox.margin>
                                   <Insets left="20.0" />
                                 </HBox.margin>
@@ -211,15 +176,10 @@
                               <Insets bottom="10.0" />
                             </VBox.margin>
                           </HBox>
-                          <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
+                          <HBox prefHeight="109.0" prefWidth="898.0">
                             <children>
                               <Label prefWidth="200.0" styleClass="addLabel" text="Mô tả:" />
-                              <TextField fx:id="descField" editable="false" prefHeight="35.0" HBox.hgrow="ALWAYS">
-                                <styleClass>
-                                  <String fx:value="addLabel" />
-                                  <String fx:value="textDisabled" />
-                                </styleClass>
-                              </TextField>
+                                          <TextArea fx:id="descField" prefHeight="200.0" prefWidth="200.0" styleClass="addLabel" HBox.hgrow="ALWAYS" />
                             </children>
                           </HBox>
                         </children>
@@ -232,21 +192,32 @@
                       </VBox>
                       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="90.0">
                         <children>
-                          <Button fx:id="listBtn" mnemonicParsing="false" text="Danh sách thưởng">
+                          <Button fx:id="listBtn" mnemonicParsing="false" prefHeight="36.0" text="Danh sách thưởng">
                             <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="addLabel" />
                               <String fx:value="saveBtn" />
                             </styleClass>
                           </Button>
-                          <Button fx:id="editBtn" mnemonicParsing="false" text="Chỉnh sửa">
-                            <styleClass>
-                              <String fx:value="btn" />
-                              <String fx:value="addLabel" />
-                              <String fx:value="saveBtn" />
-                            </styleClass>
-                          </Button>
-                          <Button fx:id="returnBtn" mnemonicParsing="false" text="Quay lại">
+                                    <AnchorPane prefHeight="100.0" prefWidth="120.0">
+                                       <children>
+                                          <Button fx:id="saveBtn" layoutX="116.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Lưu" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="32.0">
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="addLabel" />
+                                                <String fx:value="saveBtn" />
+                                             </styleClass>
+                                          </Button>
+                                <Button fx:id="editBtn" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Chỉnh sửa" AnchorPane.topAnchor="32.0">
+                                  <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="addLabel" />
+                                    <String fx:value="saveBtn" />
+                                  </styleClass>
+                                </Button>
+                                       </children>
+                                    </AnchorPane>
+                          <Button fx:id="returnBtn" mnemonicParsing="false" prefHeight="36.0" text="Quay lại">
                             <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="addLabel" />
@@ -307,6 +278,74 @@
                       </VBox>
                     </children>
                   </AnchorPane>
+                        <AnchorPane fx:id="confirmPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="526.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="196.0">
+                                 <children>
+                                    <Label fx:id="confirmLabel" alignment="CENTER" contentDisplay="CENTER" text="Lưu thay đổi" textFill="#569698">
+                                       <font>
+                                          <Font name="Montserrat SemiBold" size="26.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="100.0">
+                                       <children>
+                                          <Button fx:id="confirmBtn" mnemonicParsing="false" text="Lưu">
+                                             <padding>
+                                                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                             </padding>
+                                             <styleClass>
+                                                <String fx:value="saveBtn" />
+                                                <String fx:value="addLabel" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button fx:id="cancelBtn" mnemonicParsing="false" text="Quay lại">
+                                             <padding>
+                                                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                             </padding>
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="addLabel" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="editListBox1" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <HBox fx:id="editListBtnBox1" alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="100.0">
+                                       <children>
+                                          <Button fx:id="editListSaveBtn1" mnemonicParsing="false" text="Lưu">
+                                             <padding>
+                                                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                             </padding>
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="addLabel" />
+                                                <String fx:value="saveBtn" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button fx:id="editListReturnBtn1" mnemonicParsing="false" text="Quay lại">
+                                             <padding>
+                                                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                             </padding>
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="addLabel" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
                 </children>
               </AnchorPane>
             </children>

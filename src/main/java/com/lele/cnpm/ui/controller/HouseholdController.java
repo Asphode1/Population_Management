@@ -113,7 +113,9 @@ public class HouseholdController {
   @FXML
   private TextField editHKSearchField;
   @FXML
-  private TextField editedHKSearchField;
+  private TextField editHKNameField;
+  @FXML
+  private TextField editHKRelField;
 
   @FXML
   private AnchorPane tableHKPane;
@@ -226,6 +228,11 @@ public class HouseholdController {
   private HoKhauBean infoHKB = null;
   private ChuyenHoKhau chk = null;
   private ArrayList<ChuyenHoKhau> chkList = new ArrayList<>();
+
+  private ArrayList<NhanKhau> editnk = new ArrayList<>();
+  private ArrayList<NhanKhau> editednk = new ArrayList<>();
+  private ArrayList<NhanKhau> searcheditedNk = new ArrayList<>();
+  private ArrayList<String> editedNKRel = new ArrayList<>();
 
   public void initialize() {
     final ArrayList<AnchorPane> panes = new ArrayList<>(
@@ -348,10 +355,10 @@ public class HouseholdController {
     table.getColumns().addAll(Arrays.asList(chuCol, addrCol, dateCol, stateCol));
     getHKList();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    ArrayList<Node> al = new ArrayList<>();
+    final ArrayList<Node> al = new ArrayList<>();
     al.add(table);
     al.addAll(tableHKPane.getChildren());
-    ObservableList<Node> newList = FXCollections.observableArrayList(al);
+    final ObservableList<Node> newList = FXCollections.observableArrayList(al);
     tableHKPane.getChildren().clear();
     tableHKPane.getChildren().addAll(newList);
     table.setMinWidth(1098);
@@ -361,7 +368,7 @@ public class HouseholdController {
 
   private void getHKList() {
     try {
-      ArrayList<HoKhau> tmp = HoKhauManage.layListHoKhau();
+      final ArrayList<HoKhau> tmp = HoKhauManage.layListHoKhau();
       hkList.clear();
       hkList.addAll(tmp);
     } catch (Exception e) {
@@ -371,7 +378,7 @@ public class HouseholdController {
   }
 
   private void setTableData() {
-    ObservableList<HoKhau> data = FXCollections.observableArrayList(hkList);
+    final ObservableList<HoKhau> data = FXCollections.observableArrayList(hkList);
     table.getItems().clear();
     table.setItems(data);
   }
@@ -388,7 +395,7 @@ public class HouseholdController {
     infoAddrField.setText("" + selectedHK.getDiaChi());
     infoDateField.setText("" + selectedHK.getNgayTao());
     infoStateField.setText("" + selectedHK.getTrangThai());
-    TableView<NhanKhau> infoNKTable = new TableView<>();
+    final TableView<NhanKhau> infoNKTable = new TableView<>();
     Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
       @Override
       public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
@@ -418,7 +425,7 @@ public class HouseholdController {
     infoNKTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     Runnable getHKB = () -> {
       infoHKB = HoKhauManage.layHoKhauBean(selectedHK);
-      ObservableList<NhanKhau> nk = FXCollections.observableArrayList(infoHKB.getListNhanKhaus());
+      final ObservableList<NhanKhau> nk = FXCollections.observableArrayList(infoHKB.getListNhanKhaus());
       infoNKTable.getItems().clear();
       infoNKTable.getItems().addAll(nk);
     };
@@ -440,10 +447,6 @@ public class HouseholdController {
     editStateField.setText("" + selectedHK.getTrangThai());
     TableView<NhanKhau> editNKTable = new TableView<>();
     TableView<NhanKhau> editedNKTable = new TableView<>();
-    ArrayList<NhanKhau> nk = new ArrayList<>();
-    ArrayList<NhanKhau> editednk = new ArrayList<>();
-    ArrayList<NhanKhau> searceditedNk = new ArrayList<>();
-    ArrayList<String> editedNKRel = new ArrayList<>();
     Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
       @Override
       public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
@@ -459,8 +462,24 @@ public class HouseholdController {
         return row;
       }
     };
-    editNKTable.setRowFactory(rowFactory);
-    editedNKTable.setRowFactory(rowFactory);
+    Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowedFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
+      @Override
+      public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
+        final TableRow<NhanKhau> row = new TableRow<>();
+        row.setOnMouseClicked((e) -> {
+          selectedEditNK = row.getItem();
+          System.out.println("Clicked");
+          if (selectedEditNK != null) {
+            System.out.println("added");
+            editHKNameField.setText(selectedEditNK.getHoTen());
+            editHKRelField.setText(editedNKRel.get(editednk.indexOf(selectedEditNK)));
+            if (selectedEditChuHo != null && selectedEditNK.getID() == selectedEditChuHo.getID())
+              editCHCheckBox.setSelected(true);
+          }
+        });
+        return row;
+      }
+    };
     TableColumn<NhanKhau, String> editNKIdCol = new TableColumn<>("Id");
     editNKIdCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
     editNKIdCol.setMinWidth(40);
@@ -477,10 +496,52 @@ public class HouseholdController {
     editedNKTable.getColumns().addAll(Arrays.asList(editedNKIdCol, editedNKNameCol));
     editNKTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     editedNKTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+    Runnable getNKList = () -> {
+      editnk = NhanKhauManage.layListNhanKhauChuaCoHoKhau();
+    };
+
+    Runnable getNKedList = () -> {
+      editednk = HoKhauManage.layListNhanKhau(selectedHK);
+      editedNKRel = HoKhauManage.layHoKhauBean(selectedHK).getListQuanHeChuHos();
+    };
+
+    Consumer<String> getNKListFind = (String s) -> {
+      editnk = NhanKhauManage.layListNhanKhauChuaCoHoKhau(s);
+    };
+
+    editHKSearchField.textProperty()
+        .addListener((ObservableValue<? extends String> ob, String oldVal, String newVal) -> {
+          if (newVal.isBlank() || newVal == null)
+            getNKList.run();
+          else
+            getNKListFind.accept(newVal);
+        });
+
+    editCHCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+      @Override
+      public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        if (newValue) {
+          if (selectedEditChuHo == null
+              || selectedEditChuHo != null && selectedEditChuHo.getID() != selectedEditNK.getID()) {
+            selectedEditChuHo = selectedEditNK;
+          }
+        } else if (!newValue && selectedEditChuHo.getID() == selectedEditNK.getID()) {
+          selectedEditChuHo = null;
+        }
+      }
+    });
+
+    getNKList.run();
+    getNKedList.run();
+    editNKTable.setItems(FXCollections.observableArrayList(editnk));
+    editedNKTable.setItems(FXCollections.observableArrayList(editednk));
+    editNKTable.setRowFactory(rowFactory);
+    editedNKTable.setRowFactory(rowedFactory);
     editHKTableBox.getChildren().clear();
     editHKTableBox.getChildren().addAll(editHKSearchField, editNKTable);
     editedHKTableBox.getChildren().clear();
-    editedHKTableBox.getChildren().addAll(editedHKSearchField, editedNKTable);
+    editedHKTableBox.getChildren().add(editedNKTable);
 
   }
 
@@ -510,15 +571,15 @@ public class HouseholdController {
 
   // * edit Pane buttons
   public void saveEdit(ActionEvent e) {
-    String a1 = editIdField.getText();
-    String a2 = editCHField.getText();
-    String a3 = editTTField.getText();
-    String a4 = editQHField.getText();
-    String a5 = editPXField.getText();
-    String a6 = editAddrField.getText();
-    Date a7 = Date.valueOf(editDatePicker.getValue());
-    String a8 = editStateField.getText();
-    HoKhau tmp = new HoKhau(Integer.parseInt(a1), Integer.parseInt(a2), a3, a4, a5, a6, a7, a8);
+    final String a1 = editIdField.getText();
+    final String a2 = editCHField.getText();
+    final String a3 = editTTField.getText();
+    final String a4 = editQHField.getText();
+    final String a5 = editPXField.getText();
+    final String a6 = editAddrField.getText();
+    final Date a7 = Date.valueOf(editDatePicker.getValue());
+    final String a8 = editStateField.getText();
+    final HoKhau tmp = new HoKhau(Integer.parseInt(a1), Integer.parseInt(a2), a3, a4, a5, a6, a7, a8);
     editConfirmSavePane.setVisible(true);
     confirmSaveEditBtn.setOnAction(ae -> {
       try {
@@ -552,14 +613,6 @@ public class HouseholdController {
   public void cancelEdit(ActionEvent e) {
     editPane.setVisible(false);
     infoPane.setVisible(true);
-    infoIdField.setText("" + selectedHK.getID());
-    infoCHField.setText("" + selectedHK.getIdChuHo());
-    infoTTField.setText("" + selectedHK.getTinhThanhPho());
-    infoQHField.setText("" + selectedHK.getQuanHuyen());
-    infoPXField.setText("" + selectedHK.getPhuongXa());
-    infoAddrField.setText("" + selectedHK.getDiaChi());
-    infoDateField.setText("" + selectedHK.getNgayTao());
-    infoStateField.setText("" + selectedHK.getTrangThai());
   }
 
   // * add new Pane
@@ -567,12 +620,12 @@ public class HouseholdController {
   public void addNew(ActionEvent e) {
     addDatePicker.setValue(LocalDate.now());
     addPane.setVisible(true);
-    TableView<NhanKhau> addNKTable = new TableView<>();
-    TableView<NhanKhau> addedNKTable = new TableView<>();
-    ArrayList<NhanKhau> nk = new ArrayList<>();
-    ArrayList<NhanKhau> addednk = new ArrayList<>();
-    ArrayList<NhanKhau> searchAddedNk = new ArrayList<>();
-    ArrayList<String> addedNKRel = new ArrayList<>();
+    final TableView<NhanKhau> addNKTable = new TableView<>();
+    final TableView<NhanKhau> addedNKTable = new TableView<>();
+    final ArrayList<NhanKhau> nk = new ArrayList<>();
+    final ArrayList<NhanKhau> addednk = new ArrayList<>();
+    final ArrayList<NhanKhau> searchAddedNk = new ArrayList<>();
+    final ArrayList<String> addedNKRel = new ArrayList<>();
     // table create
     Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
       @Override
@@ -649,10 +702,10 @@ public class HouseholdController {
 
     // callbacks
     Runnable updateAddNKTable = () -> {
-      ObservableList<NhanKhau> list = FXCollections.observableArrayList(nk);
+      final ObservableList<NhanKhau> list = FXCollections.observableArrayList(nk);
       addNKTable.getItems().clear();
       addNKTable.getItems().addAll(list);
-      ObservableList<NhanKhau> addedList = FXCollections.observableArrayList(addednk);
+      final ObservableList<NhanKhau> addedList = FXCollections.observableArrayList(addednk);
       addedNKTable.getItems().clear();
       addedNKTable.getItems().addAll(addedList);
     };
@@ -694,12 +747,12 @@ public class HouseholdController {
         ObservableValue<? extends String> observable, String oldVal,
         String newVal) -> {
       if (newVal == null || newVal.isEmpty()) {
-        ObservableList<NhanKhau> list = FXCollections.observableArrayList(addednk);
+        final ObservableList<NhanKhau> list = FXCollections.observableArrayList(addednk);
         addedNKTable.getItems().clear();
         addedNKTable.getItems().addAll(list);
       } else {
         findAddedNKList.accept(newVal);
-        ObservableList<NhanKhau> addedList = FXCollections.observableArrayList(searchAddedNk);
+        final ObservableList<NhanKhau> addedList = FXCollections.observableArrayList(searchAddedNk);
         addedNKTable.getItems().clear();
         addedNKTable.getItems().addAll(addedList);
       }
@@ -825,7 +878,7 @@ public class HouseholdController {
     noteCol.setCellValueFactory(new PropertyValueFactory<>("ghiChu"));
     chkTable.getColumns().addAll(Arrays.asList(idCol, dateCol, toCol, noteCol));
     chkList = HoKhauManage.xemLichSuChuyenHoKhaus();
-    ObservableList<ChuyenHoKhau> list = FXCollections.observableArrayList(chkList);
+    final ObservableList<ChuyenHoKhau> list = FXCollections.observableArrayList(chkList);
     chkTable.setItems(list);
     historyTableBox.getChildren().clear();
     historyTableBox.getChildren().add(chkTable);
