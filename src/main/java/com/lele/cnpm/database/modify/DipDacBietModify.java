@@ -86,7 +86,7 @@ public class DipDacBietModify {
      */
     public static boolean capNhatDipDacBiet(DipDacBiet ddb) {
         String sql = "UPDATE dip_dac_biet SET ten = ?, nam = ?, moTa = ?, phanQua05 = ?, phanQua614 = ?, phanQua1517 = ?,"
-        +" tien05 = ?, tien614 = ?, tien1517  WHERE Id = " + ddb.getIdDip();
+        +" tien05 = ?, tien614 = ?, tien1517=?  WHERE idDip = " + ddb.getIdDip();
 
         try {
             Connection conn = DBConnection.getDBConnection().getConnection();

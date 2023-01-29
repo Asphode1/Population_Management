@@ -501,7 +501,8 @@ public class RewardController {
       money2Field.setEditable(true);
       money3Field.setEditable(true);
       descField.setEditable(true);
-      descField.getStyleClass().add("textDisabled");
+      nameField.setEditable(true);
+      descField.getStyleClass().remove("textDisabled");
       yearField.getStyleClass().remove("textDisabled");
       present1Field.getStyleClass().remove("textDisabled");
       present2Field.getStyleClass().remove("textDisabled");

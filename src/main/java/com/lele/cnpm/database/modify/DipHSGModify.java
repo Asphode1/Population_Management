@@ -85,7 +85,7 @@ public class DipHSGModify {
     */
     public static boolean capNhatDipHSG(DipHSG dhsg) {
         String sql = "UPDATE dip_hoc_sinh_gioi SET nam = ?, moTa = ?, phanQuaDacBiet = ?, phanQuaGioi = ?, phanQuaKha = ?,"
-        +" tienDacBiet = ?, tienGioi = ?, tienKha  WHERE Id = " + dhsg.getIdDip();
+        +" tienDacBiet = ?, tienGioi = ?, tienKha = ?  WHERE idDip = " + dhsg.getIdDip();
 
         try {
             Connection conn = DBConnection.getDBConnection().getConnection();

@@ -553,6 +553,7 @@ public class PeopleController {
           ex.printStackTrace();
         }
         addSaveConfirmPane.setVisible(false);
+        addPane.setVisible(false);
       });
     }
   }
@@ -714,6 +715,8 @@ public class PeopleController {
         } catch (Exception ex) {
           ex.printStackTrace();
         }
+        stayConfirmPane.setVisible(false);
+        stayPane.setVisible(false);
       }
     });
     stayCancelBtn.setOnAction(ae -> {
