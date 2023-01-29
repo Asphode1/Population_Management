@@ -2,9 +2,11 @@ package com.lele.cnpm.ui.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -36,6 +38,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.Pair;
+import javafx.util.StringConverter;
+
 import com.lele.cnpm.src.bean.HoKhauBean;
 import com.lele.cnpm.src.models.ChuyenHoKhau;
 import com.lele.cnpm.src.models.HoKhau;
@@ -43,6 +48,7 @@ import com.lele.cnpm.src.models.NguoiDung;
 import com.lele.cnpm.src.models.NhanKhau;
 import com.lele.cnpm.src.services.HoKhauManage;
 import com.lele.cnpm.src.services.NhanKhauManage;
+import com.lele.cnpm.src.utils.Utils;
 
 public class HouseholdController {
 
@@ -116,6 +122,28 @@ public class HouseholdController {
   private TextField editHKNameField;
   @FXML
   private TextField editHKRelField;
+  @FXML
+  private TextField splitIdField;
+  @FXML
+  private TextField splitCHField;
+  @FXML
+  private TextField splitTTField;
+  @FXML
+  private TextField splitQHField;
+  @FXML
+  private TextField splitPXField;
+  @FXML
+  private TextField splitAddrField;
+  @FXML
+  private DatePicker splitDatePicker;
+  @FXML
+  private TextField splitStateField;
+  @FXML
+  private TextField splitHKNameField;
+  @FXML
+  private TextField splitHKRelOldField;
+  @FXML
+  private TextField splitHKRelNewField;
 
   @FXML
   private AnchorPane tableHKPane;
@@ -135,6 +163,8 @@ public class HouseholdController {
   private AnchorPane confirmDeleteInfoPane;
   @FXML
   private AnchorPane splitPane;
+  @FXML
+  private AnchorPane splitConfirmSavePane;
   @FXML
   private AnchorPane movePane;
   @FXML
@@ -169,6 +199,10 @@ public class HouseholdController {
   private VBox editHKTableBox;
   @FXML
   private VBox editedHKTableBox;
+  @FXML
+  private VBox splitHKTableBox;
+  @FXML
+  private VBox splitedHKTableBox;
 
   @FXML
   private Button addBtn;
@@ -200,11 +234,25 @@ public class HouseholdController {
   private Button editAddBtn;
   @FXML
   private Button editRemoveBtn;
+  @FXML
+  private Button splitSaveBtn;
+  @FXML
+  private Button splitCloseBtn;
+  @FXML
+  private Button splitLeftBtn;
+  @FXML
+  private Button splitRightBtn;
+  @FXML
+  private Button confirmSaveSplitBtn;
+  @FXML
+  private Button confirmCancelSplitBtn;
 
   @FXML
   private CheckBox addCHCheckBox;
   @FXML
   private CheckBox editCHCheckBox;
+  @FXML
+  private CheckBox splitCHCheckBox;
 
   private NguoiDung user;
 
@@ -231,16 +279,26 @@ public class HouseholdController {
 
   private ArrayList<NhanKhau> editnk = new ArrayList<>();
   private ArrayList<NhanKhau> editednk = new ArrayList<>();
-  private ArrayList<NhanKhau> searcheditedNk = new ArrayList<>();
   private ArrayList<String> editedNKRel = new ArrayList<>();
+  private ArrayList<Pair<NhanKhau, String>> nkWithRel = new ArrayList<>();
+
+  private NhanKhau splitNewChuHo = null;
+  private NhanKhau selectedSplitNK = null;
 
   public void initialize() {
     final ArrayList<AnchorPane> panes = new ArrayList<>(
         Arrays.asList(infoPane, editPane, addPane, movePane, splitPane, historyPane));
     panes.forEach(e -> e.visibleProperty()
         .addListener((ObservableValue<? extends Boolean> ob, Boolean oldVal, Boolean newVal) -> {
-          if (newVal == false)
+          if (newVal == false) {
             getHKList();
+            selectedHK = null;
+            selectedAddChuHo = null;
+            selectedAddNK = null;
+            selectedEditChuHo = null;
+            selectedEditNK = null;
+            selectedInfoNK = null;
+          }
         }));
     optBtnList.add(addSplitBtn);
     optBtnList.add(addMoveBtn);
@@ -324,6 +382,7 @@ public class HouseholdController {
               if (selectedHK != null) {
                 optPane.setVisible(false);
                 splitPane.setVisible(true);
+                openSplit();
               }
             });
             addMoveBtn.setOnAction((ActionEvent ae) -> {
@@ -393,7 +452,7 @@ public class HouseholdController {
     infoQHField.setText("" + selectedHK.getQuanHuyen());
     infoPXField.setText("" + selectedHK.getPhuongXa());
     infoAddrField.setText("" + selectedHK.getDiaChi());
-    infoDateField.setText("" + selectedHK.getNgayTao());
+    infoDateField.setText(DateTimeFormatter.ofPattern("dd/MM/yyyy").format(selectedHK.getNgayTao().toLocalDate()));
     infoStateField.setText("" + selectedHK.getTrangThai());
     final TableView<NhanKhau> infoNKTable = new TableView<>();
     Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
@@ -443,6 +502,7 @@ public class HouseholdController {
     editQHField.setText("" + selectedHK.getQuanHuyen());
     editPXField.setText("" + selectedHK.getPhuongXa());
     editAddrField.setText("" + selectedHK.getDiaChi());
+    editDatePicker.setConverter(Utils.converter());
     editDatePicker.setValue(selectedHK.getNgayTao().toLocalDate());
     editStateField.setText("" + selectedHK.getTrangThai());
     TableView<NhanKhau> editNKTable = new TableView<>();
@@ -468,9 +528,7 @@ public class HouseholdController {
         final TableRow<NhanKhau> row = new TableRow<>();
         row.setOnMouseClicked((e) -> {
           selectedEditNK = row.getItem();
-          System.out.println("Clicked");
           if (selectedEditNK != null) {
-            System.out.println("added");
             editHKNameField.setText(selectedEditNK.getHoTen());
             editHKRelField.setText(editedNKRel.get(editednk.indexOf(selectedEditNK)));
             if (selectedEditChuHo != null && selectedEditNK.getID() == selectedEditChuHo.getID())
@@ -504,6 +562,10 @@ public class HouseholdController {
     Runnable getNKedList = () -> {
       editednk = HoKhauManage.layListNhanKhau(selectedHK);
       editedNKRel = HoKhauManage.layHoKhauBean(selectedHK).getListQuanHeChuHos();
+      nkWithRel.clear();
+      for (int i = 0; i < editednk.size(); i++) {
+        nkWithRel.add(new Pair<NhanKhau, String>(editednk.get(i), editedNKRel.get(i)));
+      }
     };
 
     Consumer<String> getNKListFind = (String s) -> {
@@ -618,6 +680,7 @@ public class HouseholdController {
   // * add new Pane
 
   public void addNew(ActionEvent e) {
+    addDatePicker.setConverter(Utils.converter());
     addDatePicker.setValue(LocalDate.now());
     addPane.setVisible(true);
     final TableView<NhanKhau> addNKTable = new TableView<>();
@@ -810,23 +873,12 @@ public class HouseholdController {
     addPane.setVisible(false);
   }
 
-  public void cancelConfirmAdd(ActionEvent e) {
-  }
-
-  public void stayConfirm(ActionEvent e) {
-  }
-
-  public void stayCancel(ActionEvent e) {
-  }
-
-  public void cancelConfirm(ActionEvent e) {
-  }
-
   // * open move
   private void openMove(ActionEvent e) {
     movePane.setVisible(true);
     optPane.setVisible(false);
     moveIdField.setText("" + selectedHK.getID());
+    moveAtPicker.setConverter(Utils.converter());
     moveAtPicker.setValue(LocalDate.now());
     moveBtn.setOnAction(ae -> {
       moveConfirmPane.setVisible(true);
@@ -886,5 +938,153 @@ public class HouseholdController {
 
   public void closeHistory(ActionEvent e) {
     historyPane.setVisible(false);
+  }
+
+  // * split pane
+  private void openSplit() {
+    splitIdField.setText(selectedHK.getID() + "");
+    splitCHField.setText(selectedHK.getTenChuHo());
+    splitDatePicker.setConverter(Utils.converter());
+    splitDatePicker.setValue(LocalDate.now());
+    final TableView<NhanKhau> splitNKTable = new TableView<>();
+    final TableView<NhanKhau> splitedNKTable = new TableView<>();
+    final ArrayList<NhanKhau> nk = HoKhauManage.layListNhanKhau(selectedHK);
+    final ArrayList<String> rel = HoKhauManage.layHoKhauBean(selectedHK).getListQuanHeChuHos();
+    final ArrayList<NhanKhau> splitednk = new ArrayList<>();
+    final ArrayList<String> splitedNKRel = new ArrayList<>();
+    final ArrayList<Pair<NhanKhau, String>> nkWRel = new ArrayList<>();
+    final ArrayList<Pair<NhanKhau, String>> nkedWRel = new ArrayList<>();
+    for (int i = 0; i < nk.size(); i++) {
+      nkWRel.add(new Pair<NhanKhau, String>(nk.get(i), rel.get(i)));
+    }
+    Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
+      @Override
+      public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
+        final TableRow<NhanKhau> row = new TableRow<>();
+        row.setOnMouseClicked((e) -> {
+          selectedAddNK = row.getItem();
+          if (selectedAddNK != null) {
+            splitHKNameField.setText(selectedAddNK.getHoTen());
+            splitHKRelOldField.setText(rel.get(nk.indexOf(selectedAddNK)));
+          }
+        });
+        return row;
+      }
+    };
+    Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowedFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
+      @Override
+      public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
+        final TableRow<NhanKhau> row = new TableRow<>();
+        row.setOnMouseClicked((e) -> {
+          selectedSplitNK = row.getItem();
+          if (selectedSplitNK != null) {
+            splitHKNameField.setText(selectedSplitNK.getHoTen());
+            splitHKRelOldField.setText(rel.get(nk.indexOf(selectedSplitNK)));
+            if (splitNewChuHo != null)
+              if (selectedSplitNK.getID() == splitNewChuHo.getID()) {
+                splitCHCheckBox.setSelected(true);
+              } else
+                splitCHCheckBox.setSelected(false);
+          }
+        });
+        return row;
+      }
+    };
+    splitNKTable.setRowFactory(rowFactory);
+    splitedNKTable.setRowFactory(rowedFactory);
+    splitNKTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    splitedNKTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    TableColumn<NhanKhau, String> splitNKIdCol = new TableColumn<>("Id");
+    splitNKIdCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    splitNKIdCol.setMinWidth(40);
+    splitNKIdCol.setMaxWidth(40);
+    TableColumn<NhanKhau, String> splitNKNameCol = new TableColumn<>("Họ và tên");
+    splitNKNameCol.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+    TableColumn<NhanKhau, String> splitedNKIdCol = new TableColumn<>("Id");
+    splitedNKIdCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    splitedNKIdCol.setMinWidth(40);
+    splitedNKIdCol.setMaxWidth(40);
+    TableColumn<NhanKhau, String> splitedNKNameCol = new TableColumn<>("Họ và tên");
+    splitedNKNameCol.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+    splitNKTable.getColumns().addAll(Arrays.asList(splitNKIdCol, splitNKNameCol));
+    splitedNKTable.getColumns().addAll(Arrays.asList(splitedNKIdCol, splitedNKNameCol));
+    splitHKTableBox.getChildren().clear();
+    splitHKTableBox.getChildren().add(splitNKTable);
+    splitedHKTableBox.getChildren().clear();
+    splitedHKTableBox.getChildren().add(splitedNKTable);
+    splitNKTable.getItems().clear();
+    splitNKTable.setItems(FXCollections.observableArrayList(nk));
+    splitedNKTable.getItems().clear();
+    splitedNKTable.setItems(FXCollections.observableArrayList(splitednk));
+    splitCHCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+      @Override
+      public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        if (newValue) {
+          if (splitNewChuHo == null
+              || splitNewChuHo != null && splitNewChuHo.getID() != selectedSplitNK.getID()) {
+            splitNewChuHo = selectedSplitNK;
+          }
+        } else if (!newValue && splitNewChuHo.getID() == selectedSplitNK.getID()) {
+          splitNewChuHo = null;
+        }
+      }
+    });
+
+    Supplier<Pair<ArrayList<NhanKhau>, ArrayList<String>>> toList = () -> {
+      ArrayList<NhanKhau> nkl = new ArrayList<>();
+      ArrayList<String> sl = new ArrayList<>();
+      for (int i = 0; i < nkedWRel.size(); i++) {
+        nkl.add(nkedWRel.get(i).getKey());
+        sl.add(nkedWRel.get(i).getValue());
+      }
+      return new Pair<ArrayList<NhanKhau>, ArrayList<String>>(nkl, sl);
+    };
+
+    Runnable updateTable = () -> {
+      nk.clear();
+      for (int i = 0; i < nkWRel.size(); i++) {
+        nk.add(nkWRel.get(i).getKey());
+      }
+      splitednk.clear();
+      splitednk.addAll(toList.get().getKey());
+      splitNKTable.getItems().clear();
+      splitNKTable.setItems(FXCollections.observableArrayList(nk));
+      splitedNKTable.getItems().clear();
+      splitedNKTable.setItems(FXCollections.observableArrayList(splitednk));
+    };
+
+    splitRightBtn.setOnAction(ae -> {
+      String s = splitHKRelNewField.getText();
+      Pair<NhanKhau, String> p = new Pair<NhanKhau, String>(selectedAddNK, s);
+      nkWRel.remove(p);
+      nkedWRel.add(p);
+      updateTable.run();
+    });
+
+    splitLeftBtn.setOnAction(ae -> {
+      String s = null;
+    });
+
+    splitSaveBtn.setOnAction(ae -> {
+      splitConfirmSavePane.setVisible(false);
+      confirmSaveSplitBtn.setOnAction(aee -> {
+        String a3 = splitTTField.getText();
+        String a4 = splitQHField.getText();
+        String a5 = splitPXField.getText();
+        String a6 = splitAddrField.getText();
+        LocalDate a7 = splitDatePicker.getValue();
+        String a8 = splitStateField.getText();
+        HoKhau hk = new HoKhau(0, splitNewChuHo.getID(), a3, a4, a5, a6, Date.valueOf(a7), a8);
+        splitednk.clear();
+        splitednk.addAll(toList.get().getKey());
+        splitedNKRel.clear();
+        splitedNKRel.addAll(toList.get().getValue());
+        HoKhauManage.tachHoKhau(hk, splitNewChuHo.getID(), nk, splitedNKRel);
+        splitConfirmSavePane.setVisible(false);
+        splitPane.setVisible(false);
+      });
+      confirmCancelSplitBtn.setOnAction(aee -> splitConfirmSavePane.setVisible(false));
+    });
+    splitCloseBtn.setOnAction(ae -> splitPane.setVisible(false));
   }
 }
