@@ -36,6 +36,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import com.lele.cnpm.src.models.*;
 import com.lele.cnpm.src.services.NhanKhauManage;
+import com.lele.cnpm.src.utils.Utils;
 
 public class PeopleController {
   @FXML
@@ -225,6 +226,8 @@ public class PeopleController {
   private AnchorPane historyDetailPane;
   @FXML
   private AnchorPane historyListPane;
+  @FXML
+  private AnchorPane confirmExcelPane;
 
   @FXML
   private Button saveAddBtn;
@@ -286,6 +289,8 @@ public class PeopleController {
   private Button closeHistoryBtn;
   @FXML
   private Button closeHistoryListBtn;
+  @FXML
+  private Button returnExcelBtn;
 
   @FXML
   private Label addErrText;
@@ -322,8 +327,13 @@ public class PeopleController {
   }
 
   public void initialize() {
+    final ArrayList<DatePicker> pickers = new ArrayList<>(
+        Arrays.asList(addCCCDDatePicker, addDOBPicker, addToDatePicker, awayFromPicker, awayToPicker, deadDatePicker,
+            deadNKBPicker, editCCCDDatePicker, editDOBPicker, editToDatePicker, moveAtPicker, stayFromPicker,
+            stayToPicker));
+    pickers.forEach(e -> e.setConverter(Utils.converter()));
     final ArrayList<AnchorPane> panes = new ArrayList<>(
-        Arrays.asList(infoPane, addPane, editPane, awayPane, movePane, lostPane));
+        Arrays.asList(infoPane, addPane, editPane, stayPane, awayPane, movePane, lostPane, excelPane));
     panes.forEach(e -> {
       e.visibleProperty().addListener((ObservableValue<? extends Boolean> ob, Boolean oldVal, Boolean newVal) -> {
         if (newVal == false)
@@ -439,7 +449,7 @@ public class PeopleController {
     TableColumn<NhanKhau, String> genCol = new TableColumn<>("Giới tính");
     genCol.setCellValueFactory(new PropertyValueFactory<>("gioiTinh"));
     genCol.getStyleClass().add("center-align");
-    TableColumn<NhanKhau, String> CCCDCol = new TableColumn<>("CCCD");
+    TableColumn<NhanKhau, String> CCCDCol = new TableColumn<>("CCCD/ĐDĐT");
     CCCDCol.setCellValueFactory(new PropertyValueFactory<>("soCCCD"));
     TableColumn<NhanKhau, String> stateCol = new TableColumn<>("Trạng thái");
     stateCol.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
@@ -717,6 +727,10 @@ public class PeopleController {
         }
         stayConfirmPane.setVisible(false);
         stayPane.setVisible(false);
+        stayBeforeField.setText("");
+        stayStayField.setText("");
+        stayFromPicker.setValue(null);
+        stayToPicker.setValue(null);
       }
     });
     stayCancelBtn.setOnAction(ae -> {
@@ -756,6 +770,10 @@ public class PeopleController {
         }
         awayConfirmPane.setVisible(false);
         awayPane.setVisible(false);
+        awayNowField.setText("");
+        awayToPicker.setValue(null);
+        awayFromPicker.setValue(null);
+        awayReasonField.setText(null);
       }
     });
     awayCancelBtn.setOnAction(ae -> {
@@ -879,11 +897,20 @@ public class PeopleController {
 
   public void excel(ActionEvent e) {
     excelPane.setVisible(true);
+    Runnable confirmed = () -> {
+      confirmExcelPane.setVisible(true);
+      returnExcelBtn.setOnAction(ae -> {
+        confirmExcelPane.setVisible(false);
+        excelPane.setVisible(false);
+      });
+    };
     importBtn.setOnAction(ae -> {
       NhanKhauManage.themNhanKhauFileExcel();
+      confirmed.run();
     });
     exportBtn.setOnAction(ae -> {
       NhanKhauManage.inListNhanKhauRaFileExcel(nhanKhau);
+      confirmed.run();
     });
     cancelExcelBtn.setOnAction(ae -> {
       excelPane.setVisible(false);

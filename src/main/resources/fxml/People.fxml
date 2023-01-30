@@ -1561,7 +1561,7 @@
                           <Insets bottom="10.0" left="20.0" right="20.0" />
                         </padding>
                       </VBox>
-                      <AnchorPane fx:id="deadConfirmPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <AnchorPane fx:id="deadConfirmPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <children>
                           <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="135.0">
                             <children>
@@ -1636,6 +1636,26 @@
                       </VBox>
                     </children>
                   </AnchorPane>
+                        <AnchorPane fx:id="confirmExcelPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="540.0" spacing="25.0" style="-fx-background-color: #f9f9f9; -fx-border-radius: 10; -fx-background-radius: 10;" AnchorPane.leftAnchor="279.0" AnchorPane.topAnchor="162.0">
+                                 <children>
+                                    <Label text="Nhập/xuất dữ liệu thành công">
+                                       <font>
+                                          <Font name="Montserrat SemiBold" size="26.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="returnExcelBtn" mnemonicParsing="false" prefWidth="200.0" text="Quay lại">
+                                       <styleClass>
+                                          <String fx:value="addLabel" />
+                                          <String fx:value="addLabelBig" />
+                                          <String fx:value="btn" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
                 </children>
               </AnchorPane>
                   <AnchorPane fx:id="historyPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
