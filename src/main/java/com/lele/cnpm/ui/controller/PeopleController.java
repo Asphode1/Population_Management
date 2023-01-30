@@ -36,6 +36,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import com.lele.cnpm.src.models.*;
 import com.lele.cnpm.src.services.NhanKhauManage;
+import com.lele.cnpm.src.utils.Utils;
 
 public class PeopleController {
   @FXML
@@ -322,6 +323,11 @@ public class PeopleController {
   }
 
   public void initialize() {
+    final ArrayList<DatePicker> pickers = new ArrayList<>(
+        Arrays.asList(addCCCDDatePicker, addDOBPicker, addToDatePicker, awayFromPicker, awayToPicker, deadDatePicker,
+            deadNKBPicker, editCCCDDatePicker, editDOBPicker, editToDatePicker, moveAtPicker, stayFromPicker,
+            stayToPicker));
+    pickers.forEach(e -> e.setConverter(Utils.converter()));
     final ArrayList<AnchorPane> panes = new ArrayList<>(
         Arrays.asList(infoPane, addPane, editPane, awayPane, movePane, lostPane));
     panes.forEach(e -> {
@@ -756,6 +762,10 @@ public class PeopleController {
         }
         awayConfirmPane.setVisible(false);
         awayPane.setVisible(false);
+        awayNowField.setText("");
+        awayToPicker.setValue(null);
+        awayFromPicker.setValue(null);
+        awayReasonField.setText(null);
       }
     });
     awayCancelBtn.setOnAction(ae -> {
