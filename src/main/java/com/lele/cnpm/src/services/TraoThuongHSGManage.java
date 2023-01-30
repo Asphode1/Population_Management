@@ -55,4 +55,8 @@ public class TraoThuongHSGManage extends DipHSGModify{
         ChiTietDipHocSinhGioiModify.capNhatChiTietDipHocSinhGioi(ct);
         return true;
     }
+
+    public static boolean xoaChiTietHSG(ChiTietDipHocSinhGioi cthsg) {
+        return ChiTietDipHocSinhGioiModify.xoaChiTietDipHocSinhGioi(cthsg);
+    }
 }

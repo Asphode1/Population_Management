@@ -54,4 +54,8 @@ public class TraoThuongDacBietManage extends DipDacBietModify{
             return false;
         }
     }
+
+    public static boolean xoaChiTietDipDacBiet(ChiTietDipDacBiet ctddb) {
+        return ChiTietDipDacBietModify.xoaChiTietDipDacBiet(ctddb);
+    }
 }
