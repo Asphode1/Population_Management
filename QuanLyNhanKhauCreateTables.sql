@@ -145,21 +145,6 @@ CREATE TABLE chi_tiet_dip_dac_biet(idDip INT NOT NULL,
                                    FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau)) ;
 
 
-INSERT INTO chi_tiet_dip_dac_biet(idDip, idNhanKhau, nhom, kiemtra)
-VALUES (1,
-        9,
-        2,
-        1), (1,
-             10,
-             2,
-             1), (2,
-                  9,
-                  2,
-                  1), (2,
-                       10,
-                       2,
-                       0);
-
 -- 12. Chi tiết dịp học sinh giỏi
 
 CREATE TABLE chi_tiet_dip_hoc_sinh_gioi(idDip INT NOT NULL,
