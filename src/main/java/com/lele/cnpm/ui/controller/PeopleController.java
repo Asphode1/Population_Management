@@ -905,12 +905,12 @@ public class PeopleController {
       });
     };
     importBtn.setOnAction(ae -> {
-      NhanKhauManage.themNhanKhauFileExcel();
-      confirmed.run();
+      if(NhanKhauManage.themNhanKhauFileExcel())
+        confirmed.run();
     });
     exportBtn.setOnAction(ae -> {
-      NhanKhauManage.inListNhanKhauRaFileExcel(nhanKhau);
-      confirmed.run();
+      if(NhanKhauManage.inListNhanKhauRaFileExcel(nhanKhau))
+        confirmed.run();
     });
     cancelExcelBtn.setOnAction(ae -> {
       excelPane.setVisible(false);

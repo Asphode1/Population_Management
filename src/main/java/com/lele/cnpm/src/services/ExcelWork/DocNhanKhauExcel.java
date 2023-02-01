@@ -116,7 +116,11 @@ public class DocNhanKhauExcel {
                     nk.setNoiLamViec(cell.getStringCellValue());
                     break;
                 case COLUMN_INDEX_SOCCCD:
-                    nk.setSoCCCD(cell.getStringCellValue());
+                    try {
+                        nk.setSoCCCD(cell.getStringCellValue());
+                    } catch(Exception e) {
+                        nk.setSoCCCD(String.valueOf((double) getCellValue(cell)));
+                    }
                     break;
                 case COLUMN_INDEX_NGAYCAP:
                     nk.setNgayCap(new java.sql.Date(cell.getDateCellValue().getTime()));
