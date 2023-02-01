@@ -1,4 +1,4 @@
-package com.lele.cnpm.ui.controller;
+package com.lele.cnpm;
 
 import java.io.IOException;
 
