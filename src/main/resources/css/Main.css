@@ -52,6 +52,10 @@
   -fx-background-radius: 0 10 0 0;
 }
 
+.minBtn{
+  -fx-background-color: #E4E4E4;
+}
+
 .startup{
   -fx-background-color:  #569698;
   -fx-border-radius: 10;

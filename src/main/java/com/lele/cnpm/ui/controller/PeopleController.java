@@ -193,7 +193,13 @@ public class PeopleController {
   @FXML
   private AnchorPane addSaveConfirmPane;
   @FXML
+  private AnchorPane addSavedPane;
+  @FXML
   private AnchorPane editPane;
+  @FXML
+  private AnchorPane editSavedPane;
+  @FXML
+  private AnchorPane editDeletedPane;
   @FXML
   private AnchorPane editSaveConfirmPane;
   @FXML
@@ -203,21 +209,31 @@ public class PeopleController {
   @FXML
   private AnchorPane infoDeleteConfirmPane;
   @FXML
+  private AnchorPane infoDeletedPane;
+  @FXML
   private AnchorPane stayPane;
   @FXML
   private AnchorPane stayConfirmPane;
+  @FXML
+  private AnchorPane stayConfirmedPane;
   @FXML
   private AnchorPane awayPane;
   @FXML
   private AnchorPane awayConfirmPane;
   @FXML
+  private AnchorPane awayConfirmedPane;
+  @FXML
   private AnchorPane movePane;
   @FXML
   private AnchorPane moveConfirmPane;
   @FXML
+  private AnchorPane moveConfirmedPane;
+  @FXML
   private AnchorPane lostPane;
   @FXML
   private AnchorPane deadConfirmPane;
+  @FXML
+  private AnchorPane deadConfirmedPane;
   @FXML
   private AnchorPane excelPane;
   @FXML
@@ -262,13 +278,19 @@ public class PeopleController {
   @FXML
   private Button stayConfirmBtn;
   @FXML
+  private Button stayConfirmedBtn;
+  @FXML
   private Button stayCancelBtn;
   @FXML
   private Button awayConfirmBtn;
   @FXML
+  private Button awayConfirmedBtn;
+  @FXML
   private Button awayCancelBtn;
   @FXML
   private Button moveConfirmBtn;
+  @FXML
+  private Button moveConfirmedBtn;
   @FXML
   private Button moveCancelBtn;
   @FXML
@@ -277,6 +299,8 @@ public class PeopleController {
   private Button deadCloseBtn;
   @FXML
   private Button deadConfirmBtn;
+  @FXML
+  private Button deadConfirmedBtn;
   @FXML
   private Button deadCancelBtn;
   @FXML
@@ -291,6 +315,14 @@ public class PeopleController {
   private Button closeHistoryListBtn;
   @FXML
   private Button returnExcelBtn;
+  @FXML
+  private Button addSavedReturnBtn;
+  @FXML
+  private Button editSavedBtn;
+  @FXML
+  private Button editDeletedBtn;
+  @FXML
+  private Button infoDeletedBtn;
 
   @FXML
   private Label addErrText;
@@ -408,8 +440,8 @@ public class PeopleController {
       public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
         final TableRow<NhanKhau> row = new TableRow<>();
         row.setOnMouseClicked((MouseEvent e) -> {
+          selectedNK = row.getItem();
           if (e.getClickCount() == 2 && e.getButton() == MouseButton.PRIMARY) {
-            selectedNK = row.getItem();
             openInfo(e);
           } else if (e.getButton() == MouseButton.SECONDARY) {
             double x = e.getSceneX();
@@ -419,20 +451,30 @@ public class PeopleController {
             optPane.setVisible(true);
             AnchorPane.setLeftAnchor(optBox, xx);
             AnchorPane.setTopAnchor(optBox, yy);
+            switch (selectedNK.getTrangThai()) {
+              case "Thường trú":
+                addStayBtn.setDisable(false);
+                addAwayBtn.setDisable(false);
+                addMoveBtn.setDisable(false);
+                addDeadBtn.setDisable(false);
+                break;
+              case "Tạm vắng":
+                addStayBtn.setDisable(false);
+                addAwayBtn.setDisable(true);
+
+              default:
+                break;
+            }
             addStayBtn.setOnAction((ActionEvent ae) -> {
-              selectedNK = row.getItem();
               openStay(ae);
             });
             addAwayBtn.setOnAction((ActionEvent ae) -> {
-              selectedNK = row.getItem();
               openAway(ae);
             });
             addMoveBtn.setOnAction((ActionEvent ae) -> {
-              selectedNK = row.getItem();
               openMove(ae);
             });
             addDeadBtn.setOnAction((ActionEvent ae) -> {
-              selectedNK = row.getItem();
               openDead(ae);
             });
           }
@@ -498,6 +540,9 @@ public class PeopleController {
         }
       }
     });
+    addCCCDField.textProperty().addListener(Utils.numberOnly(addCCCDField));
+    editCCCDField.textProperty().addListener(Utils.numberOnly(editCCCDField));
+
   }
 
   public void getNKList(ActionEvent e) {
@@ -548,22 +593,27 @@ public class PeopleController {
     String Eth = addEthField.getText();
     String Rel = addRelField.getText();
     String Before = addBeforeField.getText();
-    if (Name.length() == 0 || Nation.length() == 0 || dob == null
-        || BPlace.length() == 0 || Eth.length() == 0
+    if (CCCD.length() != 9 || CCCD.length() != 12) {
+      addErrText.setText("CCCD/ĐDĐT không phù hợp");
+    } else if (Name.length() == 0 || Nation.length() == 0 || dob == null
+        || BPlace.length() == 0 || Eth.length() == 0 || CCCD.length() == 0
         || Domicile.length() == 0 || Rel.length() == 0)
       addErrText.setText("Vui lòng nhập đầy đủ thông tin");
     else {
       addSaveConfirmPane.setVisible(true);
       saveConfirmAddBtn.setOnAction((ActionEvent ae) -> {
-        NhanKhau nk = new NhanKhau(0, Name, Ali, Date.valueOf(dob), gen, BPlace, Domicile, Eth, Rel, Nation, Job, Work,
+        NhanKhau nk = new NhanKhau(0, Name, Ali, Date.valueOf(dob), gen, BPlace, Domicile, Eth, Rel, Nation, Job,
+            Work,
             CCCD, Date.valueOf(CCCDDate), Date.valueOf(ToDate), Before, "");
-        try {
-          NhanKhauManage.themNhanKhau(nk);
-        } catch (Exception ex) {
-          ex.printStackTrace();
+        boolean b = NhanKhauManage.themNhanKhau(nk);
+        if (b) {
+          addSavedPane.setVisible(true);
+          addSavedReturnBtn.setOnAction(aee -> {
+            addSavedPane.setVisible(false);
+            addSaveConfirmPane.setVisible(false);
+            addPane.setVisible(false);
+          });
         }
-        addSaveConfirmPane.setVisible(false);
-        addPane.setVisible(false);
       });
     }
   }
@@ -592,7 +642,9 @@ public class PeopleController {
     String Eth = editEthField.getText();
     String Rel = editRelField.getText();
     String Before = editBeforeField.getText();
-    if (Name.length() == 0 || Nation.length() == 0 || DOB == null
+    if (CCCD.length() != 9 || CCCD.length() != 12)
+      addErrText.setText("CCCD/ĐDĐT không phù hợp");
+    else if (Name.length() == 0 || Nation.length() == 0 || DOB == null
         || BPlace.length() == 0 || Gen.length() == 0 || Eth.length() == 0
         || Domicile.length() == 0 || Rel.length() == 0)
       editErrText.setText("Vui lòng nhập đầy đủ thông tin");
@@ -603,13 +655,15 @@ public class PeopleController {
         NhanKhau nk = new NhanKhau(selectedNK.getID(), Name, Ali, Date.valueOf(DOB), Gen, BPlace, Domicile, Eth, Rel,
             Nation, Job, Work,
             CCCD, Date.valueOf(CCCDDate), Date.valueOf(ToDate), Before, selectedNK.getTrangThai());
-        try {
-          NhanKhauManage.capNhatNhanKhau(nk);
-        } catch (Exception ex) {
-          ex.printStackTrace();
+        Boolean b = NhanKhauManage.capNhatNhanKhau(nk);
+        if (b) {
+          editSavedPane.setVisible(true);
+          editSavedBtn.setOnAction(aee -> {
+            editSavedPane.setVisible(false);
+            editSaveConfirmPane.setVisible(false);
+            editPane.setVisible(false);
+          });
         }
-        editSaveConfirmPane.setVisible(false);
-        editPane.setVisible(false);
       });
       cancelConfirmEditBtn.setOnAction(ae -> {
         editSaveConfirmPane.setVisible(false);
@@ -624,9 +678,15 @@ public class PeopleController {
   public void deleteEdit(ActionEvent e) {
     editDeleteConfirmPane.setVisible(true);
     editDeleteConfirmBtn.setOnAction(ae -> {
-      NhanKhauManage.xoaNhanKhau(selectedNK.getID());
-      editDeleteConfirmPane.setVisible(false);
-      editPane.setVisible(false);
+      Boolean b = NhanKhauManage.xoaNhanKhau(selectedNK.getID());
+      if (b) {
+        editDeletedPane.setVisible(true);
+        editDeletedBtn.setOnAction(aee -> {
+          editDeletedPane.setVisible(false);
+          editDeleteConfirmPane.setVisible(false);
+          editPane.setVisible(false);
+        });
+      }
     });
     editCancelDeleteBtn.setOnAction(ae -> {
       editDeleteConfirmPane.setVisible(false);
@@ -684,9 +744,15 @@ public class PeopleController {
   public void deleteInfo(ActionEvent e) {
     infoDeleteConfirmPane.setVisible(true);
     infoDeleteConfirmBtn.setOnAction(ae -> {
-      NhanKhauManage.xoaNhanKhau(selectedNK.getID());
-      infoDeleteConfirmPane.setVisible(false);
-      infoPane.setVisible(false);
+      Boolean b = NhanKhauManage.xoaNhanKhau(selectedNK.getID());
+      if (b) {
+        infoDeletedPane.setVisible(true);
+        infoDeletedBtn.setOnAction(aee -> {
+          infoDeletedPane.setVisible(false);
+          infoDeleteConfirmPane.setVisible(false);
+          infoPane.setVisible(false);
+        });
+      }
     });
     infoDeleteCancelBtn.setOnAction(ae -> {
       infoDeleteConfirmPane.setVisible(false);
@@ -719,18 +785,21 @@ public class PeopleController {
         stayErrText.setText("Vui lòng nhập đầy đủ thông tin");
       } else {
         stayErrText.setText("");
-        try {
-          TamTru temp = new TamTru(0, selectedNK.getID(), s1, s2, Date.valueOf(s3), Date.valueOf(s4), s5);
-          NhanKhauManage.themTamTru(temp);
-        } catch (Exception ex) {
-          ex.printStackTrace();
+        TamTru temp = new TamTru(0, selectedNK.getID(), s1, s2, Date.valueOf(s3), Date.valueOf(s4), s5);
+        Boolean b = NhanKhauManage.themTamTru(temp);
+        if (b) {
+          stayConfirmedPane.setVisible(true);
+          stayConfirmedBtn.setOnAction(aee -> {
+            stayConfirmedPane.setVisible(false);
+            stayConfirmPane.setVisible(false);
+            stayPane.setVisible(false);
+            stayBeforeField.setText("");
+            stayStayField.setText("");
+            stayFromPicker.setValue(null);
+            stayToPicker.setValue(null);
+            stayReasonField.setText("");
+          });
         }
-        stayConfirmPane.setVisible(false);
-        stayPane.setVisible(false);
-        stayBeforeField.setText("");
-        stayStayField.setText("");
-        stayFromPicker.setValue(null);
-        stayToPicker.setValue(null);
       }
     });
     stayCancelBtn.setOnAction(ae -> {
@@ -761,19 +830,21 @@ public class PeopleController {
         awayErrText.setText("Vui lòng nhập đầy đủ thông tin");
       } else {
         awayErrText.setText("");
-        try {
-          TamVang temp = new TamVang(0, selectedNK.getID(), s1, Date.valueOf(s3), Date.valueOf(s4), s5);
-          NhanKhauManage.themTamVang(temp);
-          getNKList();
-        } catch (Exception ex) {
-          ex.printStackTrace();
+        TamVang temp = new TamVang(0, selectedNK.getID(), s1, Date.valueOf(s3), Date.valueOf(s4), s5);
+        Boolean b = NhanKhauManage.themTamVang(temp);
+        if (b) {
+          awayConfirmedPane.setVisible(true);
+          awayConfirmedBtn.setOnAction(aee -> {
+            getNKList();
+            awayConfirmedPane.setVisible(false);
+            awayConfirmPane.setVisible(false);
+            awayPane.setVisible(false);
+            awayNowField.setText("");
+            awayToPicker.setValue(null);
+            awayFromPicker.setValue(null);
+            awayReasonField.setText(null);
+          });
         }
-        awayConfirmPane.setVisible(false);
-        awayPane.setVisible(false);
-        awayNowField.setText("");
-        awayToPicker.setValue(null);
-        awayFromPicker.setValue(null);
-        awayReasonField.setText(null);
       }
     });
     awayCancelBtn.setOnAction(ae -> {
@@ -803,15 +874,20 @@ public class PeopleController {
         moveErrText.setText("Vui lòng nhập đầy đủ thông tin");
       } else {
         moveErrText.setText("");
-        try {
-          ChuyenNhanKhau temp = new ChuyenNhanKhau(0, selectedNK.getID(), Date.valueOf(s3), s4, s5);
-          NhanKhauManage.chuyenNhanKhau(temp);
-          getNKList();
-        } catch (Exception ex) {
-          ex.printStackTrace();
+        ChuyenNhanKhau temp = new ChuyenNhanKhau(0, selectedNK.getID(), Date.valueOf(s3), s4, s5);
+        Boolean b = NhanKhauManage.chuyenNhanKhau(temp);
+        if (b) {
+          moveConfirmedPane.setVisible(true);
+          moveConfirmedBtn.setOnAction(aee -> {
+            moveConfirmedPane.setVisible(false);
+            getNKList();
+            moveConfirmPane.setVisible(false);
+            movePane.setVisible(false);
+            moveAtPicker.setValue(null);
+            moveToField.setText("");
+            moveNoteField.setText("");
+          });
         }
-        moveConfirmPane.setVisible(false);
-        movePane.setVisible(false);
       }
     });
     moveCancelBtn.setOnAction(ae -> {
@@ -823,7 +899,7 @@ public class PeopleController {
     movePane.setVisible(false);
   };
 
-  // * khai tử 
+  // * dead pane
   public void openDead(ActionEvent e) {
     lostPane.setVisible(true);
     optPane.setVisible(false);
@@ -882,13 +958,18 @@ public class PeopleController {
       String reason = deadReasonField.getText().replaceAll("\n", System.getProperty("line.separator"));
       Date d2 = Date.valueOf(deadNKBPicker.getValue());
       KhaiTu kt = new KhaiTu(selectedNK.getID(), selectedNKB.getID(), d1, d2, reason);
-      try {
-        NhanKhauManage.khaiTu(kt);
-      } catch (Exception ex) {
-        ex.printStackTrace();
+      Boolean b = NhanKhauManage.khaiTu(kt);
+      if (b) {
+        deadConfirmedPane.setVisible(true);
+        deadConfirmedBtn.setOnAction(aee -> {
+          deadConfirmedPane.setVisible(false);
+          deadConfirmPane.setVisible(false);
+          lostPane.setVisible(false);
+          deadReasonField.setText("");
+          deadPField.setText("");
+          deadDatePicker.setValue(null);
+        });
       }
-      deadConfirmPane.setVisible(false);
-      lostPane.setVisible(false);
     });
     deadCancelBtn.setOnAction(ae -> {
       deadConfirmPane.setVisible(false);
@@ -905,11 +986,11 @@ public class PeopleController {
       });
     };
     importBtn.setOnAction(ae -> {
-      if(NhanKhauManage.themNhanKhauFileExcel())
+      if (NhanKhauManage.themNhanKhauFileExcel())
         confirmed.run();
     });
     exportBtn.setOnAction(ae -> {
-      if(NhanKhauManage.inListNhanKhauRaFileExcel(nhanKhau))
+      if (NhanKhauManage.inListNhanKhauRaFileExcel(nhanKhau))
         confirmed.run();
     });
     cancelExcelBtn.setOnAction(ae -> {

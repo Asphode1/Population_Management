@@ -3,6 +3,9 @@ package com.lele.cnpm.src.utils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
 public class Utils {
@@ -26,4 +29,15 @@ public class Utils {
       }
     };
   }
+
+  public static ChangeListener<String> numberOnly(TextField t) {
+    return new ChangeListener<String>() {
+      @Override
+      public void changed(ObservableValue<? extends String> ob, String oldVal, String newVal) {
+        if (!newVal.matches("\\d*")) {
+          t.setText(newVal.replaceAll("[^\\d]", ""));
+        }
+      }
+    };
+  };
 }
