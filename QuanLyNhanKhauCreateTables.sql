@@ -1,5 +1,6 @@
-create database QuanLyNhanKhau collatesaveCOnfirmAdd LATIN1_GENERAL_100_CI_AS_SC_UTF8 go 
--- 1. Người dùng
+create database QuanLyNhanKhau collate LATIN1_GENERAL_100_CI_AS_SC_UTF8; -- 1. Người dùng
+
+
 
 create table nguoi_dung(id INT Identity(1,1), taikhoan VARCHAR(255) UNIQUE NOT NULL, salt VARCHAR(16) NOT NULL, hash VARCHAR(255) NOT NULL, chucvu NVARCHAR(255), CONSTRAINT PK_nguoi_dung PRIMARY KEY(id));
 
@@ -30,22 +31,22 @@ CREATE TABLE nhan_khau(idNhanKhau INT IDENTITY(1,1),
                                                                                                                                                                                                                                              soCCCD VARCHAR(255),
                                                                                                                                                                                                                                                     ngayCap DATE, chuyenDenNgay DATE, noiThuongTruTruoc NVARCHAR(255),
                                                                                                                                                                                                                                                                                                         trangThai NVARCHAR(255),
-                                                                                                                                                                                                                                                                                                                  CONSTRAINT PK_nhan_khau PRIMARY KEY(idNhanKhau) ) ;
+                                                                                                                                                                                                                                                                                                                  CONSTRAINT PK_nhan_khau PRIMARY KEY(idNhanKhau)) ;
 
 -- 3. Hộ khẩu
 
 CREATE TABLE ho_khau
-        (idHoKhau INT IDENTITY(1,1),
-                      idChuHo INT NOT NULL,
-                                  tinhThanhPho NVARCHAR(255) NOT NULL,
-                                                             quanHuyen NVARCHAR(255) NOT NULL,
-                                                                                     phuongXa NVARCHAR(255) NOT NULL,
-                                                                                                            diaChi NVARCHAR(255) NOT NULL,
-                                                                                                                                 ngayTao DATE NOT NULL,
-                                                                                                                                              trangThai NVARCHAR(255) NOT NULL,
-                                                                                                                                                                      CONSTRAINT PK_ho_khau PRIMARY KEY(idHoKhau),
-                                                                                                                                                                                                    CONSTRAINT FK_ho_khau_nhan_khau
-         FOREIGN KEY(idChuHo) REFERENCES nhan_khau(idNhanKhau) ON DELETE CASCADE) ;
+  (idHoKhau INT IDENTITY(1,1),
+                idChuHo INT NOT NULL,
+                            tinhThanhPho NVARCHAR(255) NOT NULL,
+                                                       quanHuyen NVARCHAR(255) NOT NULL,
+                                                                               phuongXa NVARCHAR(255) NOT NULL,
+                                                                                                      diaChi NVARCHAR(255) NOT NULL,
+                                                                                                                           ngayTao DATE NOT NULL,
+                                                                                                                                        trangThai NVARCHAR(255) NOT NULL,
+                                                                                                                                                                CONSTRAINT PK_ho_khau PRIMARY KEY(idHoKhau),
+                                                                                                                                                                                              CONSTRAINT FK_ho_khau_nhan_khau
+   FOREIGN KEY(idChuHo) REFERENCES nhan_khau(idNhanKhau) ON DELETE CASCADE) ;
 
 -- 4. Hộ khẩu - nhân khẩu
 
@@ -53,58 +54,59 @@ CREATE TABLE ho_khau_nhan_khau(idHoKhau INT NOT NULL,
                                             idNhanKhau INT NOT NULL,
                                                            quanHeChuHo NVARCHAR(255) NOT NULL,
                                                                                      CONSTRAINT PK_ho_khau_nhan_khau PRIMARY KEY (idHoKhau,
-                                                                                                                                  idNhanKhau),
-                                                                CONSTRAINT FK_ho_khau_nhan_khau_nhan_khau FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau)) ;
+                                                                                                                                  idNhanKhau), CONSTRAINT FK_ho_khau_nhan_khau_nhan_khau
+                               FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau)) ;
 
 -- 5. Chuyển nhân khẩu
 
 CREATE TABLE chuyen_nhan_khau
-        (id INT IDENTITY(1,1),
-                idNhanKhau INT NOT NULL,
-                               ngayChuyenDi DATE NOT NULL,
-                                                 noiChuyenDen NVARCHAR(255) NOT NULL,
-                                                                            ghiChu NVARCHAR(255),
-                                                                                   CONSTRAINT PK_chuyen_nhan_khau PRIMARY KEY (id), CONSTRAINT FK_chuyen_nhan_khau_nhan_khau
-         FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau) ON DELETE CASCADE) ;
+  (id INT IDENTITY(1,1),
+          idNhanKhau INT NOT NULL,
+                         ngayChuyenDi DATE NOT NULL,
+                                           noiChuyenDen NVARCHAR(255) NOT NULL,
+                                                                      ghiChu NVARCHAR(255),
+                                                                             CONSTRAINT PK_chuyen_nhan_khau PRIMARY KEY (id), CONSTRAINT FK_chuyen_nhan_khau_nhan_khau
+   FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau) ON DELETE CASCADE) ;
 
 -- 6. Chuyển hộ khẩu
 
 CREATE TABLE chuyen_ho_khau
-        (id INT IDENTITY(1,1),
-                idHoKhau INT NOT NULL,
-                             ngayChuyenDi DATE NOT NULL,
-                                               noiChuyenDen NVARCHAR(255) NOT NULL,
-                                                                          ghiChu NVARCHAR(255),
-                                                                                 CONSTRAINT PK_chuyen_ho_khau PRIMARY KEY(id),
-                                                                                                                      CONSTRAINT FK_chuyen_ho_khau_ho_khau
-         FOREIGN KEY(idHoKhau) REFERENCES ho_khau(idHoKhau) ON DELETE CASCADE) ;
+  (id INT IDENTITY(1,1),
+          idHoKhau INT NOT NULL,
+                       ngayChuyenDi DATE NOT NULL,
+                                         noiChuyenDen NVARCHAR(255) NOT NULL,
+                                                                    ghiChu NVARCHAR(255),
+                                                                           CONSTRAINT PK_chuyen_ho_khau PRIMARY KEY(id),
+                                                                                                                CONSTRAINT FK_chuyen_ho_khau_ho_khau
+   FOREIGN KEY(idHoKhau) REFERENCES ho_khau(idHoKhau) ON DELETE CASCADE) ;
 
 -- 7. Tạm tru
 
 CREATE TABLE tam_tru
-        (id INT IDENTITY(1,1),
-                idNhanKhau INT NOT NULL,
-                               noiThuongTru NVARCHAR(255) NOT NULL,
-                                                          noiTamTru NVARCHAR(255) NOT NULL,
-                                                                                  tuNgay DATE NOT NULL,
-                                                                                              denNgay DATE NOT NULL,
-                                                                                                           lyDo NVARCHAR(255),
-                                                                                                                CONSTRAINT PK_tam_tru PRIMARY KEY(id),
-                                                                                                                                              CONSTRAINT FK_tam_tru_nhan_khau
-         FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau) ON DELETE CASCADE) ;
+  (id INT IDENTITY(1,1),
+          idNhanKhau INT NOT NULL,
+                         noiThuongTru NVARCHAR(255) NOT NULL,
+                                                    noiTamTru NVARCHAR(255) NOT NULL,
+                                                                            tuNgay DATE NOT NULL,
+                                                                                        denNgay DATE NOT NULL,
+                                                                                                     lyDo NVARCHAR(255),
+                                                                                                          CONSTRAINT PK_tam_tru PRIMARY KEY(id),
+                                                                                                                                        CONSTRAINT FK_tam_tru_nhan_khau
+   FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau) ON DELETE CASCADE) ;
 
 -- 8. Tạm vắng
 
 CREATE TABLE tam_vang
-        (id INT IDENTITY(1,1),
-                idNhanKhau INT NOT NULL,
-                               noiTamVang NVARCHAR(255) NOT NULL,
-                                                        tuNgay DATE NOT NULL,
-                                                                    denNgay DATE NOT NULL,
-                                                                                 lyDo NVARCHAR(255),
-                                                                                      CONSTRAINT PK_tam_vang PRIMARY KEY(id),
-                                                                                                                     CONSTRAINT FK_tam_vang_nhan_khau
-         FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau) ON DELETE CASCADE) ;
+  (id INT IDENTITY(1,1),
+          idNhanKhau INT NOT NULL,
+                         noiTamVang NVARCHAR(255) NOT NULL,
+                                                  tuNgay DATE NOT NULL,
+                                                              denNgay DATE NOT NULL,
+                                                                           lyDo NVARCHAR(255),
+                                                                                CONSTRAINT PK_tam_vang PRIMARY KEY(id),
+                                                                                                               CONSTRAINT FK_tam_vang_nhan_khau
+   FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau) ON DELETE CASCADE) ;
+
 -- 9. Dịp đặc biệt
 
 CREATE TABLE dip_dac_biet(idDip INT IDENTITY(1,1),
@@ -143,7 +145,6 @@ CREATE TABLE chi_tiet_dip_dac_biet(idDip INT NOT NULL,
                                    FOREIGN KEY(idDip) REFERENCES dip_dac_biet(idDip),
                                                                  CONSTRAINT FK_chi_tiet_dip_dac_biet
                                    FOREIGN KEY(idNhanKhau) REFERENCES nhan_khau(idNhanKhau)) ;
-
 
 -- 12. Chi tiết dịp học sinh giỏi
 

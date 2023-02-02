@@ -11,3 +11,6 @@ DatabaseConfig.txt
 
 Test.java
 Test.class
+
+.idea/
+*.xlsx

@@ -78,7 +78,7 @@
             <children>
               <AnchorPane fx:id="addPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
-                  <VBox alignment="TOP_CENTER" layoutX="55.0" prefHeight="473.0" prefWidth="1000.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="42.0">
+                  <VBox alignment="TOP_CENTER" layoutX="55.0" prefHeight="473.0" prefWidth="1000.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="42.0">
                     <children>
                       <Label text="Thêm nhân khẩu mới" textFill="#569698">
                         <font>
@@ -151,7 +151,7 @@
                                   <Insets right="30.0" />
                                 </HBox.margin>
                               </TextField>
-                              <Label prefWidth="180.0" styleClass="addLabel" text="CCCD">
+                              <Label prefWidth="180.0" styleClass="addLabel" text="CCCD/ĐDĐT">
                                 <HBox.margin>
                                   <Insets left="20.0" />
                                 </HBox.margin>
@@ -334,6 +334,37 @@
                           <Insets top="20.0" />
                         </padding>
                       </VBox>
+                              <AnchorPane fx:id="addSavedPane" layoutX="10.0" layoutY="10.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                                       <children>
+                                          <Label text="Lưu thành công" textFill="#569698">
+                                             <font>
+                                                <Font name="Montserrat SemiBold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
+                                             <children>
+                                                <Button fx:id="addSavedReturnBtn" mnemonicParsing="false" onAction="#cancelConfirmAdd" styleClass="btn" text="Quay lại">
+                                                   <font>
+                                                      <Font name="Montserrat Medium" size="20.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                                   </padding>
+                                                </Button>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets top="20.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
                     </children>
                   </AnchorPane>
                 </children>
@@ -342,7 +373,7 @@
                 <children>
                   <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="33.0">
+                      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="33.0">
                         <children>
                           <Label text="Chỉnh sửa" textFill="#569698">
                             <font>
@@ -403,7 +434,7 @@
                                 <children>
                                   <Label prefWidth="140.0" styleClass="addLabel" text="Nơi sinh" />
                                   <TextField fx:id="editBPlaceField" prefWidth="280.0" styleClass="addLabel" />
-                                  <Label prefWidth="180.0" styleClass="addLabel" text="CCCD">
+                                  <Label prefWidth="180.0" styleClass="addLabel" text="CCCD/ĐDĐT">
                                     <HBox.margin>
                                       <Insets left="20.0" />
                                     </HBox.margin>
@@ -581,6 +612,40 @@
                               <Insets top="20.0" />
                             </padding>
                           </VBox>
+                                    <AnchorPane fx:id="editSavedPane" layoutX="10.0" layoutY="10.0" style="-fx-background-color: #5555;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                                             <children>
+                                                <Label text="Lưu thành công" textFill="#569698">
+                                                   <font>
+                                                      <Font name="Montserrat SemiBold" size="22.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
+                                                   <children>
+                                                      <Button fx:id="editSavedBtn" mnemonicParsing="false" styleClass="btn" text="Quay lại">
+                                                         <font>
+                                                            <Font name="Montserrat Medium" size="20.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                         </children>
                       </AnchorPane>
                       <AnchorPane fx:id="editDeleteConfirmPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -621,6 +686,37 @@
                               <Insets top="20.0" />
                             </padding>
                           </VBox>
+                                    <AnchorPane fx:id="editDeletedPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="191.0" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                                             <children>
+                                                <Label text="Xoá nhân khẩu thành công" textFill="#569698">
+                                                   <font>
+                                                      <Font name="Montserrat SemiBold" size="22.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="editDeletedBtn" mnemonicParsing="false" styleClass="btn" text="Quay lại">
+                                                         <font>
+                                                            <Font name="Montserrat Medium" size="20.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                         </children>
                       </AnchorPane>
                     </children>
@@ -631,7 +727,7 @@
                 <children>
                   <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="33.0">
+                      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="33.0">
                         <children>
                           <Label text="Thông tin nhân khẩu" textFill="#569698">
                             <font>
@@ -850,6 +946,34 @@
                               <Insets top="20.0" />
                             </padding>
                           </VBox>
+                                    <AnchorPane fx:id="infoDeletedPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                                             <children>
+                                                <Label text="Xoá nhân khẩu thành công" textFill="#569698">
+                                                   <font>
+                                                      <Font name="Montserrat SemiBold" size="22.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="infoDeletedBtn" mnemonicParsing="false" styleClass="btn" text="Quay lại">
+                                                         <font>
+                                                            <Font name="Montserrat Medium" size="20.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                         </children>
                       </AnchorPane>
                     </children>
@@ -1046,6 +1170,37 @@
                               </HBox>
                             </children>
                           </VBox>
+                                    <AnchorPane fx:id="stayConfirmedPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" layoutX="191.0" layoutY="186.0" prefHeight="150.0" prefWidth="350.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="175.0">
+                                             <children>
+                                                <Label text="Khai báo thành công">
+                                                   <font>
+                                                      <Font name="Montserrat Medium" size="25.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="25.0" top="25.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="400.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Button fx:id="stayConfirmedBtn" mnemonicParsing="false" styleClass="btn" text="Quay lại">
+                                                         <font>
+                                                            <Font name="Montserrat Medium" size="20.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                         </children>
                       </AnchorPane>
                     </children>
@@ -1229,6 +1384,34 @@
                               </HBox>
                             </children>
                           </VBox>
+                                    <AnchorPane fx:id="awayConfirmedPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="175.0">
+                                             <children>
+                                                <Label text="Khai báo thành công">
+                                                   <font>
+                                                      <Font name="Montserrat Medium" size="25.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="25.0" top="25.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="awayConfirmedBtn" mnemonicParsing="false" styleClass="btn" text="Quay lại">
+                                                         <font>
+                                                            <Font name="Montserrat Medium" size="20.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                         </children>
                       </AnchorPane>
                     </children>
@@ -1399,6 +1582,37 @@
                               </HBox>
                             </children>
                           </VBox>
+                                    <AnchorPane fx:id="moveConfirmedPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="135.0">
+                                             <children>
+                                                <Label text="Khai báo thành công">
+                                                   <font>
+                                                      <Font name="Montserrat Medium" size="24.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" top="25.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="moveConfirmedBtn" mnemonicParsing="false" styleClass="btn" text="Quay lại">
+                                                         <font>
+                                                            <Font name="Montserrat Medium" size="20.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                         </children>
                       </AnchorPane>
                     </children>
@@ -1407,7 +1621,7 @@
               </AnchorPane>
               <AnchorPane fx:id="lostPane" layoutX="50.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
-                  <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="73.0">
+                  <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="73.0">
                     <children>
                       <VBox alignment="TOP_CENTER" prefHeight="420.0" prefWidth="900.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="0.0">
                         <children>
@@ -1582,7 +1796,7 @@
                                 <Font name="Montserrat Medium" size="20.0" />
                               </font>
                               <styleClass>
-                                <String fx:value="delBtn" />
+                                <String fx:value="saveBtn" />
                                 <String fx:value="btn" />
                               </styleClass>
                               <HBox.margin>
@@ -1601,6 +1815,37 @@
                         </HBox>
                       </children>
                     </VBox>
+                              <AnchorPane fx:id="deadConfirmedPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" layoutX="191.0" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="339.0" AnchorPane.topAnchor="210.0">
+                                       <children>
+                                          <Label text="Khai báo thành công">
+                                             <font>
+                                                <Font name="Montserrat Medium" size="25.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="deadConfirmedBtn" mnemonicParsing="false" styleClass="btn" text="Quay lại">
+                                                   <font>
+                                                      <Font name="Montserrat Medium" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
                   </children>
                 </AnchorPane>
                 </children>
@@ -1677,7 +1922,7 @@
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </AnchorPane>
-                                    <Button fx:id="closeHistoryBtn" mnemonicParsing="false" prefWidth="200.0" text="Huỷ">
+                                    <Button fx:id="closeHistoryBtn" mnemonicParsing="false" prefWidth="200.0" text="Quay lại">
                                        <styleClass>
                                           <String fx:value="addLabel" />
                                           <String fx:value="addLabelBig" />

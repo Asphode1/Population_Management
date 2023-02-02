@@ -101,6 +101,8 @@ public class HomeController implements Initializable {
   private Button rwBtn;
   @FXML
   private Button exitBtn;
+  @FXML
+  private Button minBtn;
 
   @FXML
   private Pane grayBar;
@@ -189,6 +191,8 @@ public class HomeController implements Initializable {
     });
     ColorAdjust exitButtonCA = new ColorAdjust();
     exitButtonCA.setBrightness(0);
+    ColorAdjust minButtonCA = new ColorAdjust();
+    minButtonCA.setBrightness(0);
     exitBtn.setEffect(exitButtonCA);
     exitBtn.setOnMouseEntered(e -> {
       Timeline onExitEnter = new Timeline(
@@ -211,6 +215,32 @@ public class HomeController implements Initializable {
       onExitOut.setAutoReverse(false);
       onExitOut.setCycleCount(1);
       onExitOut.play();
+    });
+    minBtn.setEffect(minButtonCA);
+    minBtn.setOnMouseEntered(e -> {
+      Timeline onExitEnter = new Timeline(
+          new KeyFrame(Duration.seconds(0),
+              new KeyValue(minButtonCA.brightnessProperty(), minButtonCA.brightnessProperty().getValue(),
+                  Interpolator.EASE_BOTH)),
+          new KeyFrame(Duration.seconds(0.25),
+              new KeyValue(minButtonCA.brightnessProperty(), -0.3, Interpolator.EASE_BOTH)));
+      onExitEnter.setAutoReverse(false);
+      onExitEnter.setCycleCount(1);
+      onExitEnter.play();
+    });
+    minBtn.setOnMouseExited(e -> {
+      Timeline onExitOut = new Timeline(
+          new KeyFrame(Duration.seconds(0),
+              new KeyValue(minButtonCA.brightnessProperty(), minButtonCA.brightnessProperty().getValue(),
+                  Interpolator.EASE_BOTH)),
+          new KeyFrame(Duration.seconds(0.25),
+              new KeyValue(minButtonCA.brightnessProperty(), 0, Interpolator.EASE_BOTH)));
+      onExitOut.setAutoReverse(false);
+      onExitOut.setCycleCount(1);
+      onExitOut.play();
+    });
+    minBtn.setOnAction(e -> {
+      ((Stage) ((Button) e.getSource()).getScene().getWindow()).setIconified(true);
     });
   }
 
@@ -402,8 +432,7 @@ public class HomeController implements Initializable {
     public void handle(MouseEvent ev) {
       Stage stage = (Stage) root.getScene().getWindow();
       try {
-        Parent root = FXMLLoader
-            .load(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         stage.setResizable(false);
