@@ -51,7 +51,8 @@ public class NhanKhauModify {
   }
 
   /**
-   * @return true nếu CCCD hợp lệ
+   * @param cccd
+   * @return true nếu CCCD hợp lệ, false nếu CCCD trùng hoặc sai kích thước
    */
   public static boolean checkCCCD(String cccd) {
     if (cccd.length() != 9 && cccd.length() != 12) return false;
