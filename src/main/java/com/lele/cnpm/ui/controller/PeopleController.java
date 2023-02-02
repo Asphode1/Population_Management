@@ -594,7 +594,7 @@ public class PeopleController {
     String Rel = addRelField.getText();
     String Before = addBeforeField.getText();
     if (CCCD.length() != 9 || CCCD.length() != 12) {
-      addErrText.setText("CCCD/ĐDĐT không phù hợp");
+      addErrText.setText("CCCD/ĐDĐT bị trùng hoặc sai định dạng");
     } else if (Name.length() == 0 || Nation.length() == 0 || dob == null
         || BPlace.length() == 0 || Eth.length() == 0 || CCCD.length() == 0
         || Domicile.length() == 0 || Rel.length() == 0)
@@ -642,8 +642,8 @@ public class PeopleController {
     String Eth = editEthField.getText();
     String Rel = editRelField.getText();
     String Before = editBeforeField.getText();
-    if (CCCD.length() != 9 || CCCD.length() != 12)
-      addErrText.setText("CCCD/ĐDĐT không phù hợp");
+    if (NhanKhauManage.checkCCCD(CCCD))
+      addErrText.setText("CCCD/ĐDĐT bị trùng hoặc sai định dạng");
     else if (Name.length() == 0 || Nation.length() == 0 || DOB == null
         || BPlace.length() == 0 || Gen.length() == 0 || Eth.length() == 0
         || Domicile.length() == 0 || Rel.length() == 0)
