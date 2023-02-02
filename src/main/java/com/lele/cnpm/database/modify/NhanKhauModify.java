@@ -128,6 +128,7 @@ public class NhanKhauModify {
    * @return true/false
    */
   public static boolean capNhatNhanKhau(NhanKhau nk) {
+    if (checkCCCD(nk.getSoCCCD())) return false;
     String sql = "UPDATE nhan_khau SET hoTen = ?, biDanh = ?, ngaySinh = ?, noiSinh = ?, gioiTinh =?,"
         + " nguyenQuan = ?, danToc = ?, tonGiao = ?, quocTich = ?, ngheNghiep = ?, noiLamViec = ?, soCCCD = ?,"
         + " ngayCap = ?, chuyenDenNgay = ?, noiThuongTruTruoc = ?, trangThai =? WHERE idNhanKhau = "
