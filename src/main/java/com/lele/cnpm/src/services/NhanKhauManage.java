@@ -30,6 +30,7 @@ public class NhanKhauManage extends NhanKhauModify {
   public static boolean chuyenNhanKhau(ChuyenNhanKhau cnk) {
     try {
       NhanKhau nk = layNhanKhau(cnk.getIdNhanKhau());
+      if (nk.getTrangThai().equals("Tạm vắng") || nk.getTrangThai().equals("Đã chuyển đi") || nk.getTrangThai().equals("Đã mất")) return false;
       nk.setTrangThai("Đã chuyển đi");
       capNhatNhanKhau(nk);
       HoKhauNhanKhauModify.xoaNhanKhau(nk);
@@ -70,6 +71,7 @@ public class NhanKhauManage extends NhanKhauModify {
   public static boolean themTamTru(TamTru tt) {
     try {
       NhanKhau nk = layNhanKhau(tt.getIdNhanKhau());
+      if (nk.getTrangThai().equals("Tạm trú") || nk.getTrangThai().equals("Đã chuyển đi") || nk.getTrangThai().equals("Đã mất")) return false;
       nk.setTrangThai("Tạm trú");
       capNhatNhanKhau(nk);
       TamTruModify.themTamTru(tt);
@@ -90,6 +92,7 @@ public class NhanKhauManage extends NhanKhauModify {
   public static boolean themTamVang(TamVang tv) {
     try {
       NhanKhau nk = layNhanKhau(tv.getIdNhanKhau());
+      if (nk.getTrangThai().equals("Tạm vắng") || nk.getTrangThai().equals("Đã chuyển đi") || nk.getTrangThai().equals("Đã mất")) return false;
       nk.setTrangThai("Tạm vắng");
       capNhatNhanKhau(nk);
       TamVangModify.themTamVang(tv);
