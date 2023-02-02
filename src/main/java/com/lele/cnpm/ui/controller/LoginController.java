@@ -135,7 +135,7 @@ public class LoginController {
       newStage.setScene(scene);
       newStage.setResizable(false);
       newStage.initStyle(StageStyle.TRANSPARENT);
-      newStage.getIcons().add(new Image("/img/logo.png"));
+      newStage.getIcons().add(new Image(getClass().getResource("/img/logo.png").toExternalForm()));
       newStage.show();
     } catch (Exception e) {
       e.printStackTrace();

@@ -22,7 +22,7 @@ public class App extends Application {
       stage.initStyle(StageStyle.TRANSPARENT);
       stage.setResizable(false);
       stage.centerOnScreen();
-      stage.getIcons().add(new Image("/img/logo.png"));
+      stage.getIcons().add(new Image(getClass().getResource("/img/logo.png").toExternalForm()));
       stage.show();
     } catch (IOException e) {
       e.printStackTrace();
