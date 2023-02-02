@@ -51,18 +51,38 @@ public class NhanKhauModify {
   }
 
   /**
+   * @return true nếu CCCD hợp lệ
+   */
+  public static boolean checkCCCD(String cccd) {
+    if (cccd.length() != 9 && cccd.length() != 12) return false;
+    String sql = "SELECT count(*) as c FROM nhan_khau WHERE soCCCD = " + cccd;
+    try {
+      Connection conn = DBConnection.getDBConnection().getConnection();
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(sql);
+      rs.next();
+      int c = rs.getInt("c");
+      if (c==0) return true; 
+      else return false;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  /**
    * Thêm một nhân khẩu
    * @param nk
    * @return true/false
    */
   public static boolean themNhanKhau(NhanKhau nk) {
     if (nk.getTrangThai() == "" || nk.getTrangThai() == null)
-    nk.setTrangThai("Thường trú");
-    insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
+      nk.setTrangThai("Thường trú");
+    if (checkCCCD(nk.getSoCCCD())) return false;
+    return insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
         nk.getNguyenQuan(), nk.getDanToc(), nk.getTonGiao(), nk.getQuocTich(), nk.getNgheNghiep(),
         nk.getNoiLamViec(), nk.getSoCCCD(), nk.getNgayCap(), nk.getChuyenDenNgay(), nk.getNoiThuongTruTruoc(),
         nk.getTrangThai());
-    return true;
   }
 
   /**
