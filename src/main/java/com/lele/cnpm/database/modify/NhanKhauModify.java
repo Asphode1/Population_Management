@@ -78,7 +78,7 @@ public class NhanKhauModify {
   public static boolean themNhanKhau(NhanKhau nk) {
     if (nk.getTrangThai() == "" || nk.getTrangThai() == null)
       nk.setTrangThai("Thường trú");
-    if (checkCCCD(nk.getSoCCCD())) return false;
+    if (!checkCCCD(nk.getSoCCCD())) return false;
     return insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
         nk.getNguyenQuan(), nk.getDanToc(), nk.getTonGiao(), nk.getQuocTich(), nk.getNgheNghiep(),
         nk.getNoiLamViec(), nk.getSoCCCD(), nk.getNgayCap(), nk.getChuyenDenNgay(), nk.getNoiThuongTruTruoc(),
@@ -128,7 +128,7 @@ public class NhanKhauModify {
    * @return true/false
    */
   public static boolean capNhatNhanKhau(NhanKhau nk) {
-    if (checkCCCD(nk.getSoCCCD())) return false;
+    if (!checkCCCD(nk.getSoCCCD())) return false;
     String sql = "UPDATE nhan_khau SET hoTen = ?, biDanh = ?, ngaySinh = ?, noiSinh = ?, gioiTinh =?,"
         + " nguyenQuan = ?, danToc = ?, tonGiao = ?, quocTich = ?, ngheNghiep = ?, noiLamViec = ?, soCCCD = ?,"
         + " ngayCap = ?, chuyenDenNgay = ?, noiThuongTruTruoc = ?, trangThai =? WHERE idNhanKhau = "
