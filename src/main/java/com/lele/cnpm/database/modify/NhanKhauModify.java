@@ -51,7 +51,8 @@ public class NhanKhauModify {
   }
 
   /**
-   * @return true nếu CCCD hợp lệ
+   * @param cccd
+   * @return true nếu CCCD hợp lệ, false nếu CCCD trùng hoặc sai kích thước
    */
   public static boolean checkCCCD(String cccd) {
     if (cccd.length() != 9 && cccd.length() != 12) return false;
@@ -62,7 +63,7 @@ public class NhanKhauModify {
       ResultSet rs = stmt.executeQuery(sql);
       rs.next();
       int c = rs.getInt("c");
-      if (c==0) return true; 
+      if (c==0) return true;
       else return false;
     } catch (SQLException e) {
       e.printStackTrace();
@@ -78,7 +79,7 @@ public class NhanKhauModify {
   public static boolean themNhanKhau(NhanKhau nk) {
     if (nk.getTrangThai() == "" || nk.getTrangThai() == null)
       nk.setTrangThai("Thường trú");
-    if (checkCCCD(nk.getSoCCCD())) return false;
+    if (!checkCCCD(nk.getSoCCCD())) return false;
     return insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
         nk.getNguyenQuan(), nk.getDanToc(), nk.getTonGiao(), nk.getQuocTich(), nk.getNgheNghiep(),
         nk.getNoiLamViec(), nk.getSoCCCD(), nk.getNgayCap(), nk.getChuyenDenNgay(), nk.getNoiThuongTruTruoc(),
@@ -128,7 +129,8 @@ public class NhanKhauModify {
    * @return true/false
    */
   public static boolean capNhatNhanKhau(NhanKhau nk) {
-    if (checkCCCD(nk.getSoCCCD())) return false;
+    if (!layNhanKhau(nk.getID()).getSoCCCD().equals(nk.getSoCCCD()))
+      if (!checkCCCD(nk.getSoCCCD())) return false;
     String sql = "UPDATE nhan_khau SET hoTen = ?, biDanh = ?, ngaySinh = ?, noiSinh = ?, gioiTinh =?,"
         + " nguyenQuan = ?, danToc = ?, tonGiao = ?, quocTich = ?, ngheNghiep = ?, noiLamViec = ?, soCCCD = ?,"
         + " ngayCap = ?, chuyenDenNgay = ?, noiThuongTruTruoc = ?, trangThai =? WHERE idNhanKhau = "
