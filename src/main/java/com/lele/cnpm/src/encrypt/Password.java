@@ -8,8 +8,24 @@ import java.security.spec.KeySpec;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-public class Hashing {
-  public static byte[] newSalt() {
+public class Password {
+  private String hash;
+  private byte[] salt;
+
+  public String getHash() {
+    return hash;
+  }
+
+  public byte[] getSalt() {
+    return salt;
+  }
+
+  public Password(String s, byte[] salt) {
+    hash = s;
+    this.salt = salt;
+  }
+
+  private static byte[] newSalt() {
     final String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     SecureRandom rnd = new SecureRandom();
     byte[] salt = new byte[16];
@@ -43,11 +59,11 @@ public class Hashing {
     return sb.toString();
   }
 
-  public static String[] newPassword(String s) throws Exception {
+  public static Password newPassword(String s) throws Exception {
     byte[] salt = newSalt();
     byte[] encryptedPassword = getEncryptedPassword(s, salt);
     String pass = transformByte(encryptedPassword);
-    String[] a = { pass, new String(salt) };
+    Password a = new Password(pass, salt);
     return a;
   }
 

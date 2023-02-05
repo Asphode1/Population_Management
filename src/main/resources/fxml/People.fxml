@@ -717,6 +717,37 @@
                                           </VBox>
                                        </children>
                                     </AnchorPane>
+                                    <AnchorPane fx:id="editDeleteFailPane" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5556;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="191.0" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
+                                             <children>
+                                                <Label text="Không thể xoá chủ hộ" textFill="#ff4949">
+                                                   <font>
+                                                      <Font name="Montserrat SemiBold" size="22.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="editDeleteFailBtn" mnemonicParsing="false" styleClass="btn" text="Quay lại">
+                                                         <font>
+                                                            <Font name="Montserrat Medium" size="20.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                         </children>
                       </AnchorPane>
                     </children>

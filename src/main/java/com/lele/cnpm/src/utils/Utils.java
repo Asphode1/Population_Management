@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -16,28 +17,24 @@ import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 public class Utils {
-  public static StringConverter<LocalDate> DATE_VN_CONVERTER = converter();
+  public static StringConverter<LocalDate> DATE_VN_CONVERTER = new StringConverter<LocalDate>() {
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-  private static StringConverter<LocalDate> converter() {
-    return new StringConverter<LocalDate>() {
-      private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    @Override
+    public String toString(LocalDate d) {
+      if (d == null)
+        return "";
+      return dtf.format(d);
+    }
 
-      @Override
-      public String toString(LocalDate d) {
-        if (d == null)
-          return "";
-        return dtf.format(d);
+    @Override
+    public LocalDate fromString(String dateString) {
+      if (dateString == null || dateString.trim().isEmpty()) {
+        return null;
       }
-
-      @Override
-      public LocalDate fromString(String dateString) {
-        if (dateString == null || dateString.trim().isEmpty()) {
-          return null;
-        }
-        return LocalDate.parse(dateString, dtf);
-      }
-    };
-  }
+      return LocalDate.parse(dateString, dtf);
+    }
+  };
 
   public static ChangeListener<String> numberOnly(TextField t) {
     return new ChangeListener<String>() {
@@ -60,7 +57,8 @@ public class Utils {
         ((TextArea) child).setText("");
       if (child instanceof DatePicker)
         ((DatePicker) child).setValue(null);
-      if (child instanceof VBox || child instanceof HBox || child instanceof AnchorPane) {
+      if (child instanceof VBox || child instanceof HBox || child instanceof AnchorPane
+          || child instanceof ScrollPane) {
         clearTextInput((Pane) child);
       }
     }

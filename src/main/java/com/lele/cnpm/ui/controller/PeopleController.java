@@ -2,6 +2,7 @@ package com.lele.cnpm.ui.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -9,6 +10,8 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -201,6 +204,8 @@ public class PeopleController {
   @FXML
   private AnchorPane editDeletedPane;
   @FXML
+  private AnchorPane editDeleteFailPane;
+  @FXML
   private AnchorPane editSaveConfirmPane;
   @FXML
   private AnchorPane editDeleteConfirmPane;
@@ -210,6 +215,8 @@ public class PeopleController {
   private AnchorPane infoDeleteConfirmPane;
   @FXML
   private AnchorPane infoDeletedPane;
+  @FXML
+  private AnchorPane infoDeleteFailPane;
   @FXML
   private AnchorPane stayPane;
   @FXML
@@ -321,6 +328,8 @@ public class PeopleController {
   private Button editSavedBtn;
   @FXML
   private Button editDeletedBtn;
+  @FXML
+  private Button editDeleteFailBtn;
   @FXML
   private Button infoDeletedBtn;
 
@@ -496,7 +505,20 @@ public class PeopleController {
     TableColumn<NhanKhau, String> stateCol = new TableColumn<>("Trạng thái");
     stateCol.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
     stateCol.getStyleClass().add("center-align");
-    table.getColumns().addAll(Arrays.asList(nameCol, DOBCol, genCol, CCCDCol, stateCol));
+    TableColumn<NhanKhau, String> isInHKCol = new TableColumn<>("Hộ khẩu");
+    isInHKCol.setCellValueFactory(new Callback<CellDataFeatures<NhanKhau, String>, ObservableValue<String>>() {
+      public ObservableValue<String> call(CellDataFeatures<NhanKhau, String> p) {
+        NhanKhau tmp = p.getValue();
+        ArrayList<NhanKhau> tmpList = NhanKhauManage.layListNhanKhauChuaCoHoKhau();
+        ObjectProperty<String> op = new SimpleObjectProperty<>();
+        if (tmpList.contains(tmp))
+          op.set("chưa có");
+        else
+          op.set("đã có");
+        return op;
+      }
+    });
+    table.getColumns().addAll(Arrays.asList(nameCol, DOBCol, genCol, CCCDCol, stateCol, isInHKCol));
     setTableData();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     ArrayList<Node> al = new ArrayList<>();
@@ -593,7 +615,7 @@ public class PeopleController {
     String Eth = addEthField.getText();
     String Rel = addRelField.getText();
     String Before = addBeforeField.getText();
-    if (CCCD.length() != 9 || CCCD.length() != 12) {
+    if (NhanKhauManage.checkCCCD(CCCD)) {
       addErrText.setText("CCCD/ĐDĐT bị trùng hoặc sai định dạng");
     } else if (Name.length() == 0 || Nation.length() == 0 || dob == null
         || BPlace.length() == 0 || Eth.length() == 0 || CCCD.length() == 0
@@ -687,6 +709,12 @@ public class PeopleController {
           editDeletedPane.setVisible(false);
           editDeleteConfirmPane.setVisible(false);
           editPane.setVisible(false);
+        });
+      } else {
+        editDeleteFailPane.setVisible(true);
+        editDeleteFailBtn.setOnAction(aee -> {
+          editDeleteFailPane.setVisible(false);
+          editDeleteConfirmPane.setVisible(false);
         });
       }
     });
@@ -899,8 +927,8 @@ public class PeopleController {
   public void openDead(ActionEvent e) {
     lostPane.setVisible(true);
     optPane.setVisible(false);
-    deadNameField.setText("" + selectedNK.getHoTen());
-    deadDOBField.setText("" + selectedNK.getNgaySinh());
+    deadNameField.setText(selectedNK.getHoTen());
+    deadDOBField.setText(DateTimeFormatter.ofPattern("dd/MM/yyyy").format(selectedNK.getNgaySinh().toLocalDate()));
     deadDatePicker.setValue(LocalDate.now());
     deadNKBPicker.setValue(LocalDate.now());
     TableView<NhanKhau> deadNKList = new TableView<>();
@@ -1010,8 +1038,8 @@ public class PeopleController {
         return row;
       }
     };
-    TableColumn<ChuyenNhanKhau, String> idCol = new TableColumn<>("Nhân khẩu");
-    idCol.setCellValueFactory(new Callback<CellDataFeatures<ChuyenNhanKhau, String>, ObservableValue<String>>() {
+    TableColumn<ChuyenNhanKhau, String> nameCol = new TableColumn<>("Nhân khẩu");
+    nameCol.setCellValueFactory(new Callback<CellDataFeatures<ChuyenNhanKhau, String>, ObservableValue<String>>() {
       public ObservableValue<String> call(CellDataFeatures<ChuyenNhanKhau, String> p) {
         ChuyenNhanKhau cnk = p.getValue();
         NhanKhau nk = NhanKhauManage.layNhanKhau(cnk.getIdNhanKhau());
@@ -1024,7 +1052,7 @@ public class PeopleController {
     denCol.setCellValueFactory(new PropertyValueFactory<>("noiChuyenDen"));
     TableColumn<ChuyenNhanKhau, String> noteCol = new TableColumn<>("Ghi chú");
     noteCol.setCellValueFactory(new PropertyValueFactory<>("ghiChu"));
-    table.getColumns().addAll(Arrays.asList(idCol, diCol, denCol, noteCol));
+    table.getColumns().addAll(Arrays.asList(nameCol, diCol, denCol, noteCol));
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     table.setRowFactory(rowFactory);
     final ArrayList<ChuyenNhanKhau> list = NhanKhauManage.xemLichSuChuyenNhanKhaus();

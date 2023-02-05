@@ -144,6 +144,16 @@ public class HouseholdController {
   private TextField splitHKRelOldField;
   @FXML
   private TextField splitHKRelNewField;
+  @FXML
+  private TextField infoNKNameField;
+  @FXML
+  private TextField infoNKCCField;
+  @FXML
+  private TextField infoNKDOBField;
+  @FXML
+  private TextField infoNKTTField;
+  @FXML
+  private TextField infoNKRelField;
 
   @FXML
   private AnchorPane tableHKPane;
@@ -174,17 +184,6 @@ public class HouseholdController {
 
   @FXML
   private ScrollPane infoNKPane;
-
-  @FXML
-  private Label infoNKNameLabel;
-  @FXML
-  private Label infoNKCCLabel;
-  @FXML
-  private Label infoNKDOBLabel;
-  @FXML
-  private Label infoNKTTLabel;
-  @FXML
-  private Label infoNKRelLabel;
 
   @FXML
   private HBox infoNKTableBox;
@@ -447,13 +446,13 @@ public class HouseholdController {
   protected void openInfo(MouseEvent e) {
     infoPane.setVisible(true);
     infoIdField.setText("" + selectedHK.getID());
-    infoCHField.setText("" + NhanKhauManage.layNhanKhau((selectedHK.getIdChuHo())).getHoTen());
-    infoTTField.setText("" + selectedHK.getTinhThanhPho());
-    infoQHField.setText("" + selectedHK.getQuanHuyen());
-    infoPXField.setText("" + selectedHK.getPhuongXa());
-    infoAddrField.setText("" + selectedHK.getDiaChi());
+    infoCHField.setText(NhanKhauManage.layNhanKhau((selectedHK.getIdChuHo())).getHoTen());
+    infoTTField.setText(selectedHK.getTinhThanhPho());
+    infoQHField.setText(selectedHK.getQuanHuyen());
+    infoPXField.setText(selectedHK.getPhuongXa());
+    infoAddrField.setText(selectedHK.getDiaChi());
     infoDateField.setText(DateTimeFormatter.ofPattern("dd/MM/yyyy").format(selectedHK.getNgayTao().toLocalDate()));
-    infoStateField.setText("" + selectedHK.getTrangThai());
+    infoStateField.setText(selectedHK.getTrangThai());
     final TableView<NhanKhau> infoNKTable = new TableView<>();
     Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
       @Override
@@ -463,11 +462,11 @@ public class HouseholdController {
           selectedInfoNK = row.getItem();
           if (selectedInfoNK != null) {
             infoNKPane.setVisible(true);
-            infoNKNameLabel.setText("" + selectedInfoNK.getHoTen());
-            infoNKCCLabel.setText("" + selectedInfoNK.getSoCCCD());
-            infoNKDOBLabel.setText("" + selectedInfoNK.getNgaySinhString());
-            infoNKTTLabel.setText("" + selectedInfoNK.getTrangThai());
-            infoNKRelLabel.setText(HoKhauManage.layQuanHeChuHo(selectedHK.getID(), selectedInfoNK.getID()));
+            infoNKNameField.setText(selectedInfoNK.getHoTen());
+            infoNKCCField.setText(selectedInfoNK.getSoCCCD());
+            infoNKDOBField.setText(selectedInfoNK.getNgaySinhString());
+            infoNKTTField.setText(selectedInfoNK.getTrangThai());
+            infoNKRelField.setText(HoKhauManage.layQuanHeChuHo(selectedHK.getID(), selectedInfoNK.getID()));
           }
         });
         return row;
@@ -498,13 +497,13 @@ public class HouseholdController {
     editPane.setVisible(true);
     editIdField.setText("" + selectedHK.getID());
     editCHField.setText("" + selectedHK.getIdChuHo());
-    editTTField.setText("" + selectedHK.getTinhThanhPho());
-    editQHField.setText("" + selectedHK.getQuanHuyen());
-    editPXField.setText("" + selectedHK.getPhuongXa());
-    editAddrField.setText("" + selectedHK.getDiaChi());
+    editTTField.setText(selectedHK.getTinhThanhPho());
+    editQHField.setText(selectedHK.getQuanHuyen());
+    editPXField.setText(selectedHK.getPhuongXa());
+    editAddrField.setText(selectedHK.getDiaChi());
     editDatePicker.setConverter(Utils.DATE_VN_CONVERTER);
     editDatePicker.setValue(selectedHK.getNgayTao().toLocalDate());
-    editStateField.setText("" + selectedHK.getTrangThai());
+    editStateField.setText(selectedHK.getTrangThai());
     TableView<NhanKhau> editNKTable = new TableView<>();
     TableView<NhanKhau> editedNKTable = new TableView<>();
     Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
