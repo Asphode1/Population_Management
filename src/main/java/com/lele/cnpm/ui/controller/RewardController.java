@@ -8,6 +8,7 @@ import com.lele.cnpm.src.models.DipHSG;
 import com.lele.cnpm.src.models.NhanKhau;
 import com.lele.cnpm.src.services.TraoThuongDacBietManage;
 import com.lele.cnpm.src.services.TraoThuongHSGManage;
+import com.lele.cnpm.src.utils.Utils;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -296,6 +297,7 @@ public class RewardController {
       listBtn.setVisible(true);
       listBtn.setPrefWidth(200);
       detailPane.setVisible(false);
+      Utils.clearTextInput(detailPane);
     });
   }
 
@@ -355,6 +357,7 @@ public class RewardController {
         TraoThuongDacBietManage.themDipDacBiet(ddb);
         confirmPane.setVisible(false);
         detailPane.setVisible(false);
+        Utils.clearTextInput(detailPane);
       });
       cancelBtn.setOnAction(aee -> confirmPane.setVisible(false));
     });
@@ -363,6 +366,7 @@ public class RewardController {
       listBtn.setVisible(true);
       listBtn.setPrefWidth(200);
       detailPane.setVisible(false);
+      Utils.clearTextInput(detailPane);
     });
   }
 
@@ -454,12 +458,18 @@ public class RewardController {
         money2Field.getStyleClass().add("textDisabled");
         money3Field.getStyleClass().add("textDisabled");
         listBtn.setOnAction(ee -> openGList(ee));
-        returnBtn.setOnAction(ee -> detailPane.setVisible(false));
+        returnBtn.setOnAction(ee -> {
+          detailPane.setVisible(false);
+          Utils.clearTextInput(detailPane);
+        });
       });
       listBtn.setOnAction(ae -> openEditGList(ae));
     });
     listBtn.setOnAction(aee -> openGList(aee));
-    returnBtn.setOnAction(aee -> detailPane.setVisible(false));
+    returnBtn.setOnAction(aee -> {
+      detailPane.setVisible(false);
+      Utils.clearTextInput(detailPane);
+    });
   }
 
   private void openSInfo(MouseEvent e) {
@@ -528,6 +538,7 @@ public class RewardController {
           TraoThuongDacBietManage.capNhatDipDacBiet(ddb);
           confirmPane.setVisible(false);
           detailPane.setVisible(false);
+          Utils.clearTextInput(detailPane);
         });
         cancelBtn.setOnAction(aeee -> {
           confirmPane.setVisible(false);
@@ -555,12 +566,20 @@ public class RewardController {
         money3Field.getStyleClass().add("textDisabled");
         nameField.getStyleClass().add("textDisabled");
         listBtn.setOnAction(ee -> openSList(ee));
-        returnBtn.setOnAction(ee -> detailPane.setVisible(false));
+        Utils.clearTextInput(detailPane);
+        returnBtn.setOnAction(ee -> {
+          Utils.clearTextInput(detailPane);
+          detailPane.setVisible(false);
+        });
       });
       listBtn.setOnAction(ae -> openEditSList(ae));
     });
     listBtn.setOnAction(aee -> openSList(aee));
-    returnBtn.setOnAction(aee -> detailPane.setVisible(false));
+    Utils.clearTextInput(detailPane);
+    returnBtn.setOnAction(aee -> {
+      Utils.clearTextInput(detailPane);
+      detailPane.setVisible(false);
+    });
   }
 
   private void openSList(ActionEvent e) {

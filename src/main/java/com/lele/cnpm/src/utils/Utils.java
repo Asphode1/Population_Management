@@ -5,11 +5,20 @@ import java.time.format.DateTimeFormatter;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 public class Utils {
-  public static StringConverter<LocalDate> converter() {
+  public static StringConverter<LocalDate> DATE_VN_CONVERTER = converter();
+
+  private static StringConverter<LocalDate> converter() {
     return new StringConverter<LocalDate>() {
       private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -40,4 +49,20 @@ public class Utils {
       }
     };
   };
+
+  public static void clearTextInput(Pane parent) {
+    if (parent.getChildren().isEmpty())
+      return;
+    for (Node child : parent.getChildren()) {
+      if (child instanceof TextField)
+        ((TextField) child).setText("");
+      if (child instanceof TextArea)
+        ((TextArea) child).setText("");
+      if (child instanceof DatePicker)
+        ((DatePicker) child).setValue(null);
+      if (child instanceof VBox || child instanceof HBox || child instanceof AnchorPane) {
+        clearTextInput((Pane) child);
+      }
+    }
+  }
 }

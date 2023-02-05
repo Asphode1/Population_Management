@@ -1753,7 +1753,7 @@
                                           <Insets right="20.0" />
                                         </HBox.margin>
                                       </Button>
-                                      <Button fx:id="deadCloseBtn" mnemonicParsing="false" onAction="#cancelEdit" styleClass="btn" text="Huỷ">
+                                      <Button fx:id="deadCloseBtn" mnemonicParsing="false" styleClass="btn" text="Huỷ">
                                         <font>
                                           <Font name="Montserrat Medium" size="20.0" />
                                         </font>

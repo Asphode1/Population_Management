@@ -502,7 +502,7 @@ public class HouseholdController {
     editQHField.setText("" + selectedHK.getQuanHuyen());
     editPXField.setText("" + selectedHK.getPhuongXa());
     editAddrField.setText("" + selectedHK.getDiaChi());
-    editDatePicker.setConverter(Utils.converter());
+    editDatePicker.setConverter(Utils.DATE_VN_CONVERTER);
     editDatePicker.setValue(selectedHK.getNgayTao().toLocalDate());
     editStateField.setText("" + selectedHK.getTrangThai());
     TableView<NhanKhau> editNKTable = new TableView<>();
@@ -644,12 +644,8 @@ public class HouseholdController {
     final HoKhau tmp = new HoKhau(Integer.parseInt(a1), Integer.parseInt(a2), a3, a4, a5, a6, a7, a8);
     editConfirmSavePane.setVisible(true);
     confirmSaveEditBtn.setOnAction(ae -> {
-      try {
-        HoKhauManage.capNhatHoKhau(tmp);
-        editConfirmSavePane.setVisible(false);
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
+      HoKhauManage.capNhatHoKhau(tmp);
+      editConfirmSavePane.setVisible(false);
     });
     confirmCancelSaveEditBtn.setOnAction(ae -> {
       editConfirmSavePane.setVisible(false);
@@ -674,13 +670,13 @@ public class HouseholdController {
 
   public void cancelEdit(ActionEvent e) {
     editPane.setVisible(false);
-    infoPane.setVisible(true);
+    Utils.clearTextInput(editPane);
   }
 
   // * add new Pane
 
   public void addNew(ActionEvent e) {
-    addDatePicker.setConverter(Utils.converter());
+    addDatePicker.setConverter(Utils.DATE_VN_CONVERTER);
     addDatePicker.setValue(LocalDate.now());
     addPane.setVisible(true);
     final TableView<NhanKhau> addNKTable = new TableView<>();
@@ -862,6 +858,7 @@ public class HouseholdController {
         HoKhauManage.themHoKhauBean(hkb);
         addSaveConfirmPane.setVisible(false);
         addPane.setVisible(false);
+        Utils.clearTextInput(addPane);
       });
       cancelConfirmAddBtn.setOnAction(ev -> {
         addSaveConfirmPane.setVisible(false);
@@ -871,6 +868,7 @@ public class HouseholdController {
 
   public void cancelAdd(ActionEvent e) {
     addPane.setVisible(false);
+    Utils.clearTextInput(addPane);
   }
 
   // * open move
@@ -878,13 +876,14 @@ public class HouseholdController {
     movePane.setVisible(true);
     optPane.setVisible(false);
     moveIdField.setText("" + selectedHK.getID());
-    moveAtPicker.setConverter(Utils.converter());
+    moveAtPicker.setConverter(Utils.DATE_VN_CONVERTER);
     moveAtPicker.setValue(LocalDate.now());
     moveBtn.setOnAction(ae -> {
       moveConfirmPane.setVisible(true);
     });
     moveCloseBtn.setOnAction(ae -> {
       movePane.setVisible(false);
+      Utils.clearTextInput(movePane);
     });
     moveConfirmBtn.setOnAction(ae -> {
       Date d1 = Date.valueOf(moveAtPicker.getValue());
@@ -894,6 +893,7 @@ public class HouseholdController {
       HoKhauManage.chuyenHoKhau(chk);
       moveConfirmPane.setVisible(false);
       movePane.setVisible(false);
+      Utils.clearTextInput(movePane);
     });
     moveCancelBtn.setOnAction(ae -> {
       moveConfirmPane.setVisible(false);
@@ -944,7 +944,7 @@ public class HouseholdController {
   private void openSplit() {
     splitIdField.setText(selectedHK.getID() + "");
     splitCHField.setText(selectedHK.getTenChuHo());
-    splitDatePicker.setConverter(Utils.converter());
+    splitDatePicker.setConverter(Utils.DATE_VN_CONVERTER);
     splitDatePicker.setValue(LocalDate.now());
     final TableView<NhanKhau> splitNKTable = new TableView<>();
     final TableView<NhanKhau> splitedNKTable = new TableView<>();
@@ -1082,9 +1082,13 @@ public class HouseholdController {
         HoKhauManage.tachHoKhau(hk, splitNewChuHo.getID(), nk, splitedNKRel);
         splitConfirmSavePane.setVisible(false);
         splitPane.setVisible(false);
+        Utils.clearTextInput(splitPane);
       });
       confirmCancelSplitBtn.setOnAction(aee -> splitConfirmSavePane.setVisible(false));
     });
-    splitCloseBtn.setOnAction(ae -> splitPane.setVisible(false));
+    splitCloseBtn.setOnAction(ae -> {
+      splitPane.setVisible(false);
+      Utils.clearTextInput(splitPane);
+    });
   }
 }

@@ -363,7 +363,7 @@ public class PeopleController {
         Arrays.asList(addCCCDDatePicker, addDOBPicker, addToDatePicker, awayFromPicker, awayToPicker, deadDatePicker,
             deadNKBPicker, editCCCDDatePicker, editDOBPicker, editToDatePicker, moveAtPicker, stayFromPicker,
             stayToPicker));
-    pickers.forEach(e -> e.setConverter(Utils.converter()));
+    pickers.forEach(e -> e.setConverter(Utils.DATE_VN_CONVERTER));
     final ArrayList<AnchorPane> panes = new ArrayList<>(
         Arrays.asList(infoPane, addPane, editPane, stayPane, awayPane, movePane, lostPane, excelPane));
     panes.forEach(e -> {
@@ -612,6 +612,7 @@ public class PeopleController {
             addSavedPane.setVisible(false);
             addSaveConfirmPane.setVisible(false);
             addPane.setVisible(false);
+            Utils.clearTextInput(addPane);
           });
         }
       });
@@ -624,6 +625,7 @@ public class PeopleController {
 
   public void cancelAdd(ActionEvent e) {
     addPane.setVisible(false);
+    Utils.clearTextInput(addPane);
   };
 
   public void saveEdit(ActionEvent e) {
@@ -793,11 +795,7 @@ public class PeopleController {
             stayConfirmedPane.setVisible(false);
             stayConfirmPane.setVisible(false);
             stayPane.setVisible(false);
-            stayBeforeField.setText("");
-            stayStayField.setText("");
-            stayFromPicker.setValue(null);
-            stayToPicker.setValue(null);
-            stayReasonField.setText("");
+            Utils.clearTextInput(stayPane);
           });
         }
       }
@@ -809,6 +807,7 @@ public class PeopleController {
 
   public void stayCancel(ActionEvent e) {
     stayPane.setVisible(false);
+    Utils.clearTextInput(stayPane);
   };
 
   // * away pane
@@ -839,10 +838,7 @@ public class PeopleController {
             awayConfirmedPane.setVisible(false);
             awayConfirmPane.setVisible(false);
             awayPane.setVisible(false);
-            awayNowField.setText("");
-            awayToPicker.setValue(null);
-            awayFromPicker.setValue(null);
-            awayReasonField.setText(null);
+            Utils.clearTextInput(awayPane);
           });
         }
       }
@@ -854,6 +850,7 @@ public class PeopleController {
 
   public void awayCancel(ActionEvent e) {
     awayPane.setVisible(false);
+    Utils.clearTextInput(awayPane);
   };
 
   // * move pane
@@ -883,9 +880,7 @@ public class PeopleController {
             getNKList();
             moveConfirmPane.setVisible(false);
             movePane.setVisible(false);
-            moveAtPicker.setValue(null);
-            moveToField.setText("");
-            moveNoteField.setText("");
+            Utils.clearTextInput(movePane);
           });
         }
       }
@@ -897,6 +892,7 @@ public class PeopleController {
 
   public void moveCancel(ActionEvent e) {
     movePane.setVisible(false);
+    Utils.clearTextInput(movePane);
   };
 
   // * dead pane
@@ -952,6 +948,7 @@ public class PeopleController {
     });
     deadCloseBtn.setOnAction(ae -> {
       lostPane.setVisible(false);
+      Utils.clearTextInput(lostPane);
     });
     deadConfirmBtn.setOnAction(ae -> {
       Date d1 = Date.valueOf(deadDatePicker.getValue());
@@ -965,9 +962,7 @@ public class PeopleController {
           deadConfirmedPane.setVisible(false);
           deadConfirmPane.setVisible(false);
           lostPane.setVisible(false);
-          deadReasonField.setText("");
-          deadPField.setText("");
-          deadDatePicker.setValue(null);
+          Utils.clearTextInput(lostPane);
         });
       }
     });
