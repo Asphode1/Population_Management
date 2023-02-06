@@ -139,7 +139,8 @@ public class TamTruModify {
      * @return số tạm trú trên địa bàn
      */
     public static int countTamTru() {
-        String sql = "SELECT count(*) as c FROM tam_tru";
+        String sql = "SELECT count(*) as c FROM nhan_khau "
+        + " WHERE trangThai = N'Tạm trú'";
         int countTamTru = 0;
         try {
             Connection conn = DBConnection.getDBConnection().getConnection();

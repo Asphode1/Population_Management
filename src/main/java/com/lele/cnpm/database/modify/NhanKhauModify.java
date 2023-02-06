@@ -55,19 +55,16 @@ public class NhanKhauModify {
    * @return true nếu CCCD hợp lệ, false nếu CCCD trùng hoặc sai kích thước
    */
   public static boolean checkCCCD(String cccd) {
-    if (cccd.length() != 9 && cccd.length() != 12)
-      return false;
-    String sql = "SELECT count(*) as c FROM nhan_khau WHERE soCCCD = '" + cccd + "'";
+    if (cccd.length() != 9 && cccd.length() != 12) return false;
+    String sql = "SELECT count(*) as c FROM nhan_khau WHERE soCCCD = " + cccd;
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
       rs.next();
       int c = rs.getInt("c");
-      if (c == 0)
-        return true;
-      else
-        return false;
+      if (c==0) return true;
+      else return false;
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -81,9 +78,8 @@ public class NhanKhauModify {
    */
   public static boolean themNhanKhau(NhanKhau nk) {
     if (nk.getTrangThai() == "" || nk.getTrangThai() == null)
-      nk.setTrangThai("Thường trú");
-    if (!checkCCCD(nk.getSoCCCD()))
-      return false;
+      nk.setTrangThai("Tạm trú");
+    if (!checkCCCD(nk.getSoCCCD())) return false;
     return insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
         nk.getNguyenQuan(), nk.getDanToc(), nk.getTonGiao(), nk.getQuocTich(), nk.getNgheNghiep(),
         nk.getNoiLamViec(), nk.getSoCCCD(), nk.getNgayCap(), nk.getChuyenDenNgay(), nk.getNoiThuongTruTruoc(),
@@ -134,8 +130,7 @@ public class NhanKhauModify {
    */
   public static boolean capNhatNhanKhau(NhanKhau nk) {
     if (!layNhanKhau(nk.getID()).getSoCCCD().equals(nk.getSoCCCD()))
-      if (!checkCCCD(nk.getSoCCCD()))
-        return false;
+      if (!checkCCCD(nk.getSoCCCD())) return false;
     String sql = "UPDATE nhan_khau SET hoTen = ?, biDanh = ?, ngaySinh = ?, noiSinh = ?, gioiTinh =?,"
         + " nguyenQuan = ?, danToc = ?, tonGiao = ?, quocTich = ?, ngheNghiep = ?, noiLamViec = ?, soCCCD = ?,"
         + " ngayCap = ?, chuyenDenNgay = ?, noiThuongTruTruoc = ?, trangThai =? WHERE idNhanKhau = "

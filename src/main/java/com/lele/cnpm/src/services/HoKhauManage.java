@@ -22,6 +22,7 @@ public class HoKhauManage extends HoKhauModify {
     public static boolean themHoKhauBean(HoKhauBean hkb) {
         try {
             HoKhau hk = hkb.getHoKhau();
+            hk.setTrangThai("Thường trú");
             hk.setIdChuHo(hkb.getChuHo().getID());
             themHoKhau(hk);
             hk.setID(HoKhauModify.layHoKhau(hk.getIdChuHo()).getID());
@@ -29,6 +30,9 @@ public class HoKhauManage extends HoKhauModify {
             ArrayList<String> quanHes = hkb.getListQuanHeChuHos();
             int sizeList = nhanKhaus.size();
             for (int i = 0; i < sizeList; i++) {
+                NhanKhau nk = nhanKhaus.get(i);
+                nk.setTrangThai("Thường trú");
+                NhanKhauManage.capNhatNhanKhau(nk);
                 HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk, nhanKhaus.get(i), quanHes.get(i));
             }
             return true;
