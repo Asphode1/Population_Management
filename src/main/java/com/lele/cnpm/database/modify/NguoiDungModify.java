@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.lele.cnpm.database.connect.DBConnection;
-import com.lele.cnpm.src.encrypt.Password;
+import com.lele.cnpm.src.utils.Password;
 import com.lele.cnpm.src.models.NguoiDung;
 
 public class NguoiDungModify {

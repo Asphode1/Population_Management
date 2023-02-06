@@ -1,6 +1,6 @@
 package com.lele.cnpm.src.models;
 
-import com.lele.cnpm.src.encrypt.Password;
+import com.lele.cnpm.src.utils.Password;
 
 // class nguoi dang nhap va su dung app
 // author: LuongHvd

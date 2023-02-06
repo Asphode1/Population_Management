@@ -765,46 +765,46 @@
                                       <content>
                                         <VBox prefHeight="200.0" prefWidth="520.0">
                                           <children>
-                                            <HBox prefHeight="24.0" prefWidth="200.0">
+                                            <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Họ tên" />
-                                                <Label fx:id="infoNKNameLabel" prefHeight="24.0" styleClass="addLabel" />
+                                                                        <TextField fx:id="infoNKNameField" style="-fx-background-color: inherit;" />
                                               </children>
                                               <VBox.margin>
                                                 <Insets bottom="6.0" />
                                               </VBox.margin>
                                             </HBox>
-                                            <HBox prefHeight="24.0" prefWidth="200.0">
+                                            <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Số CCCD" />
-                                                <Label fx:id="infoNKCCLabel" prefHeight="24.0" styleClass="addLabel" />
+                                                                        <TextField fx:id="infoNKCCField" style="-fx-background-color: inherit;" />
                                               </children>
                                               <VBox.margin>
                                                 <Insets bottom="6.0" />
                                               </VBox.margin>
                                             </HBox>
-                                            <HBox prefHeight="24.0" prefWidth="200.0">
+                                            <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Ngày sinh" />
-                                                <Label fx:id="infoNKDOBLabel" prefHeight="24.0" styleClass="addLabel" />
+                                                                        <TextField fx:id="infoNKDOBField" style="-fx-background-color: inherit;" />
                                               </children>
                                               <VBox.margin>
                                                 <Insets bottom="6.0" />
                                               </VBox.margin>
                                             </HBox>
-                                            <HBox prefHeight="24.0" prefWidth="200.0">
+                                            <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Trạng thái" />
-                                                <Label fx:id="infoNKTTLabel" prefHeight="24.0" styleClass="addLabel" />
+                                                                        <TextField fx:id="infoNKTTField" style="-fx-background-color: inherit;" />
                                               </children>
                                               <VBox.margin>
                                                 <Insets bottom="6.0" />
                                               </VBox.margin>
                                             </HBox>
-                                            <HBox prefHeight="24.0" prefWidth="200.0">
+                                            <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Quan hệ với chủ hộ" />
-                                                <Label fx:id="infoNKRelLabel" prefHeight="24.0" styleClass="addLabel" />
+                                                                        <TextField fx:id="infoNKRelField" style="-fx-background-color: inherit;" />
                                               </children>
                                             </HBox>
                                           </children>

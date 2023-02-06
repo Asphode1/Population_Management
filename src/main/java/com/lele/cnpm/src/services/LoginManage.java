@@ -1,7 +1,7 @@
 package com.lele.cnpm.src.services;
 
 import com.lele.cnpm.database.modify.NguoiDungModify;
-import com.lele.cnpm.src.encrypt.Password;
+import com.lele.cnpm.src.utils.Password;
 import com.lele.cnpm.src.models.NguoiDung;
 
 public class LoginManage {

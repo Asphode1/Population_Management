@@ -1,4 +1,4 @@
-package com.lele.cnpm.src.encrypt;
+package com.lele.cnpm.src.utils;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
