@@ -7,6 +7,7 @@ import com.lele.cnpm.src.services.NhanKhauManage;
 
 public class ChayHoCtNay {
     public static void main(String[] args) {
+        // chạy file sql trước r quay lại đây
         ArrayList<NhanKhau> nkall = NhanKhauManage.layListNhanKhauChuaCoHoKhau();
         for (NhanKhau nk : nkall) {
             
