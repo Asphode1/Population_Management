@@ -21,7 +21,6 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -160,41 +159,32 @@ public class RewardController {
         return row;
       }
     };
-    TableColumn<DipHSG, String> namGCol = new TableColumn<>("Năm");
+    TableColumn<DipHSG, String> namGCol = Utils.createColumn("Năm", "nam");
     namGCol.setMaxWidth(70);
     namGCol.setMinWidth(70);
-    namGCol.setCellValueFactory(new PropertyValueFactory<>("nam"));
-    TableColumn<DipHSG, String> numGCol = new TableColumn<>("Chưa trao thưởng");
+    TableColumn<DipHSG, String> numGCol = Utils.createColumn("Chưa trao thưởng", "soNguoiChuaTraoThuong");
     numGCol.setMaxWidth(180);
     numGCol.setMinWidth(180);
-    numGCol.setCellValueFactory(new PropertyValueFactory<>("soNguoiChuaTraoThuong"));
-    TableColumn<DipHSG, String> descGCol = new TableColumn<>("Mô tả");
-    descGCol.setCellValueFactory(new PropertyValueFactory<>("moTa"));
+    TableColumn<DipHSG, String> descGCol = Utils.createColumn("Mô tả", "moTa");
     gTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     gTable.getColumns().addAll(Arrays.asList(namGCol, numGCol, descGCol));
     gTable.setMinHeight(512);
     gTable.setMinWidth(734);
     gTable.setRowFactory(rowGFactory);
-
-    TableColumn<DipDacBiet, String> namSCol = new TableColumn<>("Năm");
+    TableColumn<DipDacBiet, String> namSCol = Utils.createColumn("Năm", "nam");
     namSCol.setMaxWidth(70);
     namSCol.setMinWidth(70);
-    namSCol.setCellValueFactory(new PropertyValueFactory<>("nam"));
-    TableColumn<DipDacBiet, String> numSCol = new TableColumn<>("Chưa trao thưởng");
+    TableColumn<DipDacBiet, String> numSCol = Utils.createColumn("Chưa trao thưởng", "soNguoiChuaTraoThuong");
     numSCol.setMaxWidth(180);
     numSCol.setMinWidth(180);
-    numSCol.setCellValueFactory(new PropertyValueFactory<>("soNguoiChuaTraoThuong"));
-    TableColumn<DipDacBiet, String> descSCol = new TableColumn<>("Mô tả");
-    descSCol.setCellValueFactory(new PropertyValueFactory<>("moTa"));
-    TableColumn<DipDacBiet, String> tenSCol = new TableColumn<>("Tên dịp");
+    TableColumn<DipDacBiet, String> descSCol = Utils.createColumn("Mô tả", "moTa");
+    TableColumn<DipDacBiet, String> tenSCol = Utils.createColumn("Tên dịp", "ten");
     tenSCol.setMaxWidth(180);
-    tenSCol.setCellValueFactory(new PropertyValueFactory<>("ten"));
     sTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     sTable.getColumns().addAll(Arrays.asList(tenSCol, namSCol, numSCol, descSCol));
     sTable.setMinHeight(512);
     sTable.setMinWidth(734);
     sTable.setRowFactory(rowSFactory);
-
     getGList();
     mainTablePane.getChildren().clear();
     mainTablePane.getChildren().add(gTable);
@@ -216,7 +206,6 @@ public class RewardController {
         mainTablePane.getChildren().add(sTable);
       }
     });
-
     goodBtn.setOnAction(e -> openGAdd(e));
     specialBtn.setOnAction(e -> openSAdd(e));
   }
@@ -290,7 +279,6 @@ public class RewardController {
         detailPane.setVisible(false);
       });
       cancelBtn.setOnAction(aee -> confirmPane.setVisible(false));
-
     });
     returnBtn.setText("Huỷ");
     returnBtn.setOnAction(ae -> {
@@ -395,7 +383,6 @@ public class RewardController {
     money3Field.getStyleClass().add("textDisabled");
     editBtn.setVisible(true);
     saveBtn.setVisible(false);
-
     editBtn.setOnAction(aee -> {
       editBtn.setVisible(false);
       saveBtn.setVisible(true);
@@ -415,7 +402,6 @@ public class RewardController {
       money1Field.getStyleClass().remove("textDisabled");
       money2Field.getStyleClass().remove("textDisabled");
       money3Field.getStyleClass().remove("textDisabled");
-
       saveBtn.setOnAction(ae -> {
         confirmPane.setVisible(true);
         confirmLabel.setText("Lưu thay đổi");
@@ -437,7 +423,6 @@ public class RewardController {
           confirmPane.setVisible(false);
         });
       });
-
       returnBtn.setOnAction(ae -> {
         saveBtn.setVisible(false);
         editBtn.setVisible(true);
@@ -499,7 +484,6 @@ public class RewardController {
     nameField.getStyleClass().add("textDisabled");
     editBtn.setVisible(true);
     saveBtn.setVisible(false);
-
     editBtn.setOnAction(aee -> {
       editBtn.setVisible(false);
       saveBtn.setVisible(true);
@@ -544,7 +528,6 @@ public class RewardController {
           confirmPane.setVisible(false);
         });
       });
-
       returnBtn.setOnAction(ae -> {
         editBtn.setVisible(true);
         saveBtn.setVisible(false);
@@ -586,14 +569,11 @@ public class RewardController {
     listPane.setVisible(true);
     listBox.setVisible(true);
     editListBox.setVisible(false);
-
-    TableColumn<NhanKhau, String> nameCol = new TableColumn<>("Họ Tên");
-    nameCol.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+    TableColumn<NhanKhau, String> nameCol = Utils.createColumn("Họ Tên", "hoTen");
     snkTable.getColumns().add(nameCol);
     getSNKList();
     snkTable.setPrefHeight(516);
     snkTable.setPrefWidth(678);
-
     listBox.getChildren().clear();
     listBox.getChildren().addAll(snkTable, listBtnBox);
     listReturnBtn.setOnAction(aee -> {
@@ -605,13 +585,11 @@ public class RewardController {
     listPane.setVisible(true);
     listBox.setVisible(true);
     editListBox.setVisible(false);
-    TableColumn<NhanKhau, String> nameCol = new TableColumn<>("Họ Tên");
-    nameCol.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+    TableColumn<NhanKhau, String> nameCol = Utils.createColumn("Họ Tên", "hoTen");
     gnkTable.getColumns().add(nameCol);
     getGNKList();
     gnkTable.setPrefHeight(516);
     gnkTable.setPrefWidth(678);
-
     listBox.getChildren().clear();
     listBox.getChildren().addAll(gnkTable, listBtnBox);
     listReturnBtn.setOnAction(aee -> {
@@ -623,7 +601,6 @@ public class RewardController {
     listPane.setVisible(true);
     listBox.setVisible(false);
     editListBox.setVisible(true);
-
     listReturnBtn.setOnAction(aee -> {
       listPane.setVisible(false);
     });
@@ -633,7 +610,6 @@ public class RewardController {
     listPane.setVisible(true);
     listBox.setVisible(false);
     editListBox.setVisible(true);
-
     listReturnBtn.setOnAction(aee -> {
       listPane.setVisible(false);
     });

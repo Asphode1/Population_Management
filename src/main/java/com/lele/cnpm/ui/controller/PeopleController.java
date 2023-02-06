@@ -6,6 +6,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.lele.cnpm.src.models.ChuyenNhanKhau;
+import com.lele.cnpm.src.models.KhaiTu;
+import com.lele.cnpm.src.models.NguoiDung;
+import com.lele.cnpm.src.models.NhanKhau;
+import com.lele.cnpm.src.models.TamTru;
+import com.lele.cnpm.src.models.TamVang;
+import com.lele.cnpm.src.services.NhanKhauManage;
+import com.lele.cnpm.src.utils.Utils;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -24,12 +33,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -37,9 +45,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import com.lele.cnpm.src.models.*;
-import com.lele.cnpm.src.services.NhanKhauManage;
-import com.lele.cnpm.src.utils.Utils;
 
 public class PeopleController {
   @FXML
@@ -492,18 +497,14 @@ public class PeopleController {
       }
     };
     table.setRowFactory(rowFactory);
-    TableColumn<NhanKhau, String> nameCol = new TableColumn<>("Họ và tên");
-    nameCol.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
-    TableColumn<NhanKhau, String> DOBCol = new TableColumn<>("Ngày sinh");
-    DOBCol.setCellValueFactory(new PropertyValueFactory<>("ngaySinhString"));
+    TableColumn<NhanKhau, String> nameCol = Utils.createColumn("Họ và tên", "hoTen");
+    nameCol.setComparator(Utils.SORT_BY_NAME);
+    TableColumn<NhanKhau, String> DOBCol = Utils.createColumn("Ngày sinh", "ngaySinhString");
     DOBCol.getStyleClass().add("center-align");
-    TableColumn<NhanKhau, String> genCol = new TableColumn<>("Giới tính");
-    genCol.setCellValueFactory(new PropertyValueFactory<>("gioiTinh"));
+    TableColumn<NhanKhau, String> genCol = Utils.createColumn("Giới tính", "gioiTinh");
     genCol.getStyleClass().add("center-align");
-    TableColumn<NhanKhau, String> CCCDCol = new TableColumn<>("CCCD/ĐDĐT");
-    CCCDCol.setCellValueFactory(new PropertyValueFactory<>("soCCCD"));
-    TableColumn<NhanKhau, String> stateCol = new TableColumn<>("Trạng thái");
-    stateCol.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
+    TableColumn<NhanKhau, String> CCCDCol = Utils.createColumn("CCCD/ĐDĐT", "soCCCD");
+    TableColumn<NhanKhau, String> stateCol = Utils.createColumn("Trạng thái", "trangThai");
     stateCol.getStyleClass().add("center-align");
     TableColumn<NhanKhau, String> isInHKCol = new TableColumn<>("Hộ khẩu");
     isInHKCol.setCellValueFactory(new Callback<CellDataFeatures<NhanKhau, String>, ObservableValue<String>>() {
@@ -960,10 +961,8 @@ public class PeopleController {
       }
     };
     deadNKList.setRowFactory(rowFactory);
-    TableColumn<NhanKhau, String> nameCol = new TableColumn<>("Họ tên");
-    nameCol.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
-    TableColumn<NhanKhau, String> cCol = new TableColumn<>("Số CCCD");
-    cCol.setCellValueFactory(new PropertyValueFactory<>("soCCCD"));
+    TableColumn<NhanKhau, String> nameCol = Utils.createColumn("Họ tên", "hoTen");
+    TableColumn<NhanKhau, String> cCol = Utils.createColumn("Số CCCD", "soCCCD");
     deadNKList.getColumns().addAll(Arrays.asList(nameCol, cCol));
     deadNKList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     ObservableList<NhanKhau> deadNK = FXCollections.observableArrayList(nhanKhau);
@@ -1046,12 +1045,9 @@ public class PeopleController {
         return nk.hoTenProperty();
       }
     });
-    TableColumn<ChuyenNhanKhau, String> diCol = new TableColumn<>("Ngày Chuyển đi");
-    diCol.setCellValueFactory(new PropertyValueFactory<>("ngayChuyenDi"));
-    TableColumn<ChuyenNhanKhau, String> denCol = new TableColumn<>("Nơi chuyển đến");
-    denCol.setCellValueFactory(new PropertyValueFactory<>("noiChuyenDen"));
-    TableColumn<ChuyenNhanKhau, String> noteCol = new TableColumn<>("Ghi chú");
-    noteCol.setCellValueFactory(new PropertyValueFactory<>("ghiChu"));
+    TableColumn<ChuyenNhanKhau, String> diCol = Utils.createColumn("Ngày Chuyển đi", "ngayChuyenDi");
+    TableColumn<ChuyenNhanKhau, String> denCol = Utils.createColumn("Nơi chuyển đến", "noiChuyenDen");
+    TableColumn<ChuyenNhanKhau, String> noteCol = Utils.createColumn("Ghi chú", "ghiChu");
     table.getColumns().addAll(Arrays.asList(nameCol, diCol, denCol, noteCol));
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     table.setRowFactory(rowFactory);

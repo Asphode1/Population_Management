@@ -612,7 +612,7 @@
                               <Insets top="20.0" />
                             </padding>
                           </VBox>
-                                    <AnchorPane fx:id="editSavedPane" layoutX="10.0" layoutY="10.0" style="-fx-background-color: #5555;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane fx:id="editSavedPane" layoutX="10.0" layoutY="10.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="208.0">
                                              <children>

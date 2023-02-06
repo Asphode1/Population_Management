@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import com.lele.cnpm.src.models.NguoiDung;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -19,7 +21,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -37,9 +38,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import com.lele.cnpm.src.models.NguoiDung;
 
-public class HomeController implements Initializable {
+public class HomeController {
   @FXML
   private AnchorPane root;
 
@@ -120,7 +120,7 @@ public class HomeController implements Initializable {
     householdController.setUser(usr);
   }
 
-  public void initialize(URL url, ResourceBundle rb) {
+  public void initialize() {
     PauseTransition pauset0 = new PauseTransition(Duration.seconds(0.75));
     Timeline logoTransition = new Timeline(
         new KeyFrame(Duration.seconds(0), new KeyValue(logo.opacityProperty(), logo.opacityProperty().getValue())),

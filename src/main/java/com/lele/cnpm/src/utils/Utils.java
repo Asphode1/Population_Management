@@ -2,14 +2,17 @@ package com.lele.cnpm.src.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -63,4 +66,17 @@ public class Utils {
       }
     }
   }
+
+  public static <S, T> TableColumn<S, T> createColumn(String name, String val) {
+    TableColumn<S, T> col = new TableColumn<>(name);
+    col.setCellValueFactory(new PropertyValueFactory<>(val));
+    return col;
+  }
+
+  public static Comparator<String> SORT_BY_NAME = new Comparator<String>() {
+    @Override
+    public int compare(String a, String b) {
+      return a.substring(a.lastIndexOf(" ") + 1).compareTo(b.substring(b.lastIndexOf(" ") + 1));
+    }
+  };
 }
