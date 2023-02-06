@@ -56,7 +56,7 @@ public class NhanKhauModify {
    */
   public static boolean checkCCCD(String cccd) {
     if (cccd.length() != 9 && cccd.length() != 12) return false;
-    String sql = "SELECT count(*) as c FROM nhan_khau WHERE soCCCD = " + cccd;
+    String sql = "SELECT count(*) as c FROM nhan_khau WHERE soCCCD = '" + cccd + "'";
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
       Statement stmt = conn.createStatement();
