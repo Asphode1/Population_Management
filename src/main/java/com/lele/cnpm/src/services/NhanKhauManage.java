@@ -230,4 +230,5 @@ public class NhanKhauManage extends NhanKhauModify {
   public static ArrayList<ChuyenNhanKhau> xemLichSuChuyenNhanKhaus() {
     return ChuyenNhanKhauModify.layListChuyenNhanKhau();
   }
+
 }
