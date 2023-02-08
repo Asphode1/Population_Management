@@ -1,9 +1,7 @@
 package com.lele.cnpm.ui.controller;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 import com.lele.cnpm.src.models.NguoiDung;
 
@@ -287,9 +285,9 @@ public class HomeController {
     navShrink.setAutoReverse(false);
     navShrink.setCycleCount(1);
     navShrink.play();
-    for (HBox h : hBoxs) {
+    /* for (HBox h : hBoxs) {
       h.setMouseTransparent(true);
-    }
+    } */
     grayBar.setMouseTransparent(true);
     grayBar.setVisible(false);
     for (Label l : labels) {

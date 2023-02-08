@@ -475,7 +475,27 @@ public class PeopleController {
               case "Tạm vắng":
                 addStayBtn.setDisable(false);
                 addAwayBtn.setDisable(true);
-
+                addMoveBtn.setDisable(false);
+                addDeadBtn.setDisable(false);
+                break;
+              case "Tạm trú":
+                addStayBtn.setDisable(true);
+                addAwayBtn.setDisable(false);
+                addMoveBtn.setDisable(false);
+                addDeadBtn.setDisable(false);
+                break;
+              case "Đã mất":
+                addStayBtn.setDisable(true);
+                addAwayBtn.setDisable(true);
+                addMoveBtn.setDisable(true);
+                addDeadBtn.setDisable(true);
+                break;
+              case "Đã chuyển đi":
+                addStayBtn.setDisable(true);
+                addAwayBtn.setDisable(true);
+                addMoveBtn.setDisable(true);
+                addDeadBtn.setDisable(true);
+                break;
               default:
                 break;
             }
@@ -506,20 +526,7 @@ public class PeopleController {
     TableColumn<NhanKhau, String> CCCDCol = Utils.createColumn("CCCD/ĐDĐT", "soCCCD");
     TableColumn<NhanKhau, String> stateCol = Utils.createColumn("Trạng thái", "trangThai");
     stateCol.getStyleClass().add("center-align");
-    TableColumn<NhanKhau, String> isInHKCol = new TableColumn<>("Hộ khẩu");
-    isInHKCol.setCellValueFactory(new Callback<CellDataFeatures<NhanKhau, String>, ObservableValue<String>>() {
-      public ObservableValue<String> call(CellDataFeatures<NhanKhau, String> p) {
-        NhanKhau tmp = p.getValue();
-        ArrayList<NhanKhau> tmpList = NhanKhauManage.layListNhanKhauChuaCoHoKhau();
-        ObjectProperty<String> op = new SimpleObjectProperty<>();
-        if (tmpList.contains(tmp))
-          op.set("chưa có");
-        else
-          op.set("đã có");
-        return op;
-      }
-    });
-    table.getColumns().addAll(Arrays.asList(nameCol, DOBCol, genCol, CCCDCol, stateCol, isInHKCol));
+    table.getColumns().addAll(Arrays.asList(nameCol, DOBCol, genCol, CCCDCol, stateCol));
     setTableData();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     ArrayList<Node> al = new ArrayList<>();

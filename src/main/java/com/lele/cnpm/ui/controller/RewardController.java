@@ -72,6 +72,8 @@ public class RewardController {
   @FXML
   private Button saveBtn;
   @FXML
+  private Button deleteBtn;
+  @FXML
   private Button returnBtn;
   @FXML
   private Button listReturnBtn;
@@ -101,6 +103,8 @@ public class RewardController {
   private VBox listBox;
   @FXML
   private VBox editListBox;
+  @FXML
+  private HBox detailBtn;
   @FXML
   private HBox listBtnBox;
   @FXML
@@ -226,6 +230,8 @@ public class RewardController {
 
   private void openGAdd(ActionEvent e) {
     detailPane.setVisible(true);
+    detailBtn.getChildren().clear();
+    detailBtn.getChildren().addAll(listBtn, saveBtn, returnBtn);
     title.setText("Thêm phần thưởng HSG");
     nameLabel.setVisible(false);
     nameField.setVisible(false);
@@ -256,10 +262,6 @@ public class RewardController {
     money1Field.getStyleClass().remove("textDisabled");
     money2Field.getStyleClass().remove("textDisabled");
     money3Field.getStyleClass().remove("textDisabled");
-    editBtn.setVisible(false);
-    saveBtn.setVisible(true);
-    listBtn.setVisible(false);
-    listBtn.setPrefWidth(0);
     saveBtn.setOnAction(ae -> {
       String s1 = yearField.getText();
       String s2 = present1Field.getText();
@@ -282,8 +284,6 @@ public class RewardController {
     });
     returnBtn.setText("Huỷ");
     returnBtn.setOnAction(ae -> {
-      listBtn.setVisible(true);
-      listBtn.setPrefWidth(200);
       detailPane.setVisible(false);
       Utils.clearTextInput(detailPane);
     });
@@ -291,6 +291,8 @@ public class RewardController {
 
   private void openSAdd(ActionEvent e) {
     detailPane.setVisible(true);
+    detailBtn.getChildren().clear();
+    detailBtn.getChildren().addAll(listBtn, saveBtn, returnBtn);
     title.setText("Thêm phần thưởng dịp đặc biệt");
     nameLabel.setVisible(true);
     nameField.setVisible(true);
@@ -323,10 +325,6 @@ public class RewardController {
     money1Field.getStyleClass().remove("textDisabled");
     money2Field.getStyleClass().remove("textDisabled");
     money3Field.getStyleClass().remove("textDisabled");
-    editBtn.setVisible(false);
-    saveBtn.setVisible(true);
-    listBtn.setVisible(false);
-    listBtn.setPrefWidth(0);
     saveBtn.setOnAction(ae -> {
       String s1 = yearField.getText();
       String s2 = present1Field.getText();
@@ -351,8 +349,6 @@ public class RewardController {
     });
     returnBtn.setText("Huỷ");
     returnBtn.setOnAction(ae -> {
-      listBtn.setVisible(true);
-      listBtn.setPrefWidth(200);
       detailPane.setVisible(false);
       Utils.clearTextInput(detailPane);
     });
@@ -361,6 +357,8 @@ public class RewardController {
   private void openGInfo(MouseEvent e) {
     title.setText("Thông tin Phần thưởng");
     detailPane.setVisible(true);
+    detailBtn.getChildren().clear();
+    detailBtn.getChildren().addAll(listBtn, editBtn, deleteBtn, returnBtn);
     present1Label.setText("Phần quà đặc biệt:");
     present2Label.setText("Phần quà HSG:");
     present3Label.setText("Phần quà HS Khá:");
@@ -381,11 +379,7 @@ public class RewardController {
     money1Field.getStyleClass().add("textDisabled");
     money2Field.getStyleClass().add("textDisabled");
     money3Field.getStyleClass().add("textDisabled");
-    editBtn.setVisible(true);
-    saveBtn.setVisible(false);
     editBtn.setOnAction(aee -> {
-      editBtn.setVisible(false);
-      saveBtn.setVisible(true);
       yearField.setEditable(true);
       present1Field.setEditable(true);
       present2Field.setEditable(true);
@@ -424,8 +418,6 @@ public class RewardController {
         });
       });
       returnBtn.setOnAction(ae -> {
-        saveBtn.setVisible(false);
-        editBtn.setVisible(true);
         yearField.setEditable(false);
         present1Field.setEditable(false);
         present2Field.setEditable(false);
@@ -460,6 +452,8 @@ public class RewardController {
   private void openSInfo(MouseEvent e) {
     title.setText("Thông tin Phần thưởng");
     detailPane.setVisible(true);
+    detailBtn.getChildren().clear();
+    detailBtn.getChildren().addAll(listBtn, editBtn, deleteBtn, returnBtn);
     present1Label.setText("Độ tuổi 0-5 tuổi:");
     present2Label.setText("Độ tuổi 6-14 tuổi:");
     present3Label.setText("Độ tuổi 15-17 tuổi:");
@@ -482,11 +476,9 @@ public class RewardController {
     money2Field.getStyleClass().add("textDisabled");
     money3Field.getStyleClass().add("textDisabled");
     nameField.getStyleClass().add("textDisabled");
-    editBtn.setVisible(true);
-    saveBtn.setVisible(false);
     editBtn.setOnAction(aee -> {
-      editBtn.setVisible(false);
-      saveBtn.setVisible(true);
+      detailBtn.getChildren().clear();
+      detailBtn.getChildren().addAll(listBtn, saveBtn, deleteBtn, returnBtn);
       yearField.setEditable(true);
       present1Field.setEditable(true);
       present2Field.setEditable(true);
@@ -529,8 +521,8 @@ public class RewardController {
         });
       });
       returnBtn.setOnAction(ae -> {
-        editBtn.setVisible(true);
-        saveBtn.setVisible(false);
+        detailBtn.getChildren().clear();
+        detailBtn.getChildren().addAll(listBtn, editBtn, deleteBtn, returnBtn);
         yearField.setEditable(false);
         present1Field.setEditable(false);
         present2Field.setEditable(false);

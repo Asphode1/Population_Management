@@ -190,7 +190,7 @@
                           <Insets right="30.0" />
                         </padding>
                       </VBox>
-                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="90.0">
+                      <HBox fx:id="detailBtn" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                         <children>
                           <Button fx:id="listBtn" mnemonicParsing="false" prefHeight="36.0" text="Danh sách thưởng">
                             <styleClass>
@@ -199,30 +199,33 @@
                               <String fx:value="saveBtn" />
                             </styleClass>
                           </Button>
-                                    <AnchorPane prefHeight="100.0" prefWidth="120.0">
-                                       <children>
-                                          <Button fx:id="saveBtn" layoutX="116.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Lưu" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="32.0">
-                                             <styleClass>
-                                                <String fx:value="btn" />
-                                                <String fx:value="addLabel" />
-                                                <String fx:value="saveBtn" />
-                                             </styleClass>
-                                          </Button>
-                                <Button fx:id="editBtn" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Chỉnh sửa" AnchorPane.topAnchor="32.0">
-                                  <styleClass>
-                                    <String fx:value="btn" />
-                                    <String fx:value="addLabel" />
-                                    <String fx:value="saveBtn" />
-                                  </styleClass>
-                                </Button>
-                                       </children>
-                                    </AnchorPane>
-                          <Button fx:id="returnBtn" mnemonicParsing="false" prefHeight="36.0" text="Quay lại">
+                                    <Button fx:id="saveBtn" layoutX="116.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Lưu" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="32.0">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="addLabel" />
+                                          <String fx:value="saveBtn" />
+                                       </styleClass>
+                                    </Button>
+                          <Button fx:id="editBtn" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Chỉnh sửa" AnchorPane.topAnchor="32.0">
                             <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="addLabel" />
+                              <String fx:value="saveBtn" />
                             </styleClass>
                           </Button>
+                          <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="36.0" text="Xoá">
+                            <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="addLabel" />
+                                          <String fx:value="delBtn" />
+                            </styleClass>
+                          </Button>
+                                    <Button fx:id="returnBtn" mnemonicParsing="false" prefHeight="36.0" text="Quay lại">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="addLabel" />
+                                       </styleClass>
+                                    </Button>
                         </children>
                       </HBox>
                     </children>
