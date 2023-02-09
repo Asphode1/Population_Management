@@ -1,9 +1,0 @@
-serverName = "ASPHODEL\MSSQLSEVER01"
-password = "luongluong"
-
-(Hướng dẫn thay đổi:
-Copy tên ServerName và password của SQLServer
-Paste vào các trường như trên, giữa các dấu ngoặc kép
-Lưu ý không thay đổi thứ tự và giữ nguyên dấu "")
-ASPHODEL\MSSQLSEVER01
-DESKTOP-9J07U8P\SQLEXPRESS
