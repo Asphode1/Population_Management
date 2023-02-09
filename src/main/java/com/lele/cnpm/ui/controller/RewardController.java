@@ -148,8 +148,8 @@ public class RewardController {
   @FXML
   private HBox editListBtnBox;
 
-  private TableView<DipDacBiet> sTable = new TableView<>();
-  private TableView<DipHSG> gTable = new TableView<>();
+  private TableView<DipDacBiet> sMainTable = new TableView<>();
+  private TableView<DipHSG> gMainTable = new TableView<>();
   private ArrayList<DipDacBiet> sList = new ArrayList<>();
   private ArrayList<DipHSG> gList = new ArrayList<>();
   private DipDacBiet selectedS = null;
@@ -211,11 +211,11 @@ public class RewardController {
     numGCol.setMaxWidth(180);
     numGCol.setMinWidth(180);
     TableColumn<DipHSG, String> descGCol = Utils.createColumn("Mô tả", "moTa");
-    gTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    gTable.getColumns().addAll(Arrays.asList(namGCol, numGCol, descGCol));
-    gTable.setMinHeight(512);
-    gTable.setMinWidth(734);
-    gTable.setRowFactory(rowGFactory);
+    gMainTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    gMainTable.getColumns().addAll(Arrays.asList(namGCol, numGCol, descGCol));
+    gMainTable.setMinHeight(512);
+    gMainTable.setMinWidth(734);
+    gMainTable.setRowFactory(rowGFactory);
     TableColumn<DipDacBiet, String> namSCol = Utils.createColumn("Năm", "nam");
     namSCol.setMaxWidth(70);
     namSCol.setMinWidth(70);
@@ -226,21 +226,21 @@ public class RewardController {
     TableColumn<DipDacBiet, String> tenSCol = Utils.createColumn("Tên dịp", "ten");
     tenSCol.setMinWidth(180);
     tenSCol.setMaxWidth(180);
-    sTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    sTable.getColumns().addAll(Arrays.asList(tenSCol, namSCol, numSCol, descSCol));
-    sTable.setMinHeight(512);
-    sTable.setMinWidth(734);
-    sTable.setRowFactory(rowSFactory);
+    sMainTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    sMainTable.getColumns().addAll(Arrays.asList(tenSCol, namSCol, numSCol, descSCol));
+    sMainTable.setMinHeight(512);
+    sMainTable.setMinWidth(734);
+    sMainTable.setRowFactory(rowSFactory);
     getGList();
     mainTablePane.getChildren().clear();
-    mainTablePane.getChildren().add(gTable);
+    mainTablePane.getChildren().add(gMainTable);
     selectHSGBtn.setOnAction(e -> {
       if (!selectHSGBtn.getStyleClass().contains("btnOnFocus")) {
         getGList();
         selectHSGBtn.getStyleClass().add("btnOnFocus");
         selectSPCBtn.getStyleClass().remove("btnOnFocus");
         mainTablePane.getChildren().clear();
-        mainTablePane.getChildren().add(gTable);
+        mainTablePane.getChildren().add(gMainTable);
       }
     });
     selectSPCBtn.setOnAction(e -> {
@@ -249,7 +249,7 @@ public class RewardController {
         selectSPCBtn.getStyleClass().add("btnOnFocus");
         selectHSGBtn.getStyleClass().remove("btnOnFocus");
         mainTablePane.getChildren().clear();
-        mainTablePane.getChildren().add(sTable);
+        mainTablePane.getChildren().add(sMainTable);
       }
     });
     goodBtn.setOnAction(e -> openGAdd(e));
@@ -258,16 +258,16 @@ public class RewardController {
 
   private void getGList() {
     gList = TraoThuongHSGManage.layListDipHSG();
-    gTable.getItems().clear();
+    gMainTable.getItems().clear();
     ObservableList<DipHSG> list = FXCollections.observableArrayList(gList);
-    gTable.setItems(list);
+    gMainTable.setItems(list);
   }
 
   private void getSList() {
     sList = TraoThuongDacBietManage.layListDipDacBiet();
-    sTable.getItems().clear();
+    sMainTable.getItems().clear();
     ObservableList<DipDacBiet> list = FXCollections.observableArrayList(sList);
-    sTable.setItems(list);
+    sMainTable.setItems(list);
   }
 
   private void openGAdd(ActionEvent e) {
@@ -852,10 +852,10 @@ public class RewardController {
       addListBox.getChildren().addAll(Arrays.asList(addListTable, addListDetailBox));
 
       final TableView<ChiTietDipHocSinhGioi> gTable = new TableView<>();
-      sTable.setMaxHeight(198);
-      sTable.setMinHeight(198);
-      sTable.setMaxWidth(480);
-      sTable.setMinWidth(480);
+      gTable.setMaxHeight(198);
+      gTable.setMinHeight(198);
+      gTable.setMaxWidth(480);
+      gTable.setMinWidth(480);
       TableColumn<ChiTietDipHocSinhGioi, String> hotenCol = new TableColumn<>("Họ Tên");
       hotenCol.setCellValueFactory(
           new Callback<TableColumn.CellDataFeatures<ChiTietDipHocSinhGioi, String>, ObservableValue<String>>() {
