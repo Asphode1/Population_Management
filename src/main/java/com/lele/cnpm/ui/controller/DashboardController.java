@@ -5,7 +5,6 @@ import java.util.Calendar;
 
 import com.lele.cnpm.database.modify.TamTruModify;
 import com.lele.cnpm.database.modify.TamVangModify;
-import com.lele.cnpm.src.models.NguoiDung;
 import com.lele.cnpm.src.services.HoKhauManage;
 import com.lele.cnpm.src.services.NhanKhauManage;
 
@@ -23,7 +22,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class DashboardController {
-  private NguoiDung user;
   @FXML
   private Label dateLabel;
   @FXML
@@ -42,10 +40,6 @@ public class DashboardController {
 
   @FXML
   private VBox dashboard;
-
-  public void setUser(NguoiDung usr) {
-    user = usr;
-  }
 
   public void initialize() {
     Calendar c = Calendar.getInstance();

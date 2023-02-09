@@ -109,7 +109,7 @@ public class HoKhauNhanKhauModify {
    * @return true/false
    */
   public static boolean capNhatHoKhau_NhanKhau(HoKhau hk, NhanKhau nk, String quanHeChuHo) {
-    String sql = "UPDATE nhan_khau SET idHoKhau = ?, quanHeChuHo=? WHERE IdNhanKhau =" + nk.getID();
+    String sql = "UPDATE ho_khau_nhan_khau SET idHoKhau = ?, quanHeChuHo=? WHERE IdNhanKhau =" + nk.getID();
 
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();

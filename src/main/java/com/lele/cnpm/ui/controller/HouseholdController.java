@@ -11,7 +11,6 @@ import java.util.function.Supplier;
 import com.lele.cnpm.src.bean.HoKhauBean;
 import com.lele.cnpm.src.models.ChuyenHoKhau;
 import com.lele.cnpm.src.models.HoKhau;
-import com.lele.cnpm.src.models.NguoiDung;
 import com.lele.cnpm.src.models.NhanKhau;
 import com.lele.cnpm.src.services.HoKhauManage;
 import com.lele.cnpm.src.services.NhanKhauManage;
@@ -213,7 +212,7 @@ public class HouseholdController {
   @FXML
   private Button confirmSaveEditBtn;
   @FXML
-  private Button confirmCancelSaveEditBtn;
+  private Button confirmCancelEditBtn;
   @FXML
   private Button confirmDelEditBtn;
   @FXML
@@ -230,6 +229,12 @@ public class HouseholdController {
   private Button editAddBtn;
   @FXML
   private Button editRemoveBtn;
+  @FXML
+  private Button editSaveBtn;
+  @FXML
+  private Button editDeleteBtn;
+  @FXML
+  private Button editCloseBtn;
   @FXML
   private Button splitSaveBtn;
   @FXML
@@ -249,12 +254,6 @@ public class HouseholdController {
   private CheckBox editCHCheckBox;
   @FXML
   private CheckBox splitCHCheckBox;
-
-  private NguoiDung user;
-
-  public void setUser(NguoiDung usr) {
-    user = usr;
-  }
 
   private ArrayList<HoKhau> hkList = new ArrayList<>();
   private TableView<HoKhau> table = new TableView<>();
@@ -288,12 +287,6 @@ public class HouseholdController {
         .addListener((ObservableValue<? extends Boolean> ob, Boolean oldVal, Boolean newVal) -> {
           if (newVal == false) {
             getHKList();
-            selectedHK = null;
-            selectedAddChuHo = null;
-            selectedAddNK = null;
-            selectedEditChuHo = null;
-            selectedEditNK = null;
-            selectedInfoNK = null;
           }
         }));
     optBtnList.add(addSplitBtn);
@@ -504,7 +497,7 @@ public class HouseholdController {
         row.setOnMouseClicked((e) -> {
           selectedEditNK = row.getItem();
           if (selectedEditNK != null) {
-            addHKNameField.setText(selectedEditNK.getHoTen());
+            editHKNameField.setText(selectedEditNK.getHoTen());
             if (selectedEditChuHo != null && selectedEditNK.getID() == selectedEditChuHo.getID())
               editCHCheckBox.setSelected(true);
           }
@@ -543,6 +536,7 @@ public class HouseholdController {
 
     Runnable getNKList = () -> {
       editnk = NhanKhauManage.layListNhanKhauChuaCoHoKhau();
+      editNKTable.setItems(FXCollections.observableArrayList(editnk));
     };
 
     Runnable getNKedList = () -> {
@@ -552,10 +546,14 @@ public class HouseholdController {
       for (int i = 0; i < editednk.size(); i++) {
         nkWithRel.add(new Pair<NhanKhau, String>(editednk.get(i), editedNKRel.get(i)));
       }
+      editedNKTable.setItems(FXCollections.observableArrayList(editednk));
     };
 
     Consumer<String> getNKListFind = (String s) -> {
       editnk = NhanKhauManage.layListNhanKhauChuaCoHoKhau(s);
+      if (selectedEditNK != null)
+        editnk.remove(selectedEditNK);
+      editNKTable.setItems(FXCollections.observableArrayList(editnk));
     };
 
     editHKSearchField.textProperty()
@@ -580,16 +578,44 @@ public class HouseholdController {
       }
     });
 
-    getNKList.run();
-    getNKedList.run();
-    editNKTable.setItems(FXCollections.observableArrayList(editnk));
-    editedNKTable.setItems(FXCollections.observableArrayList(editednk));
     editNKTable.setRowFactory(rowFactory);
     editedNKTable.setRowFactory(rowedFactory);
+    getNKList.run();
+    getNKedList.run();
     editHKTableBox.getChildren().clear();
     editHKTableBox.getChildren().addAll(editHKSearchField, editNKTable);
     editedHKTableBox.getChildren().clear();
     editedHKTableBox.getChildren().add(editedNKTable);
+
+    editAddBtn.setOnAction(ae -> {
+      if (editnk.contains(selectedEditNK)) {
+        System.out.println(editnk.remove(selectedEditNK));
+        editednk.add(selectedEditNK);
+        editNKTable.setItems(FXCollections.observableArrayList(editnk));
+        editedNKTable.setItems(FXCollections.observableArrayList(editednk));
+        String s = addHKRelField.getText();
+        editedNKRel.add(s == null || s.isEmpty() ? "" : s);
+        editHKNameField.setText(null);
+        editHKRelField.setText(null);
+        selectedEditNK = null;
+      }
+    });
+
+    editRemoveBtn.setOnAction((ae) -> {
+      if (editednk.contains(selectedEditNK)) {
+        editnk.add(selectedEditNK);
+        int i = editednk.indexOf(selectedEditNK);
+        editednk.remove(i);
+        editedNKRel.remove(i);
+        editNKTable.setItems(FXCollections.observableArrayList(editnk));
+        editedNKTable.setItems(FXCollections.observableArrayList(editednk));
+        editHKNameField.setText(null);
+        editHKRelField.setText(null);
+        if (selectedEditNK.getID() == selectedAddChuHo.getID())
+          selectedAddChuHo = null;
+        selectedEditNK = null;
+      }
+    });
 
   }
 
@@ -631,9 +657,13 @@ public class HouseholdController {
     editConfirmSavePane.setVisible(true);
     confirmSaveEditBtn.setOnAction(ae -> {
       HoKhauManage.capNhatHoKhau(tmp);
+      for (int i = 0; i < editednk.size(); i++) {
+        HoKhauManage.themNhanKhauVaoHoKhau(selectedHK.getID(), editednk.get(i).getID(), editedNKRel.get(i));
+      }
       editConfirmSavePane.setVisible(false);
+      editPane.setVisible(false);
     });
-    confirmCancelSaveEditBtn.setOnAction(ae -> {
+    confirmCancelEditBtn.setOnAction(ae -> {
       editConfirmSavePane.setVisible(false);
     });
   }
@@ -957,7 +987,7 @@ public class HouseholdController {
           selectedSplitNK = row.getItem();
           if (selectedSplitNK != null) {
             splitHKNameField.setText(selectedSplitNK.getHoTen());
-            splitHKRelOldField.setText(rel.get(nk.indexOf(selectedSplitNK)));
+            splitHKRelOldField.setText(rel.get(splitednk.indexOf(selectedSplitNK)));
             if (splitNewChuHo != null)
               if (selectedSplitNK.getID() == splitNewChuHo.getID()) {
                 splitCHCheckBox.setSelected(true);
@@ -1040,7 +1070,7 @@ public class HouseholdController {
     });
 
     splitSaveBtn.setOnAction(ae -> {
-      splitConfirmSavePane.setVisible(false);
+      splitConfirmSavePane.setVisible(true);
       confirmSaveSplitBtn.setOnAction(aee -> {
         String a3 = splitTTField.getText();
         String a4 = splitQHField.getText();

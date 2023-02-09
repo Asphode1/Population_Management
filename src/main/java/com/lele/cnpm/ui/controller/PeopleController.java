@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import com.lele.cnpm.src.models.ChuyenNhanKhau;
 import com.lele.cnpm.src.models.KhaiTu;
-import com.lele.cnpm.src.models.NguoiDung;
 import com.lele.cnpm.src.models.NhanKhau;
 import com.lele.cnpm.src.models.TamTru;
 import com.lele.cnpm.src.models.TamVang;
@@ -19,8 +18,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -365,12 +362,6 @@ public class PeopleController {
   private ArrayList<Button> optBtnList = new ArrayList<>();
   private NhanKhau selectedNKB = null;
   private ChuyenNhanKhau selectedCNK = null;
-
-  private NguoiDung user;
-
-  public void setUser(NguoiDung usr) {
-    user = usr;
-  }
 
   public void initialize() {
     final ArrayList<DatePicker> pickers = new ArrayList<>(

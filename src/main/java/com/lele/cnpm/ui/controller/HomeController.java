@@ -113,9 +113,6 @@ public class HomeController {
   public void init(NguoiDung usr) {
     user = usr;
     helloText.setText("Hello, " + user.getUserName());
-    dashboardController.setUser(usr);
-    peopleController.setUser(usr);
-    householdController.setUser(usr);
   }
 
   public void initialize() {

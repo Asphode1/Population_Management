@@ -78,7 +78,7 @@
                       <children>
                         <HBox alignment="CENTER_LEFT" layoutY="39.0">
                           <children>
-                            <Label prefWidth="180.0" styleClass="addLabel" text="Tỉnh/Thành phố">
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Tỉnh/Thành phố (*)">
                               <HBox.margin>
                                 <Insets />
                               </HBox.margin>
@@ -88,7 +88,7 @@
                                 <Insets right="30.0" />
                               </HBox.margin>
                             </TextField>
-                            <Label prefWidth="180.0" styleClass="addLabel" text="Quận/Huyện">
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Quận/Huyện (*)">
                               <HBox.margin>
                                 <Insets left="20.0" />
                               </HBox.margin>
@@ -101,7 +101,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="100.0">
                           <children>
-                            <Label prefWidth="180.0" styleClass="addLabel" text="Phường/Xã">
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Phường/Xã (*)">
                               <HBox.margin>
                                 <Insets />
                               </HBox.margin>
@@ -118,7 +118,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="180.0" styleClass="addLabel" text="Địa chỉ">
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Địa chỉ (*)">
                               <HBox.margin>
                                 <Insets />
                               </HBox.margin>
@@ -135,7 +135,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="180.0" styleClass="addLabel" text="Ngày tạo" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Ngày tạo (*)" />
                             <DatePicker fx:id="addDatePicker" prefWidth="280.0" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -146,7 +146,7 @@
                                 <Insets left="20.0" />
                               </HBox.margin>
                             </Label>
-                            <TextField fx:id="addStateField" prefWidth="280.0" styleClass="addLabel" />
+                            <TextField fx:id="addStateField" prefWidth="280.0" styleClass="addLabel" text="Thường trú" />
                           </children>
                           <VBox.margin>
                             <Insets bottom="5.0" top="5.0" />
@@ -341,8 +341,8 @@
                       <children>
                         <HBox alignment="CENTER_LEFT" layoutY="39.0">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="ID" />
-                            <TextField fx:id="editIdField" prefWidth="280.0" styleClass="addLabel">
+                            <Label prefWidth="160.0" styleClass="addLabel" text="ID" />
+                            <TextField fx:id="editIdField" disable="true" prefWidth="280.0" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
                               </HBox.margin>
@@ -352,7 +352,7 @@
                                 <Insets left="20.0" />
                               </HBox.margin>
                             </Label>
-                            <TextField fx:id="editCHField" prefWidth="280.0" styleClass="addLabel" />
+                            <TextField fx:id="editCHField" disable="true" prefWidth="280.0" styleClass="addLabel" />
                           </children>
                           <VBox.margin>
                             <Insets bottom="5.0" top="5.0" />
@@ -360,7 +360,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="100.0">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="Tỉnh/Thành phố" />
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Tỉnh/Thành phố" />
                             <TextField fx:id="editTTField" prefWidth="280.0" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -379,7 +379,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="Phường/Xã" />
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Phường/Xã" />
                             <TextField fx:id="editPXField" prefWidth="280.0" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -392,7 +392,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="Địa chỉ" />
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Địa chỉ" />
                             <TextField fx:id="editAddrField" prefHeight="39.0" prefWidth="790.0" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -405,7 +405,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="Ngày tạo" />
+                            <Label prefWidth="160.0" styleClass="addLabel" text="Ngày tạo" />
                             <DatePicker fx:id="editDatePicker" prefWidth="280.0" styleClass="addLabel" />
                             <Label prefWidth="180.0" styleClass="addLabel" text="Trạng thái">
                               <HBox.margin>
@@ -517,7 +517,7 @@
                         </VBox>
                         <VBox alignment="CENTER" spacing="30.0">
                           <children>
-                            <Button fx:id="editSaveBtn" mnemonicParsing="false" prefWidth="100.0" text="Lưu">
+                            <Button fx:id="editSaveBtn" mnemonicParsing="false" onAction="#saveEdit" prefWidth="100.0" text="Lưu">
                               <font>
                                 <Font name="Montserrat Medium" size="20.0" />
                               </font>
@@ -674,7 +674,7 @@
                       <children>
                         <HBox fx:id="roleHBox11" alignment="CENTER_LEFT" layoutY="39.0">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="ID" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="ID" />
                             <TextField fx:id="infoIdField" editable="false" prefWidth="280.0" style="-fx-background-color: inherit;" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -693,7 +693,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="100.0">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="Tỉnh/Thành phố" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Tỉnh/Thành phố" />
                             <TextField fx:id="infoTTField" editable="false" prefWidth="280.0" style="-fx-background-color: inherit;" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -712,7 +712,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="Phường/Xã" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Phường/Xã" />
                             <TextField fx:id="infoPXField" editable="false" prefWidth="280.0" style="-fx-background-color: inherit;" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -725,7 +725,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="Địa chỉ" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Địa chỉ" />
                             <TextField fx:id="infoAddrField" editable="false" prefHeight="39.0" prefWidth="790.0" style="-fx-background-color: inherit;" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -738,7 +738,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="140.0" styleClass="addLabel" text="Ngày tạo" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Ngày tạo" />
                             <TextField fx:id="infoDateField" editable="false" prefWidth="280.0" style="-fx-background-color: inherit;" styleClass="addLabel">
                               <HBox.margin>
                                 <Insets right="30.0" />
@@ -768,7 +768,7 @@
                                             <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Họ tên" />
-                                                                        <TextField fx:id="infoNKNameField" style="-fx-background-color: inherit;" />
+                                                <TextField fx:id="infoNKNameField" style="-fx-background-color: inherit;" styleClass="addLabel" />
                                               </children>
                                               <VBox.margin>
                                                 <Insets bottom="6.0" />
@@ -777,7 +777,7 @@
                                             <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Số CCCD" />
-                                                                        <TextField fx:id="infoNKCCField" style="-fx-background-color: inherit;" />
+                                                <TextField fx:id="infoNKCCField" style="-fx-background-color: inherit;" styleClass="addLabel" />
                                               </children>
                                               <VBox.margin>
                                                 <Insets bottom="6.0" />
@@ -786,7 +786,7 @@
                                             <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Ngày sinh" />
-                                                                        <TextField fx:id="infoNKDOBField" style="-fx-background-color: inherit;" />
+                                                <TextField fx:id="infoNKDOBField" style="-fx-background-color: inherit;" styleClass="addLabel" />
                                               </children>
                                               <VBox.margin>
                                                 <Insets bottom="6.0" />
@@ -795,7 +795,7 @@
                                             <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Trạng thái" />
-                                                                        <TextField fx:id="infoNKTTField" style="-fx-background-color: inherit;" />
+                                                <TextField fx:id="infoNKTTField" style="-fx-background-color: inherit;" styleClass="addLabel" />
                                               </children>
                                               <VBox.margin>
                                                 <Insets bottom="6.0" />
@@ -804,7 +804,7 @@
                                             <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="200.0">
                                               <children>
                                                 <Label prefHeight="24.0" prefWidth="200.0" styleClass="addLabel" text="Quan hệ với chủ hộ" />
-                                                                        <TextField fx:id="infoNKRelField" style="-fx-background-color: inherit;" />
+                                                <TextField fx:id="infoNKRelField" style="-fx-background-color: inherit;" styleClass="addLabel" />
                                               </children>
                                             </HBox>
                                           </children>
@@ -922,9 +922,9 @@
             </AnchorPane>
             <AnchorPane fx:id="movePane" layoutX="40.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.leftAnchor="299.0" AnchorPane.topAnchor="73.0">
+                <AnchorPane layoutX="145.0" layoutY="42.0" AnchorPane.leftAnchor="274.0" AnchorPane.topAnchor="73.0">
                   <children>
-                    <VBox alignment="TOP_CENTER" prefHeight="420.0" prefWidth="500.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="0.0">
+                    <VBox alignment="TOP_CENTER" prefHeight="420.0" prefWidth="550.0" style="-fx-background-color: #F9f9f9; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="rightProfile" AnchorPane.leftAnchor="0.0">
                       <children>
                         <Label text="Khai báo chuyển hộ khẩu" textFill="#569698">
                           <font>
@@ -938,12 +938,12 @@
                           <children>
                             <HBox alignment="CENTER_LEFT" layoutY="39.0">
                               <children>
-                                <Label prefWidth="160.0" styleClass="addLabel" text="Id Hộ khẩu">
+                                <Label prefWidth="180.0" styleClass="addLabel" text="Id Hộ khẩu">
                                   <HBox.margin>
                                     <Insets left="5.0" />
                                   </HBox.margin>
                                 </Label>
-                                <TextField fx:id="moveIdField" editable="false" prefWidth="280.0" style="-fx-background-color: inherit;" styleClass="addLabel" />
+                                <TextField fx:id="moveIdField" editable="false" prefWidth="300.0" style="-fx-background-color: inherit;" styleClass="addLabel" />
                               </children>
                               <VBox.margin>
                                 <Insets bottom="5.0" top="5.0" />
@@ -951,12 +951,12 @@
                             </HBox>
                             <HBox alignment="CENTER_LEFT">
                               <children>
-                                <Label prefWidth="160.0" styleClass="addLabel" text="Ngày chuyển đi">
+                                <Label prefWidth="180.0" styleClass="addLabel" text="Ngày chuyển đi (*)">
                                   <HBox.margin>
                                     <Insets left="5.0" />
                                   </HBox.margin>
                                 </Label>
-                                <DatePicker fx:id="moveAtPicker" prefWidth="280.0" styleClass="addLabel" />
+                                <DatePicker fx:id="moveAtPicker" prefWidth="300.0" styleClass="addLabel" />
                               </children>
                               <VBox.margin>
                                 <Insets bottom="5.0" top="5.0" />
@@ -964,12 +964,12 @@
                             </HBox>
                             <HBox alignment="CENTER_LEFT">
                               <children>
-                                <Label prefWidth="160.0" styleClass="addLabel" text="Nơi chuyển đến">
+                                <Label prefWidth="180.0" styleClass="addLabel" text="Nơi chuyển đến (*)">
                                   <HBox.margin>
                                     <Insets left="5.0" />
                                   </HBox.margin>
                                 </Label>
-                                <TextField fx:id="moveToField" prefWidth="280.0" styleClass="addLabel" />
+                                <TextField fx:id="moveToField" prefWidth="300.0" styleClass="addLabel" />
                               </children>
                               <VBox.margin>
                                 <Insets bottom="5.0" top="5.0" />
@@ -977,12 +977,12 @@
                             </HBox>
                             <HBox>
                               <children>
-                                <Label prefHeight="27.0" prefWidth="160.0" styleClass="addLabel" text="Ghi chú">
+                                <Label prefHeight="27.0" prefWidth="180.0" styleClass="addLabel" text="Ghi chú">
                                   <HBox.margin>
                                     <Insets left="5.0" />
                                   </HBox.margin>
                                 </Label>
-                                <TextArea fx:id="moveNoteField" prefHeight="84.0" prefWidth="280.0" styleClass="addLabel" />
+                                <TextArea fx:id="moveNoteField" prefHeight="84.0" prefWidth="300.0" styleClass="addLabel" />
                               </children>
                               <VBox.margin>
                                 <Insets top="5.0" />
@@ -1155,29 +1155,32 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="100.0">
                           <children>
-                            <Label prefWidth="200.0" styleClass="addLabel" text="Tỉnh/Thành phố mới" />
+                            <Label prefWidth="220.0" styleClass="addLabel" text="Tỉnh/Thành phố mới (*)" />
                             <TextField fx:id="splitTTField" prefWidth="280.0" styleClass="addLabel">
                               <HBox.margin>
-                                <Insets right="30.0" />
+                                <Insets right="10.0" />
                               </HBox.margin>
                             </TextField>
-                            <Label prefWidth="180.0" styleClass="addLabel" text="Quận/Huyện mới">
+                          </children>
+                          <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                          </VBox.margin>
+                          <padding>
+                            <Insets right="20.0" />
+                          </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                          <children>
+                            <Label prefWidth="220.0" styleClass="addLabel" text="Quận/Huyện mới (*)" />
+                            <TextField fx:id="splitQHField" prefWidth="280.0" styleClass="addLabel" />
+                            <Label prefWidth="180.0" styleClass="addLabel" text="Phường/Xã mới (*)">
                               <HBox.margin>
                                 <Insets left="20.0" />
                               </HBox.margin>
                             </Label>
-                            <TextField fx:id="splitQHField" prefWidth="280.0" styleClass="addLabel" />
-                          </children>
-                          <VBox.margin>
-                            <Insets bottom="5.0" top="5.0" />
-                          </VBox.margin>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT">
-                          <children>
-                            <Label prefWidth="200.0" styleClass="addLabel" text="Phường/Xã mới" />
                             <TextField fx:id="splitPXField" prefWidth="280.0" styleClass="addLabel">
                               <HBox.margin>
-                                <Insets right="30.0" />
+                                <Insets left="10.0" right="10.0" />
                               </HBox.margin>
                             </TextField>
                           </children>
@@ -1187,8 +1190,8 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="200.0" styleClass="addLabel" text="Địa chỉ mới" />
-                            <TextField fx:id="splitAddrField" prefHeight="39.0" prefWidth="790.0" styleClass="addLabel">
+                            <Label prefWidth="220.0" styleClass="addLabel" text="Địa chỉ mới (*)" />
+                            <TextField fx:id="splitAddrField" prefHeight="39.0" styleClass="addLabel" HBox.hgrow="ALWAYS">
                               <HBox.margin>
                                 <Insets />
                               </HBox.margin>
@@ -1197,21 +1200,27 @@
                           <VBox.margin>
                             <Insets bottom="5.0" top="5.0" />
                           </VBox.margin>
+                          <padding>
+                            <Insets right="20.0" />
+                          </padding>
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <children>
-                            <Label prefWidth="200.0" styleClass="addLabel" text="Ngày tạo" />
+                            <Label prefWidth="220.0" styleClass="addLabel" text="Ngày tạo (*)" />
                             <DatePicker fx:id="splitDatePicker" prefWidth="280.0" styleClass="addLabel" />
                             <Label prefWidth="180.0" styleClass="addLabel" text="Trạng thái">
                               <HBox.margin>
-                                <Insets left="50.0" />
+                                <Insets left="30.0" />
                               </HBox.margin>
                             </Label>
-                            <TextField fx:id="splitStateField" prefWidth="280.0" styleClass="addLabel" />
+                            <TextField fx:id="splitStateField" prefWidth="280.0" styleClass="addLabel" text="Thường trú" HBox.hgrow="ALWAYS" />
                           </children>
                           <VBox.margin>
                             <Insets bottom="5.0" top="5.0" />
                           </VBox.margin>
+                          <padding>
+                            <Insets right="20.0" />
+                          </padding>
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                           <VBox.margin>

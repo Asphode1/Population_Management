@@ -3,24 +3,32 @@ package com.lele.cnpm.ui.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.lele.cnpm.src.models.ChiTietDipDacBiet;
+import com.lele.cnpm.src.models.ChiTietDipHocSinhGioi;
 import com.lele.cnpm.src.models.DipDacBiet;
 import com.lele.cnpm.src.models.DipHSG;
 import com.lele.cnpm.src.models.NhanKhau;
+import com.lele.cnpm.src.services.NhanKhauManage;
 import com.lele.cnpm.src.services.TraoThuongDacBietManage;
 import com.lele.cnpm.src.services.TraoThuongHSGManage;
 import com.lele.cnpm.src.utils.Utils;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -37,6 +45,8 @@ public class RewardController {
   private AnchorPane listPane;
   @FXML
   private AnchorPane confirmPane;
+  @FXML
+  private AnchorPane listConfirmPane;
 
   @FXML
   private TextField yearField;
@@ -55,6 +65,12 @@ public class RewardController {
   @FXML
   private TextField money3Field;
   @FXML
+  private TextField addNameField;
+  @FXML
+  private TextField addLField;
+  @FXML
+  private TextField addSField;
+  @FXML
   private TextArea descField;
 
   @FXML
@@ -67,6 +83,14 @@ public class RewardController {
   private Button specialBtn;
   @FXML
   private Button listBtn;
+  @FXML
+  private Button listAddBtn;
+  @FXML
+  private Button listAddNewBtn;
+  @FXML
+  private Button listConfirmBtn;
+  @FXML
+  private Button listCancelBtn;
   @FXML
   private Button editBtn;
   @FXML
@@ -98,31 +122,48 @@ public class RewardController {
   private Label title;
   @FXML
   private Label confirmLabel;
+  @FXML
+  private Label addSLabel;
 
   @FXML
   private VBox listBox;
   @FXML
-  private VBox editListBox;
+  private HBox addListBox;
+  @FXML
+  private HBox addLBox;
+  @FXML
+  private HBox addSBox;
+  @FXML
+  private VBox addedListBox;
+  @FXML
+  private VBox addListDetailBox;
+  @FXML
+  private VBox editListSBox;
   @FXML
   private HBox detailBtn;
+  @FXML
+  private HBox comboBox;
   @FXML
   private HBox listBtnBox;
   @FXML
   private HBox editListBtnBox;
 
-  TableView<DipDacBiet> sTable = new TableView<>();
-  TableView<DipHSG> gTable = new TableView<>();
-  ArrayList<DipDacBiet> sList = new ArrayList<>();
-  ArrayList<DipHSG> gList = new ArrayList<>();
-  DipDacBiet selectedS = null;
-  DipHSG selectedG = null;
+  private TableView<DipDacBiet> sTable = new TableView<>();
+  private TableView<DipHSG> gTable = new TableView<>();
+  private ArrayList<DipDacBiet> sList = new ArrayList<>();
+  private ArrayList<DipHSG> gList = new ArrayList<>();
+  private DipDacBiet selectedS = null;
+  private DipHSG selectedG = null;
 
-  TableView<NhanKhau> gnkTable = new TableView<>();
-  TableView<NhanKhau> snkTable = new TableView<>();
-  ArrayList<NhanKhau> gnkList = new ArrayList<>();
-  ArrayList<NhanKhau> snkList = new ArrayList<>();
-  TableView<NhanKhau> totalTable = new TableView<>();
-  ArrayList<NhanKhau> totalNK = new ArrayList<>();
+  private TableView<ChiTietDipHocSinhGioi> gnkTable = new TableView<>();
+  private TableView<ChiTietDipDacBiet> snkTable = new TableView<>();
+  private ArrayList<ChiTietDipHocSinhGioi> gnkList = new ArrayList<>();
+  private ArrayList<ChiTietDipDacBiet> snkList = new ArrayList<>();
+  private TableView<NhanKhau> totalTable = new TableView<>();
+  private ArrayList<NhanKhau> totalNK = new ArrayList<>();
+  private NhanKhau selectedAddNK = null;
+  private ArrayList<ChiTietDipHocSinhGioi> addedGList = new ArrayList<>();
+  private ArrayList<ChiTietDipDacBiet> addedSList = new ArrayList<>();
 
   public void initialize() {
     detailPane.visibleProperty().addListener((ob, oldVal, newVal) -> {
@@ -183,6 +224,7 @@ public class RewardController {
     numSCol.setMinWidth(180);
     TableColumn<DipDacBiet, String> descSCol = Utils.createColumn("Mô tả", "moTa");
     TableColumn<DipDacBiet, String> tenSCol = Utils.createColumn("Tên dịp", "ten");
+    tenSCol.setMinWidth(180);
     tenSCol.setMaxWidth(180);
     sTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     sTable.getColumns().addAll(Arrays.asList(tenSCol, namSCol, numSCol, descSCol));
@@ -560,10 +602,43 @@ public class RewardController {
   private void openSList(ActionEvent e) {
     listPane.setVisible(true);
     listBox.setVisible(true);
-    editListBox.setVisible(false);
-    TableColumn<NhanKhau, String> nameCol = Utils.createColumn("Họ Tên", "hoTen");
-    snkTable.getColumns().add(nameCol);
+    editListSBox.setVisible(false);
+    TableColumn<ChiTietDipDacBiet, String> nameCol = new TableColumn<>("Họ tên");
+    nameCol.setCellValueFactory(new Callback<CellDataFeatures<ChiTietDipDacBiet, String>, ObservableValue<String>>() {
+      public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
+        int id = p.getValue().getIdNhanKhau();
+        NhanKhau nk = NhanKhauManage.layNhanKhau(id);
+        ObjectProperty<String> s = new SimpleObjectProperty<>();
+        s.set(nk.getHoTen());
+        return s;
+      }
+    });
+    final String NHOM[] = { "0-5 tuổi", "6-14 tuổi", "15-17 tuổi" };
+
+    TableColumn<ChiTietDipDacBiet, String> nhomCol = new TableColumn<>("Nhóm tuổi");
+    nhomCol.setCellValueFactory(new Callback<CellDataFeatures<ChiTietDipDacBiet, String>, ObservableValue<String>>() {
+      public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
+        int nhom = p.getValue().getNhom();
+        ObjectProperty<String> s = new SimpleObjectProperty<>();
+        s.set(NHOM[nhom]);
+        return s;
+      }
+    });
+    TableColumn<ChiTietDipDacBiet, String> ktraCol = new TableColumn<>("Đã nhận ?");
+    ktraCol.setCellValueFactory(
+        new Callback<TableColumn.CellDataFeatures<ChiTietDipDacBiet, String>, ObservableValue<String>>() {
+          public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
+            boolean ktra = p.getValue().getKiemtra();
+            ObjectProperty<String> s = new SimpleObjectProperty<>();
+            s.set(ktra ? "Đã nhận" : "Chưa nhận");
+            return s;
+          }
+        });
+    snkTable.setMaxHeight(470);
+    snkTable.getColumns().clear();
+    snkTable.getColumns().addAll(Arrays.asList(nameCol, nhomCol, ktraCol));
     getSNKList();
+    snkTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     snkTable.setPrefHeight(516);
     snkTable.setPrefWidth(678);
     listBox.getChildren().clear();
@@ -571,14 +646,159 @@ public class RewardController {
     listReturnBtn.setOnAction(aee -> {
       listPane.setVisible(false);
     });
+    listAddBtn.setOnAction(aee -> {
+      editListSBox.setVisible(true);
+      addLBox.setVisible(false);
+      addSBox.setVisible(false);
+      ObservableList<String> opt = FXCollections.observableArrayList(NHOM);
+      final ComboBox<String> nhomBox = new ComboBox<>(opt);
+      comboBox.getChildren().clear();
+      comboBox.getChildren().addAll(Arrays.asList(addSLabel, nhomBox));
+      TableView<NhanKhau> addListTable = new TableView<>();
+      addListTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+      final ArrayList<NhanKhau> hsList = new ArrayList<>();
+      Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
+        @Override
+        public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
+          final TableRow<NhanKhau> row = new TableRow<>();
+          row.setOnMouseClicked((e) -> {
+            selectedAddNK = row.getItem();
+            if (selectedAddNK != null) {
+              addNameField.setText(selectedAddNK.getHoTen());
+            }
+          });
+          return row;
+        }
+      };
+      TableColumn<NhanKhau, String> idCol = Utils.createColumn("ID", "ID");
+      idCol.setMinWidth(50);
+      idCol.setMaxWidth(50);
+      TableColumn<NhanKhau, String> tenCol = Utils.createColumn("Họ tên", "hoTen");
+
+      Runnable getHSList = () -> {
+        hsList.clear();
+        hsList.addAll(NhanKhauManage.layListHocSinh());
+        addListTable.getItems().clear();
+        addListTable.getItems().addAll(FXCollections.observableArrayList(hsList));
+      };
+
+      getHSList.run();
+      addListTable.setRowFactory(rowFactory);
+      addListTable.setMaxWidth(368);
+      addListTable.setMinWidth(368);
+      addListTable.getColumns().addAll(Arrays.asList(idCol, tenCol));
+      addListBox.getChildren().clear();
+      addListBox.getChildren().addAll(Arrays.asList(addListTable, addListDetailBox));
+
+      final TableView<ChiTietDipDacBiet> sTable = new TableView<>();
+      sTable.setMaxHeight(198);
+      sTable.setMinHeight(198);
+      sTable.setMaxWidth(480);
+      sTable.setMinWidth(480);
+      TableColumn<ChiTietDipDacBiet, String> hotenCol = new TableColumn<>("Họ Tên");
+      hotenCol.setCellValueFactory(
+          new Callback<TableColumn.CellDataFeatures<ChiTietDipDacBiet, String>, ObservableValue<String>>() {
+            public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
+              String hoten = NhanKhauManage.layNhanKhau(p.getValue().getIdNhanKhau()).getHoTen();
+              ObjectProperty<String> s = new SimpleObjectProperty<>();
+              s.set(hoten);
+              return s;
+            }
+          });
+      TableColumn<ChiTietDipDacBiet, String> addednhomCol = Utils.createColumn("Nhóm thưởng", "nhom");
+      sTable.getColumns().addAll(Arrays.asList(hotenCol, addednhomCol));
+      sTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+      addedListBox.getChildren().clear();
+      addedListBox.getChildren().add(sTable);
+
+      listAddNewBtn.setOnAction(aeee -> {
+        String n = nhomBox.getValue();
+        int nhom;
+        for (nhom = 0; nhom < 3; nhom++) {
+          if (NHOM[nhom].equals(n))
+            break;
+        }
+        ChiTietDipDacBiet newS = new ChiTietDipDacBiet(selectedS.getIdDip(), selectedAddNK.getID(), nhom);
+        addedSList.add(newS);
+        sTable.getItems().add(newS);
+        addNameField.setText("");
+        addLField.setText("");
+        addSField.setText("");
+      });
+
+      editListSaveBtn.setOnAction(aeee -> {
+        listConfirmPane.setVisible(true);
+        listConfirmBtn.setOnAction(aeeee -> {
+          for (int i = 0; i < addedSList.size(); i++) {
+            TraoThuongDacBietManage.themNhanKhauDuocNhanThuong(addedSList.get(i));
+          }
+          listConfirmPane.setVisible(false);
+          addedSList.clear();
+          editListSBox.setVisible(false);
+          getSNKList();
+        });
+        listCancelBtn.setOnAction(aeeee -> {
+          listConfirmPane.setVisible(false);
+        });
+      });
+
+      editListReturnBtn.setOnAction(aeee -> {
+        addedSList.clear();
+        editListSBox.setVisible(false);
+      });
+    });
   }
 
   private void openGList(ActionEvent e) {
     listPane.setVisible(true);
     listBox.setVisible(true);
-    editListBox.setVisible(false);
-    TableColumn<NhanKhau, String> nameCol = Utils.createColumn("Họ Tên", "hoTen");
-    gnkTable.getColumns().add(nameCol);
+    editListSBox.setVisible(false);
+    TableColumn<ChiTietDipHocSinhGioi, String> nameCol = new TableColumn<>("Họ tên");
+    nameCol
+        .setCellValueFactory(new Callback<CellDataFeatures<ChiTietDipHocSinhGioi, String>, ObservableValue<String>>() {
+          public ObservableValue<String> call(CellDataFeatures<ChiTietDipHocSinhGioi, String> p) {
+            int id = p.getValue().getIdNhanKhau();
+            NhanKhau nk = NhanKhauManage.layNhanKhau(id);
+            ObjectProperty<String> s = new SimpleObjectProperty<>();
+            s.set(nk.getHoTen());
+            return s;
+          }
+        });
+    TableColumn<ChiTietDipHocSinhGioi, String> tlCol = new TableColumn<>("Trường, Lớp");
+    tlCol.setCellValueFactory(
+        new Callback<TableColumn.CellDataFeatures<ChiTietDipHocSinhGioi, String>, ObservableValue<String>>() {
+          public ObservableValue<String> call(CellDataFeatures<ChiTietDipHocSinhGioi, String> p) {
+            ChiTietDipHocSinhGioi g = p.getValue();
+            ObjectProperty<String> s = new SimpleObjectProperty<>();
+            s.set("Lớp " + g.getLop() + ", " + g.getTruong());
+            return s;
+          }
+        });
+    final String NHOM[] = { "Đặc biệt", "Giỏi", "Khá" };
+    TableColumn<ChiTietDipHocSinhGioi, String> nhomCol = new TableColumn<>("Nhóm");
+    nhomCol.setCellValueFactory(
+        new Callback<TableColumn.CellDataFeatures<ChiTietDipHocSinhGioi, String>, ObservableValue<String>>() {
+          public ObservableValue<String> call(CellDataFeatures<ChiTietDipHocSinhGioi, String> p) {
+            ChiTietDipHocSinhGioi g = p.getValue();
+            ObjectProperty<String> s = new SimpleObjectProperty<>();
+            s.set(NHOM[g.getNhom() - 1]);
+            return s;
+          }
+        });
+    TableColumn<ChiTietDipHocSinhGioi, String> ktraCol = new TableColumn<>("Đã nhận ?");
+    ktraCol.setCellValueFactory(
+        new Callback<TableColumn.CellDataFeatures<ChiTietDipHocSinhGioi, String>, ObservableValue<String>>() {
+          public ObservableValue<String> call(CellDataFeatures<ChiTietDipHocSinhGioi, String> p) {
+            boolean ktra = p.getValue().getKiemtra();
+            ObjectProperty<String> s = new SimpleObjectProperty<>();
+            s.set(ktra ? "Đã nhận" : "Chưa nhận");
+            return s;
+          }
+        });
+    gnkTable.setMaxHeight(470);
+    gnkTable.getColumns().clear();
+    gnkTable.getColumns().addAll(Arrays.asList(nameCol, tlCol, nhomCol, ktraCol));
+
     getGNKList();
     gnkTable.setPrefHeight(516);
     gnkTable.setPrefWidth(678);
@@ -587,12 +807,115 @@ public class RewardController {
     listReturnBtn.setOnAction(aee -> {
       listPane.setVisible(false);
     });
+    listAddBtn.setOnAction(aee -> {
+      editListSBox.setVisible(true);
+      addLBox.setVisible(true);
+      addSBox.setVisible(true);
+      ObservableList<String> opt = FXCollections.observableArrayList(NHOM);
+      final ComboBox<String> nhomBox = new ComboBox<>(opt);
+      comboBox.getChildren().clear();
+      comboBox.getChildren().addAll(Arrays.asList(addSLabel, nhomBox));
+      TableView<NhanKhau> addListTable = new TableView<>();
+      addListTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+      final ArrayList<NhanKhau> hsList = new ArrayList<>();
+      Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {
+        @Override
+        public TableRow<NhanKhau> call(final TableView<NhanKhau> param) {
+          final TableRow<NhanKhau> row = new TableRow<>();
+          row.setOnMouseClicked((e) -> {
+            selectedAddNK = row.getItem();
+            if (selectedAddNK != null) {
+              addNameField.setText(selectedAddNK.getHoTen());
+            }
+          });
+          return row;
+        }
+      };
+      TableColumn<NhanKhau, String> idCol = Utils.createColumn("ID", "ID");
+      idCol.setMinWidth(50);
+      idCol.setMaxWidth(50);
+      TableColumn<NhanKhau, String> tenCol = Utils.createColumn("Họ tên", "hoTen");
+
+      Runnable getHSList = () -> {
+        hsList.clear();
+        hsList.addAll(NhanKhauManage.layListHocSinh());
+        addListTable.getItems().clear();
+        addListTable.getItems().addAll(FXCollections.observableArrayList(hsList));
+      };
+
+      getHSList.run();
+      addListTable.setRowFactory(rowFactory);
+      addListTable.setMaxWidth(368);
+      addListTable.setMinWidth(368);
+      addListTable.getColumns().addAll(Arrays.asList(idCol, tenCol));
+      addListBox.getChildren().clear();
+      addListBox.getChildren().addAll(Arrays.asList(addListTable, addListDetailBox));
+
+      final TableView<ChiTietDipHocSinhGioi> gTable = new TableView<>();
+      sTable.setMaxHeight(198);
+      sTable.setMinHeight(198);
+      sTable.setMaxWidth(480);
+      sTable.setMinWidth(480);
+      TableColumn<ChiTietDipHocSinhGioi, String> hotenCol = new TableColumn<>("Họ Tên");
+      hotenCol.setCellValueFactory(
+          new Callback<TableColumn.CellDataFeatures<ChiTietDipHocSinhGioi, String>, ObservableValue<String>>() {
+            public ObservableValue<String> call(CellDataFeatures<ChiTietDipHocSinhGioi, String> p) {
+              String hoten = NhanKhauManage.layNhanKhau(p.getValue().getIdNhanKhau()).getHoTen();
+              ObjectProperty<String> s = new SimpleObjectProperty<>();
+              s.set(hoten);
+              return s;
+            }
+          });
+      TableColumn<ChiTietDipHocSinhGioi, String> addednhomCol = Utils.createColumn("Nhóm thưởng", "nhom");
+      gTable.getColumns().addAll(Arrays.asList(hotenCol, addednhomCol));
+      gTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+      addedListBox.getChildren().clear();
+      addedListBox.getChildren().add(gTable);
+
+      listAddNewBtn.setOnAction(aeee -> {
+        String n = nhomBox.getValue();
+        String l = addLField.getText();
+        String t = addSField.getText();
+        int nhom;
+        for (nhom = 0; nhom < 3; nhom++) {
+          if (NHOM[nhom].equals(n))
+            break;
+        }
+        ChiTietDipHocSinhGioi newG = new ChiTietDipHocSinhGioi(selectedG.getIdDip(), selectedAddNK.getID(), t, l, nhom);
+        addedGList.add(newG);
+        gTable.getItems().add(newG);
+        addNameField.setText("");
+        addLField.setText("");
+        addSField.setText("");
+      });
+
+      editListSaveBtn.setOnAction(aeee -> {
+        listConfirmPane.setVisible(true);
+        listConfirmBtn.setOnAction(aeeee -> {
+          for (int i = 0; i < addedGList.size(); i++) {
+            TraoThuongHSGManage.themNhanKhauDuocNhanThuong(addedGList.get(i));
+          }
+          listConfirmPane.setVisible(false);
+          addedGList.clear();
+          editListSBox.setVisible(false);
+          getGNKList();
+        });
+        listCancelBtn.setOnAction(aeeee -> {
+          listConfirmPane.setVisible(false);
+        });
+      });
+
+      editListReturnBtn.setOnAction(aeee -> {
+        addedGList.clear();
+        editListSBox.setVisible(false);
+      });
+    });
   }
 
   private void openEditSList(ActionEvent e) {
     listPane.setVisible(true);
     listBox.setVisible(false);
-    editListBox.setVisible(true);
+    editListSBox.setVisible(true);
     listReturnBtn.setOnAction(aee -> {
       listPane.setVisible(false);
     });
@@ -601,23 +924,23 @@ public class RewardController {
   private void openEditGList(ActionEvent e) {
     listPane.setVisible(true);
     listBox.setVisible(false);
-    editListBox.setVisible(true);
+    editListSBox.setVisible(true);
     listReturnBtn.setOnAction(aee -> {
       listPane.setVisible(false);
     });
   }
 
   private void getGNKList() {
-    gnkList = TraoThuongHSGManage.layNhanKhauDuocTraoThuong(selectedG);
+    gnkList = TraoThuongHSGManage.layListChiTietDipHocSinhGioi(selectedG.getIdDip());
     gnkTable.getItems().clear();
-    ObservableList<NhanKhau> list = FXCollections.observableArrayList(gnkList);
+    ObservableList<ChiTietDipHocSinhGioi> list = FXCollections.observableArrayList(gnkList);
     gnkTable.setItems(list);
   }
 
   private void getSNKList() {
-    snkList = TraoThuongDacBietManage.layNhanKhauDuocTraoThuong(selectedS);
+    snkList = TraoThuongDacBietManage.layListChiTietDipDacBiet(selectedS.getIdDip());
     snkTable.getItems().clear();
-    ObservableList<NhanKhau> list = FXCollections.observableArrayList(snkList);
+    ObservableList<ChiTietDipDacBiet> list = FXCollections.observableArrayList(snkList);
     snkTable.setItems(list);
   }
 }
