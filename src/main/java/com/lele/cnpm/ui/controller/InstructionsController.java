@@ -10,8 +10,10 @@ public class InstructionsController {
   private AnchorPane root;
   @FXML
   private WebView webView;
+  private WebEngine webEngine;
 
-  public void initialize(){
-    
+  public void initialize() {
+    webEngine = webView.getEngine();
+    webEngine.load(getClass().getResource("/html/index.html").toExternalForm());
   }
 }

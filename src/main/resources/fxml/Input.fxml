@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #CFE3E3;" stylesheets="@../css/household.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.LoginController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #CFE3E3;" stylesheets="@../css/household.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.InputController">
   <children>
     <AnchorPane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: #569698; -fx-background-radius: 10 10 0 0;">
       <children>
