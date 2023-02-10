@@ -81,7 +81,7 @@ public class TraoThuongDacBietManage extends DipDacBietModify {
   }
 
   public static float tongTienCanTrao(DipDacBiet ddb) {
-    ArrayList<ChiTietDipDacBiet> cts = ChiTietDipDacBietModify.layListChiTietDipDacBiet(ddb.getId());
+    ArrayList<ChiTietDipDacBiet> cts = ChiTietDipDacBietModify.layListChiTietDipDacBiet(ddb.getIdDip());
     float res = 0;
     for(ChiTietDipDacBiet ct : cts) {
       if(ct.getNhom() == 1) res += ddb.getTien05();
@@ -92,7 +92,7 @@ public class TraoThuongDacBietManage extends DipDacBietModify {
   }
 
   public static float tongTienDaTrao(DipDacBiet ddb) {
-    ArrayList<ChiTietDipDacBiet> cts = ChiTietDipDacBietModify.layListChiTietDipDacBiet(ddb.getId());
+    ArrayList<ChiTietDipDacBiet> cts = ChiTietDipDacBietModify.layListChiTietDipDacBiet(ddb.getIdDip());
     float res = 0;
     for(ChiTietDipDacBiet ct : cts) {
       if (ct.getKiemTra()) {
