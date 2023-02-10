@@ -960,6 +960,58 @@ public class RewardController {
             return s;
           }
         });
+    Callback<TableView<ChiTietDipHocSinhGioi>, TableRow<ChiTietDipHocSinhGioi>> rowListFactory = new Callback<TableView<ChiTietDipHocSinhGioi>, TableRow<ChiTietDipHocSinhGioi>>() {
+      @Override
+      public TableRow<ChiTietDipHocSinhGioi> call(final TableView<ChiTietDipHocSinhGioi> param) {
+        final TableRow<ChiTietDipHocSinhGioi> row = new TableRow<>();
+        row.setOnMouseClicked(me -> {
+          selectedListG = row.getItem();
+          if (selectedListG != null && me.getButton() == MouseButton.SECONDARY) {
+            double x = me.getSceneX();
+            double y = me.getSceneY();
+            double xx = x > 1280 - 160 ? x - 160 - 137 : x - 135;
+            double yy = y > 720 - 160 ? y - 160 - 147 : y - 145;
+            optPane.setVisible(true);
+            AnchorPane.setLeftAnchor(optBox, xx);
+            AnchorPane.setTopAnchor(optBox, yy);
+            deleteNKBtn.setOnAction(ae -> {
+              optPane.setVisible(false);
+              listConfirmDeletePane.setVisible(true);
+              listConfirmDeleteBtn.setOnAction(aee -> {
+                TraoThuongHSGManage.xoaChiTietHSG(selectedListG);
+                listConfirmedDeletePane.setVisible(true);
+                listConfirmedDeleteBtn.setOnAction(aeee -> {
+                  listConfirmedDeletePane.setVisible(false);
+                  listConfirmDeletePane.setVisible(false);
+                  getGNKList();
+                });
+              });
+              listCancelDeleteBtn.setOnAction(aee -> {
+                listConfirmDeletePane.setVisible(false);
+              });
+            });
+            confirmNKBtn.setOnAction(ae -> {
+              optPane.setVisible(false);
+              listConfirmAddPane.setVisible(true);
+              listConfirmAddBtn.setOnAction(aee -> {
+                TraoThuongHSGManage.xacNhanDaTraoThuong(selectedListG);
+                listConfirmedAddPane.setVisible(true);
+                listConfirmedAddBtn.setOnAction(aeee -> {
+                  listConfirmedAddPane.setVisible(false);
+                  listConfirmAddPane.setVisible(false);
+                  getGNKList();
+                });
+              });
+              listCancelAddBtn.setOnAction(aee -> {
+                listConfirmAddPane.setVisible(false);
+              });
+            });
+          }
+        });
+        return row;
+      }
+    };
+    gnkTable.setRowFactory(rowListFactory);
     gnkTable.setMaxHeight(470);
     gnkTable.getColumns().clear();
     gnkTable.getColumns().addAll(Arrays.asList(nameCol, tlCol, nhomCol, ktraCol));
