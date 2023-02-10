@@ -64,9 +64,10 @@ public class HoKhauNhanKhauModify {
    * @param nk
    * @return true/false
    */
-  public static boolean xoaNhanKhau(NhanKhau nk) {
-    String sql = "DELETE FROM ho_khau_nhan_khau WHERE idNhanKhau = " + nk.getID();
-
+  public static boolean xoaNhanKhau(int idHoKhau, int idNhanKhau) {
+    String sql = "DELETE FROM ho_khau_nhan_khau "
+        + " WHERE idNhanKhau = " + idNhanKhau
+        + " AND idHoKhau = " + idHoKhau;
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
       PreparedStatement pstmt = conn.prepareStatement(sql);
