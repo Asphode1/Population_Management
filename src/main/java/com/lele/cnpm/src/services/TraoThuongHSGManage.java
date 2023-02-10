@@ -69,14 +69,14 @@ public class TraoThuongHSGManage extends DipHSGModify {
     ArrayList<ChiTietDipHocSinhGioi> cts = ChiTietDipHocSinhGioiModify.layListChiTietDipHocSinhGioi(dhsg.getIdDip());
     float res = 0;
     for(ChiTietDipHocSinhGioi ct : cts) {
-      if(ct.getNhom() == 1) res += ddb.getTienDacBiet();
-      else if(ct.getNhom() == 2) res += ddb.getTienGioi();
-      else if(ct.getNhom() == 3) res += ddb.getTienKha();
+      if(ct.getNhom() == 1) res += dhsg.getTienDacBiet();
+      else if(ct.getNhom() == 2) res += dhsg.getTienGioi();
+      else if(ct.getNhom() == 3) res += dhsg.getTienKha();
     }
     return res;
   }
 
-  public static float tongTienCanTrao(DipHSG dhsg) {
+  /* public static float tongTienCanTrao(DipHSG dhsg) {
     ArrayList<ChiTietDipHocSinhGioi> cts = ChiTietDipHocSinhGioiModify.layListChiTietDipHocSinhGioi(dhsg.getIdDip());
     float res = 0;
     for(ChiTietDipHocSinhGioi ct : cts) {
@@ -87,5 +87,5 @@ public class TraoThuongHSGManage extends DipHSGModify {
       }
     }
     return res;
-  }
+  } */
 }

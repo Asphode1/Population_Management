@@ -33,7 +33,7 @@ public class NhanKhauManage extends NhanKhauModify {
       if (nk.getTrangThai().equals("Tạm vắng") || nk.getTrangThai().equals("Đã chuyển đi") || nk.getTrangThai().equals("Đã mất")) return false;
       nk.setTrangThai("Đã chuyển đi");
       capNhatNhanKhau(nk);
-      HoKhauNhanKhauModify.xoaNhanKhau(nk);
+      HoKhauNhanKhauModify.xoaNhanKhau(nk.getID());
       ChuyenNhanKhauModify.themChuyenNhanKhau(cnk);
     } catch (Exception e) {
       e.printStackTrace();
@@ -54,7 +54,7 @@ public class NhanKhauManage extends NhanKhauModify {
       NhanKhau nk = layNhanKhau(kt.getIdNguoiMat());
       nk.setTrangThai("Đã mất");
       capNhatNhanKhau(nk);
-      HoKhauNhanKhauModify.xoaNhanKhau(nk);
+      HoKhauNhanKhauModify.xoaNhanKhau(nk.getID());
     } catch (Exception e) {
       e.printStackTrace();
       return false;

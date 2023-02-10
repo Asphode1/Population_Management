@@ -95,7 +95,7 @@ public class TraoThuongDacBietManage extends DipDacBietModify {
     ArrayList<ChiTietDipDacBiet> cts = ChiTietDipDacBietModify.layListChiTietDipDacBiet(ddb.getIdDip());
     float res = 0;
     for(ChiTietDipDacBiet ct : cts) {
-      if (ct.getKiemTra()) {
+      if (ct.getKiemtra()) {
         if(ct.getNhom() == 1) res += ddb.getTien05();
         else if(ct.getNhom() == 2) res += ddb.getTien614();
         else if(ct.getNhom() == 3) res += ddb.getTien1517();

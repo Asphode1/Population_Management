@@ -32,7 +32,7 @@
     </AnchorPane>
     <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
       <children>
-        <Label prefWidth="200.0" styleClass="addLabel" text="Tên server :" />
+        <Label prefWidth="200.0" styleClass="addLabel" text="Tên server (*):" />
         <TextField fx:id="serverField" promptText="USER\SQLSERVERNAME" style="-fx-background-color: #F2F2F2; -fx-background-radius: 12; -fx-border-radius: 12;" styleClass="addLabel" HBox.hgrow="ALWAYS" />
       </children>
       <VBox.margin>
@@ -56,7 +56,7 @@
     </HBox>
     <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
       <children>
-        <Label prefWidth="200.0" styleClass="addLabel" text="Mật khẩu" />
+        <Label prefWidth="200.0" styleClass="addLabel" text="Mật khẩu (*):" />
         <PasswordField fx:id="passField" promptText="********" style="-fx-background-color: #F2F2F2; -fx-background-radius: 12; -fx-border-radius: 12;" styleClass="addLabel" HBox.hgrow="ALWAYS" />
       </children>
       <padding>

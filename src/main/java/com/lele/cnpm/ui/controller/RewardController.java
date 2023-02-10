@@ -13,6 +13,10 @@ import com.lele.cnpm.src.services.TraoThuongDacBietManage;
 import com.lele.cnpm.src.services.TraoThuongHSGManage;
 import com.lele.cnpm.src.utils.Utils;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -29,11 +33,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import javafx.util.Duration;
 
 public class RewardController {
 
@@ -47,6 +54,16 @@ public class RewardController {
   private AnchorPane confirmPane;
   @FXML
   private AnchorPane listConfirmPane;
+  @FXML
+  private AnchorPane listConfirmDeletePane;
+  @FXML
+  private AnchorPane listConfirmAddPane;
+  @FXML
+  private AnchorPane listConfirmedDeletePane;
+  @FXML
+  private AnchorPane listConfirmedAddPane;
+  @FXML
+  private AnchorPane listConfirmedPane;
 
   @FXML
   private TextField yearField;
@@ -88,6 +105,8 @@ public class RewardController {
   @FXML
   private Button listAddNewBtn;
   @FXML
+  private Button listAddAllBtn;
+  @FXML
   private Button listConfirmBtn;
   @FXML
   private Button listCancelBtn;
@@ -102,6 +121,8 @@ public class RewardController {
   @FXML
   private Button listReturnBtn;
   @FXML
+  private Button listConfirmedBtn;
+  @FXML
   private Button editListReturnBtn;
   @FXML
   private Button editListSaveBtn;
@@ -109,6 +130,18 @@ public class RewardController {
   private Button confirmBtn;
   @FXML
   private Button cancelBtn;
+  @FXML
+  private Button listConfirmDeleteBtn;
+  @FXML
+  private Button listCancelDeleteBtn;
+  @FXML
+  private Button listConfirmedDeleteBtn;
+  @FXML
+  private Button listConfirmAddBtn;
+  @FXML
+  private Button listCancelAddBtn;
+  @FXML
+  private Button listConfirmedAddBtn;
 
   @FXML
   private Label nameLabel;
@@ -159,11 +192,17 @@ public class RewardController {
   private TableView<ChiTietDipDacBiet> snkTable = new TableView<>();
   private ArrayList<ChiTietDipHocSinhGioi> gnkList = new ArrayList<>();
   private ArrayList<ChiTietDipDacBiet> snkList = new ArrayList<>();
-  private TableView<NhanKhau> totalTable = new TableView<>();
-  private ArrayList<NhanKhau> totalNK = new ArrayList<>();
   private NhanKhau selectedAddNK = null;
+  private ChiTietDipDacBiet selectedListS = null;
+  private ChiTietDipHocSinhGioi selectedListG = null;
   private ArrayList<ChiTietDipHocSinhGioi> addedGList = new ArrayList<>();
   private ArrayList<ChiTietDipDacBiet> addedSList = new ArrayList<>();
+
+  private AnchorPane optPane = new AnchorPane();
+  private VBox optBox = new VBox();
+  private Button deleteNKBtn = new Button("Xoá nhân khẩu");
+  private Button confirmNKBtn = new Button("Xác nhận thưởng");
+  private ArrayList<Button> optBtnList = new ArrayList<>();
 
   public void initialize() {
     detailPane.visibleProperty().addListener((ob, oldVal, newVal) -> {
@@ -174,6 +213,54 @@ public class RewardController {
           getSList();
       }
     });
+
+    optBtnList.add(deleteNKBtn);
+    optBtnList.add(confirmNKBtn);
+    optBtnList.forEach((Button e) -> {
+      e.setPrefHeight(40);
+      e.setPrefWidth(160);
+      e.setStyle("-fx-background-color: inherit");
+      e.getStyleClass().addAll("addLabel", "addLabelSmaller");
+      e.addEventFilter(MouseEvent.MOUSE_ENTERED, me -> {
+        ColorAdjust ca = new ColorAdjust();
+        ca.setBrightness(0);
+        e.setEffect(ca);
+        Timeline mouseOnEnter = new Timeline(
+            new KeyFrame(Duration.seconds(0),
+                new KeyValue(ca.brightnessProperty(), ca.brightnessProperty().getValue(), Interpolator.EASE_BOTH)),
+            new KeyFrame(Duration.seconds(0.25), new KeyValue(ca.brightnessProperty(), -0.25, Interpolator.EASE_BOTH)));
+        mouseOnEnter.setAutoReverse(false);
+        mouseOnEnter.setCycleCount(1);
+        mouseOnEnter.play();
+      });
+      e.addEventFilter(MouseEvent.MOUSE_EXITED, me -> {
+        ColorAdjust ca = new ColorAdjust();
+        ca.setBrightness(0);
+        e.setEffect(ca);
+        Timeline mouseOnExit = new Timeline(
+            new KeyFrame(Duration.seconds(0),
+                new KeyValue(ca.brightnessProperty(), ca.brightnessProperty().getValue(), Interpolator.EASE_BOTH)),
+            new KeyFrame(Duration.seconds(0.25), new KeyValue(ca.brightnessProperty(), 0, Interpolator.EASE_BOTH)));
+        mouseOnExit.setAutoReverse(false);
+        mouseOnExit.setCycleCount(1);
+        mouseOnExit.play();
+      });
+    });
+    optBox.getChildren().addAll(optBtnList);
+    optBox.setPrefHeight(80);
+    optBox.setPrefWidth(160);
+    optBox.setStyle("-fx-background-color: #fefefe");
+    optPane.setVisible(false);
+    optPane.getChildren().add(optBox);
+    optPane.setOnMouseClicked((MouseEvent me) -> {
+      optPane.setVisible(false);
+    });
+    listPane.getChildren().add(optPane);
+    AnchorPane.setBottomAnchor(optPane, 0.0);
+    AnchorPane.setLeftAnchor(optPane, 0.0);
+    AnchorPane.setRightAnchor(optPane, 0.0);
+    AnchorPane.setTopAnchor(optPane, 0.0);
+
     Callback<TableView<DipHSG>, TableRow<DipHSG>> rowGFactory = new Callback<TableView<DipHSG>, TableRow<DipHSG>>() {
       @Override
       public TableRow<DipHSG> call(final TableView<DipHSG> param) {
@@ -603,6 +690,8 @@ public class RewardController {
     listPane.setVisible(true);
     listBox.setVisible(true);
     editListSBox.setVisible(false);
+    editListBtnBox.getChildren().clear();
+    editListBtnBox.getChildren().addAll(editListSaveBtn, listAddAllBtn, editListReturnBtn);
     TableColumn<ChiTietDipDacBiet, String> nameCol = new TableColumn<>("Họ tên");
     nameCol.setCellValueFactory(new Callback<CellDataFeatures<ChiTietDipDacBiet, String>, ObservableValue<String>>() {
       public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
@@ -634,6 +723,58 @@ public class RewardController {
             return s;
           }
         });
+    Callback<TableView<ChiTietDipDacBiet>, TableRow<ChiTietDipDacBiet>> rowListFactory = new Callback<TableView<ChiTietDipDacBiet>, TableRow<ChiTietDipDacBiet>>() {
+      @Override
+      public TableRow<ChiTietDipDacBiet> call(final TableView<ChiTietDipDacBiet> param) {
+        final TableRow<ChiTietDipDacBiet> row = new TableRow<>();
+        row.setOnMouseClicked(me -> {
+          selectedListS = row.getItem();
+          if (selectedListS != null && me.getButton() == MouseButton.SECONDARY) {
+            double x = me.getSceneX();
+            double y = me.getSceneY();
+            double xx = x > 1280 - 160 ? x - 160 - 137 : x - 135;
+            double yy = y > 720 - 160 ? y - 160 - 147 : y - 145;
+            optPane.setVisible(true);
+            AnchorPane.setLeftAnchor(optBox, xx);
+            AnchorPane.setTopAnchor(optBox, yy);
+            deleteNKBtn.setOnAction(ae -> {
+              optPane.setVisible(false);
+              listConfirmDeletePane.setVisible(true);
+              listConfirmDeleteBtn.setOnAction(aee -> {
+                TraoThuongDacBietManage.xoaChiTietDipDacBiet(selectedListS);
+                listConfirmedDeletePane.setVisible(true);
+                listConfirmedDeleteBtn.setOnAction(aeee -> {
+                  listConfirmedDeletePane.setVisible(false);
+                  listConfirmDeletePane.setVisible(false);
+                  getSNKList();
+                });
+              });
+              listCancelDeleteBtn.setOnAction(aee -> {
+                listConfirmDeletePane.setVisible(false);
+              });
+            });
+            confirmNKBtn.setOnAction(ae -> {
+              optPane.setVisible(false);
+              listConfirmAddPane.setVisible(true);
+              listConfirmAddBtn.setOnAction(aee -> {
+                TraoThuongDacBietManage.xacNhanDaTraoThuong(selectedListS);
+                listConfirmedAddPane.setVisible(true);
+                listConfirmedAddBtn.setOnAction(aeee -> {
+                  listConfirmedAddPane.setVisible(false);
+                  listConfirmAddPane.setVisible(false);
+                  getSNKList();
+                });
+              });
+              listCancelAddBtn.setOnAction(aee -> {
+                listConfirmAddPane.setVisible(false);
+              });
+            });
+          }
+        });
+        return row;
+      }
+    };
+    snkTable.setRowFactory(rowListFactory);
     snkTable.setMaxHeight(470);
     snkTable.getColumns().clear();
     snkTable.getColumns().addAll(Arrays.asList(nameCol, nhomCol, ktraCol));
@@ -726,16 +867,38 @@ public class RewardController {
         addSField.setText("");
       });
 
+      listAddAllBtn.setOnAction(aeee -> {
+        listConfirmPane.setVisible(true);
+        listConfirmBtn.setOnAction(aeeee -> {
+          TraoThuongDacBietManage.themToanBoHocSinh(selectedS.getIdDip());
+          listConfirmedPane.setVisible(true);
+          listConfirmedBtn.setOnAction(aeeeee -> {
+            listConfirmedPane.setVisible(false);
+            listConfirmPane.setVisible(false);
+            addedSList.clear();
+            editListSBox.setVisible(false);
+            getSNKList();
+          });
+        });
+        listCancelBtn.setOnAction(aeeee -> {
+          listConfirmPane.setVisible(false);
+        });
+      });
+
       editListSaveBtn.setOnAction(aeee -> {
         listConfirmPane.setVisible(true);
         listConfirmBtn.setOnAction(aeeee -> {
           for (int i = 0; i < addedSList.size(); i++) {
             TraoThuongDacBietManage.themNhanKhauDuocNhanThuong(addedSList.get(i));
           }
-          listConfirmPane.setVisible(false);
-          addedSList.clear();
-          editListSBox.setVisible(false);
-          getSNKList();
+          listConfirmedPane.setVisible(true);
+          listConfirmedBtn.setOnAction(aeeeee -> {
+            listConfirmedPane.setVisible(false);
+            listConfirmPane.setVisible(false);
+            addedSList.clear();
+            editListSBox.setVisible(false);
+            getSNKList();
+          });
         });
         listCancelBtn.setOnAction(aeeee -> {
           listConfirmPane.setVisible(false);
@@ -753,6 +916,8 @@ public class RewardController {
     listPane.setVisible(true);
     listBox.setVisible(true);
     editListSBox.setVisible(false);
+    editListBtnBox.getChildren().clear();
+    editListBtnBox.getChildren().addAll(editListSaveBtn, editListReturnBtn);
     TableColumn<ChiTietDipHocSinhGioi, String> nameCol = new TableColumn<>("Họ tên");
     nameCol
         .setCellValueFactory(new Callback<CellDataFeatures<ChiTietDipHocSinhGioi, String>, ObservableValue<String>>() {
@@ -895,10 +1060,14 @@ public class RewardController {
           for (int i = 0; i < addedGList.size(); i++) {
             TraoThuongHSGManage.themNhanKhauDuocNhanThuong(addedGList.get(i));
           }
-          listConfirmPane.setVisible(false);
-          addedGList.clear();
-          editListSBox.setVisible(false);
-          getGNKList();
+          listConfirmedPane.setVisible(true);
+          listConfirmedBtn.setOnAction(aeeeee -> {
+            listConfirmedPane.setVisible(false);
+            listConfirmPane.setVisible(false);
+            addedSList.clear();
+            editListSBox.setVisible(false);
+            getGNKList();
+          });
         });
         listCancelBtn.setOnAction(aeeee -> {
           listConfirmPane.setVisible(false);

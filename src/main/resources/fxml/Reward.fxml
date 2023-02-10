@@ -262,7 +262,7 @@
                         </HBox>
                       </children>
                     </VBox>
-                    <VBox fx:id="editListSBox" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0">
+                    <VBox fx:id="editListSBox" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0">
                       <children>
                                     <HBox fx:id="addListBox" alignment="CENTER_LEFT" prefHeight="470.0">
                                        <children>
@@ -297,12 +297,13 @@
                                                       <Label fx:id="addSLabel" prefWidth="170.0" styleClass="addLabel" text="Nhóm thưởng (*)" textFill="#1b1b1b" HBox.hgrow="ALWAYS" />
                                                    </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+                                                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="60.0">
                                                    <children>
-                                                      <Button fx:id="listAddNewBtn" mnemonicParsing="false" prefWidth="100.0" text="Thêm">
+                                                      <Button fx:id="listAddNewBtn" mnemonicParsing="false" prefWidth="140.0" text="Thêm">
                                                          <styleClass>
                                                             <String fx:value="btn" />
                                                             <String fx:value="saveBtn" />
+                                                            <String fx:value="addLabel" />
                                                          </styleClass>
                                                       </Button>
                                                    </children>
@@ -318,7 +319,7 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                        <HBox fx:id="editListBtnBox" alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="100.0">
+                        <HBox fx:id="editListBtnBox" alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="80.0">
                           <children>
                             <Button fx:id="editListSaveBtn" mnemonicParsing="false" text="Lưu">
                               <padding>
@@ -330,6 +331,16 @@
                                 <String fx:value="saveBtn" />
                               </styleClass>
                             </Button>
+                                          <Button fx:id="listAddAllBtn" mnemonicParsing="false" prefWidth="160.0" text="Thêm toàn bộ">
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="saveBtn" />
+                                                <String fx:value="addLabel" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </Button>
                             <Button fx:id="editListReturnBtn" mnemonicParsing="false" text="Quay lại">
                               <padding>
                                 <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
@@ -381,6 +392,176 @@
                                           <Insets top="20.0" />
                                        </padding>
                                     </VBox>
+                                    <AnchorPane fx:id="listConfirmedPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" layoutX="329.0" layoutY="186.0" prefHeight="137.0" prefWidth="410.0" spacing="10.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.bottomAnchor="249.0" AnchorPane.leftAnchor="329.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="186.0">
+                                             <children>
+                                                <Label text="Thêm thành công" textFill="#569698">
+                                                   <styleClass>
+                                                      <String fx:value="addLabelBig" />
+                                                      <String fx:value="addLabel" />
+                                                   </styleClass>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="20.0">
+                                                   <children>
+                                                      <Button fx:id="listConfirmedBtn" mnemonicParsing="false" text="Đóng">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                                         </padding>
+                                                         <styleClass>
+                                                            <String fx:value="btn" />
+                                                            <String fx:value="addLabel" />
+                                                         </styleClass>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="listConfirmDeletePane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" layoutX="329.0" layoutY="186.0" prefHeight="137.0" prefWidth="410.0" spacing="10.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.bottomAnchor="249.0" AnchorPane.leftAnchor="329.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="186.0">
+                                       <children>
+                                          <Label text="Xác nhận xoá trao thưởng" textFill="#569698">
+                                             <styleClass>
+                                                <String fx:value="addLabelBig" />
+                                                <String fx:value="addLabel" />
+                                             </styleClass>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="40.0">
+                                             <children>
+                                                <Button fx:id="listConfirmDeleteBtn" mnemonicParsing="false" text="Xoá">
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                                   </padding>
+                                                   <styleClass>
+                                                      <String fx:value="btn" />
+                                                      <String fx:value="addLabel" />
+                                                      <String fx:value="delBtn" />
+                                                   </styleClass>
+                                                </Button>
+                                                <Button fx:id="listCancelDeleteBtn" mnemonicParsing="false" text="Huỷ">
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                                   </padding>
+                                                   <styleClass>
+                                                      <String fx:value="btn" />
+                                                      <String fx:value="addLabel" />
+                                                   </styleClass>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets top="20.0" />
+                                       </padding>
+                                    </VBox>
+                                    <AnchorPane fx:id="listConfirmedDeletePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" layoutX="329.0" layoutY="186.0" prefHeight="137.0" prefWidth="410.0" spacing="10.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.bottomAnchor="249.0" AnchorPane.leftAnchor="329.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="186.0">
+                                             <children>
+                                                <Label text="Xoá thành công" textFill="#569698">
+                                                   <styleClass>
+                                                      <String fx:value="addLabelBig" />
+                                                      <String fx:value="addLabel" />
+                                                   </styleClass>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="20.0">
+                                                   <children>
+                                                      <Button fx:id="listConfirmedDeleteBtn" mnemonicParsing="false" text="Đóng">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                                         </padding>
+                                                         <styleClass>
+                                                            <String fx:value="btn" />
+                                                            <String fx:value="addLabel" />
+                                                         </styleClass>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="listConfirmAddPane" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" layoutX="329.0" layoutY="186.0" prefHeight="137.0" prefWidth="410.0" spacing="10.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.bottomAnchor="249.0" AnchorPane.leftAnchor="329.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="186.0">
+                                       <children>
+                                          <Label text="Xác nhận trao thưởng" textFill="#569698">
+                                             <styleClass>
+                                                <String fx:value="addLabelBig" />
+                                                <String fx:value="addLabel" />
+                                             </styleClass>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="20.0">
+                                             <children>
+                                                <Button fx:id="listConfirmAddBtn" mnemonicParsing="false" text="Xác nhận">
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                                   </padding>
+                                                   <styleClass>
+                                                      <String fx:value="btn" />
+                                                      <String fx:value="addLabel" />
+                                                      <String fx:value="saveBtn" />
+                                                   </styleClass>
+                                                </Button>
+                                                <Button fx:id="listCancelAddBtn" mnemonicParsing="false" text="Quay lại">
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                                   </padding>
+                                                   <styleClass>
+                                                      <String fx:value="btn" />
+                                                      <String fx:value="addLabel" />
+                                                   </styleClass>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets top="20.0" />
+                                       </padding>
+                                    </VBox>
+                                    <AnchorPane fx:id="listConfirmedAddPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" layoutX="329.0" layoutY="186.0" prefHeight="137.0" prefWidth="410.0" spacing="10.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.bottomAnchor="249.0" AnchorPane.leftAnchor="329.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="186.0">
+                                             <children>
+                                                <Label text="Xác nhận thành công" textFill="#569698">
+                                                   <styleClass>
+                                                      <String fx:value="addLabelBig" />
+                                                      <String fx:value="addLabel" />
+                                                   </styleClass>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="20.0">
+                                                   <children>
+                                                      <Button fx:id="listConfirmedAddBtn" mnemonicParsing="false" text="Đóng">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                                         </padding>
+                                                         <styleClass>
+                                                            <String fx:value="btn" />
+                                                            <String fx:value="addLabel" />
+                                                         </styleClass>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                   </children>
