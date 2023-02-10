@@ -29,6 +29,22 @@ public class TraoThuongDacBietManage extends DipDacBietModify {
     return ChiTietDipDacBietModify.themChiTietDipDacBiet(ct);
   }
 
+  public static boolean themToanBoHocSinh(int idDip) {
+    ArrayList<NhanKhau> hocSinhs = NhanKhauManage.layListHocSinh();
+    for (NhanKhau hs: hocSinhs) {
+      int tuoi = hs.getTuoi();
+      int nhom = 0;
+        if (0 <= tuoi && tuoi <= 5) nhom = 1; 
+        else if (6 <= tuoi && tuoi <= 14) nhom = 2;
+        else if (15 <= tuoi && tuoi <= 17) nhom = 3; 
+      if (nhom!=0) {
+        ChiTietDipDacBiet ct = new ChiTietDipDacBiet(idDip, hs.getID(), nhom);
+        themNhanKhauDuocNhanThuong(ct);
+      }
+    }
+    return true;
+  }
+
   /**
    * Xác nhận một chi tiết dịp đặc biệt đã trao thưởng
    * @param ct
