@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #CFE3E3;" stylesheets="@../css/household.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.InputController">
+  <children>
+    <AnchorPane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: #569698; -fx-background-radius: 10 10 0 0;">
+      <children>
+        <Label layoutX="125.0" layoutY="10.0" text="Nhập thông tin cơ sở dữ liệu" textFill="WHITE">
+          <font>
+            <Font name="Montserrat SemiBold" size="24.0" />
+          </font>
+        </Label>
+        <Button id="exitBtn" fx:id="exitBtn" layoutX="512.0" mnemonicParsing="false" onAction="#exit" prefHeight="48.0" prefWidth="88.0" style="-fx-background-color: #569698; -fx-background-radius: 0 10 0 0; -fx-border-radius: 0 10 0 0;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <graphic>
+            <ImageView fitHeight="36.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../img/exit.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </children>
+      <VBox.margin>
+        <Insets />
+      </VBox.margin>
+    </AnchorPane>
+    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+      <children>
+        <Label prefWidth="200.0" styleClass="addLabel" text="Tên server :" />
+        <TextField fx:id="serverField" promptText="USER\SQLSERVERNAME" style="-fx-background-color: #F2F2F2; -fx-background-radius: 12; -fx-border-radius: 12;" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+      </children>
+      <VBox.margin>
+        <Insets top="10.0" />
+      </VBox.margin>
+      <padding>
+        <Insets left="20.0" right="20.0" />
+      </padding>
+    </HBox>
+    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+      <children>
+        <Label prefWidth="200.0" styleClass="addLabel" text="Tên đăng nhập:" />
+        <TextField fx:id="userField" promptText="sa" style="-fx-background-color: #F2F2F2; -fx-background-radius: 12; -fx-border-radius: 12;" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+      </children>
+      <padding>
+        <Insets left="20.0" right="20.0" />
+      </padding>
+      <VBox.margin>
+        <Insets top="10.0" />
+      </VBox.margin>
+    </HBox>
+    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+      <children>
+        <Label prefWidth="200.0" styleClass="addLabel" text="Mật khẩu" />
+        <PasswordField fx:id="passField" promptText="********" style="-fx-background-color: #F2F2F2; -fx-background-radius: 12; -fx-border-radius: 12;" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+      </children>
+      <padding>
+        <Insets left="20.0" right="20.0" />
+      </padding>
+      <VBox.margin>
+        <Insets bottom="10.0" top="10.0" />
+      </VBox.margin>
+    </HBox>
+    <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+      <children>
+        <Label fx:id="setupLabel" style="-fx-underline: true; -fx-cursor: hand;" styleClass="addLabelSmall" text="Hướng dẫn cài đặt" />
+      </children>
+      <padding>
+        <Insets right="33.0" />
+      </padding>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+      <children>
+        <Button fx:id="confirmBtn" mnemonicParsing="false" text="Đồng ý">
+          <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="saveBtn" />
+            <String fx:value="addLabel" />
+            <String fx:value="addLabelBig" />
+          </styleClass>
+          <padding>
+            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+          </padding>
+        </Button>
+      </children>
+    </HBox>
+  </children>
+</VBox>

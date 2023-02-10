@@ -13,4 +13,6 @@ Test.java
 Test.class
 
 .idea/
-*.xlsx
+*.xlsx\
+
+config.properties
