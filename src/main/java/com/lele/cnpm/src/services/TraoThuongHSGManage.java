@@ -66,7 +66,7 @@ public class TraoThuongHSGManage extends DipHSGModify {
   }
   
   public static float tongTienCanTrao(DipHSG dhsg) {
-    ArrayList<ChiTietDipHocSinhGioi> cts = ChiTietDipHocSinhGioiModify.layListChiTietDipHocSinhGioi(dhsg.getId());
+    ArrayList<ChiTietDipHocSinhGioi> cts = ChiTietDipHocSinhGioiModify.layListChiTietDipHocSinhGioi(dhsg.getIdDip());
     float res = 0;
     for(ChiTietDipHocSinhGioi ct : cts) {
       if(ct.getNhom() == 1) res += ddb.getTienDacBiet();
@@ -77,7 +77,7 @@ public class TraoThuongHSGManage extends DipHSGModify {
   }
 
   public static float tongTienCanTrao(DipHSG dhsg) {
-    ArrayList<ChiTietDipHocSinhGioi> cts = ChiTietDipHocSinhGioiModify.layListChiTietDipHocSinhGioi(dhsg.getId());
+    ArrayList<ChiTietDipHocSinhGioi> cts = ChiTietDipHocSinhGioiModify.layListChiTietDipHocSinhGioi(dhsg.getIdDip());
     float res = 0;
     for(ChiTietDipHocSinhGioi ct : cts) {
       if(ct.getKiemTra()) {
