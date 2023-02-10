@@ -494,16 +494,9 @@ public class NhanKhauModify {
    * @return list học sinh có trong địa bàn
    */
   public static ArrayList<NhanKhau> layListHocSinh() {
-    String sql;
-    if (LocalDate.now().getMonthValue() < 10)
-      sql = "SELECT * FROM nhan_khau "
-          + " WHERE trangThai not in (N'Đã chuyển đi', N'Đã mất', N'Chuyển đi')"
-          + " AND YEAR(GETDATE()) - YEAR(ngaySinh) between 7 and 18"
-          + " ORDER BY idNhanKhau";
-    else
-      sql = "SELECT * FROM nhan_khau "
-          + " WHERE trangThai not in (N'Đã chuyển đi', N'Đã mất', N'Chuyển đi')"
-          + " AND YEAR(GETDATE()) - YEAR(ngaySinh) between 6 and 17"
+    String sql = "SELECT * FROM nhan_khau "
+          + " WHERE trangThai = N'Thường trú'"
+          + " AND YEAR(GETDATE()) - YEAR(ngaySinh) between 0 and 18"
           + " ORDER BY idNhanKhau";
     ArrayList<NhanKhau> NhanKhaus = new ArrayList<NhanKhau>();
     try {
