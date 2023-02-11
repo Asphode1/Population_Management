@@ -192,4 +192,21 @@ public class DipDacBietModify {
         }
         return countDipDacBiet;
     }
+
+    public static int countChuaTraoThuong(int idDip) {
+        String sql = "SELECT count(*) as c FROM chi_tiet_dip_dac_biet WHERE idDip = "
+        + idDip + " AND kiemTra = 0";
+        int countChua =0;
+        try {
+            Connection conn = DBConnection.getDBConnection().getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                countChua = rs.getInt("c");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countChua;
+    }
 }
