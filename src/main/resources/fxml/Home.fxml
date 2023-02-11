@@ -52,6 +52,15 @@
                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
               </padding>
             </Button>
+                  <AnchorPane fx:id="exitPane" mouseTransparent="true" opacity="0.0" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: #ff4949; -fx-border-radius: 0 10 0 0; -fx-background-radius: 0 10 0 0;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="7.0">
+                           <image>
+                              <Image url="@../img/exit.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
           </children>
         </AnchorPane>
         <Pane prefHeight="630.0" prefWidth="1192.0">

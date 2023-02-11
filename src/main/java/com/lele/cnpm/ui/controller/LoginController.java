@@ -1,5 +1,6 @@
 package com.lele.cnpm.ui.controller;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -18,7 +19,9 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -34,6 +37,8 @@ public class LoginController {
   private Button exitBtn;
   @FXML
   private Button loginBtn;
+  @FXML
+  private Button dbBtn;
 
   @FXML
   private Label errText;
@@ -42,6 +47,9 @@ public class LoginController {
   private TextField user;
   @FXML
   private PasswordField pass;
+
+  @FXML
+  private AnchorPane exitPane;
 
   public void initialize() {
     root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
@@ -75,27 +83,43 @@ public class LoginController {
       onExitOut.setCycleCount(1);
       onExitOut.play();
     });
-    ColorAdjust loginButtonCA = new ColorAdjust();
-    loginButtonCA.setBrightness(0);
-    exitBtn.setEffect(loginButtonCA);
     exitBtn.setOnMouseEntered(e -> {
+      FadeTransition ft = new FadeTransition(Duration.millis(100), exitPane);
+      ft.setFromValue(0);
+      ft.setToValue(1);
+      ft.setCycleCount(1);
+      ft.setAutoReverse(false);
+      ft.play();
+    });
+    exitBtn.setOnMouseExited(e -> {
+      FadeTransition ft = new FadeTransition(Duration.millis(100), exitPane);
+      ft.setFromValue(1);
+      ft.setToValue(0);
+      ft.setCycleCount(1);
+      ft.setAutoReverse(false);
+      ft.play();
+    });
+    ColorAdjust dbButtonCA = new ColorAdjust();
+    dbButtonCA.setBrightness(0);
+    dbBtn.setEffect(dbButtonCA);
+    dbBtn.setOnMouseEntered(e -> {
       Timeline onExitEnter = new Timeline(
           new KeyFrame(Duration.seconds(0),
-              new KeyValue(loginButtonCA.brightnessProperty(), loginButtonCA.brightnessProperty().getValue(),
+              new KeyValue(dbButtonCA.brightnessProperty(), dbButtonCA.brightnessProperty().getValue(),
                   Interpolator.EASE_BOTH)),
           new KeyFrame(Duration.seconds(0.25),
-              new KeyValue(loginButtonCA.brightnessProperty(), -0.3, Interpolator.EASE_BOTH)));
+              new KeyValue(dbButtonCA.brightnessProperty(), -0.3, Interpolator.EASE_BOTH)));
       onExitEnter.setAutoReverse(false);
       onExitEnter.setCycleCount(1);
       onExitEnter.play();
     });
-    exitBtn.setOnMouseExited(e -> {
+    dbBtn.setOnMouseExited(e -> {
       Timeline onExitOut = new Timeline(
           new KeyFrame(Duration.seconds(0),
-              new KeyValue(loginButtonCA.brightnessProperty(), loginButtonCA.brightnessProperty().getValue(),
+              new KeyValue(dbButtonCA.brightnessProperty(), dbButtonCA.brightnessProperty().getValue(),
                   Interpolator.EASE_BOTH)),
           new KeyFrame(Duration.seconds(0.25),
-              new KeyValue(loginButtonCA.brightnessProperty(), 0, Interpolator.EASE_BOTH)));
+              new KeyValue(dbButtonCA.brightnessProperty(), 0, Interpolator.EASE_BOTH)));
       onExitOut.setAutoReverse(false);
       onExitOut.setCycleCount(1);
       onExitOut.play();
@@ -158,5 +182,22 @@ public class LoginController {
   public void exit(ActionEvent e) {
     Stage stage = (Stage) root.getScene().getWindow();
     stage.close();
+  }
+
+  public void openDB(ActionEvent e) {
+    Stage stage = new Stage();
+    try {
+      VBox vbox = FXMLLoader.load(getClass().getResource("/fxml/Input.fxml"));
+      Scene s = new Scene(vbox);
+      s.setFill(Color.TRANSPARENT);
+      stage.setScene(s);
+      stage.initStyle(StageStyle.TRANSPARENT);
+      stage.setResizable(false);
+      stage.centerOnScreen();
+      stage.getIcons().add(new Image(getClass().getResource("/img/logo.png").toExternalForm()));
+      stage.show();
+    } catch (Exception ee) {
+      ee.printStackTrace();
+    }
   }
 }

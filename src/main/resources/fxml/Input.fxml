@@ -9,7 +9,7 @@
 
 <VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #CFE3E3;" stylesheets="@../css/household.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.InputController">
   <children>
-    <AnchorPane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: #569698; -fx-background-radius: 10 10 0 0;">
+    <AnchorPane prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: #569698; -fx-background-radius: 10 10 0 0;">
       <children>
         <Label layoutX="125.0" layoutY="10.0" text="Nhập thông tin cơ sở dữ liệu" textFill="WHITE">
           <font>
@@ -25,6 +25,15 @@
             </ImageView>
           </graphic>
         </Button>
+            <AnchorPane fx:id="exitPane" mouseTransparent="true" opacity="0.0" prefHeight="48.0" prefWidth="88.0" style="-fx-background-color: #ff4949; -fx-background-radius: 0 10 0 0; -fx-border-radius: 0 10 0 0;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="36.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="6.0">
+                     <image>
+                        <Image url="@../img/exit.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
       </children>
       <VBox.margin>
         <Insets />
@@ -66,9 +75,22 @@
         <Insets bottom="10.0" top="10.0" />
       </VBox.margin>
     </HBox>
-    <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+    <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0" spacing="100.0">
       <children>
-        <Label fx:id="setupLabel" style="-fx-underline: true; -fx-cursor: hand;" styleClass="addLabelSmall" text="Hướng dẫn cài đặt" />
+            <Label fx:id="errText" prefWidth="310.0" textFill="#ff000d">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="addLabelSmall" />
+                  <String fx:value="addLabel" />
+               </styleClass>
+            </Label>
+        <Label fx:id="setupLabel" style="-fx-underline: true; -fx-cursor: hand;" text="Hướng dẫn cài đặt">
+               <styleClass>
+                  <String fx:value="addLabelSmall" />
+                  <String fx:value="addLabel" />
+               </styleClass></Label>
       </children>
       <padding>
         <Insets right="33.0" />
