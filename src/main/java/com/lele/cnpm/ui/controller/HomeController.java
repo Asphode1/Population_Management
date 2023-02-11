@@ -40,6 +40,8 @@ import javafx.util.Duration;
 public class HomeController {
   @FXML
   private AnchorPane root;
+  @FXML
+  private AnchorPane exitPane;
 
   //startup
   @FXML
@@ -184,32 +186,23 @@ public class HomeController {
       mouseOnExit.setCycleCount(1);
       mouseOnExit.play();
     });
-    ColorAdjust exitButtonCA = new ColorAdjust();
-    exitButtonCA.setBrightness(0);
     ColorAdjust minButtonCA = new ColorAdjust();
     minButtonCA.setBrightness(0);
-    exitBtn.setEffect(exitButtonCA);
     exitBtn.setOnMouseEntered(e -> {
-      Timeline onExitEnter = new Timeline(
-          new KeyFrame(Duration.seconds(0),
-              new KeyValue(exitButtonCA.brightnessProperty(), exitButtonCA.brightnessProperty().getValue(),
-                  Interpolator.EASE_BOTH)),
-          new KeyFrame(Duration.seconds(0.25),
-              new KeyValue(exitButtonCA.brightnessProperty(), -0.3, Interpolator.EASE_BOTH)));
-      onExitEnter.setAutoReverse(false);
-      onExitEnter.setCycleCount(1);
-      onExitEnter.play();
+      FadeTransition fft = new FadeTransition(Duration.millis(100), exitPane);
+      fft.setFromValue(0);
+      fft.setToValue(1);
+      fft.setCycleCount(1);
+      fft.setAutoReverse(false);
+      fft.play();
     });
     exitBtn.setOnMouseExited(e -> {
-      Timeline onExitOut = new Timeline(
-          new KeyFrame(Duration.seconds(0),
-              new KeyValue(exitButtonCA.brightnessProperty(), exitButtonCA.brightnessProperty().getValue(),
-                  Interpolator.EASE_BOTH)),
-          new KeyFrame(Duration.seconds(0.25),
-              new KeyValue(exitButtonCA.brightnessProperty(), 0, Interpolator.EASE_BOTH)));
-      onExitOut.setAutoReverse(false);
-      onExitOut.setCycleCount(1);
-      onExitOut.play();
+      FadeTransition fft = new FadeTransition(Duration.millis(100), exitPane);
+      fft.setFromValue(1);
+      fft.setToValue(0);
+      fft.setCycleCount(1);
+      fft.setAutoReverse(false);
+      fft.play();
     });
     minBtn.setEffect(minButtonCA);
     minBtn.setOnMouseEntered(e -> {

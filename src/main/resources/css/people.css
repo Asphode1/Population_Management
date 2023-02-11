@@ -74,7 +74,7 @@ TableView .table-row-cell{
   -fx-background-color: #A5A5A5;
 }
 
-.table-view .scroll-bar * {
+/* .table-view .scroll-bar * {
   -fx-min-width: 0;
   -fx-pref-width: 0;
   -fx-max-width: 0;
@@ -83,7 +83,7 @@ TableView .table-row-cell{
   -fx-pref-height: 0;
   -fx-max-height: 0;
 }
-
+ */
 .hovered-btn{
   -fx-text-fill: #0045F2 !important; 
 }

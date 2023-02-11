@@ -89,9 +89,9 @@ public class ChiTietDipHocSinhGioiModify {
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
       PreparedStatement pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, cthsg.getTruong());
-      pstmt.setString(2, cthsg.getLop());
-      pstmt.setInt(3, cthsg.getNhom());
+      pstmt.setInt(1, cthsg.getNhom());
+      pstmt.setString(2, cthsg.getTruong());
+      pstmt.setString(3, cthsg.getLop());
       pstmt.setBoolean(4, cthsg.getKiemtra());
       pstmt.executeUpdate();
     } catch (Exception e) {
