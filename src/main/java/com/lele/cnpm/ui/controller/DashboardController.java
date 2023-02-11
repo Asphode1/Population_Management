@@ -68,8 +68,8 @@ public class DashboardController {
     serie.getData().add(new XYChart.Data<>("Nữ", nu));
     genChart.getData().add(serie);
     genChart.setMaxHeight(300);
-    genChart.setMaxWidth(400);
-    genChart.setCategoryGap(100);
+    genChart.setMaxWidth(500);
+    genChart.setCategoryGap(150);
     genChart.setLegendVisible(false);
     dGenPane.getChildren().clear();
     dGenPane.getChildren().add(genChart);
@@ -81,7 +81,7 @@ public class DashboardController {
     final PieChart ageChart = new PieChart(pieChartData);
     ageChart.setAnimated(false);
     ageChart.setMaxHeight(300);
-    ageChart.setMaxWidth(600);
+    ageChart.setMaxWidth(500);
     ageChart.setLabelLineLength(10);
     ageChart.setLegendSide(Side.RIGHT);
     dAgePane.getChildren().clear();

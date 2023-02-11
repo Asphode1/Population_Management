@@ -77,7 +77,7 @@ public class TraoThuongHSGManage extends DipHSGModify {
   }
 
   public static float tongTienDaTrao(DipHSG dhsg) {
-    ArrayList<ChiTietDipHocSinhGioi> cts = ChiTietDipHocSinhGioiModify.layListChiTietDipHocSinhGioi(ddb.getIdDip());
+    ArrayList<ChiTietDipHocSinhGioi> cts = ChiTietDipHocSinhGioiModify.layListChiTietDipHocSinhGioi(dhsg.getIdDip());
     float res = 0;
     for(ChiTietDipHocSinhGioi ct : cts) {
       if (ct.getKiemtra()) {

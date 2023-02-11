@@ -634,6 +634,79 @@
                     </VBox>
                   </children>
                 </AnchorPane>
+                        <AnchorPane fx:id="deletePane" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="526.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="196.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Xác nhận xoá phần thưởng" textFill="#569698">
+                                       <font>
+                                          <Font name="Montserrat SemiBold" size="26.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="100.0">
+                                       <children>
+                                          <Button fx:id="confirmDelBtn" mnemonicParsing="false" text="Xoá">
+                                             <padding>
+                                                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                             </padding>
+                                             <styleClass>
+                                                <String fx:value="delBtn" />
+                                                <String fx:value="addLabel" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button fx:id="cancelDelBtn" mnemonicParsing="false" text="Huỷ">
+                                             <padding>
+                                                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                             </padding>
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="addLabel" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </VBox>
+                              <AnchorPane fx:id="confirmedDelPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="526.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 10px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="196.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Xoá thành công" textFill="#569698">
+                                             <font>
+                                                <Font name="Montserrat SemiBold" size="26.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="62.0" prefWidth="698.0" spacing="100.0">
+                                             <children>
+                                                <Button fx:id="returnDelBtn" mnemonicParsing="false" text="Quay lại">
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                                                   </padding>
+                                                   <styleClass>
+                                                      <String fx:value="btn" />
+                                                      <String fx:value="addLabel" />
+                                                   </styleClass>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets top="25.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
               </children>
             </AnchorPane>
           </children>

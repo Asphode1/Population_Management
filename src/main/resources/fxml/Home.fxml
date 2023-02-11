@@ -23,11 +23,6 @@
                 <Image url="@../img/lelepopmanagement.png" />
               </image>
             </ImageView>
-            <ImageView fitHeight="42.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="327.0" AnchorPane.topAnchor="13.0">
-              <image>
-                <Image url="@../img/Picture1.png" />
-              </image>
-            </ImageView>
             <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" styleClass="exitBtn" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <graphic>
                 <ImageView fitHeight="40.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -192,7 +187,7 @@
         <Insets bottom="6.0" top="6.0" />
       </padding>
     </VBox>
-    <AnchorPane fx:id="startup" layoutX="399.0" layoutY="310.0" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0" styleClass="startup" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <AnchorPane fx:id="startup" layoutX="399.0" layoutY="310.0" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0" styleClass="startup" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <Label fx:id="helloText" layoutX="606.0" layoutY="208.0" text="Hello, ABC" textFill="#fefefe" AnchorPane.rightAnchor="590.0" AnchorPane.topAnchor="310.0">
           <font>

@@ -19,6 +19,8 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,11 +30,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -64,6 +66,10 @@ public class RewardController {
   private AnchorPane listConfirmedAddPane;
   @FXML
   private AnchorPane listConfirmedPane;
+  @FXML
+  private AnchorPane deletePane;
+  @FXML
+  private AnchorPane confirmedDelPane;
 
   @FXML
   private TextField yearField;
@@ -142,6 +148,12 @@ public class RewardController {
   private Button listCancelAddBtn;
   @FXML
   private Button listConfirmedAddBtn;
+  @FXML
+  private Button confirmDelBtn;
+  @FXML
+  private Button cancelDelBtn;
+  @FXML
+  private Button returnDelBtn;
 
   @FXML
   private Label nameLabel;
@@ -297,9 +309,29 @@ public class RewardController {
     TableColumn<DipHSG, String> numGCol = Utils.createColumn("Chưa trao thưởng", "soNguoiChuaTraoThuong");
     numGCol.setMaxWidth(180);
     numGCol.setMinWidth(180);
+    TableColumn<DipHSG, String> p1GCol = new TableColumn<>("Tổng tiền đã trao");
+    p1GCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DipHSG, String>, ObservableValue<String>>() {
+      @Override
+      public ObservableValue<String> call(CellDataFeatures<DipHSG, String> p) {
+        float can = TraoThuongHSGManage.tongTienDaTrao(p.getValue());
+        StringProperty c = new SimpleStringProperty();
+        c.set(Float.toString(can));
+        return c;
+      }
+    });
+    TableColumn<DipHSG, String> p2GCol = new TableColumn<>("Tổng tiền cần trao");
+    p2GCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DipHSG, String>, ObservableValue<String>>() {
+      @Override
+      public ObservableValue<String> call(CellDataFeatures<DipHSG, String> p) {
+        float can = TraoThuongHSGManage.tongTienCanTrao(p.getValue());
+        StringProperty c = new SimpleStringProperty();
+        c.set(Float.toString(can));
+        return c;
+      }
+    });
     TableColumn<DipHSG, String> descGCol = Utils.createColumn("Mô tả", "moTa");
     gMainTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    gMainTable.getColumns().addAll(Arrays.asList(namGCol, numGCol, descGCol));
+    gMainTable.getColumns().addAll(Arrays.asList(namGCol, numGCol, p1GCol, p2GCol, descGCol));
     gMainTable.setMinHeight(512);
     gMainTable.setMinWidth(734);
     gMainTable.setRowFactory(rowGFactory);
@@ -309,12 +341,34 @@ public class RewardController {
     TableColumn<DipDacBiet, String> numSCol = Utils.createColumn("Chưa trao thưởng", "soNguoiChuaTraoThuong");
     numSCol.setMaxWidth(180);
     numSCol.setMinWidth(180);
+    TableColumn<DipDacBiet, String> p1SCol = new TableColumn<>("Tổng tiền đã trao");
+    p1SCol
+        .setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DipDacBiet, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(CellDataFeatures<DipDacBiet, String> p) {
+            float can = TraoThuongDacBietManage.tongTienDaTrao(p.getValue());
+            StringProperty c = new SimpleStringProperty();
+            c.set(Float.toString(can));
+            return c;
+          }
+        });
+    TableColumn<DipDacBiet, String> p2SCol = new TableColumn<>("Tổng tiền cần trao");
+    p2SCol
+        .setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DipDacBiet, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(CellDataFeatures<DipDacBiet, String> p) {
+            float can = TraoThuongDacBietManage.tongTienCanTrao(p.getValue());
+            StringProperty c = new SimpleStringProperty();
+            c.set(Float.toString(can));
+            return c;
+          }
+        });
     TableColumn<DipDacBiet, String> descSCol = Utils.createColumn("Mô tả", "moTa");
     TableColumn<DipDacBiet, String> tenSCol = Utils.createColumn("Tên dịp", "ten");
     tenSCol.setMinWidth(180);
     tenSCol.setMaxWidth(180);
     sMainTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    sMainTable.getColumns().addAll(Arrays.asList(tenSCol, namSCol, numSCol, descSCol));
+    sMainTable.getColumns().addAll(Arrays.asList(tenSCol, namSCol, numSCol, p1SCol, p2SCol, descSCol));
     sMainTable.setMinHeight(512);
     sMainTable.setMinWidth(734);
     sMainTable.setRowFactory(rowSFactory);
@@ -360,7 +414,7 @@ public class RewardController {
   private void openGAdd(ActionEvent e) {
     detailPane.setVisible(true);
     detailBtn.getChildren().clear();
-    detailBtn.getChildren().addAll(listBtn, saveBtn, returnBtn);
+    detailBtn.getChildren().addAll(saveBtn, returnBtn);
     title.setText("Thêm phần thưởng HSG");
     nameLabel.setVisible(false);
     nameField.setVisible(false);
@@ -421,7 +475,7 @@ public class RewardController {
   private void openSAdd(ActionEvent e) {
     detailPane.setVisible(true);
     detailBtn.getChildren().clear();
-    detailBtn.getChildren().addAll(listBtn, saveBtn, returnBtn);
+    detailBtn.getChildren().addAll(saveBtn, returnBtn);
     title.setText("Thêm phần thưởng dịp đặc biệt");
     nameLabel.setVisible(true);
     nameField.setVisible(true);
@@ -500,15 +554,19 @@ public class RewardController {
     money1Field.setText(selectedG.getTienDacBiet() + "");
     money2Field.setText(selectedG.getTienGioi() + "");
     money3Field.setText(selectedG.getTienKha() + "");
-    descField.getStyleClass().add("textDisabled");
-    yearField.getStyleClass().add("textDisabled");
-    present1Field.getStyleClass().add("textDisabled");
-    present2Field.getStyleClass().add("textDisabled");
-    present3Field.getStyleClass().add("textDisabled");
-    money1Field.getStyleClass().add("textDisabled");
-    money2Field.getStyleClass().add("textDisabled");
-    money3Field.getStyleClass().add("textDisabled");
+    if (!yearField.getStyleClass().contains("textDisabled")) {
+      descField.getStyleClass().add("textDisabled");
+      yearField.getStyleClass().add("textDisabled");
+      present1Field.getStyleClass().add("textDisabled");
+      present2Field.getStyleClass().add("textDisabled");
+      present3Field.getStyleClass().add("textDisabled");
+      money1Field.getStyleClass().add("textDisabled");
+      money2Field.getStyleClass().add("textDisabled");
+      money3Field.getStyleClass().add("textDisabled");
+    }
     editBtn.setOnAction(aee -> {
+      detailBtn.getChildren().clear();
+      detailBtn.getChildren().addAll(saveBtn, returnBtn);
       yearField.setEditable(true);
       present1Field.setEditable(true);
       present2Field.setEditable(true);
@@ -555,23 +613,38 @@ public class RewardController {
         money2Field.setEditable(false);
         money3Field.setEditable(false);
         descField.setEditable(false);
-        descField.getStyleClass().add("textDisabled");
-        yearField.getStyleClass().add("textDisabled");
-        present1Field.getStyleClass().add("textDisabled");
-        present2Field.getStyleClass().add("textDisabled");
-        present3Field.getStyleClass().add("textDisabled");
-        money1Field.getStyleClass().add("textDisabled");
-        money2Field.getStyleClass().add("textDisabled");
-        money3Field.getStyleClass().add("textDisabled");
+        if (!yearField.getStyleClass().contains("textDisabled")) {
+          descField.getStyleClass().add("textDisabled");
+          yearField.getStyleClass().add("textDisabled");
+          present1Field.getStyleClass().add("textDisabled");
+          present2Field.getStyleClass().add("textDisabled");
+          present3Field.getStyleClass().add("textDisabled");
+          money1Field.getStyleClass().add("textDisabled");
+          money2Field.getStyleClass().add("textDisabled");
+          money3Field.getStyleClass().add("textDisabled");
+        }
         listBtn.setOnAction(ee -> openGList(ee));
+        detailBtn.getChildren().clear();
+        detailBtn.getChildren().addAll(listBtn, editBtn, deleteBtn, returnBtn);
         returnBtn.setOnAction(ee -> {
           detailPane.setVisible(false);
           Utils.clearTextInput(detailPane);
         });
       });
-      listBtn.setOnAction(ae -> openEditGList(ae));
     });
     listBtn.setOnAction(aee -> openGList(aee));
+    deleteBtn.setOnAction(aee -> {
+      deletePane.setVisible(true);
+      confirmDelBtn.setOnAction(aeee -> {
+        TraoThuongHSGManage.xoaDipHSG(selectedG);
+        confirmedDelPane.setVisible(true);
+        returnDelBtn.setOnAction(aeeee -> {
+          confirmedDelPane.setVisible(false);
+          deletePane.setVisible(false);
+          detailPane.setVisible(false);
+        });
+      });
+    });
     returnBtn.setOnAction(aee -> {
       detailPane.setVisible(false);
       Utils.clearTextInput(detailPane);
@@ -596,18 +669,20 @@ public class RewardController {
     money1Field.setText(selectedS.getTien05() + "");
     money2Field.setText(selectedS.getTien614() + "");
     money3Field.setText(selectedS.getTien1517() + "");
-    descField.getStyleClass().add("textDisabled");
-    yearField.getStyleClass().add("textDisabled");
-    present1Field.getStyleClass().add("textDisabled");
-    present2Field.getStyleClass().add("textDisabled");
-    present3Field.getStyleClass().add("textDisabled");
-    money1Field.getStyleClass().add("textDisabled");
-    money2Field.getStyleClass().add("textDisabled");
-    money3Field.getStyleClass().add("textDisabled");
-    nameField.getStyleClass().add("textDisabled");
+    if (!yearField.getStyleClass().contains("textDisabled")) {
+      descField.getStyleClass().add("textDisabled");
+      yearField.getStyleClass().add("textDisabled");
+      present1Field.getStyleClass().add("textDisabled");
+      present2Field.getStyleClass().add("textDisabled");
+      present3Field.getStyleClass().add("textDisabled");
+      money1Field.getStyleClass().add("textDisabled");
+      money2Field.getStyleClass().add("textDisabled");
+      money3Field.getStyleClass().add("textDisabled");
+      nameField.getStyleClass().add("textDisabled");
+    }
     editBtn.setOnAction(aee -> {
       detailBtn.getChildren().clear();
-      detailBtn.getChildren().addAll(listBtn, saveBtn, deleteBtn, returnBtn);
+      detailBtn.getChildren().addAll(saveBtn, returnBtn);
       yearField.setEditable(true);
       present1Field.setEditable(true);
       present2Field.setEditable(true);
@@ -660,15 +735,17 @@ public class RewardController {
         money2Field.setEditable(false);
         money3Field.setEditable(false);
         descField.setEditable(false);
-        descField.getStyleClass().add("textDisabled");
-        yearField.getStyleClass().add("textDisabled");
-        present1Field.getStyleClass().add("textDisabled");
-        present2Field.getStyleClass().add("textDisabled");
-        present3Field.getStyleClass().add("textDisabled");
-        money1Field.getStyleClass().add("textDisabled");
-        money2Field.getStyleClass().add("textDisabled");
-        money3Field.getStyleClass().add("textDisabled");
-        nameField.getStyleClass().add("textDisabled");
+        if (!yearField.getStyleClass().contains("textDisabled")) {
+          descField.getStyleClass().add("textDisabled");
+          yearField.getStyleClass().add("textDisabled");
+          present1Field.getStyleClass().add("textDisabled");
+          present2Field.getStyleClass().add("textDisabled");
+          present3Field.getStyleClass().add("textDisabled");
+          money1Field.getStyleClass().add("textDisabled");
+          money2Field.getStyleClass().add("textDisabled");
+          money3Field.getStyleClass().add("textDisabled");
+          nameField.getStyleClass().add("textDisabled");
+        }
         listBtn.setOnAction(ee -> openSList(ee));
         Utils.clearTextInput(detailPane);
         returnBtn.setOnAction(ee -> {
@@ -678,8 +755,19 @@ public class RewardController {
       });
       listBtn.setOnAction(ae -> openEditSList(ae));
     });
+    deleteBtn.setOnAction(aee -> {
+      deletePane.setVisible(true);
+      confirmDelBtn.setOnAction(aeee -> {
+        TraoThuongDacBietManage.xoaDipDacBiet(selectedS);
+        confirmedDelPane.setVisible(true);
+        returnDelBtn.setOnAction(aeeee -> {
+          confirmedDelPane.setVisible(false);
+          deletePane.setVisible(false);
+          detailPane.setVisible(false);
+        });
+      });
+    });
     listBtn.setOnAction(aee -> openSList(aee));
-    Utils.clearTextInput(detailPane);
     returnBtn.setOnAction(aee -> {
       Utils.clearTextInput(detailPane);
       detailPane.setVisible(false);
@@ -709,11 +797,11 @@ public class RewardController {
       public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
         int nhom = p.getValue().getNhom();
         ObjectProperty<String> s = new SimpleObjectProperty<>();
-        s.set(NHOM[nhom]);
+        s.set(NHOM[nhom - 1]);
         return s;
       }
     });
-    TableColumn<ChiTietDipDacBiet, String> ktraCol = new TableColumn<>("Đã nhận ?");
+    TableColumn<ChiTietDipDacBiet, String> ktraCol = new TableColumn<>("Xác nhận trao thưởng");
     ktraCol.setCellValueFactory(
         new Callback<TableColumn.CellDataFeatures<ChiTietDipDacBiet, String>, ObservableValue<String>>() {
           public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
@@ -950,7 +1038,7 @@ public class RewardController {
             return s;
           }
         });
-    TableColumn<ChiTietDipHocSinhGioi, String> ktraCol = new TableColumn<>("Đã nhận ?");
+    TableColumn<ChiTietDipHocSinhGioi, String> ktraCol = new TableColumn<>("Xác nhận trao thưởng");
     ktraCol.setCellValueFactory(
         new Callback<TableColumn.CellDataFeatures<ChiTietDipHocSinhGioi, String>, ObservableValue<String>>() {
           public ObservableValue<String> call(CellDataFeatures<ChiTietDipHocSinhGioi, String> p) {
@@ -1012,6 +1100,7 @@ public class RewardController {
       }
     };
     gnkTable.setRowFactory(rowListFactory);
+    gnkTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     gnkTable.setMaxHeight(470);
     gnkTable.getColumns().clear();
     gnkTable.getColumns().addAll(Arrays.asList(nameCol, tlCol, nhomCol, ktraCol));

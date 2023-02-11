@@ -84,7 +84,7 @@
                 <Image url="@../img/lelepopmanagement.png" />
               </image>
             </ImageView>
-                  <Button fx:id="dbBtn" mnemonicParsing="false" onAction="#openDB" prefHeight="36.0" prefWidth="280.0" style="-fx-background-color: rgba(191, 191, 191,0.5); -fx-background-radius: 12; -fx-border-radius: 12;" text="Cài đặt csdl" textFill="#355c5d">
+                  <Button fx:id="dbBtn" mnemonicParsing="false" onAction="#openDB" prefHeight="36.0" prefWidth="280.0" style="-fx-background-color: rgba(191, 191, 191,0.5); -fx-background-radius: 12; -fx-border-radius: 12;" text="Cài đặt CSDL" textFill="#355c5d">
                      <font>
                         <Font name="Montserrat Bold" size="18.0" />
                      </font>

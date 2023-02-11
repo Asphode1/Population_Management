@@ -16,6 +16,10 @@
   -fx-text-fill: #569698;
 }
 
+.chart-pie-label {
+  -fx-font-size: 10px;
+}
+
 .label{
   -fx-font-family: "Montserrat Medium";
   -fx-font-size: 24px;
