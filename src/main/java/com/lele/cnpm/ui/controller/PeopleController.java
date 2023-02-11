@@ -458,7 +458,7 @@ public class PeopleController {
             AnchorPane.setTopAnchor(optBox, yy);
             switch (selectedNK.getTrangThai()) {
               case "Thường trú":
-                addStayBtn.setDisable(false);
+                addStayBtn.setDisable(true);
                 addAwayBtn.setDisable(false);
                 addMoveBtn.setDisable(false);
                 addDeadBtn.setDisable(false);
@@ -470,7 +470,7 @@ public class PeopleController {
                 addDeadBtn.setDisable(false);
                 break;
               case "Tạm trú":
-                addStayBtn.setDisable(true);
+                addStayBtn.setDisable(false);
                 addAwayBtn.setDisable(false);
                 addMoveBtn.setDisable(false);
                 addDeadBtn.setDisable(false);

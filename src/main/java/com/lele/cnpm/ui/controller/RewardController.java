@@ -709,7 +709,7 @@ public class RewardController {
       public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
         int nhom = p.getValue().getNhom();
         ObjectProperty<String> s = new SimpleObjectProperty<>();
-        s.set(NHOM[nhom]);
+        s.set(NHOM[nhom - 1]);
         return s;
       }
     });
@@ -795,7 +795,7 @@ public class RewardController {
       final ComboBox<String> nhomBox = new ComboBox<>(opt);
       comboBox.getChildren().clear();
       comboBox.getChildren().addAll(Arrays.asList(addSLabel, nhomBox));
-      TableView<NhanKhau> addListTable = new TableView<>();
+      final TableView<NhanKhau> addListTable = new TableView<>();
       addListTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
       final ArrayList<NhanKhau> hsList = new ArrayList<>();
       Callback<TableView<NhanKhau>, TableRow<NhanKhau>> rowFactory = new Callback<TableView<NhanKhau>, TableRow<NhanKhau>>() {

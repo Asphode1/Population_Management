@@ -8,6 +8,7 @@ import com.lele.cnpm.database.modify.TamVangModify;
 import com.lele.cnpm.src.services.HoKhauManage;
 import com.lele.cnpm.src.services.NhanKhauManage;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -81,6 +82,9 @@ public class DashboardController {
     ageChart.setLegendSide(Side.RIGHT);
     dAgePane.getChildren().clear();
     dAgePane.getChildren().add(ageChart);
+    pieChartData.forEach(dat -> {
+      dat.nameProperty().bind(Bindings.concat(dat.getName(), ": ", dat.pieValueProperty()));
+    });
 
     dashboard.visibleProperty().addListener((o, ov, nv) -> {
       if (nv) {
@@ -103,6 +107,9 @@ public class DashboardController {
         }
         ageChart.getData().clear();
         ageChart.getData().addAll(FXCollections.observableArrayList(ddata));
+        pieChartData.forEach(dat -> {
+          dat.nameProperty().bind(Bindings.concat(dat.getName(), ": ", dat.pieValueProperty()));
+        });
       }
     });
   }
