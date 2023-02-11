@@ -74,9 +74,9 @@ Khởi động lại dịch vụ SQL Server sau mỗi bước để những thay
 
 # Nhập cơ sở dữ liệu
 
-Chạy [QuanLyNhanKhauCreateTables.sql](../QuanLyNhanKhauCreateTables.sql) bằng SQL Server Management Studio.
+Chạy [QuanLyNhanKhauCreateTables.sql](../QuanLyNhanKhauCreateTables.sql) bằng SQL Server Management Studio. Để có một bản mẫu cơ sở dữ liệu đầy đủ, hãy restore từ file QuanLyNhanKhau.bak
 
-Mở tệp [DatabaseConfig.txt](../DatabaseConfig.txt) và thay đổi cấu hình cơ sở dữ liệu của bạn (tên máy chủ và mật khẩu).
+Ở lần sử dụng đầu tiên, hệ thống sẽ yêu cầu bạn điền thông tin kết nối đến Cơ sở dữ liệu. Bạn cũng có thể thay đổi sau này ở giao diện đăng nhập.
 
 # Chạy chương trình
 

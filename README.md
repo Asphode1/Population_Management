@@ -78,9 +78,9 @@ Follow the steps mentioned below to use SQL Server Authentication.
 
 # Import Database
 
-Execute [QuanLyNhanKhauCreateTables.sql](QuanLyNhanKhauCreateTables.sql) using SQL Server Management Studio.
+Execute [QuanLyNhanKhauCreateTables.sql](QuanLyNhanKhauCreateTables.sql) using SQL Server Management Studio. To have a full sample database, restore the database from the file QuanLyNhanKhau.bak.
 
-Open file [DatabaseConfig.txt](DatabaseConfig.txt) and change the configuration of your database (server name and password).
+In the first entrance, the App will ask you to fill the Database Cònfiguration (servername, user, pasword). You can also change this later at the login UI.
 
 # Run the program
 
