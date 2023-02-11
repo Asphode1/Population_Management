@@ -7,18 +7,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="dashboard" prefHeight="630.0" prefWidth="1192.0" styleClass="dashboardRoot"
-  stylesheets="@../css/Dashboard.css" xmlns="http://javafx.com/javafx/8"
-  xmlns:fx="http://javafx.com/fxml/1"
-  fx:controller="com.lele.cnpm.ui.controller.DashboardController">
+<VBox fx:id="dashboard" prefHeight="630.0" prefWidth="1192.0" styleClass="dashboardRoot" stylesheets="@../css/Dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.DashboardController">
   <children>
     <VBox VBox.vgrow="ALWAYS">
       <children>
         <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="1098.0">
           <children>
             <Label styleClass="dashboard-text" text="Trang chủ" />
-            <Label fx:id="dateLabel" alignment="CENTER_RIGHT" prefWidth="450.0"
-              text="Ngày tháng năm">
+            <Label fx:id="dateLabel" alignment="CENTER_RIGHT" prefWidth="450.0" text="Ngày tháng năm">
               <HBox.margin>
                 <Insets left="520.0" />
               </HBox.margin>
@@ -36,8 +32,7 @@
         </Pane>
         <VBox VBox.vgrow="ALWAYS">
           <children>
-            <HBox prefHeight="187.0" prefWidth="1098.0" AnchorPane.leftAnchor="0.0"
-              AnchorPane.rightAnchor="0.0">
+            <HBox prefHeight="187.0" prefWidth="1098.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <children>
                 <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                   <children>
@@ -77,33 +72,25 @@
                 </VBox>
               </children>
             </HBox>
-            <Pane layoutX="324.0" layoutY="248.0" prefHeight="1.0" prefWidth="200.0"
-              style="-fx-background-color: #8888;" AnchorPane.leftAnchor="0.0"
-              AnchorPane.rightAnchor="0.0" />
+            <Pane layoutX="324.0" layoutY="248.0" prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: #8888;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <children>
-                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0"
-                  HBox.hgrow="ALWAYS">
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="450.0">
                   <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
                   <children>
-                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0"
-                      prefWidth="396.0" text="Thống kê số lượng nhân khẩu theo giới tính"
-                      textAlignment="CENTER" wrapText="true" />
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="396.0" text="Thống kê số lượng nhân khẩu theo giới tính" textAlignment="CENTER" wrapText="true" />
                     <Pane fx:id="dGenPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                   </children>
                 </VBox>
                 <Pane prefHeight="200.0" prefWidth="1.0" style="-fx-background-color: #8888;" />
-                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0"
-                  HBox.hgrow="ALWAYS">
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                   <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
                   <children>
-                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0"
-                      prefWidth="396.0" text="Thống kê số lượng nhân khẩu theo độ tuổi"
-                      textAlignment="CENTER" wrapText="true" />
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="396.0" text="Thống kê số lượng nhân khẩu theo độ tuổi" textAlignment="CENTER" wrapText="true" />
                     <Pane fx:id="dAgePane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                   </children>
                 </VBox>

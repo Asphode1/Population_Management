@@ -709,7 +709,7 @@ public class RewardController {
       public ObservableValue<String> call(CellDataFeatures<ChiTietDipDacBiet, String> p) {
         int nhom = p.getValue().getNhom();
         ObjectProperty<String> s = new SimpleObjectProperty<>();
-        s.set(NHOM[nhom - 1]);
+        s.set(NHOM[nhom]);
         return s;
       }
     });

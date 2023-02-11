@@ -1,5 +1,7 @@
 package com.lele.cnpm.ui.controller;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -9,6 +11,7 @@ import com.lele.cnpm.src.services.HoKhauManage;
 import com.lele.cnpm.src.services.NhanKhauManage;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +24,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 
 public class DashboardController {
   @FXML
@@ -64,8 +68,8 @@ public class DashboardController {
     serie.getData().add(new XYChart.Data<>("Nữ", nu));
     genChart.getData().add(serie);
     genChart.setMaxHeight(300);
-    genChart.setMaxWidth(500);
-    genChart.setCategoryGap(150);
+    genChart.setMaxWidth(400);
+    genChart.setCategoryGap(100);
     genChart.setLegendVisible(false);
     dGenPane.getChildren().clear();
     dGenPane.getChildren().add(genChart);
@@ -77,13 +81,16 @@ public class DashboardController {
     final PieChart ageChart = new PieChart(pieChartData);
     ageChart.setAnimated(false);
     ageChart.setMaxHeight(300);
-    ageChart.setMaxWidth(500);
+    ageChart.setMaxWidth(600);
     ageChart.setLabelLineLength(10);
     ageChart.setLegendSide(Side.RIGHT);
     dAgePane.getChildren().clear();
     dAgePane.getChildren().add(ageChart);
     pieChartData.forEach(dat -> {
-      dat.nameProperty().bind(Bindings.concat(dat.getName(), ": ", dat.pieValueProperty()));
+      SimpleIntegerProperty i = new SimpleIntegerProperty();
+      i.bindBidirectional(dat.pieValueProperty());
+      dat.nameProperty().bind(
+          Bindings.concat(dat.getName(), ": ", i));
     });
 
     dashboard.visibleProperty().addListener((o, ov, nv) -> {
@@ -105,10 +112,15 @@ public class DashboardController {
         for (int i = 0; i < 6; i++) {
           ddata.add(new PieChart.Data(ageGroup[i], aages[i]));
         }
+        pieChartData.clear();
+        pieChartData.addAll(FXCollections.observableArrayList(ddata));
         ageChart.getData().clear();
         ageChart.getData().addAll(FXCollections.observableArrayList(ddata));
         pieChartData.forEach(dat -> {
-          dat.nameProperty().bind(Bindings.concat(dat.getName(), ": ", dat.pieValueProperty()));
+          SimpleIntegerProperty i = new SimpleIntegerProperty();
+          i.bindBidirectional(dat.pieValueProperty());
+          dat.nameProperty().bind(
+              Bindings.concat(dat.getName(), ": ", i));
         });
       }
     });
