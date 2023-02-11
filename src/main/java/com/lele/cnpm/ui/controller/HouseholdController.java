@@ -1082,7 +1082,6 @@ public class HouseholdController {
         splitednk.clear();
         splitednk.addAll(toList.get().getKey());
         splitedNKRel.clear();
-        splitedNKRel.addAll(toList.get().getValue());
         HoKhauManage.tachHoKhau(hk, splitNewChuHo.getID(), nk, splitedNKRel);
         splitConfirmSavePane.setVisible(false);
         splitPane.setVisible(false);
