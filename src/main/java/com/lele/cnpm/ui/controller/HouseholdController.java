@@ -641,7 +641,6 @@ public class HouseholdController {
 
   public void closeInfo(ActionEvent e) {
     infoPane.setVisible(false);
-    Utils.clearTextInput(infoNKPane);
   }
 
   // * edit Pane buttons
