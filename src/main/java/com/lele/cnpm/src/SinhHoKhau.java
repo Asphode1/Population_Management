@@ -1,4 +1,4 @@
-package com.lele.cnpm.src;
+/*package com.lele.cnpm.src;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import com.lele.cnpm.src.models.HoKhau;
 import com.lele.cnpm.src.models.NhanKhau;
 
 public class SinhHoKhau {
-    public void sinhHo(int soNha){
+    public static void sinhHo(int soNha){
         ArrayList<NhanKhau> nks = NhanKhauModify.layListNhanKhauChuaCoHoKhau();
 
         NhanKhau bo = new NhanKhau(), me = new NhanKhau(), con1 = new NhanKhau(), con2 = new NhanKhau();
@@ -22,14 +22,16 @@ public class SinhHoKhau {
         // chon chu ho nam tren 30t
         for (NhanKhau nk: nks) {
             int a = nk.getTuoi();
-            if (a >=30 && a<=70 && nk.getGioiTinh().equals("Nam")) {
+            if (a >=70 && nk.getGioiTinh().equals("Nam")) {
                 bo = nk;
                 nks.remove(bo);
+                nk.setTrangThai("Thường trú");
+                NhanKhauModify.capNhatNhanKhau(nk);
                 break;
             }
         }
         HoKhau hk = new HoKhau(0, bo.getID(), "Hà Nội",
-        "Hai Bà Trưng", "Bách Khoa", "số" + soNha +", đường Lê Thanh Nghị, quận Hai Bà Trưng, Hà Nội", 
+        "Hai Bà Trưng", "Bách Khoa", "số " + soNha +", đường Trần Đại Nghĩa, quận Hai Bà Trưng, Hà Nội", 
         Date.valueOf(LocalDate.now()), "Thường trú");
 
         HoKhauModify.themHoKhau(hk);
@@ -41,12 +43,15 @@ public class SinhHoKhau {
             int a =  bo.getTuoi() - nk.getTuoi();
             if (0<= a && a<10 && nk.getGioiTinh().equals("Nữ")) {
                 me = nk;
+                me.setTrangThai("Thường trú");
+                NhanKhauModify.capNhatNhanKhau(me);
                 nks.remove(me);
                 break;
             }
         }
         HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), me.getID(), "Vợ");
 
+        boolean coCon = false;
         // chon 2 dua con
         for (NhanKhau nk: nks) {
             int a =  bo.getTuoi() - nk.getTuoi();
@@ -54,14 +59,20 @@ public class SinhHoKhau {
             if (20<= a && a<40 && 20<=b && b<=40) {
                 con1 = nk;
                 nks.remove(con1);
+                nk.setTrangThai("Thường trú");
+                NhanKhauModify.capNhatNhanKhau(nk);
+                coCon = true;
                 break;
             }
-        }
-        if (con1.getGioiTinh().equals("Nam"))
-            HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), me.getID(), "Con trai");
-        else 
-        HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), me.getID(), "Con gái");
 
+        }
+        if (coCon)
+            if (con1.getGioiTinh().equals("Nam"))
+                HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), con1.getID(), "Con trai");
+            else 
+                HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), con1.getID(), "Con gái");
+
+        coCon = false;
         // 80% co dua con thu hai
         if (rd.nextDouble() <=0.8) {
             for (NhanKhau nk: nks) {
@@ -69,36 +80,25 @@ public class SinhHoKhau {
                 int b = me.getTuoi() - nk.getTuoi();
                 if (20<= a && a<40 && 20<=b && b<=40) {
                     con2 = nk;
+                    nk.setTrangThai("Thường trú");
+                    NhanKhauModify.capNhatNhanKhau(nk);
                     nks.remove(con2);
+                    coCon = true;
                     break;
                 }
             }
-            if (con1.getGioiTinh().equals("Nam"))
-                HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), me.getID(), "Con trai");
-            else 
-            HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), me.getID(), "Con gái");
+            if (coCon)
+                if (con1.getGioiTinh().equals("Nam"))
+                    HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), con2.getID(), "Con trai");
+                else 
+                    HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), con2.getID(), "Con gái");
         }
 
-        NhanKhau ob = new NhanKhau();
-
-        //20% them cha chu ho hoac me chu ho
-        if (rd.nextDouble() <=0.2) {
-            for (NhanKhau nk: nks) {
-                int a = - bo.getTuoi() + nk.getTuoi();
-                if (20<= a && a<40) {
-                    ob = nk;
-                    nks.remove(con2);
-                    break;
-                }
-            }
-            if (ob.getGioiTinh().equals("Nam"))
-                HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), me.getID(), "Bố");
-            else 
-            HoKhauNhanKhauModify.themHoKhau_NhanKhau(hk.getID(), me.getID(), "Mẹ");
-        }
     }
 
     public static void main(String[] args) {
-        
+        for (int i = 2; i<=100; i+=5)
+            sinhHo(i);
     }
 }
+*/

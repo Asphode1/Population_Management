@@ -2,6 +2,8 @@ package com.lele.cnpm.src.models;
 
 import java.util.Objects;
 
+import com.lele.cnpm.database.modify.DipHSGModify;
+
 public class DipHSG {
     private int idDip;
     private int nam;
@@ -114,11 +116,12 @@ public class DipHSG {
     }
 
     public int getSoNguoiChuaTraoThuong() {
+        setSoNguoiChuaTraoThuong();
         return this.soNguoiChuaTraoThuong;
     }
 
-    public void setSoNguoiChuaTraoThuong(int soNguoiChuaTraoThuong) {
-        this.soNguoiChuaTraoThuong = soNguoiChuaTraoThuong;
+    public void setSoNguoiChuaTraoThuong() {
+        this.soNguoiChuaTraoThuong = DipHSGModify.countChuaTraoThuong(this.idDip);
     }
 
     public DipHSG idDip(int idDip) {
@@ -166,8 +169,8 @@ public class DipHSG {
         return this;
     }
 
-    public DipHSG soNguoiChuaTraoThuong(int soNguoiChuaTraoThuong) {
-        setSoNguoiChuaTraoThuong(soNguoiChuaTraoThuong);
+    public DipHSG soNguoiChuaTraoThuong() {
+        setSoNguoiChuaTraoThuong();
         return this;
     }
 

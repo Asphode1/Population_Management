@@ -2,6 +2,8 @@ package com.lele.cnpm.src.models;
 
 import java.util.Objects;
 
+import com.lele.cnpm.database.modify.DipDacBietModify;
+
 public class DipDacBiet {
     private int idDip;
     private String ten;
@@ -128,11 +130,12 @@ public class DipDacBiet {
     }
 
     public int getSoNguoiChuaTraoThuong() {
+        setSoNguoiChuaTraoThuong();
         return this.soNguoiChuaTraoThuong;
     }
 
-    public void setSoNguoiChuaTraoThuong(int soNguoiChuaTraoThuong) {
-        this.soNguoiChuaTraoThuong = soNguoiChuaTraoThuong;
+    public void setSoNguoiChuaTraoThuong() {
+        this.soNguoiChuaTraoThuong = DipDacBietModify.countChuaTraoThuong(this.idDip);
     }
 
     public DipDacBiet idDip(int idDip) {
@@ -186,7 +189,7 @@ public class DipDacBiet {
     }
 
     public DipDacBiet soNguoiChuaTraoThuong(int soNguoiChuaTraoThuong) {
-        setSoNguoiChuaTraoThuong(soNguoiChuaTraoThuong);
+        setSoNguoiChuaTraoThuong();
         return this;
     }
 
