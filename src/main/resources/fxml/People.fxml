@@ -30,7 +30,7 @@
                 </ImageView>
               </graphic>
               <HBox.margin>
-                <Insets left="100.0" />
+                <Insets left="115.0" />
               </HBox.margin>
             </Button>
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#excel" prefHeight="40.0" prefWidth="40.0" styleClass="addBtn">
@@ -57,7 +57,7 @@
                 </ImageView>
               </graphic>
             </Button>
-            <TextField fx:id="searchBar" prefHeight="40.0" promptText="Tìm kiếm..." styleClass="manageSearchBar" HBox.hgrow="ALWAYS">
+            <TextField fx:id="searchBar" prefHeight="40.0" prefWidth="420.0" promptText="Tìm kiếm..." styleClass="manageSearchBar">
               <font>
                 <Font name="Montserrat Medium" size="20.0" />
               </font>
@@ -75,7 +75,7 @@
             <Insets top="10.0" />
           </VBox.margin>
         </Pane>
-        <AnchorPane fx:id="tableNkPane" prefHeight="432.0" prefWidth="1098.0" VBox.vgrow="ALWAYS">
+        <AnchorPane fx:id="tableNkPane" prefHeight="560.0" prefWidth="1098.0" VBox.vgrow="ALWAYS">
           <children>
             <AnchorPane fx:id="addPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
@@ -2004,7 +2004,7 @@
         </AnchorPane>
       </children>
       <padding>
-        <Insets left="47.0" right="47.0" top="10.0" />
+        <Insets left="32.0" right="32.0" top="10.0" />
       </padding>
     </VBox>
   </children>

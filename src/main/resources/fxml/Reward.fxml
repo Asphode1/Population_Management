@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="reward" prefWidth="1192.0" styleClass="reward" stylesheets="@../css/reward.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lele.cnpm.ui.controller.RewardController">
   <children>
-    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="1162.0" styleClass="household" stylesheets="@../css/household.css" AnchorPane.leftAnchor="15.0">
+    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="1162.0" AnchorPane.leftAnchor="15.0">
       <children>
         <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="1180.0">
           <children>
@@ -713,7 +713,7 @@
         </AnchorPane>
       </children>
       <padding>
-        <Insets left="47.0" right="47.0" top="10.0" />
+        <Insets left="32.0" right="32.0" top="10.0" />
       </padding>
     </VBox>
   </children>

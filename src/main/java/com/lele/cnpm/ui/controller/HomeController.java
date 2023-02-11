@@ -1,6 +1,7 @@
 package com.lele.cnpm.ui.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import com.lele.cnpm.src.models.NguoiDung;
@@ -52,6 +53,14 @@ public class HomeController {
   private Label helloText;
   @FXML
   private Pane movePane;
+  @FXML
+  private Pane mainLabelPane;
+  @FXML
+  private Pane nkLabelPane;
+  @FXML
+  private Pane hkLabelPane;
+  @FXML
+  private Pane rwLabelPane;
 
   // include
   @FXML
@@ -162,6 +171,12 @@ public class HomeController {
         labels.add((Label) h.getChildren().get(1));
       }
     }
+    lgoHBtn.setMouseTransparent(true);
+    ppHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openPeople);
+    dshHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openDashboard);
+    hhHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openHousehold);
+    rwHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openReward);
+    setOnHover(hBoxs);
     navBtn.addEventFilter(MouseEvent.MOUSE_ENTERED, ev -> {
       ColorAdjust ca = new ColorAdjust();
       ca.setBrightness(0);
@@ -233,9 +248,7 @@ public class HomeController {
   }
 
   public void navOpen(ActionEvent e) {
-    for (HBox h : hBoxs) {
-      h.setMouseTransparent(false);
-    }
+    lgoHBtn.setMouseTransparent(false);
     lgoHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, logout);
     ppHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openPeople);
     dshHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openDashboard);
@@ -275,9 +288,7 @@ public class HomeController {
     navShrink.setAutoReverse(false);
     navShrink.setCycleCount(1);
     navShrink.play();
-    /* for (HBox h : hBoxs) {
-      h.setMouseTransparent(true);
-    } */
+    lgoHBtn.setMouseTransparent(true);
     grayBar.setMouseTransparent(true);
     grayBar.setVisible(false);
     for (Label l : labels) {
@@ -301,9 +312,7 @@ public class HomeController {
     navShrink.setAutoReverse(false);
     navShrink.setCycleCount(1);
     navShrink.play();
-    for (HBox h : hBoxs) {
-      h.setMouseTransparent(true);
-    }
+    lgoHBtn.setMouseTransparent(true);
     grayBar.setMouseTransparent(true);
     grayBar.setVisible(false);
     for (Label l : labels) {
@@ -321,7 +330,11 @@ public class HomeController {
   }
 
   private void setOnHover(ArrayList<HBox> hBoxes) {
-    for (HBox h : hBoxes) {
+    final ArrayList<Pane> panes = new ArrayList<>();
+    panes.addAll(Arrays.asList(mainLabelPane, nkLabelPane, hkLabelPane, rwLabelPane));
+    for (int i = 0; i < hBoxes.size(); i++) {
+      final int index = i;
+      final HBox h = hBoxes.get(i);
       h.addEventFilter(MouseEvent.MOUSE_ENTERED, ev -> {
         ColorAdjust ca = new ColorAdjust();
         ca.setBrightness(0);
@@ -333,6 +346,14 @@ public class HomeController {
         mouseOnEnter.setAutoReverse(false);
         mouseOnEnter.setCycleCount(1);
         mouseOnEnter.play();
+        if (index < 4) {
+          final FadeTransition fft = new FadeTransition(Duration.millis(100), panes.get(index));
+          fft.setFromValue(0);
+          fft.setToValue(1);
+          fft.setCycleCount(1);
+          fft.setAutoReverse(false);
+          fft.play();
+        }
       });
       h.addEventFilter(MouseEvent.MOUSE_EXITED, ev -> {
         ColorAdjust ca = new ColorAdjust();
@@ -345,6 +366,14 @@ public class HomeController {
         mouseOnExit.setAutoReverse(false);
         mouseOnExit.setCycleCount(1);
         mouseOnExit.play();
+        if (index < 4) {
+          final FadeTransition fft = new FadeTransition(Duration.millis(100), panes.get(index));
+          fft.setFromValue(1);
+          fft.setToValue(0);
+          fft.setCycleCount(1);
+          fft.setAutoReverse(false);
+          fft.play();
+        }
       });
       h.addEventFilter(MouseEvent.MOUSE_CLICKED, ev -> {
         navShrink(ev);

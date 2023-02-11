@@ -406,7 +406,7 @@ public class HouseholdController {
     tableHKPane.getChildren().clear();
     tableHKPane.getChildren().addAll(newList);
     table.setMinWidth(1098);
-    table.setMinHeight(570);
+    table.setMinHeight(550);
     AnchorPane.setTopAnchor(table, 6.0);
   }
 
@@ -641,6 +641,7 @@ public class HouseholdController {
 
   public void closeInfo(ActionEvent e) {
     infoPane.setVisible(false);
+    Utils.clearTextInput(infoNKPane);
   }
 
   // * edit Pane buttons

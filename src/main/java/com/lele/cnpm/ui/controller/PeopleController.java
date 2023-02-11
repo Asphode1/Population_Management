@@ -527,7 +527,7 @@ public class PeopleController {
     tableNkPane.getChildren().clear();
     tableNkPane.getChildren().addAll(newList);
     table.setMinWidth(1098);
-    table.setMinHeight(570);
+    table.setMinHeight(550);
     AnchorPane.setTopAnchor(table, 6.0);
     addMCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
       @Override
