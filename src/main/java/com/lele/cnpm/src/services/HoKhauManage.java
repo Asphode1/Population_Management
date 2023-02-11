@@ -45,17 +45,15 @@ public class HoKhauManage extends HoKhauModify {
     /**
      * Thực hiện tách hộ khẩu
      * @param hkCu
+     * @param hkMoi
      * @param idChuHoMoi
      * @param nhanKhauTach
      * @param quanHeMoi
      * @return true/false
      */
-    public static boolean tachHoKhau(HoKhau hkCu, int idChuHoMoi, ArrayList<NhanKhau> nhanKhauTach,
+    public static boolean tachHoKhau(HoKhau hkCu, HoKhau hkMoi, int idChuHoMoi, ArrayList<NhanKhau> nhanKhauTach,
             ArrayList<String> quanHeMoi) {
         try {
-            HoKhau hkMoi = new HoKhau(0, idChuHoMoi, hkCu.getTinhThanhPho(),
-                    hkCu.getQuanHuyen(), hkCu.getPhuongXa(), hkCu.getDiaChi(), Date.valueOf(LocalDate.now()),
-                    "Thường trú");
             //them ho khau moi vao db
             themHoKhau(hkMoi);
             hkMoi = layHoKhau(idChuHoMoi); //cap nhat id Ho Khau tang tu dong trong db
