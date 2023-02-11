@@ -145,7 +145,7 @@ public class HoKhauModify {
      * @return toàn bộ hộ khẩu mà chủ hộ có tên chứa đoạn name
      */
     public static ArrayList<HoKhau> layListHoKhau(String name) {
-        String sql = "SELECT * FROM ho_khau join Nhan_khau on (ho_khau.idChuHo = nhan_khau.IdNhanKhau)"
+        String sql = "SELECT * FROM ho_khau_nhan_khau join Nhan_khau on (ho_khau_nhan_khau.idNhanKhau = nhan_khau.IdNhanKhau)"
                 + " WHERE (nhan_khau.hoTen LIKE '%" + name + "%')"
                 + " ORDER BY IdHoKhau";
         ArrayList<HoKhau> HoKhaus = new ArrayList<HoKhau>();
@@ -156,16 +156,7 @@ public class HoKhauModify {
             // chen vao Ho khau
             while (rs.next()) {
                 int idHoKhau = rs.getInt("IdHoKhau");
-                int idChuHo = rs.getInt("idChuHo");
-                String tinhThanhPho = rs.getString("tinhThanhPho");
-                String quanHuyen = rs.getString("quanHuyen");
-                String phuongXa = rs.getString("phuongXa");
-                String diaChi = rs.getString("diaChi");
-                Date ngayTao = rs.getDate("ngayTao");
-                String trangThai = rs.getString("trangThai");
-
-                HoKhaus.add(
-                        new HoKhau(idHoKhau, idChuHo, tinhThanhPho, quanHuyen, phuongXa, diaChi, ngayTao, trangThai));
+                HoKhaus.add(layHoKhauTheoIdHoKhau(idHoKhau));
             }
         } catch (SQLException e) {
             e.printStackTrace();
