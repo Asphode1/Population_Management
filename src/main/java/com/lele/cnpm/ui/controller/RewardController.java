@@ -177,6 +177,8 @@ public class RewardController {
   private Label addSLabel;
   @FXML
   private Label errText;
+  @FXML
+  private Label listErrText;
 
   @FXML
   private VBox listBox;
@@ -642,14 +644,6 @@ public class RewardController {
         }
       });
       returnBtn.setOnAction(ae -> {
-        yearField.setEditable(false);
-        present1Field.setEditable(false);
-        present2Field.setEditable(false);
-        present3Field.setEditable(false);
-        money1Field.setEditable(false);
-        money2Field.setEditable(false);
-        money3Field.setEditable(false);
-        descField.setEditable(false);
         yearField.setText(selectedG.getNam() + "");
         present1Field.setText(selectedG.getPhanQuaDacBiet());
         present2Field.setText(selectedG.getPhanQuaGioi());
@@ -658,6 +652,14 @@ public class RewardController {
         money2Field.setText(selectedG.getTienGioi() + "");
         money3Field.setText(selectedG.getTienKha() + "");
         descField.setText(selectedG.getMoTa());
+        yearField.setEditable(false);
+        present1Field.setEditable(false);
+        present2Field.setEditable(false);
+        present3Field.setEditable(false);
+        money1Field.setEditable(false);
+        money2Field.setEditable(false);
+        money3Field.setEditable(false);
+        descField.setEditable(false);
         if (!yearField.getStyleClass().contains("textDisabled")) {
           descField.getStyleClass().add("textDisabled");
           yearField.getStyleClass().add("textDisabled");
@@ -670,7 +672,6 @@ public class RewardController {
         }
         listBtn.setOnAction(ee -> openGList(ee));
         detailBtn.getChildren().clear();
-        Utils.clearTextInput(detailPane);
         detailBtn.getChildren().addAll(listBtn, editBtn, deleteBtn, returnBtn);
         present1Label.setText("Phần quà đặc biệt:");
         present2Label.setText("Phần quà HSG:");
@@ -827,7 +828,6 @@ public class RewardController {
         }
         listBtn.setOnAction(ee -> openSList(ee));
         errText.setVisible(false);
-        Utils.clearTextInput(detailPane);
         returnBtn.setOnAction(ee -> {
           Utils.clearTextInput(detailPane);
           errText.setVisible(false);
@@ -1270,12 +1270,18 @@ public class RewardController {
           if (NHOM[nhom].equals(n))
             break;
         }
-        ChiTietDipHocSinhGioi newG = new ChiTietDipHocSinhGioi(selectedG.getIdDip(), selectedAddNK.getID(), t, l, nhom);
-        addedGList.add(newG);
-        gTable.getItems().add(newG);
-        addNameField.setText("");
-        addLField.setText("");
-        addSField.setText("");
+        if (n.isEmpty() || l.isEmpty() || t.isEmpty())
+          listErrText.setVisible(true);
+        else {
+          listErrText.setVisible(false);
+          ChiTietDipHocSinhGioi newG = new ChiTietDipHocSinhGioi(selectedG.getIdDip(), selectedAddNK.getID(), t, l,
+              nhom);
+          addedGList.add(newG);
+          gTable.getItems().add(newG);
+          addNameField.setText("");
+          addLField.setText("");
+          addSField.setText("");
+        }
       });
 
       editListSaveBtn.setOnAction(aeee -> {
