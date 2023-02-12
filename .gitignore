@@ -16,3 +16,5 @@ Test.class
 *.xlsx\
 
 config.properties
+
+dependency-reduced-pom.xml
