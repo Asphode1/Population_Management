@@ -614,11 +614,11 @@ public class PeopleController {
     String Eth = addEthField.getText();
     String Rel = addRelField.getText();
     String Before = addBeforeField.getText();
-    if (NhanKhauManage.checkCCCD(CCCD)) {
+    if (!NhanKhauManage.checkCCCD(CCCD)) {
       addErrText.setText("CCCD/ĐDĐT bị trùng hoặc sai định dạng");
     } else if (Name.length() == 0 || Nation.length() == 0 || dob == null
-        || BPlace.length() == 0 || Eth.length() == 0 || CCCD.length() == 0
-        || Domicile.length() == 0 || Rel.length() == 0)
+    || BPlace.length() == 0 || gen.length() == 0 || Eth.length() == 0
+    || Domicile.length() == 0 || Rel.length() == 0)
       addErrText.setText("Vui lòng nhập đầy đủ thông tin");
     else {
       addSaveConfirmPane.setVisible(true);
