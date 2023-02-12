@@ -1314,7 +1314,6 @@
                             </VBox>
                             <HBox alignment="CENTER" spacing="50.0">
                               <children>
-                                <Button fx:id="splitLeftBtn" mnemonicParsing="false" styleClass="addLabel" text="&lt;" />
                                 <Button fx:id="splitRightBtn" mnemonicParsing="false" styleClass="addLabel" text="&gt;" />
                               </children>
                             </HBox>

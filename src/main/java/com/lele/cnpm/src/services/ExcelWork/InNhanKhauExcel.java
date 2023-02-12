@@ -72,7 +72,6 @@ public class InNhanKhauExcel {
  
         // Create file excel
         createOutputFile(workbook, excelFilePath);
-        System.out.println("Done!!!");
     }
 
  

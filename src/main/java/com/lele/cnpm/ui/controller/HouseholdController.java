@@ -247,8 +247,6 @@ public class HouseholdController {
   @FXML
   private Button splitCloseBtn;
   @FXML
-  private Button splitLeftBtn;
-  @FXML
   private Button splitRightBtn;
   @FXML
   private Button confirmSaveSplitBtn;
@@ -1084,9 +1082,6 @@ public class HouseholdController {
       updateTable.run();
     });
 
-    splitLeftBtn.setOnAction(ae -> {
-    });
-
     splitSaveBtn.setOnAction(ae -> {
       String a3 = splitTTField.getText();
       String a4 = splitQHField.getText();
@@ -1104,7 +1099,8 @@ public class HouseholdController {
           splitednk.clear();
           splitednk.addAll(toList.get().getKey());
           splitedNKRel.clear();
-          HoKhauManage.tachHoKhau(selectedHK, hk, splitNewChuHo.getID(), nk, splitedNKRel);
+          splitedNKRel.addAll(toList.get().getValue());
+          HoKhauManage.tachHoKhau(selectedHK, hk, splitNewChuHo.getID(), splitednk, splitedNKRel);
           splitConfirmSavePane.setVisible(false);
           splitPane.setVisible(false);
           splitErrText.setVisible(false);

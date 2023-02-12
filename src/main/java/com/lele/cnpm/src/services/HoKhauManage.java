@@ -65,9 +65,7 @@ public class HoKhauManage extends HoKhauModify {
                 NhanKhau nk = nhanKhauTach.get(i);
                 String qh = quanHeMoi.get(i);
                 HoKhauNhanKhauModify.xoaNhanKhau(hkCu.getID(), nk.getID());
-                System.out.println("Them moi");
                 HoKhauNhanKhauModify.themHoKhau_NhanKhau(hkMoi2.getID(), nk.getID(), qh);
-                System.out.println("Them moi xong");
             }
             
         } catch (Exception e) {
