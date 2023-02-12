@@ -25,7 +25,7 @@
   <children>
     <Pane prefHeight="640.0" prefWidth="550.0" style="-fx-background-radius: 5; -fx-border-radius: 5;">
       <children>
-        <ImageView fitHeight="627.0" fitWidth="500.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="627.0" fitWidth="500.0" layoutX="23.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../img/BG1.png" />
           </image>
