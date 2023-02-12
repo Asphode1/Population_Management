@@ -111,8 +111,14 @@ public class DashboardController {
         }
         pieChartData.clear();
         pieChartData.addAll(FXCollections.observableArrayList(ddata));
-        ageChart.getData().clear();
-        ageChart.getData().addAll(FXCollections.observableArrayList(ddata));
+        final PieChart newAgeChart = new PieChart(pieChartData);
+        newAgeChart.setAnimated(false);
+        newAgeChart.setMaxHeight(300);
+        newAgeChart.setMaxWidth(500);
+        newAgeChart.setLabelLineLength(10);
+        newAgeChart.setLegendSide(Side.RIGHT);
+        dAgePane.getChildren().clear();
+        dAgePane.getChildren().add(newAgeChart);
         pieChartData.forEach(dat -> {
           SimpleIntegerProperty i = new SimpleIntegerProperty();
           i.bindBidirectional(dat.pieValueProperty());
