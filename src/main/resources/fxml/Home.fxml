@@ -72,7 +72,7 @@
       </children>
     </VBox>
     <Pane fx:id="grayBar" mouseTransparent="true" prefHeight="720.0" prefWidth="1192.0" styleClass="grayBar" visible="false" AnchorPane.leftAnchor="88.0" />
-      <AnchorPane fx:id="settingsPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="settingsPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox layoutX="340.0" layoutY="210.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-radius: 10;-fx-border-radius: 10;-fx-background-color: #f1f1f1;">
                <children>
@@ -88,14 +88,14 @@
                   </HBox>
                   <HBox style="-fx-background-color: #d9d9d9;">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="300.0" text="Đổi mật khẩu" HBox.hgrow="ALWAYS">
+                        <Button fx:id="reBtn" mnemonicParsing="false" prefWidth="300.0" text="Đổi mật khẩu" HBox.hgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="addLabel" />
                               <String fx:value="btnOnFocus" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="300.0" text="Tạo tài khoản" HBox.hgrow="ALWAYS">
+                        <Button fx:id="newBtn" mnemonicParsing="false" prefWidth="300.0" text="Tạo tài khoản" HBox.hgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="addLabel" />
@@ -105,7 +105,7 @@
                   </HBox>
                   <AnchorPane maxHeight="236.0" prefHeight="236.0" prefWidth="600.0">
                      <children>
-                        <VBox fx:id="newBox" layoutY="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox fx:id="reBox" layoutY="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
                                  <children>
@@ -139,7 +139,7 @@
                               </HBox>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Label textFill="#f83b3b">
+                                    <Label fx:id="reErr" textFill="#f83b3b">
                                        <styleClass>
                                           <String fx:value="addLabel" />
                                           <String fx:value="addLabelSmall" />
@@ -147,18 +147,142 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="42.0" prefWidth="600.0">
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="600.0" spacing="80.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Button" />
-                                    <Button mnemonicParsing="false" text="Button" />
+                                    <Button fx:id="reSave" mnemonicParsing="false" text="Lưu">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="addLabel" />
+                                          <String fx:value="saveBtn" />
+                                       </styleClass></Button>
+                                    <Button fx:id="reReturn" mnemonicParsing="false" text="Huỷ">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="addLabel" />
+                                       </styleClass></Button>
                                  </children>
                               </HBox>
                            </children></VBox>
-                        <VBox fx:id="changeBox" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS" />
+                        <VBox fx:id="newBox" layoutX="10.0" layoutY="110.0" spacing="5.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Label prefWidth="210.0" styleClass="addLabel" text="Tên đăng nhập" />
+                                    <TextField fx:id="username" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Label prefWidth="210.0" styleClass="addLabel" text="Mật khẩu" />
+                                    <PasswordField fx:id="pass" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Label prefWidth="210.0" styleClass="addLabel" text="Nhập lại mật khẩu" />
+                                    <PasswordField fx:id="reNewPass" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="newErr" textFill="#f83b3b">
+                                       <styleClass>
+                                          <String fx:value="addLabel" />
+                                          <String fx:value="addLabelSmall" />
+                                       </styleClass>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="600.0" spacing="80.0">
+                                 <children>
+                                    <Button fx:id="newSave" mnemonicParsing="false" text="Lưu">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="addLabel" />
+                                          <String fx:value="saveBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="newReturn" mnemonicParsing="false" text="Huỷ">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="addLabel" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
                </children>
             </VBox>
+            <AnchorPane fx:id="confirmSettingsPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox alignment="CENTER" layoutX="436.0" layoutY="292.0" prefHeight="137.0" prefWidth="409.0" spacing="20.0" style="-fx-background-radius: 10;-fx-border-radius: 10;-fx-background-color: #f1f1f1;">
+                     <children>
+                        <Label fx:id="text" text="Xác nhận đổi mật khẩu" textFill="#569698">
+                           <styleClass>
+                              <String fx:value="addLabel" />
+                              <String fx:value="addLabelBig" />
+                           </styleClass>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="80.0">
+                           <children>
+                              <Button fx:id="confirmChange" mnemonicParsing="false" text="Lưu">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="addLabel" />
+                                    <String fx:value="saveBtn" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="cancelChange" mnemonicParsing="false" text="Huỷ">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="addLabel" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <AnchorPane fx:id="confirmedSettingsPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="436.0" layoutY="292.0" prefHeight="137.0" prefWidth="409.0" spacing="20.0" style="-fx-background-radius: 10;-fx-border-radius: 10;-fx-background-color: #f1f1f1;">
+                           <children>
+                              <Label fx:id="confirmText" text="Đổi mật khẩu thành công" textFill="#569698">
+                                 <styleClass>
+                                    <String fx:value="addLabel" />
+                                    <String fx:value="addLabelBig" />
+                                 </styleClass>
+                              </Label>
+                              <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="80.0">
+                                 <children>
+                                    <Button fx:id="confirmedChange" mnemonicParsing="false" text="Đóng">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="addLabel" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
     <VBox id="NavBar" fx:id="navBar" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="88.0" style="-fx-background-color: #569698;" styleClass="navBar">
@@ -332,7 +456,7 @@
             </ImageView>
          </children>
       </Pane>
-    <AnchorPane fx:id="startup" layoutX="399.0" layoutY="310.0" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0" styleClass="startup" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <AnchorPane fx:id="startup" layoutX="399.0" layoutY="310.0" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0" styleClass="startup" visible="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <Label fx:id="helloText" layoutX="606.0" layoutY="208.0" text="Hello, ABC" textFill="#fefefe" AnchorPane.rightAnchor="590.0" AnchorPane.topAnchor="310.0">
           <font>

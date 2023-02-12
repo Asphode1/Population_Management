@@ -20,4 +20,41 @@ public class LoginManage {
         return nd;
     return null;
   }
+
+  /**
+   * Thay đổi mật khẩu người dùng
+   * @param user
+   * @param newPassword
+   * @return true/false
+   * @throws Exception
+   */
+  public static boolean changePassword(NguoiDung user, String newPassword) throws Exception {
+    Password p = Password.newPassword(newPassword);
+    NguoiDung nd = new NguoiDung(user.getID(), user.getUserName(), p, user.getChucVu());
+    if (NguoiDungModify.capNhatNguoiDung(nd))
+      return true;
+    return false;
+  }
+
+  /**
+   * Kiểm tra tên đăng nhập có tồn tại không
+   * @param username
+   * @return true/false
+   * @throws Exception
+   */
+  public static boolean checkUsername(String username) throws Exception {
+    NguoiDung nd = NguoiDungModify.layNguoiDung(username);
+    if (nd == null)
+      return true;
+    return false;
+  }
+
+  /**
+   * Thêm người dùng
+   * @param nd
+   * @return true/false
+   */
+  public static boolean themNguoiDung(NguoiDung nd) {
+    return NguoiDungModify.themNguoiDung(nd);
+  }
 }

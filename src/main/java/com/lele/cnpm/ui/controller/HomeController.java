@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import com.lele.cnpm.src.models.NguoiDung;
+import com.lele.cnpm.src.services.LoginManage;
+import com.lele.cnpm.src.utils.Password;
+import com.lele.cnpm.src.utils.Utils;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -26,6 +29,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -43,6 +48,12 @@ public class HomeController {
   private AnchorPane root;
   @FXML
   private AnchorPane exitPane;
+  @FXML
+  private AnchorPane settingsPane;
+  @FXML
+  private AnchorPane confirmSettingsPane;
+  @FXML
+  private AnchorPane confirmedSettingsPane;
 
   //startup
   @FXML
@@ -82,6 +93,10 @@ public class HomeController {
   private VBox main;
   @FXML
   private VBox navBar;
+  @FXML
+  private VBox reBox;
+  @FXML
+  private VBox newBox;
 
   @FXML
   private HBox navHBtn;
@@ -95,6 +110,8 @@ public class HomeController {
   private HBox hhHBtn;
   @FXML
   private HBox rwHBtn;
+  @FXML
+  private HBox sttHBtn;
 
   @FXML
   private Button navBtn;
@@ -112,6 +129,46 @@ public class HomeController {
   private Button exitBtn;
   @FXML
   private Button minBtn;
+  @FXML
+  private Button reBtn;
+  @FXML
+  private Button newBtn;
+  @FXML
+  private Button reSave;
+  @FXML
+  private Button reReturn;
+  @FXML
+  private Button newSave;
+  @FXML
+  private Button newReturn;
+  @FXML
+  private Button confirmChange;
+  @FXML
+  private Button cancelChange;
+  @FXML
+  private Button confirmedChange;
+
+  @FXML
+  private PasswordField oldPass;
+  @FXML
+  private PasswordField newPass;
+  @FXML
+  private PasswordField rePass;
+  @FXML
+  private TextField username;
+  @FXML
+  private PasswordField pass;
+  @FXML
+  private PasswordField reNewPass;
+
+  @FXML
+  private Label reErr;
+  @FXML
+  private Label newErr;
+  @FXML
+  private Label text;
+  @FXML
+  private Label confirmText;
 
   @FXML
   private Pane grayBar;
@@ -123,7 +180,7 @@ public class HomeController {
 
   public void init(NguoiDung usr) {
     user = usr;
-    helloText.setText("Hello, " + user.getUserName());
+    helloText.setText("Xin chào, " + user.getUserName());
   }
 
   public void initialize() {
@@ -136,17 +193,17 @@ public class HomeController {
     PauseTransition pauset1 = new PauseTransition(Duration.seconds(0.5));
     Interpolator itp = Interpolator.SPLINE(.34, .7, .54, 1);
     TranslateTransition ttlogo = new TranslateTransition(Duration.seconds(1), logo);
-    ttlogo.setByX(-260);
+    ttlogo.setByX(-285);
     ttlogo.setAutoReverse(false);
     ttlogo.setCycleCount(1);
     ttlogo.setInterpolator(itp);
     TranslateTransition ttPane = new TranslateTransition(Duration.seconds(1), movePane);
-    ttPane.setByX(-260);
+    ttPane.setByX(-285);
     ttPane.setAutoReverse(false);
     ttPane.setCycleCount(1);
     ttPane.setInterpolator(itp);
     TranslateTransition ttText = new TranslateTransition(Duration.seconds(1), helloText);
-    ttText.setByX(260);
+    ttText.setByX(285);
     ttText.setAutoReverse(false);
     ttText.setCycleCount(1);
     ttText.setInterpolator(itp);
@@ -171,6 +228,7 @@ public class HomeController {
         labels.add((Label) h.getChildren().get(1));
       }
     }
+    sttHBtn.setMouseTransparent(true);
     lgoHBtn.setMouseTransparent(true);
     ppHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openPeople);
     dshHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openDashboard);
@@ -245,10 +303,13 @@ public class HomeController {
     minBtn.setOnAction(e -> {
       ((Stage) ((Button) e.getSource()).getScene().getWindow()).setIconified(true);
     });
+
   }
 
   public void navOpen(ActionEvent e) {
+    sttHBtn.setMouseTransparent(false);
     lgoHBtn.setMouseTransparent(false);
+    sttHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, settings);
     lgoHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, logout);
     ppHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openPeople);
     dshHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openDashboard);
@@ -287,6 +348,7 @@ public class HomeController {
     navShrink.setAutoReverse(false);
     navShrink.setCycleCount(1);
     navShrink.play();
+    sttHBtn.setMouseTransparent(true);
     lgoHBtn.setMouseTransparent(true);
     grayBar.setMouseTransparent(true);
     grayBar.setVisible(false);
@@ -311,6 +373,7 @@ public class HomeController {
     navShrink.setAutoReverse(false);
     navShrink.setCycleCount(1);
     navShrink.play();
+    sttHBtn.setMouseTransparent(true);
     lgoHBtn.setMouseTransparent(true);
     grayBar.setMouseTransparent(true);
     grayBar.setVisible(false);
@@ -376,10 +439,10 @@ public class HomeController {
       });
       h.addEventFilter(MouseEvent.MOUSE_CLICKED, ev -> {
         navShrink(ev);
-        if (!h.equals(lgoHBtn) && !h.getStyleClass().contains("onFocus"))
+        if (!h.equals(lgoHBtn) && !h.equals(sttHBtn) && !h.getStyleClass().contains("onFocus"))
           h.getStyleClass().add("onFocus");
         for (HBox hOther : hBoxes) {
-          if (!hOther.equals(h) && h.getStyleClass().contains("onFocus")) {
+          if (!hOther.equals(h) && !h.equals(sttHBtn) && h.getStyleClass().contains("onFocus")) {
             hOther.getStyleClass().remove("onFocus");
           }
         }
@@ -398,6 +461,7 @@ public class HomeController {
       household.setVisible(false);
       reward.setManaged(false);
       reward.setVisible(false);
+      settingsPane.setVisible(false);
     }
   };
 
@@ -412,6 +476,7 @@ public class HomeController {
       household.setVisible(false);
       reward.setManaged(false);
       reward.setVisible(false);
+      settingsPane.setVisible(false);
     }
   };
 
@@ -426,6 +491,7 @@ public class HomeController {
       household.setVisible(true);
       reward.setManaged(false);
       reward.setVisible(false);
+      settingsPane.setVisible(false);
     }
   };
 
@@ -440,6 +506,115 @@ public class HomeController {
       household.setVisible(false);
       reward.setManaged(true);
       reward.setVisible(true);
+      settingsPane.setVisible(false);
+    }
+  };
+
+  EventHandler<MouseEvent> settings = new EventHandler<MouseEvent>() {
+    @Override
+    public void handle(MouseEvent e) {
+      settingsPane.setVisible(true);
+      reReturn.setOnAction(ae -> settingsPane.setVisible(false));
+      newReturn.setOnAction(ae -> settingsPane.setVisible(false));
+      reBtn.setOnAction(ae -> {
+        if (!reBtn.getStyleClass().contains("btnOnFocus")) {
+          reBtn.getStyleClass().add("btnOnFocus");
+          newBtn.getStyleClass().remove("btnOnFocus");
+          reBox.setVisible(true);
+          newBox.setVisible(false);
+          text.setText("Xác nhận đổi mật khẩu");
+          confirmText.setText("Đổi mật khẩu thành công");
+        }
+      });
+      newBtn.setOnAction(ae -> {
+        if (!newBtn.getStyleClass().contains("btnOnFocus")) {
+          newBtn.getStyleClass().add("btnOnFocus");
+          reBtn.getStyleClass().remove("btnOnFocus");
+          reBox.setVisible(false);
+          newBox.setVisible(true);
+          text.setText("Xác nhận thêm người dùng");
+          confirmText.setText("Thêm người dùng thành công");
+        }
+      });
+      reSave.setOnAction(aee -> {
+        String s1 = oldPass.getText();
+        String s2 = newPass.getText();
+        String s3 = rePass.getText();
+        if (s1.isEmpty() || s2.isEmpty() || s3.isEmpty())
+          reErr.setText("Vui lòng nhập đủ thông tin");
+        else if (!s2.equals(s3))
+          reErr.setText("Vui lòng nhập lại đúng mật khẩu");
+        else if (s2.equals(s1))
+          reErr.setText("Vui lòng nhập mật khẩu mới khác mật khẩu cũ");
+        else {
+          try {
+            NguoiDung nd = LoginManage.checkUser(user.getUserName(), s1);
+            if (nd == null)
+              reErr.setText("Sai mật khẩu cũ");
+            else {
+              confirmSettingsPane.setVisible(true);
+              confirmChange.setOnAction(aeee -> {
+                try {
+                  LoginManage.changePassword(user, s3);
+                } catch (Exception ex) {
+                  ex.printStackTrace();
+                }
+                confirmedSettingsPane.setVisible(true);
+                confirmedChange.setOnAction(aeeee -> {
+                  confirmedSettingsPane.setVisible(false);
+                  confirmSettingsPane.setVisible(false);
+                  settingsPane.setVisible(false);
+                  Utils.clearTextInput(settingsPane);
+                });
+              });
+              cancelChange.setOnAction(aeee -> {
+                confirmSettingsPane.setVisible(false);
+              });
+            }
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+        }
+      });
+      newSave.setOnAction(aee -> {
+        String s1 = username.getText();
+        String s2 = pass.getText();
+        String s3 = reNewPass.getText();
+        if (s1.isEmpty() || s2.isEmpty() || s3.isEmpty())
+          newErr.setText("Vui lòng nhập đủ thông tin");
+        else if (!s2.equals(s3))
+          newErr.setText("Vui lòng nhập lại đúng mật khẩu");
+        else {
+          try {
+            if (!LoginManage.checkUsername(s1)) {
+              newErr.setText("Tên đăng nhập đã tồn tại");
+            } else {
+              confirmSettingsPane.setVisible(true);
+              confirmChange.setOnAction(aeee -> {
+                try {
+                  Password p = Password.newPassword(s2);
+                  NguoiDung nd = new NguoiDung(0, s1, p, "Tổ trưởng");
+                  LoginManage.themNguoiDung(nd);
+                } catch (Exception ex) {
+                  ex.printStackTrace();
+                }
+                confirmedSettingsPane.setVisible(true);
+                confirmedChange.setOnAction(aeeee -> {
+                  confirmedSettingsPane.setVisible(false);
+                  confirmSettingsPane.setVisible(false);
+                  settingsPane.setVisible(false);
+                  Utils.clearTextInput(settingsPane);
+                });
+              });
+              cancelChange.setOnAction(aeeee -> {
+                confirmSettingsPane.setVisible(false);
+              });
+            }
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+        }
+      });
     }
   };
 
