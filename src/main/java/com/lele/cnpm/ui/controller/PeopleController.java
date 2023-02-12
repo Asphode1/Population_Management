@@ -39,7 +39,13 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
@@ -384,6 +390,9 @@ public class PeopleController {
     optBtnList.forEach((Button e) -> {
       e.setPrefHeight(40);
       e.setPrefWidth(160);
+      e.setBorder(new Border(
+          new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+              BorderWidths.DEFAULT)));
       e.setStyle("-fx-background-color: inherit");
       e.getStyleClass().addAll("addLabel", "addLabelSmaller");
       e.addEventFilter(MouseEvent.MOUSE_ENTERED, me -> {
@@ -626,7 +635,8 @@ public class PeopleController {
       saveConfirmAddBtn.setOnAction((ActionEvent ae) -> {
         NhanKhau nk = new NhanKhau(0, Name, Ali, Date.valueOf(dob), gen, BPlace, Domicile, Eth, Rel, Nation, Job,
             Work,
-            CCCD, Date.valueOf(CCCDDate), Date.valueOf(ToDate), Before, "");
+            CCCD, CCCDDate == null ? null : Date.valueOf(CCCDDate), ToDate == null ? null : Date.valueOf(ToDate),
+            Before, "");
         boolean b = NhanKhauManage.themNhanKhau(nk);
         if (b) {
           addSavedPane.setVisible(true);

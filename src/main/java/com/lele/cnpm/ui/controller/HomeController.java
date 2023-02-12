@@ -254,7 +254,6 @@ public class HomeController {
     dshHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openDashboard);
     hhHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openHousehold);
     rwHBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, openReward);
-    setOnHover(hBoxs);
     if (navBar.getPrefWidth() == 88) {
       Timeline navOpen = new Timeline(
           new KeyFrame(Duration.seconds(0),
@@ -346,7 +345,7 @@ public class HomeController {
         mouseOnEnter.setAutoReverse(false);
         mouseOnEnter.setCycleCount(1);
         mouseOnEnter.play();
-        if (index < 4) {
+        if (index < 4 && navBar.getPrefWidth() == 88) {
           final FadeTransition fft = new FadeTransition(Duration.millis(100), panes.get(index));
           fft.setFromValue(0);
           fft.setToValue(1);
@@ -366,7 +365,7 @@ public class HomeController {
         mouseOnExit.setAutoReverse(false);
         mouseOnExit.setCycleCount(1);
         mouseOnExit.play();
-        if (index < 4) {
+        if (index < 4 && navBar.getPrefWidth() == 88) {
           final FadeTransition fft = new FadeTransition(Duration.millis(100), panes.get(index));
           fft.setFromValue(1);
           fft.setToValue(0);

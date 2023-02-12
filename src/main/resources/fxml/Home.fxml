@@ -72,6 +72,95 @@
       </children>
     </VBox>
     <Pane fx:id="grayBar" mouseTransparent="true" prefHeight="720.0" prefWidth="1192.0" styleClass="grayBar" visible="false" AnchorPane.leftAnchor="88.0" />
+      <AnchorPane fx:id="settingsPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5555;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox layoutX="340.0" layoutY="210.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-radius: 10;-fx-border-radius: 10;-fx-background-color: #f1f1f1;">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="42.0" prefWidth="500.0" style="-fx-background-radius: 10 10 0 0; -fx-background-color: #569698;">
+                     <children>
+                        <Label text="Cài đặt" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="addLabel" />
+                              <String fx:value="addLabelBig" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox style="-fx-background-color: #d9d9d9;">
+                     <children>
+                        <Button mnemonicParsing="false" prefWidth="300.0" text="Đổi mật khẩu" HBox.hgrow="ALWAYS">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="addLabel" />
+                              <String fx:value="btnOnFocus" />
+                           </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false" prefWidth="300.0" text="Tạo tài khoản" HBox.hgrow="ALWAYS">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="addLabel" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <AnchorPane maxHeight="236.0" prefHeight="236.0" prefWidth="600.0">
+                     <children>
+                        <VBox fx:id="newBox" layoutY="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Label prefWidth="210.0" styleClass="addLabel" text="Mật khẩu cũ" />
+                                    <PasswordField fx:id="oldPass" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Label prefWidth="210.0" styleClass="addLabel" text="Mật khẩu mới" />
+                                    <PasswordField fx:id="newPass" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Label prefWidth="210.0" styleClass="addLabel" text="Nhập lại mật khẩu mới" />
+                                    <PasswordField fx:id="rePass" styleClass="addLabel" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label textFill="#f83b3b">
+                                       <styleClass>
+                                          <String fx:value="addLabel" />
+                                          <String fx:value="addLabelSmall" />
+                                       </styleClass>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="42.0" prefWidth="600.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Button" />
+                                    <Button mnemonicParsing="false" text="Button" />
+                                 </children>
+                              </HBox>
+                           </children></VBox>
+                        <VBox fx:id="changeBox" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
     <VBox id="NavBar" fx:id="navBar" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="88.0" style="-fx-background-color: #569698;" styleClass="navBar">
       <children>
         <HBox fx:id="navHBtn" alignment="CENTER_RIGHT" prefHeight="76.0" prefWidth="76.0">
@@ -162,6 +251,26 @@
           </VBox.margin>
         </HBox>
         <Pane VBox.vgrow="ALWAYS" />
+            <HBox fx:id="sttHBtn" alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="76.0">
+               <children>
+                  <Button fx:id="sttBtn" mnemonicParsing="false" prefHeight="76.0" prefWidth="76.0">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/setting.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Label ellipsisString="" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="0.0" text="Cài đặt" />
+               </children>
+               <VBox.margin>
+                  <Insets left="6.0" right="6.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
         <HBox fx:id="lgoHBtn" alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="76.0">
           <children>
             <Button fx:id="lgoBtn" mnemonicParsing="false" prefHeight="76.0" prefWidth="76.0">
@@ -223,7 +332,7 @@
             </ImageView>
          </children>
       </Pane>
-    <AnchorPane fx:id="startup" layoutX="399.0" layoutY="310.0" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0" styleClass="startup" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <AnchorPane fx:id="startup" layoutX="399.0" layoutY="310.0" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0" styleClass="startup" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <Label fx:id="helloText" layoutX="606.0" layoutY="208.0" text="Hello, ABC" textFill="#fefefe" AnchorPane.rightAnchor="590.0" AnchorPane.topAnchor="310.0">
           <font>

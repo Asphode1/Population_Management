@@ -1,7 +1,5 @@
 package com.lele.cnpm.src.services;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.lele.cnpm.database.modify.ChuyenHoKhauModify;
@@ -9,7 +7,10 @@ import com.lele.cnpm.database.modify.HoKhauModify;
 import com.lele.cnpm.database.modify.HoKhauNhanKhauModify;
 import com.lele.cnpm.database.modify.NhanKhauModify;
 import com.lele.cnpm.src.bean.HoKhauBean;
-import com.lele.cnpm.src.models.*;
+import com.lele.cnpm.src.models.ChuyenHoKhau;
+import com.lele.cnpm.src.models.ChuyenNhanKhau;
+import com.lele.cnpm.src.models.HoKhau;
+import com.lele.cnpm.src.models.NhanKhau;
 
 public class HoKhauManage extends HoKhauModify {
     

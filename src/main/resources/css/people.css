@@ -88,6 +88,10 @@ TableView .table-row-cell{
   -fx-text-fill: #0045F2 !important; 
 }
 
+.border{
+  -fx-border-color: black;
+}
+
 .btn{
   -fx-background-color: #d9d9d9;
   -fx-background-radius: 5;

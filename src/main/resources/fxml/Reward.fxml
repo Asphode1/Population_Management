@@ -106,9 +106,9 @@
                       <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
                           <children>
-                            <Label prefWidth="200.0" styleClass="addLabel" text="Năm" />
+                            <Label prefWidth="220.0" styleClass="addLabel" text="Năm (*)" />
                             <TextField fx:id="yearField" editable="false" prefHeight="35.0" prefWidth="100.0" styleClass="addLabel" />
-                            <Label fx:id="nameLabel" prefWidth="200.0" styleClass="addLabel" text="Tên dịp">
+                            <Label fx:id="nameLabel" prefWidth="200.0" styleClass="addLabel" text="Tên dịp (*)">
                               <HBox.margin>
                                 <Insets left="20.0" />
                               </HBox.margin>
@@ -121,7 +121,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
                           <children>
-                            <Label fx:id="present1Label" prefWidth="200.0" styleClass="addLabel" text="Phần quà đặc biệt: " />
+                            <Label fx:id="present1Label" prefWidth="220.0" styleClass="addLabel" text="Phần quà đặc biệt (*): " />
                             <TextField fx:id="present1Field" editable="false" prefWidth="400.0" styleClass="addLabel" HBox.hgrow="ALWAYS">
                               <HBox.margin>
                                 <Insets right="20.0" />
@@ -140,7 +140,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
                           <children>
-                            <Label fx:id="present2Label" prefWidth="200.0" styleClass="addLabel" text="Phần quà HSG: " />
+                            <Label fx:id="present2Label" prefWidth="220.0" styleClass="addLabel" text="Phần quà HSG (*): " />
                             <TextField fx:id="present2Field" editable="false" prefWidth="400.0" styleClass="addLabel" HBox.hgrow="ALWAYS">
                               <HBox.margin>
                                 <Insets right="20.0" />
@@ -159,7 +159,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="978.0">
                           <children>
-                            <Label fx:id="present3Label" prefWidth="200.0" styleClass="addLabel" text="Phần quà HS Khá: " />
+                            <Label fx:id="present3Label" prefWidth="220.0" styleClass="addLabel" text="Phần quà HS Khá (*): " />
                             <TextField fx:id="present3Field" editable="false" prefWidth="400.0" styleClass="addLabel" HBox.hgrow="ALWAYS">
                               <HBox.margin>
                                 <Insets right="20.0" />
@@ -178,7 +178,7 @@
                         </HBox>
                         <HBox prefHeight="109.0" prefWidth="898.0">
                           <children>
-                            <Label prefWidth="200.0" styleClass="addLabel" text="Mô tả:" />
+                            <Label prefWidth="220.0" styleClass="addLabel" text="Mô tả:" />
                             <TextArea fx:id="descField" prefHeight="200.0" prefWidth="200.0" styleClass="addLabel" HBox.hgrow="ALWAYS" />
                           </children>
                         </HBox>

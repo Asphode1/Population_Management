@@ -61,3 +61,36 @@
   -fx-border-radius: 10;
   -fx-background-radius: 10;
 }
+
+.addLabel{
+  -fx-font-family: "Montserrat Medium";
+  -fx-font-size: 18px;
+}
+
+.btn{
+  -fx-background-color: #d9d9d9;
+  -fx-background-radius: 5;
+  -fx-border-radius: 5;
+}
+
+.btnOnFocus{
+  -fx-background-color: #bbb;
+}
+
+.delBtn{
+  -fx-background-color: #ff4949 !important;
+  -fx-text-fill: #efefef;
+}
+
+.saveBtn{
+  -fx-background-color: #1e999b !important;
+  -fx-text-fill: #efefef;
+}
+
+.addLabelBig{
+  -fx-font-size: 24px;
+}
+
+.addLabelSmall{
+  -fx-font-size: 12px;
+}

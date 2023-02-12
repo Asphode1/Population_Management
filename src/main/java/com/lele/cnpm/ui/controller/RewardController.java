@@ -39,8 +39,14 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
@@ -231,6 +237,9 @@ public class RewardController {
     optBtnList.forEach((Button e) -> {
       e.setPrefHeight(40);
       e.setPrefWidth(160);
+      e.setBorder(new Border(
+          new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+              BorderWidths.DEFAULT)));
       e.setStyle("-fx-background-color: inherit");
       e.getStyleClass().addAll("addLabel", "addLabelSmaller");
       e.addEventFilter(MouseEvent.MOUSE_ENTERED, me -> {
@@ -625,12 +634,14 @@ public class RewardController {
         }
         listBtn.setOnAction(ee -> openGList(ee));
         detailBtn.getChildren().clear();
+        Utils.clearTextInput(detailPane);
         detailBtn.getChildren().addAll(listBtn, editBtn, deleteBtn, returnBtn);
         returnBtn.setOnAction(ee -> {
           detailPane.setVisible(false);
           Utils.clearTextInput(detailPane);
         });
       });
+      listBtn.setOnAction(ae -> openEditGList(ae));
     });
     listBtn.setOnAction(aee -> openGList(aee));
     deleteBtn.setOnAction(aee -> {
@@ -1058,7 +1069,7 @@ public class RewardController {
             double x = me.getSceneX();
             double y = me.getSceneY();
             double xx = x > 1280 - 160 ? x - 160 - 137 : x - 135;
-            double yy = y > 720 - 160 ? y - 160 - 147 : y - 145;
+            double yy = y > 720 - 80 ? y - 80 - 147 : y - 145;
             optPane.setVisible(true);
             AnchorPane.setLeftAnchor(optBox, xx);
             AnchorPane.setTopAnchor(optBox, yy);

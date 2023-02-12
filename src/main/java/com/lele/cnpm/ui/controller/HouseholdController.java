@@ -40,8 +40,14 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -269,7 +275,6 @@ public class HouseholdController {
   private NhanKhau selectedEditChuHo = null;
   private NhanKhau selectedInfoNK = null;
   private HoKhauBean infoHKB = null;
-  private ChuyenHoKhau chk = null;
   private ArrayList<ChuyenHoKhau> chkList = new ArrayList<>();
 
   private ArrayList<NhanKhau> editnk = new ArrayList<>();
@@ -294,6 +299,9 @@ public class HouseholdController {
     optBtnList.forEach((Button e) -> {
       e.setPrefHeight(40);
       e.setPrefWidth(160);
+      e.setBorder(new Border(
+          new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+              BorderWidths.DEFAULT)));
       e.setStyle("-fx-background-color: inherit");
       e.addEventFilter(MouseEvent.MOUSE_ENTERED, me -> {
         ColorAdjust ca = new ColorAdjust();
@@ -362,7 +370,7 @@ public class HouseholdController {
             double x = e.getSceneX();
             double y = e.getSceneY();
             double xx = x > 1280 - 160 ? x - 160 - 137 : x - 135;
-            double yy = y > 720 - 160 ? y - 160 - 147 : y - 145;
+            double yy = y > 720 - 80 ? y - 80 - 147 : y - 145;
             optPane.setVisible(true);
             AnchorPane.setLeftAnchor(optBox, xx);
             AnchorPane.setTopAnchor(optBox, yy);
@@ -918,19 +926,6 @@ public class HouseholdController {
     historyPane.setVisible(true);
     optPane.setVisible(false);
     TableView<ChuyenHoKhau> chkTable = new TableView<>();
-    Callback<TableView<ChuyenHoKhau>, TableRow<ChuyenHoKhau>> rowFactory = new Callback<TableView<ChuyenHoKhau>, TableRow<ChuyenHoKhau>>() {
-      @Override
-      public TableRow<ChuyenHoKhau> call(TableView<ChuyenHoKhau> param) {
-        final TableRow<ChuyenHoKhau> row = new TableRow<>();
-        row.setOnMouseClicked(ae -> {
-          if (ae.getClickCount() >= 2) {
-            chk = row.getItem();
-          }
-        });
-        return row;
-      }
-    };
-    chkTable.setRowFactory(rowFactory);
     chkTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     TableColumn<ChuyenHoKhau, String> idCol = Utils.createColumn("Chủ hộ", "tenChuHo");
     TableColumn<ChuyenHoKhau, String> dateCol = Utils.createColumn("Ngày chuyển đi", "ngayChuyenDiString");
@@ -1066,7 +1061,6 @@ public class HouseholdController {
     });
 
     splitLeftBtn.setOnAction(ae -> {
-      String s = null;
     });
 
     splitSaveBtn.setOnAction(ae -> {
