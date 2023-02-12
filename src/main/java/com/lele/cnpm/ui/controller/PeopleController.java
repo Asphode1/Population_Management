@@ -679,7 +679,7 @@ public class PeopleController {
     String Eth = editEthField.getText();
     String Rel = editRelField.getText();
     String Before = editBeforeField.getText();
-    if (!NhanKhauManage.checkCCCD(CCCD))
+    if (!NhanKhauManage.checkCCCD(CCCD) && !CCCD.equals(selectedNK.getSoCCCD()))
       editErrText.setText("CCCD/ĐDĐT bị trùng hoặc sai định dạng");
     else if (Name.length() == 0 || Nation.length() == 0 || DOB == null
         || BPlace.length() == 0 || Gen.length() == 0 || Eth.length() == 0
