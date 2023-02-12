@@ -86,7 +86,7 @@ In the first entrance, the App will ask you to fill the Database Configuration (
 
 # For Users
 
-[Download](https://github.com/Asphode1/Population_Management/releases/download/v1.0.0/Population_Management-1.0.0.jar) and run executable jar.
+[Download](https://github.com/Asphode1/Population_Management/releases/download/v1.0.1/Population_Management-1.0.1.jar) and run executable jar.
 
 # For Developer/Tester
 

@@ -82,7 +82,7 @@ Khôi phục CSDL mẫu từ file [QuanLyNhanKhau.bak](assets/QuanLyNhanKhau.bak
 
 # Đối với người dùng
 
-[Tải](https://github.com/Asphode1/Population_Management/releases/download/v1.0.0/Population_Management-1.0.0.jar) và chạy file jar.
+[Tải](https://github.com/Asphode1/Population_Management/releases/download/v1.0.1/Population_Management-1.0.1.jar) và chạy file jar.
 
 # Đối với lập trình viên/kiểm thử
 
