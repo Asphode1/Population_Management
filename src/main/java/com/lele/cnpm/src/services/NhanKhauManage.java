@@ -71,7 +71,7 @@ public class NhanKhauManage extends NhanKhauModify {
   public static boolean themTamTru(TamTru tt) {
     try {
       NhanKhau nk = layNhanKhau(tt.getIdNhanKhau());
-      if (nk.getTrangThai().equals("Tạm trú") || nk.getTrangThai().equals("Đã chuyển đi") || nk.getTrangThai().equals("Đã mất")) return false;
+      if (nk.getTrangThai().equals("Đã chuyển đi") || nk.getTrangThai().equals("Đã mất")) return false;
       nk.setTrangThai("Tạm trú");
       capNhatNhanKhau(nk);
       TamTruModify.themTamTru(tt);
