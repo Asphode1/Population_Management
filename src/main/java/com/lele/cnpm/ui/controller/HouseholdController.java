@@ -1075,11 +1075,17 @@ public class HouseholdController {
     };
 
     splitRightBtn.setOnAction(ae -> {
-      String s = splitHKRelNewField.getText();
-      Pair<NhanKhau, String> p = new Pair<NhanKhau, String>(selectedAddNK, s);
-      nkWRel.remove(p);
-      nkedWRel.add(p);
-      updateTable.run();
+      if (selectedAddNK.getID() != selectedHK.getIdChuHo()) {
+        String s = splitHKRelNewField.getText();
+        Pair<NhanKhau, String> p = new Pair<NhanKhau, String>(selectedAddNK, s);
+        nkWRel.remove(p);
+        nkedWRel.add(p);
+        updateTable.run();
+        selectedAddNK = null;
+        splitHKRelNewField.setText("");
+        splitHKNameField.setText("");
+        splitHKRelNewField.setText("");
+      }
     });
 
     splitSaveBtn.setOnAction(ae -> {
