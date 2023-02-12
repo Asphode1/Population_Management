@@ -76,8 +76,7 @@ public class NhanKhauModify {
    * @return true/false
    */
   public static boolean themNhanKhau(NhanKhau nk) {
-    if (nk.getTrangThai() == "" || nk.getTrangThai() == null)
-      nk.setTrangThai("Tạm trú");
+    nk.setTrangThai("Tạm trú");
     if (!checkCCCD(nk.getSoCCCD())) return false;
     else return insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
         nk.getNguyenQuan(), nk.getDanToc(), nk.getTonGiao(), nk.getQuocTich(), nk.getNgheNghiep(),

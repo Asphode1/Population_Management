@@ -49,7 +49,7 @@ public class NhanKhau {
         this.ngayCap = ngayCap;
         this.chuyenDenNgay = chuyenDenNgay;
         this.noiThuongTruTruoc = noiThuongTruTruoc;
-        if (trangThai.equals("") || trangThai == null) this.trangThai = "Thường trú";
+        if (trangThai == null|| trangThai.equals("") ) this.trangThai = "Thường trú";
         else this.trangThai = trangThai;
         setName(hoTen);
     }

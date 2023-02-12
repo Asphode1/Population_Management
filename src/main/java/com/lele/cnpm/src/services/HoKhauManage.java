@@ -63,7 +63,8 @@ public class HoKhauManage extends HoKhauModify {
             for (int i = 0; i < sizeList; i++) {
                 NhanKhau nk = nhanKhauTach.get(i);
                 String qh = quanHeMoi.get(i);
-                HoKhauNhanKhauModify.capNhatHoKhau_NhanKhau(hkMoi, nk, qh);
+                HoKhauNhanKhauModify.xoaNhanKhau(hkCu.getID(), nk.getID());
+                HoKhauNhanKhauModify.themHoKhau_NhanKhau(hkMoi.getID(), nk.getID(), qh);
             }
             HoKhauNhanKhauModify.xoaNhanKhau(hkMoi.getID(), hkCu.getIdChuHo());
             HoKhauNhanKhauModify.xoaNhanKhau(hkCu.getID(), idChuHoMoi);
