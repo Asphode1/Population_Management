@@ -626,7 +626,7 @@ public class PeopleController {
       saveConfirmAddBtn.setOnAction((ActionEvent ae) -> {
         NhanKhau nk = new NhanKhau(0, Name, Ali, Date.valueOf(dob), gen, BPlace, Domicile, Eth, Rel, Nation, Job,
             Work,
-            CCCD, Date.valueOf(CCCDDate), Date.valueOf(ToDate), Before, "");
+            CCCD, CCCDDate==null ? null : Date.valueOf(CCCDDate),ToDate==null ? null : Date.valueOf(ToDate), Before, "");
         boolean b = NhanKhauManage.themNhanKhau(nk);
         if (b) {
           addSavedPane.setVisible(true);
@@ -678,7 +678,7 @@ public class PeopleController {
       saveConfirmEditBtn.setOnAction((ActionEvent ae) -> {
         NhanKhau nk = new NhanKhau(selectedNK.getID(), Name, Ali, Date.valueOf(DOB), Gen, BPlace, Domicile, Eth, Rel,
             Nation, Job, Work,
-            CCCD, Date.valueOf(CCCDDate), Date.valueOf(ToDate), Before, selectedNK.getTrangThai());
+            CCCD, CCCDDate==null ? null : Date.valueOf(CCCDDate), CCCDDate==null ? null : Date.valueOf(ToDate), Before, selectedNK.getTrangThai());
         Boolean b = NhanKhauManage.capNhatNhanKhau(nk);
         if (b) {
           editSavedPane.setVisible(true);
