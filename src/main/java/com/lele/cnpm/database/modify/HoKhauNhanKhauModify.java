@@ -61,7 +61,8 @@ public class HoKhauNhanKhauModify {
 
   /**
    * Xóa một nhân khẩu khỏi quan hệ hộ khẩu-nhân khẩu
-   * @param nk
+   * @param idHoKhau
+   * @param idNhanKhau
    * @return true/false
    */
   public static boolean xoaNhanKhau(int idHoKhau, int idNhanKhau) {

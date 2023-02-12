@@ -45,8 +45,8 @@ public class HoKhauManage extends HoKhauModify {
 
     /**
      * Thực hiện tách hộ khẩu
-     * @param hkCu
-     * @param hkMoi
+     * @param hkCu : da co trong database
+     * @param hkMoi : chua co trong database
      * @param idChuHoMoi
      * @param nhanKhauTach
      * @param quanHeMoi
@@ -57,17 +57,18 @@ public class HoKhauManage extends HoKhauModify {
         try {
             //them ho khau moi vao db
             themHoKhau(hkMoi);
-            hkMoi = layHoKhau(idChuHoMoi); //cap nhat id Ho Khau tang tu dong trong db
+
+            HoKhau hkMoi2 = layHoKhau(idChuHoMoi); //cap nhat id Ho Khau tang tu dong trong db
             //cap nhat quan he trong ho khau moi
             int sizeList = nhanKhauTach.size();
             for (int i = 0; i < sizeList; i++) {
                 NhanKhau nk = nhanKhauTach.get(i);
                 String qh = quanHeMoi.get(i);
                 HoKhauNhanKhauModify.xoaNhanKhau(hkCu.getID(), nk.getID());
-                HoKhauNhanKhauModify.themHoKhau_NhanKhau(hkMoi.getID(), nk.getID(), qh);
+                System.out.println("Them moi");
+                HoKhauNhanKhauModify.themHoKhau_NhanKhau(hkMoi2.getID(), nk.getID(), qh);
+                System.out.println("Them moi xong");
             }
-            HoKhauNhanKhauModify.xoaNhanKhau(hkMoi.getID(), hkCu.getIdChuHo());
-            HoKhauNhanKhauModify.xoaNhanKhau(hkCu.getID(), idChuHoMoi);
             
         } catch (Exception e) {
             e.printStackTrace();
