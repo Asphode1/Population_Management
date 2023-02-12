@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.lele.cnpm.database.connect.DBConnection;
@@ -77,7 +76,7 @@ public class NhanKhauModify {
    * @return true/false
    */
   public static boolean themNhanKhau(NhanKhau nk) {
-    if (nk.getTrangThai() == "" || nk.getTrangThai() == null)
+    if (nk.getTrangThai() == null)
       nk.setTrangThai("Tạm trú");
     if (!checkCCCD(nk.getSoCCCD())) return false;
     else return insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
