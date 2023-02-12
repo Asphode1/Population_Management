@@ -617,10 +617,11 @@ public class PeopleController {
     if (!NhanKhauManage.checkCCCD(CCCD)) {
       addErrText.setText("CCCD/ĐDĐT bị trùng hoặc sai định dạng");
     } else if (Name.length() == 0 || Nation.length() == 0 || dob == null
-    || BPlace.length() == 0 || gen.length() == 0 || Eth.length() == 0
-    || Domicile.length() == 0 || Rel.length() == 0)
+        || BPlace.length() == 0 || gen.length() == 0 || Eth.length() == 0
+        || Domicile.length() == 0 || Rel.length() == 0)
       addErrText.setText("Vui lòng nhập đầy đủ thông tin");
     else {
+      addErrText.setText("");
       addSaveConfirmPane.setVisible(true);
       saveConfirmAddBtn.setOnAction((ActionEvent ae) -> {
         NhanKhau nk = new NhanKhau(0, Name, Ali, Date.valueOf(dob), gen, BPlace, Domicile, Eth, Rel, Nation, Job,
