@@ -80,7 +80,13 @@ Khôi phục CSDL mẫu từ file [QuanLyNhanKhau.bak](assets/QuanLyNhanKhau.bak
 
 # Chạy chương trình
 
-## Sử dụng cmd
+# Đối với người dùng
+
+[Tải](https://github.com/Asphode1/Population_Management/releases/download/v1.0.0/Population_Management-1.0.0.jar) và chạy file jar.
+
+# Đối với lập trình viên/kiểm thử
+
+### Sử dụng cmd
 
 Mở cmd và chạy lệnh sau:
 
@@ -88,7 +94,7 @@ Mở cmd và chạy lệnh sau:
 mvn clean javafx:run
 ```
 
-## Sử dụng VSCode
+### Sử dụng VSCode
 
 1. Tạo thư mục <code>.vscode</code> bên trong thư mục làm việc và tạo một tệp có tên <code>tasks.json</code> bên trong.
 
