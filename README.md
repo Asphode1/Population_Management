@@ -54,13 +54,13 @@ Follow the steps mentioned below to use SQL Server Authentication.
 
 2. On the Server Properties page, Click on Security. Enable SQL Server and Windows Authentication mode.
 
-3. Under "Server proxy account", Click "Enable Proxy Account", enter "Proxy account" as `sa` and create a password, then click Ok.
+3. Under "Server proxy account", Click "Enable Proxy Account", create a "Proxy account" (default to `sa`) and create a password, then click Ok.
 
 ### Enable the SQL Server Auth Login:
 
 1. Connect to the SQL Server instance using SSMS and expand Security > Logins directory.
 
-2. Right-click on the `sa` account, select Properties.
+2. Right-click on the created account, select Properties.
 
 3. Head to the Status page. Enable Login settings for the account. Click Ok.
 
@@ -78,9 +78,9 @@ Follow the steps mentioned below to use SQL Server Authentication.
 
 # Import Database
 
-Execute [QuanLyNhanKhauCreateTables.sql](QuanLyNhanKhauCreateTables.sql) using SQL Server Management Studio. To have a full sample database, restore the database from the file QuanLyNhanKhau.bak.
+Restore Sample Database using backup file [QuanLyNhanKhau.bak](assets/QuanLyNhanKhau.bak)
 
-In the first entrance, the App will ask you to fill the Database Cònfiguration (servername, user, pasword). You can also change this later at the login UI.
+In the first entrance, the App will ask you to fill the Database Configuration (servername, username, password). You can also change this later at the login UI.
 
 # Run the program
 

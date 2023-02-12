@@ -50,15 +50,15 @@ Khởi động lại dịch vụ SQL Server sau mỗi bước để những thay
 
 2. Trên trang Server Properties, Nhấp vào Security. Bật chế độ SQL Server and Windows Authentication.
 
-3. Tại mục "Server proxy account", chọn "Enable server proxy account", nhập "Proxy Account" là `sa` và tạo một mật khẩu, sau đó nhấn OK.
+3. Tại mục "Server proxy account", chọn "Enable server proxy account", tạo tài khoản "Proxy Account" (mặc định là `sa`) và tạo một mật khẩu, sau đó nhấn OK.
 
 ### Kích hoạt đăng nhập Tài khoản SQL Server Auth:
 
 1. Kết nối với phiên bản SQL Server bằng SSMS và chuyển đến Security > Logins.
 
-2. Nhấp chuột phải vào tài khoản `sa` và đi đến Login Properties.
+2. Nhấp chuột phải vào tài khoản đã tạo và đi đến Login Properties.
 
-3. Nhấp vào trang Status. Tại mục Login, nhấn Enable để kích hoạt đăng nhập bằng tài khoản `sa`, Nhấn Ok.
+3. Nhấp vào trang Status. Tại mục Login, nhấn Enable để kích hoạt đăng nhập bằng tài khoản, nhấn Ok.
 
 4. Khởi động lại và đăng nhập vào SQL Server Instance trong SSMS bằng chế độ SQL Server Authentication. Nếu không thành công, hãy thử khởi động lại máy tính.
 
@@ -74,7 +74,7 @@ Khởi động lại dịch vụ SQL Server sau mỗi bước để những thay
 
 # Nhập cơ sở dữ liệu
 
-Chạy [QuanLyNhanKhauCreateTables.sql](../QuanLyNhanKhauCreateTables.sql) bằng SQL Server Management Studio. Để có một bản mẫu cơ sở dữ liệu đầy đủ, hãy restore từ file QuanLyNhanKhau.bak
+Khôi phục CSDL mẫu từ file [QuanLyNhanKhau.bak](assets/QuanLyNhanKhau.bak)
 
 Ở lần sử dụng đầu tiên, hệ thống sẽ yêu cầu bạn điền thông tin kết nối đến Cơ sở dữ liệu. Bạn cũng có thể thay đổi sau này ở giao diện đăng nhập.
 
