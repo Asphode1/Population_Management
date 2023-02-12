@@ -55,7 +55,7 @@ public class NhanKhauModify {
    * @return true nếu CCCD hợp lệ, false nếu CCCD trùng hoặc sai kích thước
    */
   public static boolean checkCCCD(String cccd) {
-    if (cccd.length() != 9 && cccd.length() != 12) return false;
+    if (cccd.length() !=0 && cccd.length() != 9 && cccd.length() != 12) return false;
     String sql = "SELECT count(*) as c FROM nhan_khau WHERE soCCCD = '" + cccd + "'";
     try {
       Connection conn = DBConnection.getDBConnection().getConnection();
@@ -80,7 +80,7 @@ public class NhanKhauModify {
     if (nk.getTrangThai() == "" || nk.getTrangThai() == null)
       nk.setTrangThai("Tạm trú");
     if (!checkCCCD(nk.getSoCCCD())) return false;
-    return insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
+    else return insert(nk.getHoTen(), nk.getBietDanh(), nk.getNgaySinh(), nk.getNoiSinh(), nk.getGioiTinh(),
         nk.getNguyenQuan(), nk.getDanToc(), nk.getTonGiao(), nk.getQuocTich(), nk.getNgheNghiep(),
         nk.getNoiLamViec(), nk.getSoCCCD(), nk.getNgayCap(), nk.getChuyenDenNgay(), nk.getNoiThuongTruTruoc(),
         nk.getTrangThai());
