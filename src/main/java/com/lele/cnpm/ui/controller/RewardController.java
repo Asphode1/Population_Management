@@ -1026,8 +1026,8 @@ public class RewardController {
       listAddNewBtn.setOnAction(aeee -> {
         String n = nhomBox.getValue();
         int nhom;
-        for (nhom = 0; nhom < 3; nhom++) {
-          if (NHOM[nhom].equals(n))
+        for (nhom = 1; nhom <= 3; nhom++) {
+          if (NHOM[nhom - 1].equals(n))
             break;
         }
         ChiTietDipDacBiet newS = new ChiTietDipDacBiet(selectedS.getIdDip(), selectedAddNK.getID(), nhom);
@@ -1266,8 +1266,8 @@ public class RewardController {
         String l = addLField.getText();
         String t = addSField.getText();
         int nhom;
-        for (nhom = 0; nhom < 3; nhom++) {
-          if (NHOM[nhom].equals(n))
+        for (nhom = 1; nhom <= 3; nhom++) {
+          if (NHOM[nhom - 1].equals(n))
             break;
         }
         if (n.isEmpty() || l.isEmpty() || t.isEmpty())
