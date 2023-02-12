@@ -190,7 +190,13 @@
                         <Insets right="30.0" />
                       </padding>
                     </VBox>
-                    <HBox fx:id="detailBtn" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                              <Label fx:id="errText" text="Vui lòng nhập đủ thông tin" textFill="#eb2222" visible="false">
+                                 <styleClass>
+                                    <String fx:value="addLabelSmall" />
+                                    <String fx:value="addLabel" />
+                                 </styleClass>
+                              </Label>
+                    <HBox fx:id="detailBtn" alignment="CENTER" prefHeight="68.0" prefWidth="958.0" spacing="50.0">
                       <children>
                         <Button fx:id="listBtn" mnemonicParsing="false" prefHeight="36.0" text="Danh sách thưởng">
                           <styleClass>

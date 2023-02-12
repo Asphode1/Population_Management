@@ -30,6 +30,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -260,6 +261,13 @@ public class HouseholdController {
   private CheckBox editCHCheckBox;
   @FXML
   private CheckBox splitCHCheckBox;
+
+  @FXML
+  private Label addErrText;
+  @FXML
+  private Label moveErrText;
+  @FXML
+  private Label splitErrText;
 
   private ArrayList<HoKhau> hkList = new ArrayList<>();
   private TableView<HoKhau> table = new TableView<>();
@@ -871,23 +879,30 @@ public class HouseholdController {
       String a6 = addAddrField.getText();
       LocalDate a7 = addDatePicker.getValue();
       String a8 = addStateField.getText();
-      addSaveConfirmPane.setVisible(true);
-      saveConfirmAddBtn.setOnAction(ev -> {
-        HoKhau hk = new HoKhau(0, selectedAddChuHo.getID(), a3, a4, a5, a6, Date.valueOf(a7), a8);
-        HoKhauBean hkb = new HoKhauBean(hk, selectedAddChuHo, addednk, addedNKRel);
-        HoKhauManage.themHoKhauBean(hkb);
-        addSaveConfirmPane.setVisible(false);
-        addPane.setVisible(false);
-        Utils.clearTextInput(addPane);
-      });
-      cancelConfirmAddBtn.setOnAction(ev -> {
-        addSaveConfirmPane.setVisible(false);
-      });
+      if (a3.isEmpty() || a4.isEmpty() || a5.isEmpty() || a6.isEmpty() || a7 == null || selectedAddChuHo == null)
+        addErrText.setVisible(true);
+      else {
+        addErrText.setVisible(false);
+        addSaveConfirmPane.setVisible(true);
+        saveConfirmAddBtn.setOnAction(ev -> {
+          HoKhau hk = new HoKhau(0, selectedAddChuHo.getID(), a3, a4, a5, a6, Date.valueOf(a7), a8);
+          HoKhauBean hkb = new HoKhauBean(hk, selectedAddChuHo, addednk, addedNKRel);
+          HoKhauManage.themHoKhauBean(hkb);
+          addSaveConfirmPane.setVisible(false);
+          addPane.setVisible(false);
+          addErrText.setVisible(false);
+          Utils.clearTextInput(addPane);
+        });
+        cancelConfirmAddBtn.setOnAction(ev -> {
+          addSaveConfirmPane.setVisible(false);
+        });
+      }
     });
   }
 
   public void cancelAdd(ActionEvent e) {
     addPane.setVisible(false);
+    addErrText.setVisible(false);
     Utils.clearTextInput(addPane);
   }
 
@@ -899,10 +914,18 @@ public class HouseholdController {
     moveAtPicker.setConverter(Utils.DATE_VN_CONVERTER);
     moveAtPicker.setValue(LocalDate.now());
     moveBtn.setOnAction(ae -> {
-      moveConfirmPane.setVisible(true);
+      Date d1 = Date.valueOf(moveAtPicker.getValue());
+      String s1 = moveToField.getText();
+      if (d1 == null || s1.isEmpty())
+        moveErrText.setVisible(true);
+      else {
+        moveErrText.setVisible(false);
+        moveConfirmPane.setVisible(true);
+      }
     });
     moveCloseBtn.setOnAction(ae -> {
       movePane.setVisible(false);
+      moveErrText.setVisible(false);
       Utils.clearTextInput(movePane);
     });
     moveConfirmBtn.setOnAction(ae -> {
@@ -913,6 +936,7 @@ public class HouseholdController {
       HoKhauManage.chuyenHoKhau(chk);
       moveConfirmPane.setVisible(false);
       movePane.setVisible(false);
+      moveErrText.setVisible(false);
       Utils.clearTextInput(movePane);
     });
     moveCancelBtn.setOnAction(ae -> {
@@ -1064,27 +1088,34 @@ public class HouseholdController {
     });
 
     splitSaveBtn.setOnAction(ae -> {
-      splitConfirmSavePane.setVisible(true);
-      confirmSaveSplitBtn.setOnAction(aee -> {
-        String a3 = splitTTField.getText();
-        String a4 = splitQHField.getText();
-        String a5 = splitPXField.getText();
-        String a6 = splitAddrField.getText();
-        LocalDate a7 = splitDatePicker.getValue();
-        String a8 = splitStateField.getText();
-        HoKhau hk = new HoKhau(0, splitNewChuHo.getID(), a3, a4, a5, a6, Date.valueOf(a7), a8);
-        splitednk.clear();
-        splitednk.addAll(toList.get().getKey());
-        splitedNKRel.clear();
-        HoKhauManage.tachHoKhau(selectedHK, hk, splitNewChuHo.getID(), nk, splitedNKRel);
-        splitConfirmSavePane.setVisible(false);
-        splitPane.setVisible(false);
-        Utils.clearTextInput(splitPane);
-      });
-      confirmCancelSplitBtn.setOnAction(aee -> splitConfirmSavePane.setVisible(false));
+      String a3 = splitTTField.getText();
+      String a4 = splitQHField.getText();
+      String a5 = splitPXField.getText();
+      String a6 = splitAddrField.getText();
+      LocalDate a7 = splitDatePicker.getValue();
+      String a8 = splitStateField.getText();
+      if (a3.isEmpty() || a4.isEmpty() || a5.isEmpty() || a6.isEmpty() || a7 == null)
+        splitErrText.setVisible(true);
+      else {
+        splitErrText.setVisible(false);
+        splitConfirmSavePane.setVisible(true);
+        confirmSaveSplitBtn.setOnAction(aee -> {
+          HoKhau hk = new HoKhau(0, splitNewChuHo.getID(), a3, a4, a5, a6, Date.valueOf(a7), a8);
+          splitednk.clear();
+          splitednk.addAll(toList.get().getKey());
+          splitedNKRel.clear();
+          HoKhauManage.tachHoKhau(selectedHK, hk, splitNewChuHo.getID(), nk, splitedNKRel);
+          splitConfirmSavePane.setVisible(false);
+          splitPane.setVisible(false);
+          splitErrText.setVisible(false);
+          Utils.clearTextInput(splitPane);
+        });
+        confirmCancelSplitBtn.setOnAction(aee -> splitConfirmSavePane.setVisible(false));
+      }
     });
     splitCloseBtn.setOnAction(ae -> {
       splitPane.setVisible(false);
+      splitErrText.setVisible(false);
       Utils.clearTextInput(splitPane);
     });
   }

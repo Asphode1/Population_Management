@@ -351,6 +351,8 @@ public class PeopleController {
   private Label awayErrText;
   @FXML
   private Label moveErrText;
+  @FXML
+  private Label deadErrText;
 
   @FXML
   private VBox deadTable;
@@ -657,6 +659,7 @@ public class PeopleController {
 
   public void cancelAdd(ActionEvent e) {
     addPane.setVisible(false);
+    addErrText.setVisible(false);
     Utils.clearTextInput(addPane);
   };
 
@@ -677,13 +680,13 @@ public class PeopleController {
     String Rel = editRelField.getText();
     String Before = editBeforeField.getText();
     if (!NhanKhauManage.checkCCCD(CCCD))
-      addErrText.setText("CCCD/ĐDĐT bị trùng hoặc sai định dạng");
+      editErrText.setText("CCCD/ĐDĐT bị trùng hoặc sai định dạng");
     else if (Name.length() == 0 || Nation.length() == 0 || DOB == null
         || BPlace.length() == 0 || Gen.length() == 0 || Eth.length() == 0
         || Domicile.length() == 0 || Rel.length() == 0)
-      editErrText.setText("Vui lòng nhập đầy đủ thông tin");
+      editErrText.setVisible(true);
     else {
-      editErrText.setText("");
+      editErrText.setVisible(false);
       editSaveConfirmPane.setVisible(true);
       saveConfirmEditBtn.setOnAction((ActionEvent ae) -> {
         NhanKhau nk = new NhanKhau(selectedNK.getID(), Name, Ali, Date.valueOf(DOB), Gen, BPlace, Domicile, Eth, Rel,
@@ -736,6 +739,7 @@ public class PeopleController {
 
   public void cancelEdit(ActionEvent e) {
     editPane.setVisible(false);
+    editErrText.setVisible(false);
   };
 
   public void openInfo(MouseEvent e) {
@@ -820,12 +824,12 @@ public class PeopleController {
     LocalDate s3 = stayFromPicker.getValue();
     LocalDate s4 = stayToPicker.getValue();
     String s5 = stayReasonField.getText().replaceAll("\n", System.getProperty("line.separator"));
-    stayConfirmPane.setVisible(true);
-    stayConfirmBtn.setOnAction(ae -> {
-      if (s1.length() == 0 || s2.length() == 0 || s3 == null || s4 == null) {
-        stayErrText.setText("Vui lòng nhập đầy đủ thông tin");
-      } else {
-        stayErrText.setText("");
+    if (s1.length() == 0 || s2.length() == 0 || s3 == null || s4 == null) {
+      stayErrText.setVisible(true);
+    } else {
+      stayConfirmPane.setVisible(true);
+      stayErrText.setVisible(false);
+      stayConfirmBtn.setOnAction(ae -> {
         TamTru temp = new TamTru(0, selectedNK.getID(), s1, s2, Date.valueOf(s3), Date.valueOf(s4), s5);
         Boolean b = NhanKhauManage.themTamTru(temp);
         if (b) {
@@ -837,15 +841,16 @@ public class PeopleController {
             Utils.clearTextInput(stayPane);
           });
         }
-      }
-    });
-    stayCancelBtn.setOnAction(ae -> {
-      stayConfirmPane.setVisible(false);
-    });
+      });
+      stayCancelBtn.setOnAction(ae -> {
+        stayConfirmPane.setVisible(false);
+      });
+    }
   };
 
   public void stayCancel(ActionEvent e) {
     stayPane.setVisible(false);
+    stayErrText.setVisible(false);
     Utils.clearTextInput(stayPane);
   };
 
@@ -862,12 +867,12 @@ public class PeopleController {
     LocalDate s3 = awayFromPicker.getValue();
     LocalDate s4 = awayToPicker.getValue();
     String s5 = awayReasonField.getText().replaceAll("\n", System.getProperty("line.separator"));
-    awayConfirmPane.setVisible(true);
-    awayConfirmBtn.setOnAction(ae -> {
-      if (s1.length() == 0 || s3 == null || s4 == null) {
-        awayErrText.setText("Vui lòng nhập đầy đủ thông tin");
-      } else {
-        awayErrText.setText("");
+    if (s1.length() == 0 || s3 == null || s4 == null) {
+      awayErrText.setVisible(true);
+    } else {
+      awayErrText.setVisible(false);
+      awayConfirmPane.setVisible(true);
+      awayConfirmBtn.setOnAction(ae -> {
         TamVang temp = new TamVang(0, selectedNK.getID(), s1, Date.valueOf(s3), Date.valueOf(s4), s5);
         Boolean b = NhanKhauManage.themTamVang(temp);
         if (b) {
@@ -880,15 +885,16 @@ public class PeopleController {
             Utils.clearTextInput(awayPane);
           });
         }
-      }
-    });
-    awayCancelBtn.setOnAction(ae -> {
-      awayConfirmPane.setVisible(false);
-    });
+      });
+      awayCancelBtn.setOnAction(ae -> {
+        awayConfirmPane.setVisible(false);
+      });
+    }
   };
 
   public void awayCancel(ActionEvent e) {
     awayPane.setVisible(false);
+    awayErrText.setVisible(false);
     Utils.clearTextInput(awayPane);
   };
 
@@ -904,12 +910,12 @@ public class PeopleController {
     LocalDate s3 = moveAtPicker.getValue();
     String s4 = moveToField.getText();
     String s5 = moveNoteField.getText().replaceAll("\n", System.getProperty("line.separator"));
-    moveConfirmPane.setVisible(true);
-    moveConfirmBtn.setOnAction(ae -> {
-      if (s3 == null || s4 == null) {
-        moveErrText.setText("Vui lòng nhập đầy đủ thông tin");
-      } else {
-        moveErrText.setText("");
+    if (s3 == null || s4 == null) {
+      moveErrText.setVisible(true);
+    } else {
+      moveErrText.setVisible(false);
+      moveConfirmPane.setVisible(true);
+      moveConfirmBtn.setOnAction(ae -> {
         ChuyenNhanKhau temp = new ChuyenNhanKhau(0, selectedNK.getID(), Date.valueOf(s3), s4, s5);
         Boolean b = NhanKhauManage.chuyenNhanKhau(temp);
         if (b) {
@@ -922,11 +928,11 @@ public class PeopleController {
             Utils.clearTextInput(movePane);
           });
         }
-      }
-    });
-    moveCancelBtn.setOnAction(ae -> {
-      moveConfirmPane.setVisible(false);
-    });
+      });
+      moveCancelBtn.setOnAction(ae -> {
+        moveConfirmPane.setVisible(false);
+      });
+    }
   };
 
   public void moveCancel(ActionEvent e) {
@@ -981,10 +987,17 @@ public class PeopleController {
     deadTable.getChildren().clear();
     deadTable.getChildren().addAll(deadSearchField, deadNKList);
     deadAddBtn.setOnAction(ae -> {
-      deadConfirmPane.setVisible(true);
+      Date d1 = Date.valueOf(deadDatePicker.getValue());
+      if (d1 == null || selectedNKB == null)
+        deadErrText.setVisible(true);
+      else {
+        deadErrText.setVisible(false);
+        deadConfirmPane.setVisible(true);
+      }
     });
     deadCloseBtn.setOnAction(ae -> {
       lostPane.setVisible(false);
+      deadErrText.setVisible(false);
       Utils.clearTextInput(lostPane);
     });
     deadConfirmBtn.setOnAction(ae -> {

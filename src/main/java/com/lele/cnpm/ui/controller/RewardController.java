@@ -175,6 +175,8 @@ public class RewardController {
   private Label confirmLabel;
   @FXML
   private Label addSLabel;
+  @FXML
+  private Label errText;
 
   @FXML
   private VBox listBox;
@@ -427,9 +429,9 @@ public class RewardController {
     title.setText("Thêm phần thưởng HSG");
     nameLabel.setVisible(false);
     nameField.setVisible(false);
-    present1Label.setText("Phần quà đặc biệt:");
-    present2Label.setText("Phần quà HSG:");
-    present3Label.setText("Phần quà HS Khá:");
+    present1Label.setText("Phần quà đặc biệt (*):");
+    present2Label.setText("Phần quà HSG (*):");
+    present3Label.setText("Phần quà HS Khá (*):");
     yearField.setEditable(true);
     present1Field.setEditable(true);
     present2Field.setEditable(true);
@@ -463,20 +465,27 @@ public class RewardController {
       String s6 = present3Field.getText();
       String s7 = money3Field.getText();
       String s8 = descField.getText();
-      confirmPane.setVisible(true);
-      confirmLabel.setText("Xác nhận thêm phần thưởng");
-      confirmBtn.setOnAction(aee -> {
-        DipHSG hsg = new DipHSG(0, Integer.parseInt(s1), s8, s2, s4, s6, Float.parseFloat(s3), Float.parseFloat(s5),
-            Float.parseFloat(s7));
-        TraoThuongHSGManage.themDipHSG(hsg);
-        confirmPane.setVisible(false);
-        detailPane.setVisible(false);
-      });
-      cancelBtn.setOnAction(aee -> confirmPane.setVisible(false));
+      if (s1.isEmpty() || s2.isEmpty() || s3.isEmpty() || s4.isEmpty() || s5.isEmpty() || s6.isEmpty() || s7.isEmpty())
+        errText.setVisible(true);
+      else {
+        errText.setVisible(false);
+        confirmPane.setVisible(true);
+        confirmLabel.setText("Xác nhận thêm phần thưởng");
+        confirmBtn.setOnAction(aee -> {
+          DipHSG hsg = new DipHSG(0, Integer.parseInt(s1), s8, s2, s4, s6, Float.parseFloat(s3), Float.parseFloat(s5),
+              Float.parseFloat(s7));
+          TraoThuongHSGManage.themDipHSG(hsg);
+          confirmPane.setVisible(false);
+          detailPane.setVisible(false);
+          errText.setVisible(false);
+        });
+        cancelBtn.setOnAction(aee -> confirmPane.setVisible(false));
+      }
     });
     returnBtn.setText("Huỷ");
     returnBtn.setOnAction(ae -> {
       detailPane.setVisible(false);
+      errText.setVisible(false);
       Utils.clearTextInput(detailPane);
     });
   }
@@ -488,9 +497,9 @@ public class RewardController {
     title.setText("Thêm phần thưởng dịp đặc biệt");
     nameLabel.setVisible(true);
     nameField.setVisible(true);
-    present1Label.setText("Độ tuổi 0-5 tuổi:");
-    present2Label.setText("Độ tuổi 6-14 tuổi:");
-    present3Label.setText("Độ tuổi 15-17 tuổi:");
+    present1Label.setText("Độ tuổi 0-5 tuổi (*):");
+    present2Label.setText("Độ tuổi 6-14 tuổi (*):");
+    present3Label.setText("Độ tuổi 15-17 tuổi (*):");
     yearField.setEditable(true);
     nameField.setEditable(true);
     present1Field.setEditable(true);
@@ -527,21 +536,29 @@ public class RewardController {
       String s7 = money3Field.getText();
       String s8 = nameField.getText();
       String s9 = descField.getText();
-      confirmPane.setVisible(true);
-      confirmLabel.setText("Xác nhận thêm phần thưởng");
-      confirmBtn.setOnAction(aee -> {
-        DipDacBiet ddb = new DipDacBiet(0, s8, Integer.parseInt(s1), s9, s2, s4, s6, Float.parseFloat(s3),
-            Float.parseFloat(s5), Float.parseFloat(s7));
-        TraoThuongDacBietManage.themDipDacBiet(ddb);
+      if (s1.isEmpty() || s2.isEmpty() || s3.isEmpty() || s4.isEmpty() || s5.isEmpty() || s6.isEmpty() || s7.isEmpty()
+          || s8.isEmpty())
+        errText.setVisible(true);
+      else {
+        errText.setVisible(false);
         confirmPane.setVisible(false);
-        detailPane.setVisible(false);
-        Utils.clearTextInput(detailPane);
-      });
-      cancelBtn.setOnAction(aee -> confirmPane.setVisible(false));
+        confirmLabel.setText("Xác nhận thêm phần thưởng");
+        confirmBtn.setOnAction(aee -> {
+          DipDacBiet ddb = new DipDacBiet(0, s8, Integer.parseInt(s1), s9, s2, s4, s6, Float.parseFloat(s3),
+              Float.parseFloat(s5), Float.parseFloat(s7));
+          TraoThuongDacBietManage.themDipDacBiet(ddb);
+          confirmPane.setVisible(false);
+          errText.setVisible(false);
+          detailPane.setVisible(false);
+          Utils.clearTextInput(detailPane);
+        });
+        cancelBtn.setOnAction(aee -> confirmPane.setVisible(false));
+      }
     });
     returnBtn.setText("Huỷ");
     returnBtn.setOnAction(ae -> {
       detailPane.setVisible(false);
+      errText.setVisible(false);
       Utils.clearTextInput(detailPane);
     });
   }
@@ -563,6 +580,7 @@ public class RewardController {
     money1Field.setText(selectedG.getTienDacBiet() + "");
     money2Field.setText(selectedG.getTienGioi() + "");
     money3Field.setText(selectedG.getTienKha() + "");
+    descField.setText(selectedG.getMoTa());
     if (!yearField.getStyleClass().contains("textDisabled")) {
       descField.getStyleClass().add("textDisabled");
       yearField.getStyleClass().add("textDisabled");
@@ -574,6 +592,9 @@ public class RewardController {
       money3Field.getStyleClass().add("textDisabled");
     }
     editBtn.setOnAction(aee -> {
+      present1Label.setText("Phần quà đặc biệt (*):");
+      present2Label.setText("Phần quà HSG (*):");
+      present3Label.setText("Phần quà HS Khá (*):");
       detailBtn.getChildren().clear();
       detailBtn.getChildren().addAll(saveBtn, returnBtn);
       yearField.setEditable(true);
@@ -593,25 +614,32 @@ public class RewardController {
       money2Field.getStyleClass().remove("textDisabled");
       money3Field.getStyleClass().remove("textDisabled");
       saveBtn.setOnAction(ae -> {
-        confirmPane.setVisible(true);
-        confirmLabel.setText("Lưu thay đổi");
-        confirmBtn.setOnAction(aeee -> {
-          int s1 = Integer.parseInt(yearField.getText());
-          String s2 = present1Field.getText();
-          float s3 = Float.parseFloat(money1Field.getText());
-          String s4 = present2Field.getText();
-          float s5 = Float.parseFloat(money2Field.getText());
-          String s6 = present3Field.getText();
-          float s7 = Float.parseFloat(money3Field.getText());
-          String s9 = descField.getText();
-          final DipHSG hsg = new DipHSG(selectedG.getIdDip(), s1, s9, s2, s4, s6, s3, s5, s7);
-          TraoThuongHSGManage.capNhatDipHSG(hsg);
-          confirmPane.setVisible(false);
-          detailPane.setVisible(false);
-        });
-        cancelBtn.setOnAction(aeee -> {
-          confirmPane.setVisible(false);
-        });
+        String s1 = yearField.getText();
+        String s2 = present1Field.getText();
+        String s3 = money1Field.getText();
+        String s4 = present2Field.getText();
+        String s5 = money2Field.getText();
+        String s6 = present3Field.getText();
+        String s7 = money3Field.getText();
+        String s9 = descField.getText();
+        if (s1.isEmpty() || s2.isEmpty() || s3.isEmpty() || s4.isEmpty() || s5.isEmpty() || s6.isEmpty()
+            || s7.isEmpty())
+          errText.setVisible(true);
+        else {
+          errText.setVisible(false);
+          confirmPane.setVisible(true);
+          confirmLabel.setText("Lưu thay đổi");
+          confirmBtn.setOnAction(aeee -> {
+            final DipHSG hsg = new DipHSG(selectedG.getIdDip(), Integer.parseInt(s1), s9, s2, s4, s6,
+                Float.parseFloat(s3), Float.parseFloat(s5), Float.parseFloat(s7));
+            TraoThuongHSGManage.capNhatDipHSG(hsg);
+            confirmPane.setVisible(false);
+            detailPane.setVisible(false);
+          });
+          cancelBtn.setOnAction(aeee -> {
+            confirmPane.setVisible(false);
+          });
+        }
       });
       returnBtn.setOnAction(ae -> {
         yearField.setEditable(false);
@@ -622,6 +650,14 @@ public class RewardController {
         money2Field.setEditable(false);
         money3Field.setEditable(false);
         descField.setEditable(false);
+        yearField.setText(selectedG.getNam() + "");
+        present1Field.setText(selectedG.getPhanQuaDacBiet());
+        present2Field.setText(selectedG.getPhanQuaGioi());
+        present3Field.setText(selectedG.getPhanQuaKha());
+        money1Field.setText(selectedG.getTienDacBiet() + "");
+        money2Field.setText(selectedG.getTienGioi() + "");
+        money3Field.setText(selectedG.getTienKha() + "");
+        descField.setText(selectedG.getMoTa());
         if (!yearField.getStyleClass().contains("textDisabled")) {
           descField.getStyleClass().add("textDisabled");
           yearField.getStyleClass().add("textDisabled");
@@ -636,12 +672,15 @@ public class RewardController {
         detailBtn.getChildren().clear();
         Utils.clearTextInput(detailPane);
         detailBtn.getChildren().addAll(listBtn, editBtn, deleteBtn, returnBtn);
+        present1Label.setText("Phần quà đặc biệt:");
+        present2Label.setText("Phần quà HSG:");
+        present3Label.setText("Phần quà HS Khá:");
         returnBtn.setOnAction(ee -> {
           detailPane.setVisible(false);
+          errText.setVisible(false);
           Utils.clearTextInput(detailPane);
         });
       });
-      listBtn.setOnAction(ae -> openEditGList(ae));
     });
     listBtn.setOnAction(aee -> openGList(aee));
     deleteBtn.setOnAction(aee -> {
@@ -653,11 +692,17 @@ public class RewardController {
           confirmedDelPane.setVisible(false);
           deletePane.setVisible(false);
           detailPane.setVisible(false);
+          errText.setVisible(false);
+          Utils.clearTextInput(detailPane);
         });
+      });
+      cancelDelBtn.setOnAction(aeee -> {
+        deletePane.setVisible(false);
       });
     });
     returnBtn.setOnAction(aee -> {
       detailPane.setVisible(false);
+      errText.setVisible(false);
       Utils.clearTextInput(detailPane);
     });
   }
@@ -680,6 +725,7 @@ public class RewardController {
     money1Field.setText(selectedS.getTien05() + "");
     money2Field.setText(selectedS.getTien614() + "");
     money3Field.setText(selectedS.getTien1517() + "");
+    descField.setText(selectedS.getMoTa());
     if (!yearField.getStyleClass().contains("textDisabled")) {
       descField.getStyleClass().add("textDisabled");
       yearField.getStyleClass().add("textDisabled");
@@ -692,6 +738,9 @@ public class RewardController {
       nameField.getStyleClass().add("textDisabled");
     }
     editBtn.setOnAction(aee -> {
+      present1Label.setText("Độ tuổi 0-5 tuổi (*):");
+      present2Label.setText("Độ tuổi 6-14 tuổi (*):");
+      present3Label.setText("Độ tuổi 15-17 tuổi (*):");
       detailBtn.getChildren().clear();
       detailBtn.getChildren().addAll(saveBtn, returnBtn);
       yearField.setEditable(true);
@@ -713,27 +762,34 @@ public class RewardController {
       money3Field.getStyleClass().remove("textDisabled");
       nameField.getStyleClass().remove("textDisabled");
       saveBtn.setOnAction(ae -> {
-        confirmPane.setVisible(true);
-        confirmLabel.setText("Lưu thay đổi");
-        confirmBtn.setOnAction(aeee -> {
-          int s1 = Integer.parseInt(yearField.getText());
-          String s2 = present1Field.getText();
-          float s3 = Float.parseFloat(money1Field.getText());
-          String s4 = present2Field.getText();
-          float s5 = Float.parseFloat(money2Field.getText());
-          String s6 = present3Field.getText();
-          float s7 = Float.parseFloat(money3Field.getText());
-          String s8 = nameField.getText();
-          String s9 = descField.getText();
-          final DipDacBiet ddb = new DipDacBiet(selectedS.getIdDip(), s8, s1, s9, s2, s4, s6, s3, s5, s7);
-          TraoThuongDacBietManage.capNhatDipDacBiet(ddb);
-          confirmPane.setVisible(false);
-          detailPane.setVisible(false);
-          Utils.clearTextInput(detailPane);
-        });
-        cancelBtn.setOnAction(aeee -> {
-          confirmPane.setVisible(false);
-        });
+        String s1 = yearField.getText();
+        String s2 = present1Field.getText();
+        String s3 = money1Field.getText();
+        String s4 = present2Field.getText();
+        String s5 = money2Field.getText();
+        String s6 = present3Field.getText();
+        String s7 = money3Field.getText();
+        String s8 = nameField.getText();
+        String s9 = descField.getText();
+        if (s1.isEmpty() || s2.isEmpty() || s3.isEmpty() || s4.isEmpty() || s5.isEmpty() || s6.isEmpty() || s7.isEmpty()
+            || s8.isEmpty())
+          errText.setVisible(true);
+        else {
+          errText.setVisible(false);
+          confirmPane.setVisible(true);
+          confirmLabel.setText("Lưu thay đổi");
+          confirmBtn.setOnAction(aeee -> {
+            final DipDacBiet ddb = new DipDacBiet(selectedS.getIdDip(), s8, Integer.parseInt(s1), s9, s2, s4, s6,
+                Float.parseFloat(s3), Float.parseFloat(s5), Float.parseFloat(s7));
+            TraoThuongDacBietManage.capNhatDipDacBiet(ddb);
+            confirmPane.setVisible(false);
+            detailPane.setVisible(false);
+            Utils.clearTextInput(detailPane);
+          });
+          cancelBtn.setOnAction(aeee -> {
+            confirmPane.setVisible(false);
+          });
+        }
       });
       returnBtn.setOnAction(ae -> {
         detailBtn.getChildren().clear();
@@ -746,6 +802,18 @@ public class RewardController {
         money2Field.setEditable(false);
         money3Field.setEditable(false);
         descField.setEditable(false);
+        yearField.setText(selectedS.getNam() + "");
+        nameField.setText(selectedS.getTen());
+        present1Field.setText(selectedS.getPhanQua05());
+        present2Field.setText(selectedS.getPhanQua614());
+        present3Field.setText(selectedS.getPhanQua1517());
+        money1Field.setText(selectedS.getTien05() + "");
+        money2Field.setText(selectedS.getTien614() + "");
+        money3Field.setText(selectedS.getTien1517() + "");
+        descField.setText(selectedS.getMoTa());
+        present1Label.setText("Độ tuổi 0-5 tuổi:");
+        present2Label.setText("Độ tuổi 6-14 tuổi:");
+        present3Label.setText("Độ tuổi 15-17 tuổi:");
         if (!yearField.getStyleClass().contains("textDisabled")) {
           descField.getStyleClass().add("textDisabled");
           yearField.getStyleClass().add("textDisabled");
@@ -758,13 +826,14 @@ public class RewardController {
           nameField.getStyleClass().add("textDisabled");
         }
         listBtn.setOnAction(ee -> openSList(ee));
+        errText.setVisible(false);
         Utils.clearTextInput(detailPane);
         returnBtn.setOnAction(ee -> {
           Utils.clearTextInput(detailPane);
+          errText.setVisible(false);
           detailPane.setVisible(false);
         });
       });
-      listBtn.setOnAction(ae -> openEditSList(ae));
     });
     deleteBtn.setOnAction(aee -> {
       deletePane.setVisible(true);
@@ -775,12 +844,15 @@ public class RewardController {
           confirmedDelPane.setVisible(false);
           deletePane.setVisible(false);
           detailPane.setVisible(false);
+          errText.setVisible(false);
+          Utils.clearTextInput(detailPane);
         });
       });
     });
     listBtn.setOnAction(aee -> openSList(aee));
     returnBtn.setOnAction(aee -> {
       Utils.clearTextInput(detailPane);
+      errText.setVisible(false);
       detailPane.setVisible(false);
     });
   }
@@ -1230,24 +1302,6 @@ public class RewardController {
         addedGList.clear();
         editListSBox.setVisible(false);
       });
-    });
-  }
-
-  private void openEditSList(ActionEvent e) {
-    listPane.setVisible(true);
-    listBox.setVisible(false);
-    editListSBox.setVisible(true);
-    listReturnBtn.setOnAction(aee -> {
-      listPane.setVisible(false);
-    });
-  }
-
-  private void openEditGList(ActionEvent e) {
-    listPane.setVisible(true);
-    listBox.setVisible(false);
-    editListSBox.setVisible(true);
-    listReturnBtn.setOnAction(aee -> {
-      listPane.setVisible(false);
     });
   }
 

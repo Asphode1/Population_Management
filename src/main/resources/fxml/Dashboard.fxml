@@ -46,7 +46,7 @@
                 <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                   <children>
                     <Label fx:id="hkLabel" styleClass="labelBig" text="Value" />
-                    <Label text="Số hộ Khẩu" />
+                    <Label text="Số hộ khẩu" />
                   </children>
                   <padding>
                     <Insets left="50.0" />
