@@ -543,7 +543,7 @@ public class RewardController {
         errText.setVisible(true);
       else {
         errText.setVisible(false);
-        confirmPane.setVisible(false);
+        confirmPane.setVisible(true);
         confirmLabel.setText("Xác nhận thêm phần thưởng");
         confirmBtn.setOnAction(aee -> {
           DipDacBiet ddb = new DipDacBiet(0, s8, Integer.parseInt(s1), s9, s2, s4, s6, Float.parseFloat(s3),
